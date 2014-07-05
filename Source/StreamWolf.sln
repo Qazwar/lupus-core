@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "..\Test\UnitTests\UnitTests.vcxproj", "{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78132E93-9A9E-44A4-A197-9AB73521E689} = {78132E93-9A9E-44A4-A197-9AB73521E689}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreamWolfServer", "StreamWolfServer\StreamWolfServer.vcxproj", "{78132E93-9A9E-44A4-A197-9AB73521E689}"
 EndProject
