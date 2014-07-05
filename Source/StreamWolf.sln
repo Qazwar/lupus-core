@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "..\Test\UnitTests\UnitTests.vcxproj", "{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreamWolfServer", "StreamWolfServer\StreamWolfServer.vcxproj", "{78132E93-9A9E-44A4-A197-9AB73521E689}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StreamWolfClient", "StreamWolfClient", "{8F345168-B24F-4631-B218-846CF1B37FB5}"
+	ProjectSection(SolutionItems) = preProject
+		StreamWolfClient\index.html = StreamWolfClient\index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "javascripts", "javascripts", "{73B4132B-612D-41ED-BBD6-AA2B3631BAF5}"
+	ProjectSection(SolutionItems) = preProject
+		StreamWolfClient\javascripts\angular.min.js = StreamWolfClient\javascripts\angular.min.js
+		StreamWolfClient\javascripts\jquery.min.js = StreamWolfClient\javascripts\jquery.min.js
+		StreamWolfClient\javascripts\layouts.js = StreamWolfClient\javascripts\layouts.js
+		StreamWolfClient\javascripts\ready.js = StreamWolfClient\javascripts\ready.js
+		StreamWolfClient\javascripts\utility.js = StreamWolfClient\javascripts\utility.js
+		StreamWolfClient\javascripts\views.js = StreamWolfClient\javascripts\views.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stylesheets", "stylesheets", "{029E3A3A-EBF4-4464-A943-3C38860E288B}"
+	ProjectSection(SolutionItems) = preProject
+		StreamWolfClient\stylesheets\styles.css = StreamWolfClient\stylesheets\styles.css
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Profile|Win32 = Profile|Win32
+		Profile|x64 = Profile|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Debug|Win32.Build.0 = Debug|Win32
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Debug|x64.ActiveCfg = Debug|x64
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Debug|x64.Build.0 = Debug|x64
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Profile|Win32.ActiveCfg = Profile|Win32
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Profile|Win32.Build.0 = Profile|Win32
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Profile|x64.ActiveCfg = Profile|x64
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Profile|x64.Build.0 = Profile|x64
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Release|Win32.ActiveCfg = Release|Win32
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Release|Win32.Build.0 = Release|Win32
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Release|x64.ActiveCfg = Release|x64
+		{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}.Release|x64.Build.0 = Release|x64
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Debug|Win32.ActiveCfg = Debug|Win32
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Debug|Win32.Build.0 = Debug|Win32
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Debug|x64.ActiveCfg = Debug|x64
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Debug|x64.Build.0 = Debug|x64
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Profile|Win32.ActiveCfg = Profile|Win32
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Profile|Win32.Build.0 = Profile|Win32
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Profile|x64.ActiveCfg = Profile|x64
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Profile|x64.Build.0 = Profile|x64
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Release|Win32.ActiveCfg = Release|Win32
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Release|Win32.Build.0 = Release|Win32
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Release|x64.ActiveCfg = Release|x64
+		{78132E93-9A9E-44A4-A197-9AB73521E689}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73B4132B-612D-41ED-BBD6-AA2B3631BAF5} = {8F345168-B24F-4631-B218-846CF1B37FB5}
+		{029E3A3A-EBF4-4464-A943-3C38860E288B} = {8F345168-B24F-4631-B218-846CF1B37FB5}
+	EndGlobalSection
+EndGlobal
