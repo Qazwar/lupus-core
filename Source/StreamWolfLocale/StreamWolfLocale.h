@@ -34,9 +34,25 @@
 #define NOEXCEPT noexcept
 #endif
 
+#include <boost/noncopyable.hpp>
+#include <pugixml/pugixml.hpp>
+#include <memory>
 #include <string>
+#include <map>
 
-STREAMWOLFLOCALE_API int StreamWolfLocaleInit();
-STREAMWOLFLOCALE_API int SetStreamWolfLocale(const std::string& locale);
-STREAMWOLFLOCALE_API std::string GetString(const std::string& variable);
-STREAMWOLFLOCALE_API void StreamWolfLocaleQuit();
+class STREAMWOLFLOCALE_API StringTable : public boost::noncopyable
+{
+public:
+    StringTable(const std::string& locale);
+    ~StringTable();
+
+    std::string GetString(const std::string& variable) const;
+
+private:
+
+    std::shared_ptr<pugi::xml_document> mFile;
+};
+
+typedef std::shared_ptr<StringTable> StringTablePtr;
+
+STREAMWOLFLOCALE_API StringTablePtr GetStringTable(const std::string& locale);
