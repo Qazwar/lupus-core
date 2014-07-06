@@ -33,8 +33,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StreamWolfData", "StreamWolfData", "{BD190E09-6703-44C4-8B9C-3C752E4C0E22}"
 	ProjectSection(SolutionItems) = preProject
 		StreamWolfData\1-CreateTables.sql = StreamWolfData\1-CreateTables.sql
-		StreamWolfData\2-CreateTriggers.sql = StreamWolfData\2-CreateTriggers.sql
-		StreamWolfData\3-CreateFunctions.sql = StreamWolfData\3-CreateFunctions.sql
+		StreamWolfData\2-CreateViews.sql = StreamWolfData\2-CreateViews.sql
+		StreamWolfData\3-CreateTriggers.sql = StreamWolfData\3-CreateTriggers.sql
+		StreamWolfData\4-CreateFunctions.sql = StreamWolfData\4-CreateFunctions.sql
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreamWolfLocale", "StreamWolfLocale\StreamWolfLocale.vcxproj", "{D636FA8B-AB07-42C8-B924-159C1C566B3D}"
