@@ -13,6 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{15f0b351-4738-4054-951f-34cfb66accad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Header Files">
+      <UniqueIdentifier>{434da4bd-20c5-41c7-8198-bd265b2954f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Source Files">
+      <UniqueIdentifier>{cde9775f-5242-4d6c-91a7-1894084806db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{6455b95b-3dca-4656-bd2d-ac0eb1a1f3eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Header Files">
+      <UniqueIdentifier>{2d155088-ecce-4716-8047-ed78ebbfd855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Source Files">
+      <UniqueIdentifier>{0eaa3889-bbce-4977-8b15-78617f85bf47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{8c981b03-f4f4-4706-a3c6-c54a667b8897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Header Files">
+      <UniqueIdentifier>{cb7d0668-2ca0-4eda-8a98-98aa9f39cfe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Source Files">
+      <UniqueIdentifier>{a9ff2ef9-0122-4671-a20a-accc214f0762}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -21,10 +48,45 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Facade.cpp">
+      <Filter>Application\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Data\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigurationFile.cpp">
+      <Filter>Application\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDatabase.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Application\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Facade.h">
+      <Filter>Application\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigurationFile.h">
+      <Filter>Application\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StreamWolfServer.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
