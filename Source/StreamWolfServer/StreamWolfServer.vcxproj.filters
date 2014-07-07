@@ -54,11 +54,11 @@
     <ClCompile Include="Facade.cpp">
       <Filter>Application\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Database.cpp">
-      <Filter>Data\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ConfigurationFile.cpp">
       <Filter>Application\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PgDatabase.cpp">
+      <Filter>Data\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,14 +74,14 @@
     <ClInclude Include="Facade.h">
       <Filter>Application\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Database.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ConfigurationFile.h">
       <Filter>Application\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PgDatabase.h">
+      <Filter>Data\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

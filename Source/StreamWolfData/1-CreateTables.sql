@@ -8,7 +8,8 @@ CREATE TABLE  Account (
     Path VARCHAR(260),
     Forename VARCHAR(64), -- Für Personen
     Surname VARCHAR(64), -- Für Personen
-    Name VARCHAR(64) UNIQUE -- Für Firmen
+    Name VARCHAR(64) UNIQUE -- Für Firmen,
+    Token CHAR(64) UNIQUE
 );
 
 DROP TABLE IF EXISTS Tag CASCADE;
@@ -72,6 +73,13 @@ CREATE TABLE ContentData (
     Size BIGINT,
     Price INT,
     Uploaded TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS Permission CASCADE;
+CREATE TABLE Permission (
+    Id BIGSERIAL PRIMARY KEY,
+    Account_Username VARCHAR(32) REFERENCES Account (Username),
+    ContentData_Id BIGINT REFERENCES ContentData (Id)
 );
 
 DROP TABLE IF EXISTS Image CASCADE;
