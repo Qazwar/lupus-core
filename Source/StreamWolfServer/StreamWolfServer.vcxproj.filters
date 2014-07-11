@@ -40,6 +40,15 @@
     <Filter Include="Objects\Source Files">
       <UniqueIdentifier>{a9ff2ef9-0122-4671-a20a-accc214f0762}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Postgres">
+      <UniqueIdentifier>{f3998050-a3ae-4cf5-bbdb-088ad79bfdbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Postgres\Header Files">
+      <UniqueIdentifier>{30245147-f208-403b-b26d-f040d941b310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Postgres\Source Files">
+      <UniqueIdentifier>{5cb594fa-12a0-4db2-a775-a916367c2b7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -57,16 +66,16 @@
     <ClCompile Include="ConfigurationFile.cpp">
       <Filter>Application\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PgDatabase.cpp">
-      <Filter>Data\Source Files</Filter>
+    <ClCompile Include="PgConnection.cpp">
+      <Filter>Data\Postgres\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PgCommand.cpp">
+      <Filter>Data\Postgres\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IDatabase.h">
-      <Filter>Data\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Application\Header Files</Filter>
@@ -80,8 +89,41 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PgDatabase.h">
+    <ClInclude Include="IConnection.h">
       <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PgConnection.h">
+      <Filter>Data\Postgres\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ITransaction.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IsolationLevel.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataReader.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataType.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataRow.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataTable.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataColumn.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IParameter.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PgCommand.h">
+      <Filter>Data\Postgres\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
