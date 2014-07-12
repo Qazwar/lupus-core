@@ -24,8 +24,6 @@ namespace StreamWolf {
                 virtual const std::string& Text() const override;
                 virtual std::vector<std::shared_ptr<Parameter>>& Parameters() override;
                 virtual const std::vector<std::shared_ptr<Parameter>>& Parameters() const override;
-                virtual void Transaction(std::shared_ptr<ITransaction>) override;
-                virtual std::shared_ptr<ITransaction> Transaction() const override;
 
                 virtual std::shared_ptr<Parameter> CreateParameter() override;
                 virtual int ExecuteNonQuery() override;
@@ -41,7 +39,6 @@ namespace StreamWolf {
                 bool mPrepared = false;
                 std::string mName = "";
                 std::string mQuery = "";
-                std::shared_ptr<ITransaction> mTransaction;
                 std::vector<std::shared_ptr<Parameter>> mParameters;
             };
         }

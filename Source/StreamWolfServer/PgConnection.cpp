@@ -1,5 +1,6 @@
 #include "PgConnection.h"
 #include "PgCommand.h"
+#include "PgTransaction.h"
 
 #include <thread>
 #include <postgres/libpq-fe.h>
@@ -19,6 +20,13 @@ namespace StreamWolf {
                 Close();
             }
 
+            void PgConnection::BeginTransactionAsync(IsolationLevel level, std::function<void(IConnection*, std::shared_ptr<ITransaction>)> callback)
+            {
+                thread([this, &level, &callback]() {
+                    callback(this, this->BeginTransaction(level));
+                }).detach();
+            }
+
             void PgConnection::ConnectAsync(const string& PgConnectionString, function<void(IConnection*)> callback)
             {
                 thread([this, &PgConnectionString, &callback] () {
@@ -34,7 +42,7 @@ namespace StreamWolf {
 
             shared_ptr<ITransaction> PgConnection::BeginTransaction(IsolationLevel level)
             {
-                return nullptr;
+                return make_shared<PgTransaction>(mPgConn, level);
             }
             
             void PgConnection::Connect(const string& PgConnectionString)

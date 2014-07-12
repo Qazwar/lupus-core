@@ -13,7 +13,9 @@ namespace StreamWolf {
                 return;
             }
 
-            for (int i = 0; i < reader->FieldCount(); i++) {
+            const int fieldCount = reader->FieldCount();
+
+            for (int i = 0; i < fieldCount; i++) {
                 mColumns.push_back(make_shared<DataColumn>(
                     reader->ColumnName(i), reader->Type(i), i
                 ));
@@ -22,7 +24,7 @@ namespace StreamWolf {
             do {
                 unordered_map<string, boost::any> row;
 
-                for (int i = 0; i < reader->FieldCount(); i++) {
+                for (int i = 0; i < fieldCount; i++) {
                     row[reader->ColumnName(i)] = reader->Value(i);
                 }
 

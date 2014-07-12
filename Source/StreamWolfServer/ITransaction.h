@@ -12,9 +12,7 @@ namespace StreamWolf {
             virtual ~ITransaction() = default;
 
             virtual void Commit() = 0;
-            virtual void Save(const std::string&) = 0;
             virtual void Rollback() = 0;
-            virtual void Rollback(const std::string&) = 0;
         };
     }
 }

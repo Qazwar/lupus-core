@@ -29,8 +29,6 @@ namespace StreamWolf {
             virtual const std::string& Text() const = 0;
             virtual std::vector<std::shared_ptr<Parameter>>& Parameters() = 0;
             virtual const std::vector<std::shared_ptr<Parameter>>& Parameters() const = 0;
-            virtual void Transaction(std::shared_ptr<ITransaction>) = 0;
-            virtual std::shared_ptr<ITransaction> Transaction() const = 0;
 
             virtual std::shared_ptr<Parameter> CreateParameter() = 0;
             virtual int ExecuteNonQuery() = 0;

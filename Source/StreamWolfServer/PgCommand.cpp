@@ -71,16 +71,6 @@ namespace StreamWolf {
                 return mParameters;
             }
             
-            void PgCommand::Transaction(shared_ptr<ITransaction> transaction)
-            {
-                mTransaction = transaction;
-            }
-            
-            shared_ptr<ITransaction> PgCommand::Transaction() const
-            {
-                return mTransaction;
-            }
-            
             shared_ptr<Parameter> PgCommand::CreateParameter()
             {
                 shared_ptr<Parameter> param = make_shared<Parameter>();

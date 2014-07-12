@@ -87,6 +87,9 @@
     <ClCompile Include="PgDataReader.cpp">
       <Filter>Data\Postgres\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PgTransaction.cpp">
+      <Filter>Data\Postgres\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -147,6 +150,9 @@
       <Filter>Data\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PgDataReader.h">
+      <Filter>Data\Postgres\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PgTransaction.h">
       <Filter>Data\Postgres\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

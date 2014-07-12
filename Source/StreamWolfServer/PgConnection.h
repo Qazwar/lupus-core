@@ -16,6 +16,7 @@ namespace StreamWolf {
 
                 virtual ~PgConnection();
 
+                virtual void BeginTransactionAsync(IsolationLevel, std::function<void(IConnection*, std::shared_ptr<ITransaction>)>) override;
                 virtual void ConnectAsync(const std::string&, std::function<void(IConnection*)>) override;
 
                 virtual std::string ConnectionString() const override;
