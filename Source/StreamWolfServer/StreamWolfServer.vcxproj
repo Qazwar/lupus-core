@@ -248,6 +248,10 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ConfigurationFile.cpp" />
+    <ClCompile Include="DataColumn.cpp" />
+    <ClCompile Include="DataRow.cpp" />
+    <ClCompile Include="DataTable.cpp" />
+    <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="PgCommand.cpp" />
     <ClCompile Include="PgConnection.cpp" />
     <ClCompile Include="Facade.cpp" />
@@ -256,13 +260,13 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="ConfigurationFile.h" />
-    <ClInclude Include="IDataColumn.h" />
-    <ClInclude Include="IDataTable.h" />
+    <ClInclude Include="DataColumn.h" />
+    <ClInclude Include="DataTable.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IDataReader.h" />
-    <ClInclude Include="IDataRow.h" />
-    <ClInclude Include="IParameter.h" />
+    <ClInclude Include="DataRow.h" />
+    <ClInclude Include="Parameter.h" />
     <ClInclude Include="IsolationLevel.h" />
     <ClInclude Include="ITransaction.h" />
     <ClInclude Include="PgCommand.h" />
@@ -271,7 +275,6 @@
     <ClInclude Include="IConnection.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="PgOid.h" />
-    <ClInclude Include="PgParameter.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

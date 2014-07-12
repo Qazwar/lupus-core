@@ -72,6 +72,18 @@
     <ClCompile Include="PgCommand.cpp">
       <Filter>Data\Postgres\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataColumn.cpp">
+      <Filter>Data\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataRow.cpp">
+      <Filter>Data\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTable.cpp">
+      <Filter>Data\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parameter.cpp">
+      <Filter>Data\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -110,22 +122,7 @@
     <ClInclude Include="DataType.h">
       <Filter>Data\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDataRow.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IDataTable.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IDataColumn.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IParameter.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PgCommand.h">
-      <Filter>Data\Postgres\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PgParameter.h">
       <Filter>Data\Postgres\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PgOid.h">
@@ -133,6 +130,18 @@
     </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataRow.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTable.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parameter.h">
+      <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataColumn.h">
+      <Filter>Data\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

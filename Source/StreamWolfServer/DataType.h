@@ -21,7 +21,8 @@ namespace StreamWolf {
             Serial8,
             SmallFloat,
             SmallInt,
-            Text
+            Text,
+            Unknown
         };
     }
 }

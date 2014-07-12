@@ -22,16 +22,16 @@ namespace StreamWolf {
                 virtual void Text(const std::string&) override;
                 virtual std::string& Text() override;
                 virtual const std::string& Text() const override;
-                virtual std::vector<std::shared_ptr<IParameter>>& Parameters() override;
-                virtual const std::vector<std::shared_ptr<IParameter>>& Parameters() const override;
+                virtual std::vector<std::shared_ptr<Parameter>>& Parameters() override;
+                virtual const std::vector<std::shared_ptr<Parameter>>& Parameters() const override;
                 virtual void Transaction(std::shared_ptr<ITransaction>) override;
                 virtual std::shared_ptr<ITransaction> Transaction() const override;
 
-                virtual std::shared_ptr<IParameter> CreateParameter() override;
+                virtual std::shared_ptr<Parameter> CreateParameter() override;
                 virtual int ExecuteNonQuery() override;
                 virtual std::shared_ptr<IDataReader> ExecuteReader() override;
                 virtual std::vector<std::unordered_map<std::string, boost::any>> ExecuteScalar() override;
-                virtual void Prepare() override;
+                virtual bool Prepare() override;
 
             private:
 
@@ -42,7 +42,7 @@ namespace StreamWolf {
                 std::string mName = "";
                 std::string mQuery = "";
                 std::shared_ptr<ITransaction> mTransaction;
-                std::vector<std::shared_ptr<IParameter>> mParameters;
+                std::vector<std::shared_ptr<Parameter>> mParameters;
             };
         }
     }

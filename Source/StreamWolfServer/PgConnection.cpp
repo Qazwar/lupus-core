@@ -43,10 +43,6 @@ namespace StreamWolf {
                 mPgConn = PQconnectdb(PgConnectionString.c_str());
             }
             
-            void PgConnection::ClearPool()
-            {
-            }
-            
             void PgConnection::Close()
             {
                 if (mPgConn) {

@@ -22,7 +22,6 @@ namespace StreamWolf {
 
                 virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) override;
                 virtual void Connect(const std::string&) override;
-                virtual void ClearPool() override;
                 virtual void Close() override;
                 virtual std::shared_ptr<ICommand> CreateCommand() override;
                 virtual void Open() override;

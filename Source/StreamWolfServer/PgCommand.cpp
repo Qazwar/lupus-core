@@ -1,6 +1,6 @@
 #include "PgCommand.h"
 #include "PgOid.h"
-#include "IParameter.h"
+#include "Parameter.h"
 #include "Utility.h"
 
 #include <thread>
@@ -60,12 +60,12 @@ namespace StreamWolf {
                 return mQuery;
             }
 
-            vector<shared_ptr<IParameter>>& PgCommand::Parameters()
+            vector<shared_ptr<Parameter>>& PgCommand::Parameters()
             {
                 return mParameters;
             }
 
-            const vector<shared_ptr<IParameter>>& PgCommand::Parameters() const
+            const vector<shared_ptr<Parameter>>& PgCommand::Parameters() const
             {
                 return mParameters;
             }
@@ -80,7 +80,7 @@ namespace StreamWolf {
                 return mTransaction;
             }
             
-            shared_ptr<IParameter> PgCommand::CreateParameter()
+            shared_ptr<Parameter> PgCommand::CreateParameter()
             {
                 return nullptr;
             }
@@ -125,11 +125,11 @@ namespace StreamWolf {
                 return scalar;
             }
             
-            void PgCommand::Prepare()
+            bool PgCommand::Prepare()
             {
                 vector<Oid> paramTypes;
 
-                for_each(begin(mParameters), end(mParameters), [&paramTypes](shared_ptr<IParameter>& param) {
+                for_each(begin(mParameters), end(mParameters), [&paramTypes](shared_ptr<Parameter>& param) {
                     switch (param->DbType()) {
                         case DataType::Boolean: paramTypes.push_back(BOOLOID); break;
                         case DataType::Byte: paramTypes.push_back(BYTEAOID); break;
@@ -158,6 +158,7 @@ namespace StreamWolf {
                 PGresult* result = PQprepare(mPgConn, mName.c_str(), mQuery.c_str(), paramTypes.size(), paramTypes.data());
                 mPrepared = (PQresultStatus(result) == PGRES_COMMAND_OK);
                 PQclear(result);
+                return mPrepared;
             }
 
             PGresult* PgCommand::GetResult()
@@ -172,7 +173,7 @@ namespace StreamWolf {
                 paramFormats.reserve(mParameters.size());
                 paramLengths.reserve(mParameters.size());
 
-                for_each(begin(mParameters), end(mParameters), [&paramValues, &paramLengths, &paramFormats](shared_ptr<IParameter>& param) {
+                for_each(begin(mParameters), end(mParameters), [&paramValues, &paramLengths, &paramFormats](shared_ptr<Parameter>& param) {
                     string value = boost::any_cast<string>(param->Value());
                     paramLengths.push_back(value.length());
 

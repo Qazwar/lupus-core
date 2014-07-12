@@ -24,7 +24,6 @@ namespace StreamWolf {
             
             virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) = 0;
             virtual void Connect(const std::string&) = 0;
-            virtual void ClearPool() = 0;
             virtual void Close() = 0;
             virtual std::shared_ptr<ICommand> CreateCommand() = 0;
             virtual void Open() = 0;
