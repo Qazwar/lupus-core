@@ -1,11 +1,9 @@
 ## Specific ignores
-Lib/*
+Bin/*
 Temp/*
 Assets/*
 
 ## Specific un-ignores
-!Lib/3rdParty/
-!Lib/delete.me
 !Temp/delete.me
 !Assets/delete.me
 
@@ -109,7 +107,6 @@ sympy-plots-for-*.tex/
 *.xdy
 
 ## Doxygen
-#[Dd]oxygen
 html/
 latex/
 
@@ -123,12 +120,12 @@ latex/
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
-x64/
+#[Dd]ebug/
+#[Rr]elease/
+#x64/
 build/
 [Bb]in/
-[Oo]bj/
+#[Oo]bj/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
