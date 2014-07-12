@@ -16,7 +16,7 @@ namespace StreamWolf {
 
                 virtual ~PgConnection();
 
-                virtual void BeginConnect(const std::string&, std::function<void(IConnection*)>) override;
+                virtual void ConnectAsync(const std::string&, std::function<void(IConnection*)>) override;
 
                 virtual std::string ConnectionString() const override;
 

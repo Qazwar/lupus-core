@@ -13,7 +13,7 @@ namespace StreamWolf {
         std::string str(N, ' ');
 
         for (unsigned i = 0; i < N; i++) {
-            str.[i] = alphanum[rng.GenerateWord32() % size];
+            str[i] = alphanum[rng.GenerateWord32() % size];
         }
 
         return str;

@@ -13,7 +13,7 @@ namespace StreamWolf {
             DoublePrecision,
             Float,
             Integer,
-            Int8,
+            Integer8,
             Interval,
             Numeric,
             Real,

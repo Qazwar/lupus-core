@@ -18,7 +18,7 @@ namespace StreamWolf {
             
             virtual ~IConnection() = default;
 
-            virtual void BeginConnect(const std::string&, std::function<void(IConnection*)>) = 0;
+            virtual void ConnectAsync(const std::string&, std::function<void(IConnection*)>) = 0;
 
             virtual std::string ConnectionString() const = 0;
             

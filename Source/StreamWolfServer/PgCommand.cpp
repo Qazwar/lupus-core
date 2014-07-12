@@ -24,21 +24,21 @@ namespace StreamWolf {
             {
             }
 
-            void PgCommand::BeginExecuteNonQuery(function<void(ICommand*, int)> callback)
+            void PgCommand::ExecuteNonQueryAsync(function<void(ICommand*, int)> callback)
             {
                 thread([this, &callback]() {
                     callback(this, this->ExecuteNonQuery());
                 }).detach();
             }
             
-            void PgCommand::BeginExecuteReader(function<void(ICommand*, shared_ptr<IDataReader>)> callback)
+            void PgCommand::ExecuteReaderAsync(function<void(ICommand*, shared_ptr<IDataReader>)> callback)
             {
                 thread([this, &callback]() {
                     callback(this, this->ExecuteReader());
                 }).detach();
             }
             
-            void PgCommand::BeginExecuteScalar(function<void(ICommand*, const vector<unordered_map<string, boost::any>>&)> callback)
+            void PgCommand::ExecuteScalarAsync(function<void(ICommand*, const vector<unordered_map<string, boost::any>>&)> callback)
             {
                 thread([this, &callback]() {
                     callback(this, this->ExecuteScalar());
@@ -82,6 +82,7 @@ namespace StreamWolf {
             
             shared_ptr<IParameter> PgCommand::CreateParameter()
             {
+                return nullptr;
             }
             
             int PgCommand::ExecuteNonQuery()
@@ -94,6 +95,7 @@ namespace StreamWolf {
             
             shared_ptr<IDataReader> PgCommand::ExecuteReader()
             {
+                return nullptr;
             }
             
             vector<unordered_map<string, boost::any>> PgCommand::ExecuteScalar()
@@ -113,7 +115,7 @@ namespace StreamWolf {
                     unordered_map<string, boost::any> row;
 
                     for (int j = 0; j < fields; j++) {
-                        row[PQfname(result, j)] = (PQgetisnull(result, i, j) == 1) ? nullptr : PQgetvalue(result, i, j);
+                        row[PQfname(result, j)] = (PQgetisnull(result, i, j) == 1) ? "" : PQgetvalue(result, i, j);
                     }
 
                     scalar.push_back(row);
@@ -139,7 +141,7 @@ namespace StreamWolf {
                         case DataType::DoublePrecision: paramTypes.push_back(FLOAT8OID); break;
                         case DataType::Float: paramTypes.push_back(FLOAT4OID); break;
                         case DataType::Integer: paramTypes.push_back(INT4OID); break;
-                        case DataType::Int8: paramTypes.push_back(INT8OID); break;
+                        case DataType::Integer8: paramTypes.push_back(INT8OID); break;
                         case DataType::Interval: paramTypes.push_back(INTERVALOID); break;
                         case DataType::Numeric: paramTypes.push_back(NUMERICOID); break;
                         case DataType::Real: paramTypes.push_back(FLOAT4OID); break;
@@ -174,9 +176,13 @@ namespace StreamWolf {
                     string value = boost::any_cast<string>(param->Value());
                     paramLengths.push_back(value.length());
 
-                    char* buffer = new char[value.length()];
-                    strncpy(buffer, value.c_str(), value.length());
-                    paramValues.push_back(buffer);
+                    if (value.empty()) {
+                        char* buffer = new char[value.length()];
+                        strncpy_s(buffer, value.length(), value.c_str(), value.length());
+                        paramValues.push_back(buffer);
+                    } else {
+                        paramValues.push_back("");
+                    }
 
                     paramFormats.push_back(0); // 0 = string, 1 = binäre
                 });
@@ -186,6 +192,8 @@ namespace StreamWolf {
                 for_each(begin(paramValues), end(paramValues), [](const char* s) {
                     delete s;
                 });
+
+                return result;
             }
         }
     }

@@ -97,30 +97,30 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
     <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
-    <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -270,7 +270,10 @@
     <ClInclude Include="Facade.h" />
     <ClInclude Include="IConnection.h" />
     <ClInclude Include="Linker.h" />
+    <ClInclude Include="PgOid.h" />
+    <ClInclude Include="PgParameter.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StreamWolfServer.rc" />

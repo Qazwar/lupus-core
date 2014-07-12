@@ -19,7 +19,7 @@ namespace StreamWolf {
                 Close();
             }
 
-            void PgConnection::BeginConnect(const string& PgConnectionString, function<void(IConnection*)> callback)
+            void PgConnection::ConnectAsync(const string& PgConnectionString, function<void(IConnection*)> callback)
             {
                 thread([this, &PgConnectionString, &callback] () {
                     this->Connect(PgConnectionString);
@@ -32,8 +32,9 @@ namespace StreamWolf {
                 return mConnString;
             }
 
-            shared_ptr<ITransaction> PgConnection::BeginTransaction(IsolationLevel level = IsolationLevel::Committed)
+            shared_ptr<ITransaction> PgConnection::BeginTransaction(IsolationLevel level)
             {
+                return nullptr;
             }
             
             void PgConnection::Connect(const string& PgConnectionString)

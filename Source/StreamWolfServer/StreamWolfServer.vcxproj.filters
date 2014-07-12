@@ -125,6 +125,15 @@
     <ClInclude Include="PgCommand.h">
       <Filter>Data\Postgres\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PgParameter.h">
+      <Filter>Data\Postgres\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PgOid.h">
+      <Filter>Data\Postgres\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StreamWolfServer.rc">

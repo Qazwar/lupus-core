@@ -15,9 +15,9 @@ namespace StreamWolf {
                 PgCommand(pg_conn* conn);
                 virtual ~PgCommand();
 
-                virtual void BeginExecuteNonQuery(std::function<void(ICommand*, int)>) override;
-                virtual void BeginExecuteReader(std::function<void(ICommand*, std::shared_ptr<IDataReader>)>) override;
-                virtual void BeginExecuteScalar(std::function<void(ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) override;
+                virtual void ExecuteNonQueryAsync(std::function<void(ICommand*, int)>) override;
+                virtual void ExecuteReaderAsync(std::function<void(ICommand*, std::shared_ptr<IDataReader>)>) override;
+                virtual void ExecuteScalarAsync(std::function<void(ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) override;
 
                 virtual void Text(const std::string&) override;
                 virtual std::string& Text() override;

@@ -20,9 +20,9 @@ namespace StreamWolf {
 
             virtual ~ICommand() = default;
 
-            virtual void BeginExecuteNonQuery(std::function<void(ICommand*, int)>) = 0;
-            virtual void BeginExecuteReader(std::function<void(ICommand*, std::shared_ptr<IDataReader>)>) = 0;
-            virtual void BeginExecuteScalar(std::function<void(ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) = 0;
+            virtual void ExecuteNonQueryAsync(std::function<void(ICommand*, int)>) = 0;
+            virtual void ExecuteReaderAsync(std::function<void(ICommand*, std::shared_ptr<IDataReader>)>) = 0;
+            virtual void ExecuteScalarAsync(std::function<void(ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) = 0;
 
             virtual void Text(const std::string&) = 0;
             virtual std::string& Text() = 0;
