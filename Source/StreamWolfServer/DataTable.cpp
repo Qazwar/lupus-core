@@ -15,7 +15,7 @@ namespace StreamWolf {
 
             for (int i = 0; i < reader->FieldCount(); i++) {
                 mColumns.push_back(make_shared<DataColumn>(
-                    reader->ColumnName(i), reader->DataType(i), i
+                    reader->ColumnName(i), reader->Type(i), i
                 ));
             }
 

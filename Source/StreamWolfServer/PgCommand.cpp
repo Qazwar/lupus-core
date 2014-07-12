@@ -1,5 +1,6 @@
 #include "PgCommand.h"
 #include "PgOid.h"
+#include "PgDataReader.h"
 #include "Parameter.h"
 #include "Utility.h"
 
@@ -82,7 +83,9 @@ namespace StreamWolf {
             
             shared_ptr<Parameter> PgCommand::CreateParameter()
             {
-                return nullptr;
+                shared_ptr<Parameter> param = make_shared<Parameter>();
+                mParameters.push_back(param);
+                return param;
             }
             
             int PgCommand::ExecuteNonQuery()
@@ -95,7 +98,7 @@ namespace StreamWolf {
             
             shared_ptr<IDataReader> PgCommand::ExecuteReader()
             {
-                return nullptr;
+                return make_shared<PgDataReader>(GetResult());
             }
             
             vector<unordered_map<string, boost::any>> PgCommand::ExecuteScalar()

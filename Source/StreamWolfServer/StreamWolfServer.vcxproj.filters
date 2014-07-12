@@ -84,6 +84,9 @@
     <ClCompile Include="Parameter.cpp">
       <Filter>Data\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PgDataReader.cpp">
+      <Filter>Data\Postgres\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="DataColumn.h">
       <Filter>Data\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PgDataReader.h">
+      <Filter>Data\Postgres\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

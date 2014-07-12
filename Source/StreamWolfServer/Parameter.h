@@ -12,6 +12,7 @@ namespace StreamWolf {
         {
         public:
 
+            Parameter() = default;
             Parameter(DataType, const boost::any&);
             virtual ~Parameter() = default;
 
