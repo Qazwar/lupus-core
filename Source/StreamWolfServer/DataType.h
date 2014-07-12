@@ -22,7 +22,7 @@ namespace StreamWolf {
             SmallFloat,
             SmallInt,
             Text,
-            Any
+            NonStandard
         };
     }
 }

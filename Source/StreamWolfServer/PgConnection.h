@@ -7,14 +7,14 @@ struct pg_conn;
 namespace StreamWolf {
     namespace Data {
         namespace Postgres {
-            class Connection : public IConnection
+            class PgConnection : public IConnection
             {
             public:
 
-                Connection() = default;
-                Connection(const std::string&);
+                PgConnection() = default;
+                PgConnection(const std::string&);
 
-                virtual ~Connection();
+                virtual ~PgConnection();
 
                 virtual void BeginConnect(const std::string&, std::function<void(IConnection*)>) override;
 

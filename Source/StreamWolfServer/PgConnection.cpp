@@ -1,4 +1,5 @@
 #include "PgConnection.h"
+#include "PgCommand.h"
 
 #include <thread>
 #include <postgres/libpq-fe.h>
@@ -8,44 +9,44 @@ using namespace std;
 namespace StreamWolf {
     namespace Data {
         namespace Postgres {
-            Connection::Connection(const string& connectionString)
+            PgConnection::PgConnection(const string& PgConnectionString)
             {
-                mPgConn = PQconnectdb(connectionString.c_str());
+                mPgConn = PQconnectdb(PgConnectionString.c_str());
             }
 
-            Connection::~Connection()
+            PgConnection::~PgConnection()
             {
                 Close();
             }
 
-            void Connection::BeginConnect(const string& connectionString, function<void(IConnection*)> callback)
+            void PgConnection::BeginConnect(const string& PgConnectionString, function<void(IConnection*)> callback)
             {
-                thread([this, &connectionString, &callback] () {
-                    this->Connect(connectionString);
+                thread([this, &PgConnectionString, &callback] () {
+                    this->Connect(PgConnectionString);
                     callback(this);
                 }).detach();
             }
             
-            string Connection::ConnectionString() const
+            string PgConnection::ConnectionString() const
             {
                 return mConnString;
             }
 
-            shared_ptr<ITransaction> Connection::BeginTransaction(IsolationLevel level = IsolationLevel::Committed)
+            shared_ptr<ITransaction> PgConnection::BeginTransaction(IsolationLevel level = IsolationLevel::Committed)
             {
             }
             
-            void Connection::Connect(const string& connectionString)
+            void PgConnection::Connect(const string& PgConnectionString)
             {
                 Close();
-                mPgConn = PQconnectdb(connectionString.c_str());
+                mPgConn = PQconnectdb(PgConnectionString.c_str());
             }
             
-            void Connection::ClearPool()
+            void PgConnection::ClearPool()
             {
             }
             
-            void Connection::Close()
+            void PgConnection::Close()
             {
                 if (mPgConn) {
                     PQfinish(mPgConn);
@@ -53,12 +54,15 @@ namespace StreamWolf {
                 }
             }
             
-            shared_ptr<ICommand> Connection::CreateCommand()
+            shared_ptr<ICommand> PgConnection::CreateCommand()
             {
+                return make_shared<PgCommand>(mPgConn);
             }
             
-            void Connection::Open()
+            void PgConnection::Open()
             {
+                Close();
+                mPgConn = PQconnectdb(mConnString.c_str());
             }
         }
     }
