@@ -29,11 +29,11 @@ namespace StreamWolf {
                 virtual void WriteAsync(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT;
                 
                 virtual void Close() throw(socket_error);
-                virtual void Close(uint32_t) throw(socket_error);
-                virtual int32_t Read(std::vector<uint8_t>&, uint32_t, uint32_t) throw(socket_error);
+                virtual void Close(uint32_t timeout) throw(socket_error);
+                virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error);
                 virtual int32_t ReadByte() throw(socket_error);
-                virtual int32_t Write(const std::vector<uint8_t>&, uint32_t, uint32_t) throw(socket_error);
-                virtual int32_t WriteByte(uint8_t) throw(socket_error);
+                virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error);
+                virtual int32_t WriteByte(uint8_t byte) throw(socket_error);
 
             private:
 

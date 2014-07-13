@@ -138,6 +138,9 @@
     <ClCompile Include="UdpClient.cpp">
       <Filter>Net\Socket\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HttpServer.cpp">
+      <Filter>Net\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -204,9 +207,6 @@
       <Filter>Data\Postgres\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HttpServer.h">
-      <Filter>Net\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpsServer.h">
       <Filter>Net\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IPAddress.h">
