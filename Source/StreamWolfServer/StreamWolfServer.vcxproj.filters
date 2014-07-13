@@ -120,6 +120,9 @@
     <ClCompile Include="NetUtility.cpp">
       <Filter>Net\Socket\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkStream.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">

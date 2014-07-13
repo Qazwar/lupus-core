@@ -249,6 +249,7 @@
     <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="IPAddress.cpp" />
     <ClCompile Include="IPEndPoint.cpp" />
+    <ClCompile Include="NetworkStream.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="PgCommand.cpp" />
     <ClCompile Include="PgConnection.cpp" />
