@@ -263,6 +263,7 @@
     <ClCompile Include="SocketState.cpp" />
     <ClCompile Include="NetUtility.cpp" />
     <ClCompile Include="TcpClient.cpp" />
+    <ClCompile Include="TcpListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />

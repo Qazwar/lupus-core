@@ -23,8 +23,8 @@ namespace StreamWolf {
 
                 TcpClient() = default;
                 TcpClient(AddressFamily family) NOEXCEPT;
-                TcpClient(std::shared_ptr<IPEndPoint> localEP) throw(socket_error);
-                TcpClient(const std::string& hostname, uint16_t port) throw(socket_error);
+                TcpClient(std::shared_ptr<IPEndPoint> localEP) throw(socket_error, null_pointer);
+                TcpClient(const std::string& hostname, uint16_t port) throw(socket_error, std::runtime_error);
                 virtual ~TcpClient() = default;
 
                 virtual uint32_t Available() const NOEXCEPT;

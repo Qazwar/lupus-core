@@ -132,6 +132,9 @@
     <ClCompile Include="Integer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TcpListener.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">

@@ -20,6 +20,10 @@ namespace StreamWolf {
 
             TcpClient::TcpClient(shared_ptr<IPEndPoint> localEP)
             {
+                if (!localEP) {
+                    throw null_pointer();
+                }
+
                 mClient = make_shared<Socket>(localEP->Family(), SocketType::Stream, ProtocolType::TCP);
                 mClient->Connect(localEP);
             }

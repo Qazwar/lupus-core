@@ -20,8 +20,8 @@ namespace StreamWolf {
             {
             public:
 
-                TcpListener(std::shared_ptr<IPEndPoint> localEP);
-                TcpListener(std::shared_ptr<IPAddress> localaddr, uint16_t port);
+                TcpListener(std::shared_ptr<IPEndPoint> localEP) throw(socket_error, null_pointer);
+                TcpListener(std::shared_ptr<IPAddress> localaddr, uint16_t port) throw(socket_error, null_pointer);
                 virtual ~TcpListener() = default;
 
                 virtual bool IsActive() const throw(socket_error);
