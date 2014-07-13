@@ -12,24 +12,33 @@ using namespace std;
 namespace StreamWolf {
     namespace Net {
         namespace Sockets {
-            UdpClient::UdpClient(AddressFamily)
+            UdpClient::UdpClient(AddressFamily family)
             {
+                mClient = make_shared<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
             }
 
             UdpClient::UdpClient(uint16_t port)
             {
+                mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
+                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback, port));
             }
 
-            UdpClient::UdpClient(shared_ptr<IPEndPoint>)
+            UdpClient::UdpClient(shared_ptr<IPEndPoint> ep)
             {
+                mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
+                mClient->Bind(ep);
             }
 
-            UdpClient::UdpClient(uint16_t port, AddressFamily)
+            UdpClient::UdpClient(uint16_t port, AddressFamily family)
             {
+                mClient = make_shared<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
+                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback, port));
             }
 
             UdpClient::UdpClient(const string& hostname, uint16_t port)
             {
+                mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
+                mClient->Connect(GetAddressInformation(hostname, Integer::ToString(port), AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP));
             }
 
             uint32_t UdpClient::Available() const

@@ -20,11 +20,11 @@ namespace StreamWolf {
             public:
 
                 UdpClient() = default;
-                UdpClient(AddressFamily);
-                UdpClient(uint16_t port);
-                UdpClient(std::shared_ptr<IPEndPoint>);
-                UdpClient(uint16_t port, AddressFamily);
-                UdpClient(const std::string& hostname, uint16_t port);
+                UdpClient(AddressFamily); // Socket
+                UdpClient(uint16_t port); // Bind
+                UdpClient(std::shared_ptr<IPEndPoint>); // Bind
+                UdpClient(uint16_t port, AddressFamily); // Bind
+                UdpClient(const std::string& hostname, uint16_t port); // Connect
                 virtual ~UdpClient() = default;
 
                 virtual uint32_t Available() const throw(null_pointer);
