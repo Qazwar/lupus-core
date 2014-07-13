@@ -1,7 +1,12 @@
 #include "Application.h"
 #include "HttpServer.h"
+#include "Socket.h"
+
+#include <Windows.h>
 
 #include <cstdio>
+#include <cstring>
+#include <iostream>
 
 using namespace std;
 using namespace StreamWolf::Net;
@@ -11,6 +16,14 @@ namespace StreamWolf {
     namespace Application {
         int Application::Initialize(const vector<string>& args)
         {
+            WSADATA wsaData;
+
+            memset(&wsaData, 0, sizeof(WSADATA));
+
+            if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+                cerr << GetLastSocketErrorString() << endl;
+            }
+
             return 0;
         }
 
@@ -25,6 +38,7 @@ namespace StreamWolf {
 
         int Application::Shutdown()
         {
+            WSACleanup();
             return 0;
         }
     }

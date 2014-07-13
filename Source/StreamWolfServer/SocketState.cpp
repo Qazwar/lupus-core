@@ -112,7 +112,7 @@ namespace StreamWolf {
                 AddrLength length = sizeof(AddrStorage);
 
                 memset(&storage, 0, sizeof(AddrStorage));
-                result = recvfrom(socket->Handle(), (char*)&buffer[offset], size, (int)socketFlags, (Addr*)&storage, &length);
+                result = recvfrom(socket->Handle(), (char*)buffer.data() + offset, size, (int)socketFlags, (Addr*)&storage, &length);
                 remoteEndPoint = IPEndPointPtr(new IPEndPoint(std::vector<uint8_t>((uint8_t*)&storage, (uint8_t*)&storage + sizeof(AddrLength))));
                 return result;
             }
@@ -130,7 +130,7 @@ namespace StreamWolf {
 
                 std::vector<uint8_t> address = remoteEndPoint->Serialize();
 
-                return sendto(socket->Handle(), (const char*)buffer[offset], size, (int)socketFlags, (const Addr*)address.data(), buffer.size());
+                return sendto(socket->Handle(), (const char*)buffer.data() + offset, size, (int)socketFlags, (const Addr*)address.data(), buffer.size());
             }
 
             void Socket::SocketState::Shutdown(Socket* socket, SocketShutdown how)
@@ -231,11 +231,11 @@ namespace StreamWolf {
             {
                 SocketHandle handle;
                 AddrStorage storage;
-                AddrLength length;
+                AddrLength length = sizeof(AddrStorage);
 
                 memset(&storage, 0, sizeof(AddrStorage));
 
-                if ((handle = accept(socket->Handle(), (Addr*)&storage, &length)) != INVALID_SOCKET) {
+                if ((handle = accept(socket->Handle(), (Addr*)&storage, &length)) == INVALID_SOCKET) {
                     throw socket_error(GetLastSocketErrorString());
                 }
 
@@ -275,7 +275,7 @@ namespace StreamWolf {
                     throw std::out_of_range("offset and size does not match buffer size");
                 }
 
-                return recv(socket->Handle(), (char*)buffer[offset], size, (int)socketFlags);
+                return recv(socket->Handle(), (char*)buffer.data() + offset, size, (int)socketFlags);
             }
 
             int32_t Socket::SocketConnected::Send(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode)
@@ -284,7 +284,7 @@ namespace StreamWolf {
                     throw std::out_of_range("offset and size does not match buffer size");
                 }
 
-                return send(socket->Handle(), (const char*)&buffer[offset], size, (int)socketFlags);
+                return send(socket->Handle(), (const char*)buffer.data() + offset, size, (int)socketFlags);
             }
 
             void Socket::SocketConnected::Shutdown(Socket* socket, SocketShutdown how)
@@ -305,7 +305,9 @@ namespace StreamWolf {
                 int yes = 1;
                 std::vector<uint8_t> address = localEndPoint->Serialize();
 
-                if (setsockopt(socket->Handle(), SOL_SOCKET, SO_REUSEADDR, (const char*)yes, sizeof(int)) != 0) {
+                if (setsockopt(socket->Handle(), SOL_SOCKET, SO_REUSEADDR, (const char*)&yes, sizeof(int)) != 0) {
+                    throw socket_error(GetLastSocketErrorString());
+                } else if (bind(socket->Handle(), (const Addr*)address.data(), address.size()) != 0) {
                     throw socket_error(GetLastSocketErrorString());
                 }
 

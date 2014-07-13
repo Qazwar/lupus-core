@@ -14,7 +14,13 @@ namespace StreamWolf {
     namespace Net {
         HttpServer::HttpServer(uint16_t port)
         {
-            mListener = make_shared<TcpListener>(IPAddress::Any, port);
+            try {
+                mListener = make_shared<TcpListener>(IPAddress::Any, port);
+                mListener->Start(100);
+            } catch (const exception& e) {
+                cout << e.what() << endl;
+                rethrow_exception(current_exception());
+            }
         }
 
         void HttpServer::Start()
@@ -29,7 +35,7 @@ namespace StreamWolf {
                         cout << e.what() << endl;
                     }
                 }
-            }, mListener, std::ref(mRun));
+            }, mListener, std::ref(mRun)).detach();
         }
         
         void HttpServer::Stop()
@@ -42,10 +48,16 @@ namespace StreamWolf {
             thread([=]() {
                 vector<uint8_t> buffer(client->Available());
                 auto stream = client->GetStream();
+                int32_t n = stream->Read(buffer, 0, buffer.size());
 
-                stream->Read(buffer, 0, 0);
-                cout << buffer.data() << endl;
-
+                if (n < 0) {
+                    int err = WSAGetLastError();
+                    cout << GetLastSocketErrorString() << endl;
+                } else if (n == 0) {
+                    cout << "No connection" << endl;
+                } else {
+                    cout << buffer.data() << endl;
+                }
                 // TODO: Anfrage bearbeiten
             }).detach();
         }
