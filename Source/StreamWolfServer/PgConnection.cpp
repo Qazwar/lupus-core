@@ -20,18 +20,26 @@ namespace StreamWolf {
                 Close();
             }
 
-            void PgConnection::BeginTransactionAsync(IsolationLevel level, std::function<void(IConnection*, std::shared_ptr<ITransaction>)> callback)
+            void PgConnection::BeginTransactionAsync(IsolationLevel level, std::function<void(std::exception_ptr, IConnection*, std::shared_ptr<ITransaction>)> callback)
             {
                 thread([this, &level, &callback]() {
-                    callback(this, this->BeginTransaction(level));
+                    try {
+                        callback(nullptr, this, this->BeginTransaction(level));
+                    } catch (...) {
+                        callback(current_exception(), nullptr, nullptr);
+                    }
                 }).detach();
             }
 
-            void PgConnection::ConnectAsync(const string& PgConnectionString, function<void(IConnection*)> callback)
+            void PgConnection::ConnectAsync(const string& PgConnectionString, function<void(std::exception_ptr, IConnection*)> callback)
             {
                 thread([this, &PgConnectionString, &callback] () {
-                    this->Connect(PgConnectionString);
-                    callback(this);
+                    try {
+                        this->Connect(PgConnectionString);
+                        callback(nullptr, this);
+                    } catch (...) {
+                        callback(current_exception(), nullptr);
+                    }
                 }).detach();
             }
             

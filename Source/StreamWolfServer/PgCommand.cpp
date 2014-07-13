@@ -25,24 +25,36 @@ namespace StreamWolf {
             {
             }
 
-            void PgCommand::ExecuteNonQueryAsync(function<void(ICommand*, int)> callback)
+            void PgCommand::ExecuteNonQueryAsync(function<void(std::exception_ptr, ICommand*, int)> callback)
             {
                 thread([this, &callback]() {
-                    callback(this, this->ExecuteNonQuery());
+                    try {
+                        callback(nullptr, this, this->ExecuteNonQuery());
+                    } catch (...) {
+                        callback(current_exception(), nullptr, 0);
+                    }
                 }).detach();
             }
             
-            void PgCommand::ExecuteReaderAsync(function<void(ICommand*, shared_ptr<IDataReader>)> callback)
+            void PgCommand::ExecuteReaderAsync(function<void(std::exception_ptr, ICommand*, shared_ptr<IDataReader>)> callback)
             {
                 thread([this, &callback]() {
-                    callback(this, this->ExecuteReader());
+                    try {
+                        callback(nullptr, this, this->ExecuteReader());
+                    } catch (...) {
+                        callback(current_exception(), nullptr, nullptr);
+                    }
                 }).detach();
             }
             
-            void PgCommand::ExecuteScalarAsync(function<void(ICommand*, const vector<unordered_map<string, boost::any>>&)> callback)
+            void PgCommand::ExecuteScalarAsync(function<void(std::exception_ptr, ICommand*, const vector<unordered_map<string, boost::any>>&)> callback)
             {
                 thread([this, &callback]() {
-                    callback(this, this->ExecuteScalar());
+                    try {
+                        callback(nullptr, this, this->ExecuteScalar());
+                    } catch (...) {
+                        callback(current_exception(), nullptr, vector<unordered_map<string, boost::any>>());
+                    }
                 }).detach();
             }
 
