@@ -4,8 +4,6 @@
 
 #ifdef _MSC_VER
 
-#pragma comment(lib, "Ws2_32.lib")
-
 #include <WinSock2.h> // Header muss vor <Windows.h> inkludiert werden
 #include <WS2tcpip.h> // Header muss vor <Windows.h> inkludiert werden
 
@@ -23,7 +21,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             typedef SOCKET SocketHandle;
 
             inline std::string GetLastSocketErrorString() {
@@ -72,7 +70,7 @@ namespace StreamWolf {
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             typedef int SocketHandle;
             typedef unsigned long u_long;
 
@@ -110,7 +108,7 @@ namespace StreamWolf {
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             typedef socklen_t AddrLength;
             typedef addrinfo AddrInfo;
             typedef sockaddr Addr;

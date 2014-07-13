@@ -10,7 +10,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             class IPEndPoint;
 
             //! Repräsentiert einen IP-Adresse

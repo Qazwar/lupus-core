@@ -5,7 +5,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             uint16_t HostToNetworkOrder(uint16_t host)
             {
                 return htons(host);

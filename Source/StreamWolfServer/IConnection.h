@@ -19,7 +19,7 @@ namespace StreamWolf {
             
             virtual ~IConnection() = default;
 
-            virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, IConnection*, std::shared_ptr<ITransaction>)>) NOEXCEPT = 0;
+            virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, std::shared_ptr<ITransaction>)>) NOEXCEPT = 0;
             virtual void ConnectAsync(const std::string&, std::function<void(std::exception_ptr, IConnection*)>) NOEXCEPT = 0;
 
             virtual std::string ConnectionString() const NOEXCEPT = 0;

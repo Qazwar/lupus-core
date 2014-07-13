@@ -4,7 +4,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             IPEndPoint::IPEndPoint(uint32_t address, uint16_t port) :
                 IPEndPoint(std::make_shared<IPAddress>(address), port)
             {

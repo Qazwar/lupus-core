@@ -11,7 +11,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             class IPAddress;
 
             //! Repräsentiert einen Endpunkt mit dem Kommuniziert werden kann.

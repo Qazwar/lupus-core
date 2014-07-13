@@ -7,7 +7,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             Socket::Socket(const SocketInformation& socketInformation)
             {
                 if (socketInformation.ProtocolInformation.size() != sizeof(AddrStorage) + 12) {
@@ -77,6 +77,7 @@ namespace StreamWolf {
             {
                 if (mHandle != INVALID_SOCKET) {
                     closesocket(mHandle);
+                    mHandle = INVALID_SOCKET;
                 }
             }
 
@@ -119,6 +120,10 @@ namespace StreamWolf {
                     } catch (socket_error&) {
                         continue;
                     }
+                }
+
+                if (!IsConnected()) {
+                    throw socket_error("Could not connect to given end points");
                 }
             }
 
@@ -333,7 +338,7 @@ namespace StreamWolf {
                     throw socket_error(GetLastSocketErrorString());
                 }
 
-                return (result == 1);
+                return (result != 0);
             }
 
             void Socket::NoDelay(bool value)

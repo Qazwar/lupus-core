@@ -16,7 +16,7 @@ namespace StreamWolf {
 
                 virtual ~PgConnection();
 
-                virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, IConnection*, std::shared_ptr<ITransaction>)>) NOEXCEPT override;
+                virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, std::shared_ptr<ITransaction>)>) NOEXCEPT override;
                 virtual void ConnectAsync(const std::string&, std::function<void(std::exception_ptr, IConnection*)>) NOEXCEPT override;
 
                 virtual std::string ConnectionString() const NOEXCEPT override;

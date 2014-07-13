@@ -15,9 +15,9 @@ namespace StreamWolf {
                 PgCommand(pg_conn* conn);
                 virtual ~PgCommand();
 
-                virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, ICommand*, int)>) NOEXCEPT override;
-                virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, ICommand*, std::shared_ptr<IDataReader>)>) NOEXCEPT override;
-                virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT override;
+                virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, int)>) NOEXCEPT override;
+                virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, std::shared_ptr<IDataReader>)>) NOEXCEPT override;
+                virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT override;
 
                 virtual void Text(const std::string&) NOEXCEPT override;
                 virtual std::string& Text() NOEXCEPT override;

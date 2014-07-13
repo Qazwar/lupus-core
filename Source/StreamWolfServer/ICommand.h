@@ -22,9 +22,9 @@ namespace StreamWolf {
 
             virtual ~ICommand() = default;
 
-            virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, ICommand*, int)>) NOEXCEPT = 0;
-            virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, ICommand*, std::shared_ptr<IDataReader>)>) NOEXCEPT = 0;
-            virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT = 0;
+            virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, int)>) NOEXCEPT = 0;
+            virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, std::shared_ptr<IDataReader>)>) NOEXCEPT = 0;
+            virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT = 0;
 
             virtual void Text(const std::string&) NOEXCEPT = 0;
             virtual std::string& Text() NOEXCEPT = 0;

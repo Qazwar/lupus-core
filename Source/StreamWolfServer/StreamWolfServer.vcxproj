@@ -247,6 +247,8 @@
     <ClCompile Include="DataColumn.cpp" />
     <ClCompile Include="DataRow.cpp" />
     <ClCompile Include="DataTable.cpp" />
+    <ClCompile Include="Float.cpp" />
+    <ClCompile Include="Integer.cpp" />
     <ClCompile Include="IPAddress.cpp" />
     <ClCompile Include="IPEndPoint.cpp" />
     <ClCompile Include="NetworkStream.cpp" />
@@ -260,6 +262,7 @@
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="SocketState.cpp" />
     <ClCompile Include="NetUtility.cpp" />
+    <ClCompile Include="TcpClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -267,6 +270,8 @@
     <ClInclude Include="DataColumn.h" />
     <ClInclude Include="DataTable.h" />
     <ClInclude Include="DataType.h" />
+    <ClInclude Include="Float.hpp" />
+    <ClInclude Include="Integer.hpp" />
     <ClInclude Include="NetDefinitions.h" />
     <ClInclude Include="SocketEnum.h" />
     <ClInclude Include="HttpServer.h" />
@@ -292,6 +297,8 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="SocketInformation.h" />
+    <ClInclude Include="TcpClient.h" />
+    <ClInclude Include="TcpListener.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             IPAddress::IPAddress(uint32_t ipv4) :
                 mFamily(AddressFamily::InterNetwork)
             {

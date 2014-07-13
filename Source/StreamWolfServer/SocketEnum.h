@@ -4,7 +4,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             //! Sockettyp
             enum class SocketType {
                 Unspecified = 0, //!< Typ ist nicht spezifiziert und von daher variabl.

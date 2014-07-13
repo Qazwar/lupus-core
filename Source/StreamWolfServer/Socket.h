@@ -10,7 +10,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             struct SocketInformation;
             class IPEndPoint;
             class IPAddress;
@@ -104,7 +104,7 @@ namespace StreamWolf {
                  * \param[in]   endPoints   Endpunkte mit denen sich Verbunden werden
                  *                          soll.
                  */
-                virtual void Connect(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) throw(null_pointer);
+                virtual void Connect(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) throw(socket_error, null_pointer);
 
                 /*!
                  * Ruft Connect(std::shared_ptr<IPEndPoint>) auf.

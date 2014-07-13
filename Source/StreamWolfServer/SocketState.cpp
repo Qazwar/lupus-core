@@ -7,7 +7,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             std::shared_ptr<Socket> Socket::SocketState::Accept(Socket* socket)
             {
                 throw socket_error("Socket is not in an valid state for Accept");

@@ -7,7 +7,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             enum class SocketInformationOption {
                 None,
                 Connected,

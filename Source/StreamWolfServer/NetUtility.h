@@ -5,7 +5,7 @@
 
 namespace StreamWolf {
     namespace Net {
-        namespace Socket {
+        namespace Sockets {
             class Socket;
             class IPAddress;
             class IPEndPoint;

@@ -20,22 +20,22 @@ namespace StreamWolf {
                 Close();
             }
 
-            void PgConnection::BeginTransactionAsync(IsolationLevel level, std::function<void(std::exception_ptr, IConnection*, std::shared_ptr<ITransaction>)> callback)
+            void PgConnection::BeginTransactionAsync(IsolationLevel level, std::function<void(std::exception_ptr, std::shared_ptr<ITransaction>)> callback)
             {
-                thread([this, &level, &callback]() {
+                thread([this, level, callback]() {
                     try {
-                        callback(nullptr, this, this->BeginTransaction(level));
+                        callback(nullptr, this->BeginTransaction(level));
                     } catch (...) {
-                        callback(current_exception(), nullptr, nullptr);
+                        callback(current_exception(), nullptr);
                     }
                 }).detach();
             }
 
-            void PgConnection::ConnectAsync(const string& PgConnectionString, function<void(std::exception_ptr, IConnection*)> callback)
+            void PgConnection::ConnectAsync(const string& pgConnectionString, function<void(std::exception_ptr, IConnection*)> callback)
             {
-                thread([this, &PgConnectionString, &callback] () {
+                thread([this, pgConnectionString, callback] () {
                     try {
-                        this->Connect(PgConnectionString);
+                        this->Connect(pgConnectionString);
                         callback(nullptr, this);
                     } catch (...) {
                         callback(current_exception(), nullptr);
@@ -53,11 +53,11 @@ namespace StreamWolf {
                 return make_shared<PgTransaction>(mPgConn, level);
             }
             
-            void PgConnection::Connect(const string& PgConnectionString)
+            void PgConnection::Connect(const string& pgConnectionString)
             {
                 Close();
 
-                if (!(mPgConn = PQconnectdb(PgConnectionString.c_str()))) {
+                if (!(mPgConn = PQconnectdb(pgConnectionString.c_str()))) {
                     throw sql_error("could not connect to postgres database");
                 }
             }
