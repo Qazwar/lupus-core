@@ -4,6 +4,7 @@
 #include <boost/any.hpp>
 #include <boost/noncopyable.hpp>
 
+#include "Utility.h"
 #include "DataType.h"
 
 namespace StreamWolf {
@@ -16,13 +17,13 @@ namespace StreamWolf {
             Parameter(DataType, const boost::any&);
             virtual ~Parameter() = default;
 
-            virtual DataType& DbType();
-            virtual const DataType& DbType() const;
-            virtual void DbType(DataType);
+            virtual DataType& DbType() NOEXCEPT;
+            virtual const DataType& DbType() const NOEXCEPT;
+            virtual void DbType(DataType) NOEXCEPT;
 
-            virtual boost::any& Value();
-            virtual const boost::any& Value() const;
-            virtual void Value(const boost::any&);
+            virtual boost::any& Value() NOEXCEPT;
+            virtual const boost::any& Value() const NOEXCEPT;
+            virtual void Value(const boost::any&) NOEXCEPT;
 
         private:
 

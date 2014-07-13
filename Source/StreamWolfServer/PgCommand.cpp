@@ -149,6 +149,11 @@ namespace StreamWolf {
 
                 mName = RandomString<8>().c_str();
                 PGresult* result = PQprepare(mPgConn, mName.c_str(), mQuery.c_str(), paramTypes.size(), paramTypes.data());
+
+                if (!result) {
+                    throw sql_error("database is not connected");
+                }
+
                 mPrepared = (PQresultStatus(result) == PGRES_COMMAND_OK);
                 PQclear(result);
                 return mPrepared;
@@ -156,8 +161,16 @@ namespace StreamWolf {
 
             PGresult* PgCommand::GetResult()
             {
+                PGresult* result = nullptr;
+
                 if (!mPrepared) {
-                    return PQexec(mPgConn, mQuery.c_str());
+                    if (!(result = PQexec(mPgConn, mQuery.c_str()))) {
+                        throw sql_error("database is not connected");
+                    } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                        throw sql_error("error while executing command");
+                    } else {
+                        return result;
+                    }
                 }
 
                 vector<const char*> paramValues;
@@ -181,11 +194,17 @@ namespace StreamWolf {
                     paramFormats.push_back(0); // 0 = string, 1 = binäre
                 });
 
-                PGresult* result = PQexecPrepared(mPgConn, mName.c_str(), mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);
+                result = PQexecPrepared(mPgConn, mName.c_str(), mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);
 
                 for_each(begin(paramValues), end(paramValues), [](const char* s) {
                     delete s;
                 });
+
+                if (!result) {
+                    throw sql_error("database is not connected");
+                } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                    throw sql_error("error while executing command");
+                }
 
                 return result;
             }

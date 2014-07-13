@@ -3,6 +3,8 @@
 #include <string>
 #include <boost/noncopyable.hpp>
 
+#include "Utility.h"
+
 namespace StreamWolf {
     namespace Data {
         class ITransaction : public boost::noncopyable
@@ -11,8 +13,8 @@ namespace StreamWolf {
 
             virtual ~ITransaction() = default;
 
-            virtual void Commit() = 0;
-            virtual void Rollback() = 0;
+            virtual void Commit() throw(sql_error) = 0;
+            virtual void Rollback() throw(sql_error) = 0;
         };
     }
 }

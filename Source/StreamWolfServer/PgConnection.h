@@ -16,16 +16,16 @@ namespace StreamWolf {
 
                 virtual ~PgConnection();
 
-                virtual void BeginTransactionAsync(IsolationLevel, std::function<void(IConnection*, std::shared_ptr<ITransaction>)>) override;
-                virtual void ConnectAsync(const std::string&, std::function<void(IConnection*)>) override;
+                virtual void BeginTransactionAsync(IsolationLevel, std::function<void(IConnection*, std::shared_ptr<ITransaction>)>) NOEXCEPT override;
+                virtual void ConnectAsync(const std::string&, std::function<void(IConnection*)>) NOEXCEPT override;
 
-                virtual std::string ConnectionString() const override;
+                virtual std::string ConnectionString() const NOEXCEPT override;
 
-                virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) override;
-                virtual void Connect(const std::string&) override;
-                virtual void Close() override;
-                virtual std::shared_ptr<ICommand> CreateCommand() override;
-                virtual void Open() override;
+                virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) override;
+                virtual void Connect(const std::string&) throw(sql_error) override;
+                virtual void Close() NOEXCEPT override;
+                virtual std::shared_ptr<ICommand> CreateCommand() throw(sql_error) override;
+                virtual void Open() throw(sql_error) override;
 
             private:
 

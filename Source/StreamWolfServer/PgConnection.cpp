@@ -48,7 +48,10 @@ namespace StreamWolf {
             void PgConnection::Connect(const string& PgConnectionString)
             {
                 Close();
-                mPgConn = PQconnectdb(PgConnectionString.c_str());
+
+                if (!(mPgConn = PQconnectdb(PgConnectionString.c_str()))) {
+                    throw sql_error("could not connect to postgres database");
+                }
             }
             
             void PgConnection::Close()
@@ -66,8 +69,7 @@ namespace StreamWolf {
             
             void PgConnection::Open()
             {
-                Close();
-                mPgConn = PQconnectdb(mConnString.c_str());
+                Connect(mConnString);
             }
         }
     }

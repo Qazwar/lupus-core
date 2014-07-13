@@ -5,6 +5,7 @@
 #include <functional>
 #include <boost/noncopyable.hpp>
 
+#include "Utility.h"
 #include "IsolationLevel.h"
 
 namespace StreamWolf {
@@ -18,16 +19,16 @@ namespace StreamWolf {
             
             virtual ~IConnection() = default;
 
-            virtual void BeginTransactionAsync(IsolationLevel, std::function<void(IConnection*, std::shared_ptr<ITransaction>)>) = 0;
-            virtual void ConnectAsync(const std::string&, std::function<void(IConnection*)>) = 0;
+            virtual void BeginTransactionAsync(IsolationLevel, std::function<void(IConnection*, std::shared_ptr<ITransaction>)>) NOEXCEPT = 0;
+            virtual void ConnectAsync(const std::string&, std::function<void(IConnection*)>) NOEXCEPT = 0;
 
-            virtual std::string ConnectionString() const = 0;
+            virtual std::string ConnectionString() const NOEXCEPT = 0;
             
-            virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) = 0;
-            virtual void Connect(const std::string&) = 0;
-            virtual void Close() = 0;
-            virtual std::shared_ptr<ICommand> CreateCommand() = 0;
-            virtual void Open() = 0;
+            virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) = 0;
+            virtual void Connect(const std::string&) throw(sql_error) = 0;
+            virtual void Close() NOEXCEPT = 0;
+            virtual std::shared_ptr<ICommand> CreateCommand() throw(sql_error) = 0;
+            virtual void Open() throw(sql_error) = 0;
         };
     }
 }

@@ -6,6 +6,7 @@
 #include <cryptopp/cryptlib.h>
 
 #ifdef _MSC_VER
+#pragma warning(disable: 4290)
 #define NOEXCEPT throw()
 #else
 #deifne NOEXCEPT noexcept
@@ -20,10 +21,12 @@
         virtual ~cls() = default; \
         cls& operator=(const cls&) = default; \
         virtual inline const char* what() const override { return mMessage.c_str(); } \
-    };
+    }
 
 namespace StreamWolf {
-    DefineError(null_pointer)
+    DefineError(null_pointer);
+    DefineError(sql_error);
+    DefineError(socket_error);
 
     template <unsigned N>
     std::string RandomString()

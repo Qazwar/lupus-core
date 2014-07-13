@@ -2,17 +2,8 @@
 
 #include "Utility.h"
 
-namespace StreamWolf {
-    namespace Net {
-        namespace Socket {
-            DefineError(socket_error)
-        }
-    }
-}
-
 #ifdef _MSC_VER
 
-#pragma warning(disable: 4290)
 #pragma comment(lib, "Ws2_32.lib")
 
 #include <WinSock2.h> // Header muss vor <Windows.h> inkludiert werden

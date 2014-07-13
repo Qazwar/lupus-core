@@ -8,23 +8,56 @@ namespace StreamWolf {
 
             PgTransaction::PgTransaction(PGconn* conn, IsolationLevel level)
             {
+                PGresult* result = nullptr;
                 mPgConn = conn;
 
                 switch (level) {
                     case IsolationLevel::Uncommitted:
-                        PQclear(PQexec(conn, "SET TRANSACTION READ UNCOMMITED"));
+                        if (!(result = PQexec(conn, "SET TRANSACTION READ UNCOMMITED"))) {
+                            throw sql_error("database is not connected");
+                        } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                            PQclear(result);
+                            throw sql_error("command failed");
+                        } else {
+                            PQclear(result);
+                        }
+
                         break;
 
                     case IsolationLevel::Committed:
-                        PQclear(PQexec(conn, "SET TRANSACTION READ COMMITED"));
+                        if (!(result = PQexec(conn, "SET TRANSACTION READ COMMITED"))) {
+                            throw sql_error("database is not connected");
+                        } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                            PQclear(result);
+                            throw sql_error("command failed");
+                        } else {
+                            PQclear(result);
+                        }
+
                         break;
 
                     case IsolationLevel::Repeatable:
-                        PQclear(PQexec(conn, "SET TRANSACTION REPEATABLE READ"));
+                        if (!(result = PQexec(conn, "SET TRANSACTION REPEATABLE READ"))) {
+                            throw sql_error("database is not connected");
+                        } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                            PQclear(result);
+                            throw sql_error("command failed");
+                        } else {
+                            PQclear(result);
+                        }
+
                         break;
 
                     case IsolationLevel::Serializable:
-                        PQclear(PQexec(conn, "SET TRANSACTION SERIALIZABLE"));
+                        if (!(result = PQexec(conn, "SET TRANSACTION SERIALIZABLE"))) {
+                            throw sql_error("database is not connected");
+                        } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                            PQclear(result);
+                            throw sql_error("command failed");
+                        } else {
+                            PQclear(result);
+                        }
+
                         break;
                 }
             }
@@ -35,12 +68,31 @@ namespace StreamWolf {
 
             void PgTransaction::Commit()
             {
-                PQclear(PQexec(mPgConn, "COMMIT"));
+                PGresult* result = nullptr;
+
+                if (!(result = PQexec(mPgConn, "COMMIT"))) {
+                    throw sql_error("database is not connected");
+                } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                    PQclear(result);
+                    throw sql_error("command failed");
+                } else {
+                    PQclear(result);
+                }
+
             }
             
             void PgTransaction::Rollback()
             {
-                PQclear(PQexec(mPgConn, "ROLLBACK"));
+                PGresult* result = nullptr;
+
+                if (!(result = PQexec(mPgConn, "ROLLBACK"))) {
+                    throw sql_error("database is not connected");
+                } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
+                    PQclear(result);
+                    throw sql_error("command failed");
+                } else {
+                    PQclear(result);
+                }
             }
         }
     }

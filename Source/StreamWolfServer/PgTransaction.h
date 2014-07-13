@@ -12,11 +12,11 @@ namespace StreamWolf {
             {
             public:
 
-                PgTransaction(pg_conn*, IsolationLevel);
+                PgTransaction(pg_conn*, IsolationLevel) throw(sql_error);
                 virtual ~PgTransaction();
 
-                virtual void Commit() override;
-                virtual void Rollback() override;
+                virtual void Commit() throw(sql_error) override;
+                virtual void Rollback() throw(sql_error) override;
 
             private:
 

@@ -15,25 +15,25 @@ namespace StreamWolf {
                 PgCommand(pg_conn* conn);
                 virtual ~PgCommand();
 
-                virtual void ExecuteNonQueryAsync(std::function<void(ICommand*, int)>) override;
-                virtual void ExecuteReaderAsync(std::function<void(ICommand*, std::shared_ptr<IDataReader>)>) override;
-                virtual void ExecuteScalarAsync(std::function<void(ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) override;
+                virtual void ExecuteNonQueryAsync(std::function<void(ICommand*, int)>) NOEXCEPT override;
+                virtual void ExecuteReaderAsync(std::function<void(ICommand*, std::shared_ptr<IDataReader>)>) NOEXCEPT override;
+                virtual void ExecuteScalarAsync(std::function<void(ICommand*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT override;
 
-                virtual void Text(const std::string&) override;
-                virtual std::string& Text() override;
-                virtual const std::string& Text() const override;
-                virtual std::vector<std::shared_ptr<Parameter>>& Parameters() override;
-                virtual const std::vector<std::shared_ptr<Parameter>>& Parameters() const override;
+                virtual void Text(const std::string&) NOEXCEPT override;
+                virtual std::string& Text() NOEXCEPT override;
+                virtual const std::string& Text() const NOEXCEPT override;
+                virtual std::vector<std::shared_ptr<Parameter>>& Parameters() NOEXCEPT override;
+                virtual const std::vector<std::shared_ptr<Parameter>>& Parameters() const NOEXCEPT override;
 
-                virtual std::shared_ptr<Parameter> CreateParameter() override;
-                virtual int ExecuteNonQuery() override;
-                virtual std::shared_ptr<IDataReader> ExecuteReader() override;
-                virtual std::vector<std::unordered_map<std::string, boost::any>> ExecuteScalar() override;
-                virtual bool Prepare() override;
+                virtual std::shared_ptr<Parameter> CreateParameter() NOEXCEPT override;
+                virtual int ExecuteNonQuery() throw(sql_error) override;
+                virtual std::shared_ptr<IDataReader> ExecuteReader() throw(sql_error) override;
+                virtual std::vector<std::unordered_map<std::string, boost::any>> ExecuteScalar() throw(sql_error) override;
+                virtual bool Prepare() throw(sql_error) override;
 
             private:
 
-                pg_result* GetResult();
+                pg_result* GetResult() throw(sql_error);
 
                 pg_conn* mPgConn = nullptr;
                 bool mPrepared = false;

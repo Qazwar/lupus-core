@@ -14,14 +14,14 @@ namespace StreamWolf {
                 PgDataReader(pg_result*);
                 virtual ~PgDataReader();
 
-                virtual int Depth() const override;
-                virtual int FieldCount() const override;
-                virtual std::string ColumnName(int) const override;
-                virtual int ColumnNumber(const std::string&) const override;
-                virtual DataType Type(int) const override;
-                virtual boost::any Value(int) const override;
-                virtual bool IsNull(int) const override;
-                virtual bool NextResult() override;
+                virtual int Depth() const NOEXCEPT override;
+                virtual int FieldCount() const NOEXCEPT override;
+                virtual std::string ColumnName(int) const NOEXCEPT override;
+                virtual int ColumnNumber(const std::string&) const NOEXCEPT override;
+                virtual DataType Type(int) const NOEXCEPT override;
+                virtual boost::any Value(int) const NOEXCEPT override;
+                virtual bool IsNull(int) const NOEXCEPT override;
+                virtual bool NextResult() NOEXCEPT override;
 
             private:
 
