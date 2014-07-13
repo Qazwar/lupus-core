@@ -1,9 +1,30 @@
 #pragma once
 
 #include <string>
+#include <exception>
+
 #include <cryptopp/cryptlib.h>
 
+#ifdef _MSC_VER
+#define NOEXCEPT throw()
+#else
+#deifne NOEXCEPT noexcept
+#endif
+
+#define DefineError(cls) \
+    class cls : public virtual std::exception \
+    { \
+        std::string mMessage; \
+    public: \
+        inline cls(const std::string& message = "") : mMessage(message) { } \
+        virtual ~cls() = default; \
+        cls& operator=(const cls&) = default; \
+        virtual inline const char* what() const override { return mMessage.c_str(); } \
+    };
+
 namespace StreamWolf {
+    DefineError(null_pointer)
+
     template <unsigned N>
     std::string RandomString()
     {

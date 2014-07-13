@@ -49,9 +49,24 @@
     <Filter Include="Data\Postgres\Source Files">
       <UniqueIdentifier>{5cb594fa-12a0-4db2-a775-a916367c2b7d}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Filter Include="Net">
+      <UniqueIdentifier>{d7b92a6f-e8fb-4ce5-9e37-13a66e651fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Header Files">
+      <UniqueIdentifier>{f172c3e7-1264-45af-8f21-c51d2c3efa5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Source Files">
+      <UniqueIdentifier>{0fce3a79-e351-4cd9-a830-cd3790bfe714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Socket">
+      <UniqueIdentifier>{43315da2-2861-4370-a923-fa819bb62bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Socket\Header Files">
+      <UniqueIdentifier>{68964f0a-e50a-40fa-9688-f574d39b9150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Socket\Source Files">
+      <UniqueIdentifier>{8de0ff29-1383-419c-bb27-6e707527ae84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -89,6 +104,21 @@
     </ClCompile>
     <ClCompile Include="PgTransaction.cpp">
       <Filter>Data\Postgres\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IPAddress.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IPEndPoint.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketState.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetUtility.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +184,36 @@
     </ClInclude>
     <ClInclude Include="PgTransaction.h">
       <Filter>Data\Postgres\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpServer.h">
+      <Filter>Net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpsServer.h">
+      <Filter>Net\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IPAddress.h">
+      <Filter>Net\Socket\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IPEndPoint.h">
+      <Filter>Net\Socket\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetUtility.h">
+      <Filter>Net\Socket\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkStream.h">
+      <Filter>Net\Socket\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>Net\Socket\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketInformation.h">
+      <Filter>Net\Socket\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketEnum.h">
+      <Filter>Net\Socket\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetDefinitions.h">
+      <Filter>Net\Socket\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
