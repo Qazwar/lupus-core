@@ -548,9 +548,7 @@ namespace StreamWolf {
 
                     virtual void Connect(Socket* socket, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
                     virtual int32_t Receive(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range) override;
-                    virtual int32_t ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range) override;
                     virtual int32_t Send(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range) override;
-                    virtual int32_t SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range) override;
                     virtual void Shutdown(Socket* socket, SocketShutdown how) throw(socket_error) override;
                 };
 
@@ -573,6 +571,8 @@ namespace StreamWolf {
                     virtual void Close(Socket* socket) throw(socket_error) override;
                     virtual void Close(Socket* socket, uint32_t timeout) throw(socket_error) override;
                     virtual SocketInformation DuplicateAndClose(Socket* socket) throw(socket_error) override;
+                    virtual int32_t ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range) override;
+                    virtual int32_t SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range) override;
                 };
 
                 Socket() = default;

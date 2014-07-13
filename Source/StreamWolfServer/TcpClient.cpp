@@ -37,11 +37,11 @@ namespace StreamWolf {
 
             uint32_t TcpClient::Available() const
             {
-                if (mClient) {
-                    return mClient->Available();
+                if (!mClient) {
+                    throw null_pointer();
                 }
 
-                return 0;
+                return mClient->Available();
             }
 
             shared_ptr<Socket> TcpClient::Client() const
@@ -69,6 +69,10 @@ namespace StreamWolf {
 
             bool TcpClient::ExclusiveAddressUse() const
             {
+                if (!mClient) {
+                    throw null_pointer();
+                }
+
                 int32_t result, length = 4;
 
                 if (getsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&result, (int*)&length) != 0) {
@@ -80,6 +84,10 @@ namespace StreamWolf {
 
             void TcpClient::ExclusiveAddressUse(bool value)
             {
+                if (!mClient) {
+                    throw null_pointer();
+                }
+
                 int32_t val = value ? 1 : 0;
 
                 if (setsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&val, 4) != 0) {

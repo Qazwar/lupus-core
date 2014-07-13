@@ -27,7 +27,7 @@ namespace StreamWolf {
                 TcpClient(const std::string& hostname, uint16_t port) throw(socket_error, std::runtime_error);
                 virtual ~TcpClient() = default;
 
-                virtual uint32_t Available() const NOEXCEPT;
+                virtual uint32_t Available() const throw(null_pointer);
                 virtual std::shared_ptr<Socket> Client() const NOEXCEPT;
                 virtual void Client(std::shared_ptr<Socket>) throw(null_pointer);
                 virtual bool IsConnected() const NOEXCEPT;
@@ -58,7 +58,7 @@ namespace StreamWolf {
 
             private:
 
-                std::shared_ptr<Socket> mClient;
+                std::shared_ptr<Socket> mClient = nullptr;
             };
         }
     }

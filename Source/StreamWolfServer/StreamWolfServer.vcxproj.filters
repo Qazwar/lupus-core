@@ -135,6 +135,9 @@
     <ClCompile Include="TcpListener.cpp">
       <Filter>Net\Socket\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UdpClient.cpp">
+      <Filter>Net\Socket\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="Integer.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UdpClient.h">
+      <Filter>Net\Socket\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

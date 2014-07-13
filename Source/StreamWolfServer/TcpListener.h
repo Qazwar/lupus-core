@@ -41,7 +41,7 @@ namespace StreamWolf {
 
             private:
 
-                std::shared_ptr<Socket> mServer;
+                std::shared_ptr<Socket> mServer = nullptr;
             };
         }
     }

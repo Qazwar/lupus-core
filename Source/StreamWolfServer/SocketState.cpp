@@ -103,7 +103,18 @@ namespace StreamWolf {
 
             int32_t Socket::SocketState::ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint)
             {
-                throw socket_error("Socket is not in an valid state for ReceiveFrom");
+                if (offset > buffer.size() || size > buffer.size() - offset) {
+                    throw std::out_of_range("offset and size does not match buffer size");
+                }
+
+                int32_t result = 0;
+                AddrStorage storage;
+                AddrLength length = sizeof(AddrStorage);
+
+                memset(&storage, 0, sizeof(AddrStorage));
+                result = recvfrom(socket->Handle(), (char*)&buffer[offset], size, (int)socketFlags, (Addr*)&storage, &length);
+                remoteEndPoint = IPEndPointPtr(new IPEndPoint(std::vector<uint8_t>((uint8_t*)&storage, (uint8_t*)&storage + sizeof(AddrLength))));
+                return result;
             }
 
             int32_t Socket::SocketState::Send(Socket* socket, const std::vector<uint8_t>& buaffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode)
@@ -113,7 +124,13 @@ namespace StreamWolf {
 
             int32_t Socket::SocketState::SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint)
             {
-                throw socket_error("Socket is not in an valid state for SendTo");
+                if (offset > buffer.size() || size > buffer.size() - offset) {
+                    throw std::out_of_range("offset and size does not match buffer size");
+                }
+
+                std::vector<uint8_t> address = remoteEndPoint->Serialize();
+
+                return sendto(socket->Handle(), (const char*)buffer[offset], size, (int)socketFlags, (const Addr*)address.data(), buffer.size());
             }
 
             void Socket::SocketState::Shutdown(Socket* socket, SocketShutdown how)
@@ -261,22 +278,6 @@ namespace StreamWolf {
                 return recv(socket->Handle(), (char*)buffer[offset], size, (int)socketFlags);
             }
 
-            int32_t Socket::SocketConnected::ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint)
-            {
-                if (offset > buffer.size() || size > buffer.size() - offset) {
-                    throw std::out_of_range("offset and size does not match buffer size");
-                }
-
-                int32_t result = 0;
-                AddrStorage storage;
-                AddrLength length = sizeof(AddrStorage);
-
-                memset(&storage, 0, sizeof(AddrStorage));
-                result = recvfrom(socket->Handle(), (char*)&buffer[offset], size, (int)socketFlags, (Addr*)&storage, &length);
-                remoteEndPoint = IPEndPointPtr(new IPEndPoint(std::vector<uint8_t>((uint8_t*)&storage, (uint8_t*)&storage + sizeof(AddrLength))));
-                return result;
-            }
-
             int32_t Socket::SocketConnected::Send(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode)
             {
                 if (offset > buffer.size() || size > buffer.size() - offset) {
@@ -284,17 +285,6 @@ namespace StreamWolf {
                 }
 
                 return send(socket->Handle(), (const char*)&buffer[offset], size, (int)socketFlags);
-            }
-
-            int32_t Socket::SocketConnected::SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint)
-            {
-                if (offset > buffer.size() || size > buffer.size() - offset) {
-                    throw std::out_of_range("offset and size does not match buffer size");
-                }
-
-                std::vector<uint8_t> address = remoteEndPoint->Serialize();
-
-                return sendto(socket->Handle(), (const char*)buffer[offset], size, (int)socketFlags, (const Addr*)address.data(), buffer.size());
             }
 
             void Socket::SocketConnected::Shutdown(Socket* socket, SocketShutdown how)
@@ -340,6 +330,16 @@ namespace StreamWolf {
             SocketInformation Socket::SocketClosed::DuplicateAndClose(Socket* socket)
             {
                 throw socket_error("Socket is not in an valid state for DuplicateAndClose");
+            }
+
+            int32_t Socket::SocketClosed::ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint)
+            {
+                throw socket_error("Socket is not in an valid state for ReceiveFrom");
+            }
+
+            int32_t Socket::SocketClosed::SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint)
+            {
+                throw socket_error("Socket is not in an valid state for SendTo");
             }
         }
     }
