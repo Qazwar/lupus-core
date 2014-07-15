@@ -4,6 +4,8 @@
 #include "IPAddress.h"
 #include "IPEndPoint.h"
 #include "NetworkStream.h"
+#include "HttpRequest.h"
+#include "HttpResponse.h"
 
 #include <iostream>
 
@@ -12,54 +14,36 @@ using namespace StreamWolf::Net::Sockets;
 
 namespace StreamWolf {
     namespace Net {
-        HttpServer::HttpServer(uint16_t port)
-        {
-            try {
-                mListener = make_shared<TcpListener>(IPAddress::Any, port);
-                mListener->Start(100);
-            } catch (const exception& e) {
-                cout << e.what() << endl;
-                rethrow_exception(current_exception());
+        namespace Http {
+            HttpServer::HttpServer(uint16_t port, int32_t backlog)
+            {
+                try {
+                    mListener = make_shared<TcpListener>(IPAddress::Any, port);
+                    mListener->Start(backlog);
+                } catch (const exception& e) {
+                    cerr << e.what() << endl;
+                    rethrow_exception(current_exception());
+                }
             }
-        }
 
-        void HttpServer::Start()
-        {
-            mRun = true;
+            void HttpServer::Start(function<void(shared_ptr<HttpRequest>, shared_ptr<HttpResponse>)> callback)
+            {
+                mRun = true;
+                thread(bind(&HttpServer::HandleConnection, this, callback)).detach();
+            }
 
-            thread([this](shared_ptr<TcpListener> listener, std::atomic<bool>& run) {
-                while (run.load()) {
-                    try {
-                        this->HandleClient(listener->AcceptTcpClient());
-                    } catch (const exception& e) {
-                        cout << e.what() << endl;
-                    }
+            void HttpServer::Stop()
+            {
+                mRun.store(false);
+            }
+
+            void HttpServer::HandleConnection(function<void(shared_ptr<HttpRequest>, shared_ptr<HttpResponse>)> callback)
+            {
+                while (mRun.load()) {
+                    auto client = mListener->AcceptTcpClient();
+                    callback(make_shared<HttpRequest>(client), make_shared<HttpResponse>(client));
                 }
-            }, mListener, std::ref(mRun)).detach();
-        }
-        
-        void HttpServer::Stop()
-        {
-            mRun.store(false);
-        }
-
-        void HttpServer::HandleClient(shared_ptr<TcpClient> client)
-        {
-            thread([=]() {
-                vector<uint8_t> buffer(client->Available());
-                auto stream = client->GetStream();
-                int32_t n = stream->Read(buffer, 0, buffer.size());
-
-                if (n < 0) {
-                    int err = WSAGetLastError();
-                    cout << GetLastSocketErrorString() << endl;
-                } else if (n == 0) {
-                    cout << "No connection" << endl;
-                } else {
-                    cout << buffer.data() << endl;
-                }
-                // TODO: Anfrage bearbeiten
-            }).detach();
+            }
         }
     }
 }

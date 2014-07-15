@@ -27,6 +27,7 @@ namespace StreamWolf {
     DefineError(null_pointer);
     DefineError(sql_error);
     DefineError(socket_error);
+    DefineError(http_error);
 
     template <unsigned N>
     std::string RandomString()

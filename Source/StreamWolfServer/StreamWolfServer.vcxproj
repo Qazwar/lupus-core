@@ -248,6 +248,8 @@
     <ClCompile Include="DataRow.cpp" />
     <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="Float.cpp" />
+    <ClCompile Include="HttpRequest.cpp" />
+    <ClCompile Include="HttpResponse.cpp" />
     <ClCompile Include="HttpServer.cpp" />
     <ClCompile Include="Integer.cpp" />
     <ClCompile Include="IPAddress.cpp" />
@@ -274,6 +276,8 @@
     <ClInclude Include="DataTable.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="Float.hpp" />
+    <ClInclude Include="HttpRequest.h" />
+    <ClInclude Include="HttpResponse.h" />
     <ClInclude Include="Integer.hpp" />
     <ClInclude Include="NetDefinitions.h" />
     <ClInclude Include="SocketEnum.h" />

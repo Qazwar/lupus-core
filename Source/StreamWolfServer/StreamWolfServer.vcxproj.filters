@@ -52,12 +52,6 @@
     <Filter Include="Net">
       <UniqueIdentifier>{d7b92a6f-e8fb-4ce5-9e37-13a66e651fdd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Net\Header Files">
-      <UniqueIdentifier>{f172c3e7-1264-45af-8f21-c51d2c3efa5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net\Source Files">
-      <UniqueIdentifier>{0fce3a79-e351-4cd9-a830-cd3790bfe714}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Net\Sockets">
       <UniqueIdentifier>{43315da2-2861-4370-a923-fa819bb62bcb}</UniqueIdentifier>
     </Filter>
@@ -66,6 +60,15 @@
     </Filter>
     <Filter Include="Net\Sockets\Source Files">
       <UniqueIdentifier>{8de0ff29-1383-419c-bb27-6e707527ae84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Http">
+      <UniqueIdentifier>{f10cafea-af22-45a6-b5ef-ccade4ee0f3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Http\Header Files">
+      <UniqueIdentifier>{f172c3e7-1264-45af-8f21-c51d2c3efa5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Net\Http\Source Files">
+      <UniqueIdentifier>{0fce3a79-e351-4cd9-a830-cd3790bfe714}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +142,13 @@
       <Filter>Net\Sockets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HttpServer.cpp">
-      <Filter>Net\Source Files</Filter>
+      <Filter>Net\Http\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpRequest.cpp">
+      <Filter>Net\Http\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpResponse.cpp">
+      <Filter>Net\Http\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,7 +216,7 @@
       <Filter>Data\Postgres\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HttpServer.h">
-      <Filter>Net\Header Files</Filter>
+      <Filter>Net\Http\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IPAddress.h">
       <Filter>Net\Sockets\Header Files</Filter>
@@ -247,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="UdpClient.h">
       <Filter>Net\Sockets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpRequest.h">
+      <Filter>Net\Http\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpResponse.h">
+      <Filter>Net\Http\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

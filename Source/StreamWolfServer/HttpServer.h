@@ -8,6 +8,7 @@
 #include <thread>
 #include <atomic>
 #include <exception>
+#include <functional>
 
 namespace StreamWolf {
     namespace Net {
@@ -16,22 +17,27 @@ namespace StreamWolf {
             class TcpListener;
         }
 
-        class HttpServer : public boost::noncopyable
-        {
-        public:
+        namespace Http {
+            class HttpRequest;
+            class HttpResponse;
 
-            HttpServer(uint16_t port);
-            virtual ~HttpServer() = default;
+            class HttpServer : public boost::noncopyable
+            {
+            public:
 
-            virtual void Start();
-            virtual void Stop();
+                HttpServer(uint16_t port, int32_t backlog = 100);
+                virtual ~HttpServer() = default;
 
-            virtual void HandleClient(std::shared_ptr<Sockets::TcpClient>);
+                virtual void Start(std::function<void(std::shared_ptr<HttpRequest>, std::shared_ptr<HttpResponse>)>);
+                virtual void Stop();
 
-        private:
+            private:
 
-            std::atomic<bool> mRun = false;
-            std::shared_ptr<Sockets::TcpListener> mListener = nullptr;
-        };
+                void HandleConnection(std::function<void(std::shared_ptr<HttpRequest>, std::shared_ptr<HttpResponse>)>);
+
+                std::atomic<bool> mRun = false;
+                std::shared_ptr<Sockets::TcpListener> mListener = nullptr;
+            };
+        }
     }
 }

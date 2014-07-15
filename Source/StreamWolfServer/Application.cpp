@@ -1,5 +1,7 @@
 #include "Application.h"
 #include "HttpServer.h"
+#include "HttpRequest.h"
+#include "HttpResponse.h"
 #include "Socket.h"
 
 #include <Windows.h>
@@ -10,6 +12,7 @@
 
 using namespace std;
 using namespace StreamWolf::Net;
+using namespace StreamWolf::Net::Http;
 using namespace StreamWolf::Net::Sockets;
 
 namespace StreamWolf {
@@ -30,7 +33,9 @@ namespace StreamWolf {
         int Application::Execute()
         {
             auto httpServer = make_shared<HttpServer>(8080);
-            httpServer->Start();
+            httpServer->Start([](shared_ptr<HttpRequest> request, shared_ptr<HttpResponse> response) {
+                cout << "Connected" << endl;
+            });
             getchar();
             httpServer->Stop();
             return 0;
