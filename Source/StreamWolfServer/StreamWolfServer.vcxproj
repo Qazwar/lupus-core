@@ -258,7 +258,6 @@
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="PgCommand.cpp" />
     <ClCompile Include="PgConnection.cpp" />
-    <ClCompile Include="Facade.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PgDataReader.cpp" />
     <ClCompile Include="PgTransaction.cpp" />
@@ -294,7 +293,6 @@
     <ClInclude Include="ITransaction.h" />
     <ClInclude Include="PgCommand.h" />
     <ClInclude Include="PgConnection.h" />
-    <ClInclude Include="Facade.h" />
     <ClInclude Include="IConnection.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="PgDataReader.h" />
@@ -303,6 +301,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="SocketInformation.h" />
+    <ClInclude Include="Stream.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="UdpClient.h" />

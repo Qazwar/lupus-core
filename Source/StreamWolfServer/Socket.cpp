@@ -157,13 +157,13 @@ namespace StreamWolf {
             int32_t Socket::Receive(std::vector<uint8_t>& buffer)
             {
                 SocketError errorCode;
-                return mState->Receive(this, buffer, 0, buffer.size(), SocketFlags::None, errorCode);
+                return mState->Receive(this, buffer, 0, (uint32_t)buffer.size(), SocketFlags::None, errorCode);
             }
 
             int32_t Socket::Receive(std::vector<uint8_t>& buffer, uint32_t offset)
             {
                 SocketError errorCode;
-                return mState->Receive(this, buffer, offset, buffer.size() - offset, SocketFlags::None, errorCode);
+                return mState->Receive(this, buffer, offset, (uint32_t)buffer.size() - offset, SocketFlags::None, errorCode);
             }
 
             int32_t Socket::Receive(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
@@ -185,12 +185,12 @@ namespace StreamWolf {
 
             int32_t Socket::ReceiveFrom(std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint>& remoteEndPoint)
             {
-                return mState->ReceiveFrom(this, buffer, 0, buffer.size(), SocketFlags::None, remoteEndPoint);
+                return mState->ReceiveFrom(this, buffer, 0, (uint32_t)buffer.size(), SocketFlags::None, remoteEndPoint);
             }
 
             int32_t Socket::ReceiveFrom(std::vector<uint8_t>& buffer, uint32_t offset, std::shared_ptr<IPEndPoint>& remoteEndPoint)
             {
-                return mState->ReceiveFrom(this, buffer, offset, buffer.size() - offset, SocketFlags::None, remoteEndPoint);
+                return mState->ReceiveFrom(this, buffer, offset, (uint32_t)buffer.size() - offset, SocketFlags::None, remoteEndPoint);
             }
 
             int32_t Socket::ReceiveFrom(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::shared_ptr<IPEndPoint>& remoteEndPoint)
@@ -206,13 +206,13 @@ namespace StreamWolf {
             int32_t Socket::Send(const std::vector<uint8_t>& buffer)
             {
                 SocketError errorCode;
-                return mState->Send(this, buffer, 0, buffer.size(), SocketFlags::None, errorCode);
+                return mState->Send(this, buffer, 0, (uint32_t)buffer.size(), SocketFlags::None, errorCode);
             }
 
             int32_t Socket::Send(const std::vector<uint8_t>& buffer, uint32_t offset)
             {
                 SocketError errorCode;
-                return mState->Send(this, buffer, offset, buffer.size() - offset, SocketFlags::None, errorCode);
+                return mState->Send(this, buffer, offset, (uint32_t)buffer.size() - offset, SocketFlags::None, errorCode);
             }
 
             int32_t Socket::Send(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
@@ -234,12 +234,12 @@ namespace StreamWolf {
 
             int32_t Socket::SendTo(const std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint> remoteEndPoint)
             {
-                return mState->SendTo(this, buffer, 0, buffer.size(), SocketFlags::None, remoteEndPoint);
+                return mState->SendTo(this, buffer, 0, (uint32_t)buffer.size(), SocketFlags::None, remoteEndPoint);
             }
 
             int32_t Socket::SendTo(const std::vector<uint8_t>& buffer, uint32_t offset, std::shared_ptr<IPEndPoint> remoteEndPoint)
             {
-                return mState->SendTo(this, buffer, offset, buffer.size() - offset, SocketFlags::None, remoteEndPoint);
+                return mState->SendTo(this, buffer, offset, (uint32_t)buffer.size() - offset, SocketFlags::None, remoteEndPoint);
             }
 
             int32_t Socket::SendTo(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::shared_ptr<IPEndPoint> remoteEndPoint)

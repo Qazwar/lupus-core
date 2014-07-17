@@ -160,7 +160,7 @@ namespace StreamWolf {
                 });
 
                 mName = RandomString<8>().c_str();
-                PGresult* result = PQprepare(mPgConn, mName.c_str(), mQuery.c_str(), paramTypes.size(), paramTypes.data());
+                PGresult* result = PQprepare(mPgConn, mName.c_str(), mQuery.c_str(), (int)paramTypes.size(), paramTypes.data());
 
                 if (!result) {
                     throw sql_error("database is not connected");
@@ -193,7 +193,7 @@ namespace StreamWolf {
 
                 for_each(begin(mParameters), end(mParameters), [&paramValues, &paramLengths, &paramFormats](shared_ptr<Parameter>& param) {
                     string value = boost::any_cast<string>(param->Value());
-                    paramLengths.push_back(value.length());
+                    paramLengths.push_back((int)value.length());
 
                     if (value.empty()) {
                         char* buffer = new char[value.length()];
@@ -206,7 +206,7 @@ namespace StreamWolf {
                     paramFormats.push_back(0); // 0 = string, 1 = binäre
                 });
 
-                result = PQexecPrepared(mPgConn, mName.c_str(), mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);
+                result = PQexecPrepared(mPgConn, mName.c_str(), (int)mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);
 
                 for_each(begin(paramValues), end(paramValues), [](const char* s) {
                     delete s;

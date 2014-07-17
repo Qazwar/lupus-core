@@ -130,7 +130,7 @@ namespace StreamWolf {
 
                 std::vector<uint8_t> address = remoteEndPoint->Serialize();
 
-                return sendto(socket->Handle(), (const char*)buffer.data() + offset, size, (int)socketFlags, (const Addr*)address.data(), buffer.size());
+                return sendto(socket->Handle(), (const char*)buffer.data() + offset, size, (int)socketFlags, (const Addr*)address.data(), (int)buffer.size());
             }
 
             void Socket::SocketState::Shutdown(Socket* socket, SocketShutdown how)
@@ -307,7 +307,7 @@ namespace StreamWolf {
 
                 if (setsockopt(socket->Handle(), SOL_SOCKET, SO_REUSEADDR, (const char*)&yes, sizeof(int)) != 0) {
                     throw socket_error(GetLastSocketErrorString());
-                } else if (bind(socket->Handle(), (const Addr*)address.data(), address.size()) != 0) {
+                } else if (bind(socket->Handle(), (const Addr*)address.data(), (int)address.size()) != 0) {
                     throw socket_error(GetLastSocketErrorString());
                 }
 

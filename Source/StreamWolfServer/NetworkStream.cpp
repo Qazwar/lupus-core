@@ -58,6 +58,11 @@ namespace StreamWolf {
             {
                 mSocket->Close(timeout);
             }
+
+            int64_t NetworkStream::Length() const
+            {
+                return (int64_t)mSocket->Available();
+            }
             
             int32_t NetworkStream::Read(vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
             {
