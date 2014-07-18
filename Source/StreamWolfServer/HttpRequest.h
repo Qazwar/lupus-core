@@ -1,15 +1,20 @@
 #pragma once
 
 #include <boost/any.hpp>
+#include <boost/noncopyable.hpp>
 
 #include <string>
+#include <memory>
 #include <unordered_map>
 
-#include "Stream.h"
+#include "Utility.h"
 
 namespace StreamWolf {
+    class ReadStream;
+
     namespace Net {
         namespace Sockets {
+            class IPAddress;
             class TcpClient;
         }
 
@@ -21,15 +26,16 @@ namespace StreamWolf {
             {
             public:
 
-                Request(std::shared_ptr<Sockets::TcpClient>);
+                Request(std::shared_ptr<Sockets::TcpClient>) throw(socket_error);
                 virtual ~Request() = default;
 
+                virtual void Abort() throw(socket_error);
+                virtual std::shared_ptr<ReadStream> Body() const NOEXCEPT;
                 virtual const std::string& ContentType() const NOEXCEPT;
-                virtual uint32_t ContentLength() const NOEXCEPT;
                 virtual const std::unordered_map<std::string, Cookie>& Cookies() const NOEXCEPT;
                 virtual const std::unordered_map<std::string, std::string>& Form() const NOEXCEPT;
                 virtual const std::unordered_map<std::string, std::string>& Headers() const NOEXCEPT;
-                virtual std::shared_ptr<ReadStream> InputStream() const NOEXCEPT;
+                virtual std::shared_ptr<Sockets::IPAddress> HostAddress() const NOEXCEPT;
                 virtual const std::string& Method() const NOEXCEPT;
                 virtual const std::unordered_map<std::string, std::string>& QueryString() const NOEXCEPT;
                 virtual std::shared_ptr<Uri> Url() const NOEXCEPT;

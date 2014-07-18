@@ -28,19 +28,32 @@ namespace StreamWolf {
     DefineError(sql_error);
     DefineError(socket_error);
     DefineError(http_error);
+    DefineError(io_error);
 
     template <unsigned N>
-    std::string RandomString()
+    tstring RandomString()
     {
         static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const size_t size = sizeof(alphanum);
         CryptoPP::RandomNumberGenerator rng;
-        std::string str(N, ' ');
+        tstring str(N, ' ');
 
         for (unsigned i = 0; i < N; i++) {
             str[i] = alphanum[rng.GenerateWord32() % size];
         }
 
         return str;
+    }
+
+    template <typename Dest, typename Src>
+    Dest force_cast(const Src& src)
+    {
+        union types {
+            Src s;
+            Dest d;
+        } t;
+
+        t.s = src;
+        return t.d;
     }
 }
