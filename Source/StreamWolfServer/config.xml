@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <Services>
+    <Service type="dll" path="/" />
+    <Service type="script" path="/script" />
+  </Services>
+</Config>
