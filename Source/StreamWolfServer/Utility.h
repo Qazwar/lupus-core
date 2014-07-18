@@ -31,12 +31,12 @@ namespace StreamWolf {
     DefineError(io_error);
 
     template <unsigned N>
-    tstring RandomString()
+    std::string RandomString()
     {
         static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const size_t size = sizeof(alphanum);
         CryptoPP::RandomNumberGenerator rng;
-        tstring str(N, ' ');
+        std::string str(N, ' ');
 
         for (unsigned i = 0; i < N; i++) {
             str[i] = alphanum[rng.GenerateWord32() % size];
