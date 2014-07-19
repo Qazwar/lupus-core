@@ -125,7 +125,7 @@ namespace StreamWolf {
         }
 
         mBuffer.insert(mBuffer.end(), begin(buffer) + offset, begin(buffer) + offset + size);
-        mIterator = prev(end(mBuffer));
+        mIterator = end(mBuffer);
         return (int32_t)size;
     }
 
@@ -152,6 +152,16 @@ namespace StreamWolf {
         }
 
         return 0; // TODO: implement
+    }
+
+    uint32_t MemoryStream::Capacity() const
+    {
+        return (uint32_t)mBuffer.capacity();
+    }
+
+    void MemoryStream::Capacity(uint32_t cap)
+    {
+        mBuffer.reserve(cap);
     }
 
     const vector<uint8_t>& MemoryStream::GetBuffer() const

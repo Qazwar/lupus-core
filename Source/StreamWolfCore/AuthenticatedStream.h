@@ -5,7 +5,7 @@
 namespace StreamWolf {
     namespace Net {
         namespace Security {
-            class AuthenticatedSteram : public ReadStream, public WriteStream
+            class SWC_API AuthenticatedSteram : public Stream
             {
             public:
 
@@ -19,7 +19,7 @@ namespace StreamWolf {
                 virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) override;
                 virtual int32_t ReadByte() override;
                 virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) override;
-                virtual int32_t WriteByte(uint8_t byte) override;
+                virtual void WriteByte(uint8_t byte) override;
 
             protected:
 
