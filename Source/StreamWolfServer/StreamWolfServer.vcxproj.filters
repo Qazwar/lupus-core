@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -22,235 +18,35 @@
     <Filter Include="Application\Source Files">
       <UniqueIdentifier>{cde9775f-5242-4d6c-91a7-1894084806db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data">
-      <UniqueIdentifier>{6455b95b-3dca-4656-bd2d-ac0eb1a1f3eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Header Files">
-      <UniqueIdentifier>{2d155088-ecce-4716-8047-ed78ebbfd855}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Source Files">
-      <UniqueIdentifier>{0eaa3889-bbce-4977-8b15-78617f85bf47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Postgres">
-      <UniqueIdentifier>{f3998050-a3ae-4cf5-bbdb-088ad79bfdbe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Postgres\Header Files">
-      <UniqueIdentifier>{30245147-f208-403b-b26d-f040d941b310}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Postgres\Source Files">
-      <UniqueIdentifier>{5cb594fa-12a0-4db2-a775-a916367c2b7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net">
-      <UniqueIdentifier>{d7b92a6f-e8fb-4ce5-9e37-13a66e651fdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net\Sockets">
-      <UniqueIdentifier>{43315da2-2861-4370-a923-fa819bb62bcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net\Sockets\Header Files">
-      <UniqueIdentifier>{68964f0a-e50a-40fa-9688-f574d39b9150}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net\Sockets\Source Files">
-      <UniqueIdentifier>{8de0ff29-1383-419c-bb27-6e707527ae84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net\Http">
-      <UniqueIdentifier>{f10cafea-af22-45a6-b5ef-ccade4ee0f3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net\Http\Header Files">
-      <UniqueIdentifier>{f172c3e7-1264-45af-8f21-c51d2c3efa5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Net\Http\Source Files">
-      <UniqueIdentifier>{0fce3a79-e351-4cd9-a830-cd3790bfe714}</UniqueIdentifier>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6fad7f9d-684b-4d9d-9d61-720a8e7d9788}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Application\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ConfigurationFile.cpp">
       <Filter>Application\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PgConnection.cpp">
-      <Filter>Data\Postgres\Source Files</Filter>
+    <ClCompile Include="UnixApplication.cpp">
+      <Filter>Application\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PgCommand.cpp">
-      <Filter>Data\Postgres\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataColumn.cpp">
-      <Filter>Data\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataRow.cpp">
-      <Filter>Data\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTable.cpp">
-      <Filter>Data\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Parameter.cpp">
-      <Filter>Data\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PgDataReader.cpp">
-      <Filter>Data\Postgres\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PgTransaction.cpp">
-      <Filter>Data\Postgres\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IPAddress.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IPEndPoint.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Socket.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SocketState.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NetUtility.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NetworkStream.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TcpClient.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Float.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Integer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TcpListener.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UdpClient.cpp">
-      <Filter>Net\Sockets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpServer.cpp">
-      <Filter>Net\Http\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpRequest.cpp">
-      <Filter>Net\Http\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpResponse.cpp">
-      <Filter>Net\Http\Source Files</Filter>
+    <ClCompile Include="Win32Application.cpp">
+      <Filter>Application\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Linker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Application\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConfigurationFile.h">
       <Filter>Application\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="Linker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IConnection.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PgConnection.h">
-      <Filter>Data\Postgres\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ITransaction.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommand.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IsolationLevel.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IDataReader.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataType.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PgCommand.h">
-      <Filter>Data\Postgres\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PgOid.h">
-      <Filter>Data\Postgres\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataRow.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTable.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parameter.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataColumn.h">
-      <Filter>Data\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PgDataReader.h">
-      <Filter>Data\Postgres\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PgTransaction.h">
-      <Filter>Data\Postgres\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpServer.h">
-      <Filter>Net\Http\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IPAddress.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IPEndPoint.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NetUtility.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkStream.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Socket.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SocketInformation.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SocketEnum.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NetDefinitions.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TcpListener.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TcpClient.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Float.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Integer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UdpClient.h">
-      <Filter>Net\Sockets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpRequest.h">
-      <Filter>Net\Http\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpResponse.h">
-      <Filter>Net\Http\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StreamWolfServer.rc">

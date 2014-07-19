@@ -5,6 +5,7 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "..\Test\UnitTests\UnitTests.vcxproj", "{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}"
 	ProjectSection(ProjectDependencies) = postProject
+		{40A04166-C40C-422E-93B4-B52CD76A296C} = {40A04166-C40C-422E-93B4-B52CD76A296C}
 		{78132E93-9A9E-44A4-A197-9AB73521E689} = {78132E93-9A9E-44A4-A197-9AB73521E689}
 	EndProjectSection
 EndProject
@@ -35,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StreamWolfData", "StreamWol
 		StreamWolfData\1-CreateTables.sql = StreamWolfData\1-CreateTables.sql
 		StreamWolfData\2-CreateFunctions.sql = StreamWolfData\2-CreateFunctions.sql
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreamWolfCore", "StreamWolfCore\StreamWolfCore.vcxproj", "{40A04166-C40C-422E-93B4-B52CD76A296C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +97,25 @@ Global
 		{78132E93-9A9E-44A4-A197-9AB73521E689}.Release|Win32.Build.0 = Release|Win32
 		{78132E93-9A9E-44A4-A197-9AB73521E689}.Release|x64.ActiveCfg = Release|x64
 		{78132E93-9A9E-44A4-A197-9AB73521E689}.Release|x64.Build.0 = Release|x64
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Debug|Win32.Build.0 = Debug|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Debug|x64.ActiveCfg = Debug|x64
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Debug|x64.Build.0 = Debug|x64
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Profile|Any CPU.ActiveCfg = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Profile|Mixed Platforms.ActiveCfg = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Profile|Mixed Platforms.Build.0 = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Profile|Win32.ActiveCfg = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Profile|Win32.Build.0 = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Profile|x64.ActiveCfg = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Release|Win32.ActiveCfg = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Release|Win32.Build.0 = Release|Win32
+		{40A04166-C40C-422E-93B4-B52CD76A296C}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ using namespace StreamWolf::Net::Sockets;
 namespace StreamWolf {
     namespace Net {
         namespace Http {
-            Request::Request(shared_ptr<TcpClient> client)
+            HttpRequest::HttpRequest(shared_ptr<TcpClient> client)
             {
                 mClient = client;
             }

@@ -12,7 +12,7 @@ namespace StreamWolf {
     namespace Data {
         class DataColumn;
 
-        class DataRow : public boost::noncopyable
+        class SWC_API DataRow : public boost::noncopyable
         {
         public:
 

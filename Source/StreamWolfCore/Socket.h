@@ -15,7 +15,7 @@ namespace StreamWolf {
             class IPEndPoint;
             class IPAddress;
 
-            class Socket : public boost::noncopyable
+            class SWC_API Socket : public boost::noncopyable
             {
             public:
                 /*!

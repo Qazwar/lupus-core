@@ -2,7 +2,7 @@
 #include "Socket.h"
 #include "IPAddress.h"
 #include "IPEndPoint.h"
-#include "Integer.hpp"
+#include "Integer.h"
 #include "NetUtility.h"
 
 #include <thread>

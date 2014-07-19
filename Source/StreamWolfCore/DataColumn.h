@@ -8,7 +8,7 @@
 
 namespace StreamWolf {
     namespace Data {
-        class DataColumn
+        class SWC_API DataColumn
         {
         public:
 

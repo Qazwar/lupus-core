@@ -14,7 +14,7 @@ namespace StreamWolf {
             class IPEndPoint;
 
             //! Repräsentiert einen IP-Adresse
-            class IPAddress : public boost::noncopyable
+            class SWC_API IPAddress : public boost::noncopyable
             {
             public:
 

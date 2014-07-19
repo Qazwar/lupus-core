@@ -16,7 +16,7 @@ namespace StreamWolf {
             class IPEndPoint;
             class TcpClient;
 
-            class TcpListener : public boost::noncopyable
+            class SWC_API TcpListener : public boost::noncopyable
             {
             public:
 

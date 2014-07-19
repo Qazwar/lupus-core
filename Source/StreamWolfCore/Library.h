@@ -7,7 +7,7 @@
 
 namespace StreamWolf {
     namespace System {
-        class Library : public boost::noncopyable
+        class SWC_API Library : public boost::noncopyable
         {
         public:
 

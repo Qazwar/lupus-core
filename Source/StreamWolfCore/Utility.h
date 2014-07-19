@@ -8,8 +8,33 @@
 #ifdef _MSC_VER
 #pragma warning(disable: 4290)
 #define NOEXCEPT throw()
+
+#ifdef STREAMWOLFCORE_EXPORT
+#define SWC_API __declspec(dllexport)
+#else
+#define SWC_API __declspec(dllimport)
+#endif
+
 #else
 #deifne NOEXCEPT noexcept
+
+#ifdef STREAMWOLFCORE_EXPORT
+
+#ifdef __CYGWIN__
+#define SWC_API __attribute__ ((dllexport))
+#else
+#define SWC_API __attribute__ ((visibility ("default")))
+#endif
+
+#else
+
+#ifdef __CYGWIN__
+#define SWC_API __attribute__ ((dllimport))
+#else
+#define SWC_API __attribute__ ((visibility ("default")))
+#endif
+
+#endif
 #endif
 
 #define DefineError(cls) \
@@ -29,6 +54,8 @@ namespace StreamWolf {
     DefineError(socket_error);
     DefineError(http_error);
     DefineError(io_error);
+    DefineError(not_supported);
+    DefineError(unauthorized_access);
 
     template <unsigned N>
     std::string RandomString()

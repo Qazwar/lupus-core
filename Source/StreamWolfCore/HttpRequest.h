@@ -22,14 +22,14 @@ namespace StreamWolf {
             class Uri;
             class Cookie;
 
-            class Request : boost::noncopyable
+            class SWC_API HttpRequest : boost::noncopyable
             {
             public:
 
-                Request(std::shared_ptr<Sockets::TcpClient>) throw(socket_error);
-                virtual ~Request() = default;
+                HttpRequest(std::shared_ptr<Sockets::TcpClient>) throw(socket_error);
+                virtual ~HttpRequest() = default;
 
-                virtual void Abort() throw(socket_error);
+                /*virtual void Abort() throw(socket_error);
                 virtual std::shared_ptr<ReadStream> Body() const NOEXCEPT;
                 virtual const std::string& ContentType() const NOEXCEPT;
                 virtual const std::unordered_map<std::string, Cookie>& Cookies() const NOEXCEPT;
@@ -40,7 +40,7 @@ namespace StreamWolf {
                 virtual const std::unordered_map<std::string, std::string>& QueryString() const NOEXCEPT;
                 virtual std::shared_ptr<Uri> Url() const NOEXCEPT;
 
-                boost::any operator[](const std::string&) const NOEXCEPT;
+                boost::any operator[](const std::string&) const NOEXCEPT;*/
 
             private:
 

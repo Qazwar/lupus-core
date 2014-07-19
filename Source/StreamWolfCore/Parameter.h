@@ -9,7 +9,7 @@
 
 namespace StreamWolf {
     namespace Data {
-        class Parameter : public boost::noncopyable
+        class SWC_API Parameter : public boost::noncopyable
         {
         public:
 

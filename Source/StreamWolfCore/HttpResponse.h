@@ -5,6 +5,8 @@
 #include <string>
 #include <memory>
 
+#include "Utility.h"
+
 namespace StreamWolf {
     namespace Net {
         namespace Sockets {
@@ -12,7 +14,7 @@ namespace StreamWolf {
         }
 
         namespace Http {
-            class HttpResponse : boost::noncopyable
+            class SWC_API HttpResponse : boost::noncopyable
             {
             public:
 

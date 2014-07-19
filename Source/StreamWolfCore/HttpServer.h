@@ -10,6 +10,8 @@
 #include <exception>
 #include <functional>
 
+#include "Utility.h"
+
 namespace StreamWolf {
     namespace Net {
         namespace Sockets {
@@ -21,7 +23,7 @@ namespace StreamWolf {
             class HttpRequest;
             class HttpResponse;
 
-            class HttpServer : public boost::noncopyable
+            class SWC_API HttpServer : public boost::noncopyable
             {
             public:
 

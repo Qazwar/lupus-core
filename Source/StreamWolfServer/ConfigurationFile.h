@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "Utility.h"
+#include "../StreamWolfCore/Utility.h"
 
 namespace StreamWolf {
     namespace Net {

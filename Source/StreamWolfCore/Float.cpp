@@ -16,12 +16,14 @@
  * along with LupusFramwork.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Float.hpp"
+#include "Float.h"
 #include <cstdio>
 #include <cstring>
 
 #ifdef _MSC_VER
 #define snprintf_s _snprintf_s
+#else
+#define snprintf_s snprintf
 #endif
 
 namespace StreamWolf {
@@ -65,4 +67,37 @@ namespace StreamWolf {
 	{
         return (sscanf_s(string.c_str(), ("%Lf"), &result) == 1);
 	}
+
+    float Float::ParseFloat(const std::string& string)
+    {
+        float result = 0;
+
+        if (!TryParse(string, result)) {
+            throw std::invalid_argument("could not parse given string to float");
+        }
+
+        return result;
+    }
+    
+    double Float::ParseDouble(const std::string& string)
+    {
+        double result = 0;
+
+        if (!TryParse(string, result)) {
+            throw std::invalid_argument("could not parse given string to float");
+        }
+
+        return result;
+    }
+    
+    long double Float::ParseLongDouble(const std::string& string)
+    {
+        long double result = 0;
+
+        if (!TryParse(string, result)) {
+            throw std::invalid_argument("could not parse given string to float");
+        }
+
+        return result;
+    }
 }

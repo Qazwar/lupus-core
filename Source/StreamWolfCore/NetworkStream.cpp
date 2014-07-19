@@ -85,10 +85,10 @@ namespace StreamWolf {
                 return mSocket->Send(buffer, offset, size);
             }
             
-            int32_t NetworkStream::WriteByte(uint8_t byte)
+            void NetworkStream::WriteByte(uint8_t byte)
             {
                 vector<uint8_t> vec(1, byte);
-                return mSocket->Send(vec, 0, 1);
+                mSocket->Send(vec, 0, 1);
             }
         }
     }

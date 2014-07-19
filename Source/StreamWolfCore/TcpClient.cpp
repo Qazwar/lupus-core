@@ -4,7 +4,7 @@
 #include "IPAddress.h"
 #include "NetworkStream.h"
 #include "NetUtility.h"
-#include "Integer.hpp"
+#include "Integer.h"
 
 #include <thread>
 

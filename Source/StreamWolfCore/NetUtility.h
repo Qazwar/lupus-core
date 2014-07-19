@@ -15,42 +15,42 @@ namespace StreamWolf {
              *
              * \returns Die 16-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            uint16_t HostToNetworkOrder(uint16_t host) NOEXCEPT;
+            SWC_API uint16_t HostToNetworkOrder(uint16_t host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            uint32_t HostToNetworkOrder(uint32_t host) NOEXCEPT;
+            SWC_API uint32_t HostToNetworkOrder(uint32_t host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            uint64_t HostToNetworkOrder(uint64_t host) NOEXCEPT;
+            SWC_API uint64_t HostToNetworkOrder(uint64_t host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 16-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 16-Bit Ganzzahl in Host Byteorder.
              */
-            uint16_t NetworkToHostOrder(uint16_t network) NOEXCEPT;
+            SWC_API uint16_t NetworkToHostOrder(uint16_t network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Host Byteorder.
              */
-            uint32_t NetworkToHostOrder(uint32_t network) NOEXCEPT;
+            SWC_API uint32_t NetworkToHostOrder(uint32_t network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Host Byteorder.
              */
-            uint64_t NetworkToHostOrder(uint64_t network) NOEXCEPT;
+            SWC_API uint64_t NetworkToHostOrder(uint64_t network) NOEXCEPT;
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -59,7 +59,7 @@ namespace StreamWolf {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service) throw(std::runtime_error);
+            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -67,7 +67,7 @@ namespace StreamWolf {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family) throw(std::runtime_error);
+            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -75,7 +75,7 @@ namespace StreamWolf {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, SocketType type) throw(std::runtime_error);
+            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, SocketType type) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -83,7 +83,7 @@ namespace StreamWolf {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, ProtocolType protocol) throw(std::runtime_error);
+            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, ProtocolType protocol) throw(std::runtime_error);
 
             /*!
              * Liest die Adressinformation des angegebenen Knotens mit dem
@@ -110,7 +110,7 @@ namespace StreamWolf {
              *
              * \returns Vektor mit allen gefunden Adressen.
              */
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(
+            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(
                 const std::string& node,
                 const std::string& service,
                 AddressFamily family,

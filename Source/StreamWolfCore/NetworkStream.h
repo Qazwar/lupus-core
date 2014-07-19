@@ -7,7 +7,7 @@ namespace StreamWolf {
         namespace Sockets {
             class Socket;
 
-            class NetworkStream : public ReadStream, public WriteStream
+            class SWC_API NetworkStream : public Stream
             {
             public:
 
@@ -23,10 +23,10 @@ namespace StreamWolf {
                 virtual void Close() throw(socket_error) override;
                 virtual void Close(uint32_t timeout) throw(socket_error);
                 virtual int64_t Length() const throw(socket_error) override;
-                virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error) override;
+                virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error, std::out_of_range) override;
                 virtual int32_t ReadByte() throw(socket_error) override;
-                virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error) override;
-                virtual int32_t WriteByte(uint8_t byte) throw(socket_error) override;
+                virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error, std::out_of_range) override;
+                virtual void WriteByte(uint8_t byte) throw(socket_error) override;
 
             private:
 

@@ -1,7 +1,6 @@
 #include "ConfigurationFile.h"
 
 #include <pugixml/pugixml.hpp>
-#include <Windows.h>
 
 using namespace std;
 using namespace pugi;
@@ -34,6 +33,22 @@ namespace StreamWolf {
 
                 mNodes[path] = move(attr);
             }
+        }
+
+        const unordered_map<string, vector<string>>& ConfigurationFile::Options() const
+        {
+            return mNodes;
+        }
+
+        const vector<string>& ConfigurationFile::operator[](const string& node) const
+        {
+            auto it = mNodes.find(node);
+
+            if (it == end(mNodes)) {
+                return vector<string>();
+            }
+
+            it->second;
         }
     }
 }

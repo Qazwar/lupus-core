@@ -15,7 +15,7 @@ namespace StreamWolf {
             class IPAddress;
 
             //! Repräsentiert einen Endpunkt mit dem Kommuniziert werden kann.
-            class IPEndPoint : public boost::noncopyable
+            class SWC_API IPEndPoint : public boost::noncopyable
             {
             public:
 

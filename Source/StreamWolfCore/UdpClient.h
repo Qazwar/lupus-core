@@ -15,7 +15,7 @@ namespace StreamWolf {
             class IPAddress;
             class IPEndPoint;
 
-            class UdpClient : public boost::noncopyable
+            class SWC_API UdpClient : public boost::noncopyable
             {
             public:
 

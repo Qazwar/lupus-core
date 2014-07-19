@@ -16,12 +16,14 @@
  * along with LupusFramwork.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Integer.hpp"
+#include "Integer.h"
 #include <cstdio>
 #include <cstring>
 
 #ifdef _MSC_VER
 #define snprintf_s _snprintf_s
+#else
+#define snprintf_s snprintf
 #endif
 
 namespace StreamWolf {
@@ -345,5 +347,115 @@ namespace StreamWolf {
                 return (sscanf_s(string.c_str(), ("%llo"), &result) == 1);
         }
         return false;
+    }
+
+    int8_t Integer::ParseByte(const std::string& string, IntegerBase base)
+    {
+        int8_t result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    short Integer::ParseShort(const std::string& string, IntegerBase base)
+    {
+        short result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    int Integer::ParseInt(const std::string& string, IntegerBase base)
+    {
+        int result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    long Integer::ParseLong(const std::string& string, IntegerBase base)
+    {
+        long result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    long long Integer::ParseLongLong(const std::string& string, IntegerBase base)
+    {
+        long long result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    uint8_t Integer::ParseUByte(const std::string& string, IntegerBase base)
+    {
+        uint8_t result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    unsigned short Integer::ParseUShort(const std::string& string, IntegerBase base)
+    {
+        unsigned short result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    unsigned int Integer::ParseUInt(const std::string& string, IntegerBase base)
+    {
+        unsigned int result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    unsigned long Integer::ParseULong(const std::string& string, IntegerBase base)
+    {
+        unsigned long result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
+    }
+
+    unsigned long long Integer::ParseULongLong(const std::string& string, IntegerBase base)
+    {
+        unsigned long long result = 0;
+
+        if (!TryParse(string, result, base)) {
+            throw std::invalid_argument("could not parse string to integer");
+        }
+
+        return result;
     }
 }
