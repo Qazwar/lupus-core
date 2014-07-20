@@ -25,17 +25,11 @@ namespace StreamWolf {
             typedef SOCKET SocketHandle;
 
             inline std::string GetLastSocketErrorString() {
-                char buffer[1024];
-                memset(buffer, 0, sizeof(buffer));
-                strerror_s(buffer, sizeof(buffer), WSAGetLastError());
-                return buffer;
+                return std::to_string(WSAGetLastError());
             }
 
             inline std::string GetLastAddressInfoErrorString() {
-                char buffer[1024];
-                memset(buffer, 0, sizeof(buffer));
-                strerror_s(buffer, sizeof(buffer), WSAGetLastError());
-                return buffer;
+                return std::to_string(WSAGetLastError());
             }
         }
     }

@@ -57,6 +57,21 @@ namespace StreamWolf {
         mIterator = begin(mBuffer);
     }
 
+    bool MemoryStream::CanRead() const
+    {
+        return true;
+    }
+
+    bool MemoryStream::CanWrite() const
+    {
+        return mWritable;
+    }
+
+    bool MemoryStream::CanSeek() const
+    {
+        return true;
+    }
+
     void MemoryStream::Close()
     {
         mBuffer.clear();
@@ -142,16 +157,19 @@ namespace StreamWolf {
     {
         switch (origin) {
             case SeekOrigin::Begin:
+                advance((mIterator = begin(mBuffer)), offset);
                 break;
 
             case SeekOrigin::Current:
+                mIterator += offset;
                 break;
 
             case SeekOrigin::End:
+                advance((mIterator = end(mBuffer)), offset);
                 break;
         }
 
-        return 0; // TODO: implement
+        return Position();
     }
 
     uint32_t MemoryStream::Capacity() const
@@ -167,7 +185,7 @@ namespace StreamWolf {
     const vector<uint8_t>& MemoryStream::GetBuffer() const
     {
         if (!mVisible) {
-            throw not_supported();
+            throw unauthorized_access();
         }
 
         return mBuffer;

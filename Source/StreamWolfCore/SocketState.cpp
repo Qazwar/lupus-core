@@ -20,31 +20,34 @@ namespace StreamWolf {
 
             void Socket::SocketState::Close(Socket* socket)
             {
-                if (closesocket(socket->Handle()) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
-                }
+                if (socket->Handle() != INVALID_SOCKET) {
+                    if (closesocket(socket->Handle()) != 0) {
+                        throw socket_error(GetLastSocketErrorString());
+                    }
 
-                socket->mHandle = INVALID_SOCKET;
-                socket->mSendTime = 0;
-                socket->mRecvTime = 0;
-                socket->mBlocking = true;
-                socket->mLocal = IPEndPointPtr(nullptr);
-                socket->mRemote = IPEndPointPtr(nullptr);
-                socket->mBound = false;
-                socket->mConnected = false;
-                ChangeState(socket, std::shared_ptr<Socket::SocketState>(new SocketClosed()));
+                    socket->mHandle = INVALID_SOCKET;
+                    socket->mSendTime = 0;
+                    socket->mRecvTime = 0;
+                    socket->mBlocking = true;
+                    socket->mLocal = IPEndPointPtr(nullptr);
+                    socket->mRemote = IPEndPointPtr(nullptr);
+                    socket->mBound = false;
+                    socket->mConnected = false;
+
+                    ChangeState(socket, std::shared_ptr<Socket::SocketState>(new SocketClosed()));
+                } else {
+                    return ChangeState(socket, std::shared_ptr<Socket::SocketState>(new SocketClosed()));
+                }
             }
 
             void Socket::SocketState::Close(Socket* socket, uint32_t timeout)
             {
                 if (socket->Handle() == INVALID_SOCKET) {
-                    throw socket_error("Cannot close invalid socket handle");
-                }
-
-                std::thread([this, &socket, timeout]() {
-                    std::this_thread::sleep_for(std::chrono::seconds(timeout));
+                    return ChangeState(socket, std::shared_ptr<Socket::SocketState>(new SocketClosed()));
+                } else {
+                    socket->LingerState({ true, (int)timeout });
                     this->Close(socket);
-                }).detach();
+                }
             }
 
             void Socket::SocketState::Connect(Socket* socket, std::shared_ptr<IPEndPoint> remoteEndPoint)
@@ -321,12 +324,12 @@ namespace StreamWolf {
 
             void Socket::SocketClosed::Close(Socket* socket)
             {
-                throw socket_error("Socket is not in an valid state for Close");
+                // do nothing
             }
 
             void Socket::SocketClosed::Close(Socket* socket, uint32_t timeout)
             {
-                throw socket_error("Socket is not in an valid state for Close");
+                // do nothing
             }
 
             SocketInformation Socket::SocketClosed::DuplicateAndClose(Socket* socket)

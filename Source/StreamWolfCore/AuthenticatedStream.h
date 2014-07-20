@@ -5,25 +5,28 @@
 namespace StreamWolf {
     namespace Net {
         namespace Security {
-            class SWC_API AuthenticatedSteram : public Stream
+            class SWC_API AuthenticatedStream : public Stream
             {
             public:
 
-                virtual ~AuthenticatedSteram() = default;
+                virtual ~AuthenticatedStream() = default;
 
-                virtual void ReadAsync(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT override;
-                virtual void WriteAsync(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT override;
-
-                virtual void Close() override;
-                virtual int64_t Length() const override;
-                virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) override;
-                virtual int32_t ReadByte() override;
-                virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) override;
-                virtual void WriteByte(uint8_t byte) override;
+                virtual std::shared_ptr<Stream> InnerStream() const NOEXCEPT;
+                virtual bool IsAuthenticated() const = 0;
+                virtual bool IsEncrypted() const = 0;
+                virtual bool IsMutuallyAuthenticated() const = 0;
+                virtual bool IsServer() const = 0;
+                virtual bool IsSigned() const = 0;
+                virtual bool LeaveInnerStreamOpen() const NOEXCEPT;
 
             protected:
 
-                AuthenticatedSteram(std::shared_ptr<Stream> innerStream, bool leaveInnerStreamOpen);
+                AuthenticatedStream(std::shared_ptr<Stream> innerStream, bool leaveInnerStreamOpen);
+
+            private:
+
+                std::shared_ptr<Stream> mStream = nullptr;
+                bool mLeaveOpen = false;
             };
         }
     }

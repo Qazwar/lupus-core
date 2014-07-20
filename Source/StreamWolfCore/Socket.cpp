@@ -330,6 +330,32 @@ namespace StreamWolf {
                 }
             }
 
+            LingerOption Socket::LingerState() const
+            {
+                LingerOption o;
+                linger l;
+                int s = sizeof(linger);
+
+                if (getsockopt(mHandle, SOL_SOCKET, SO_LINGER, (char*)&l, &s) != 0) {
+                    throw socket_error(GetLastSocketErrorString());
+                }
+
+                o.Enabled = l.l_onoff != 0;
+                o.LingerTime = (int)l.l_linger;
+                return o;
+            }
+
+            void Socket::LingerState(const LingerOption& o)
+            {
+                linger l;
+                l.l_onoff = o.Enabled ? 1 : 0;
+                l.l_linger = static_cast<decltype(l.l_linger)>(o.LingerTime);
+
+                if (setsockopt(mHandle, SOL_SOCKET, SO_LINGER, (char*)&l, sizeof(linger)) != 0) {
+                    throw socket_error(GetLastSocketErrorString());
+                }
+            }
+
             bool Socket::NoDelay() const
             {
                 int32_t result, length = 4;

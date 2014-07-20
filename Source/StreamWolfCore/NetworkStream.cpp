@@ -49,6 +49,21 @@ namespace StreamWolf {
                 }, mSocket).detach();
             }
 
+            bool NetworkStream::CanRead() const
+            {
+                return mRead;
+            }
+
+            bool NetworkStream::CanWrite() const
+            {
+                return mWrite;
+            }
+
+            bool NetworkStream::CanSeek() const
+            {
+                return false;
+            }
+
             void NetworkStream::Close()
             {
                 mSocket->Close();
@@ -66,11 +81,19 @@ namespace StreamWolf {
             
             int32_t NetworkStream::Read(vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
             {
+                if (!mRead) {
+                    throw io_error("network stream is not readable");
+                }
+
                 return mSocket->Receive(buffer, offset, size);
             }
             
             int32_t NetworkStream::ReadByte()
             {
+                if (!mRead) {
+                    throw io_error("network stream is not readable");
+                }
+
                 vector<uint8_t> vec(1);
                 
                 if (mSocket->Receive(vec, 0, 1) != 1) {
@@ -82,13 +105,41 @@ namespace StreamWolf {
             
             int32_t NetworkStream::Write(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
             {
+                if (!mWrite) {
+                    throw io_error("network stream is not writable");
+                }
+
                 return mSocket->Send(buffer, offset, size);
             }
             
             void NetworkStream::WriteByte(uint8_t byte)
             {
+                if (!mWrite) {
+                    throw io_error("network stream is not writable");
+                }
+
                 vector<uint8_t> vec(1, byte);
                 mSocket->Send(vec, 0, 1);
+            }
+
+            bool NetworkStream::Readable() const
+            {
+                return mRead;
+            }
+
+            void NetworkStream::Readable(bool b)
+            {
+                mRead = b;
+            }
+
+            bool NetworkStream::Writable() const
+            {
+                return mWrite;
+            }
+
+            void NetworkStream::Writable(bool b)
+            {
+                mWrite = b;
             }
         }
     }

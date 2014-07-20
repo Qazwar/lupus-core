@@ -15,6 +15,11 @@ namespace StreamWolf {
             class IPEndPoint;
             class IPAddress;
 
+            extern "C" struct LingerOption {
+                bool Enabled;
+                int LingerTime;
+            };
+
             class SWC_API Socket : public boost::noncopyable
             {
             public:
@@ -412,6 +417,16 @@ namespace StreamWolf {
                 virtual void Blocking(bool) throw(socket_error);
 
                 /*!
+                 * Liest den LingerState
+                 */
+                virtual LingerOption LingerState() const throw(socket_error);
+
+                /*!
+                 * Schreibt den LingerState
+                 */
+                virtual void LingerState(const LingerOption&) throw(socket_error);
+
+                /*!
                  * Überprüft ob der Nagle-Algorithmus aktiviert ist.
                  */
                 virtual bool NoDelay() const throw(socket_error);
@@ -568,8 +583,8 @@ namespace StreamWolf {
                     SocketClosed() = default;
                     virtual ~SocketClosed() = default;
 
-                    virtual void Close(Socket* socket) throw(socket_error) override;
-                    virtual void Close(Socket* socket, uint32_t timeout) throw(socket_error) override;
+                    virtual void Close(Socket* socket) NOEXCEPT override;
+                    virtual void Close(Socket* socket, uint32_t timeout) NOEXCEPT override;
                     virtual SocketInformation DuplicateAndClose(Socket* socket) throw(socket_error) override;
                     virtual int32_t ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range) override;
                     virtual int32_t SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range) override;

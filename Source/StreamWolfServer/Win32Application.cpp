@@ -35,7 +35,8 @@ namespace StreamWolf {
             po::options_description desc("Allowed options");
             desc.add_options()
                 ("help", "produce help message")
-                ("port", po::value<uint16_t>(&mPort), "set port to listen");
+                ("port", po::value<uint16_t>(&mPort), "set port to listen")
+                ("backlog", po::value<uint32_t>(&mBacklog), "set backlog queue length");
             po::store(po::parse_command_line(argc, argv, desc), vm);
 
             mHttp = vm.count("http") > 0 || vm.count("http only") > 0;
@@ -49,7 +50,7 @@ namespace StreamWolf {
 
         int Application::Execute()
         {
-            auto httpServer = make_shared<HttpServer>(mPort);
+            auto httpServer = make_shared<HttpServer>(mPort, mBacklog);
             httpServer->Start([](shared_ptr<HttpRequest> request, shared_ptr<HttpResponse> response) {
                 cout << "Connected" << endl;
             });

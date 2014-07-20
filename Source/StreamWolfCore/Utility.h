@@ -65,7 +65,13 @@ namespace StreamWolf {
         CryptoPP::RandomNumberGenerator rng;
         std::string str(N, ' ');
 
-        for (unsigned i = 0; i < N; i++) {
+        if (N == 0) {
+            return "";
+        } else if (N >= 1) {
+            str[0] = alphanum[rng.GenerateWord32() % (size - 10) + 10];
+        }
+
+        for (unsigned i = 1; i < N; i++) {
             str[i] = alphanum[rng.GenerateWord32() % size];
         }
 

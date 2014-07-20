@@ -16,6 +16,17 @@ namespace StreamWolf {
             }
         }).detach();
     }
+    void Stream::FlushAsync(function<void(exception_ptr)> callback)
+    {
+        thread([this, callback]() {
+            try {
+                this->Flush();
+                callback(nullptr);
+            } catch (...) {
+                callback(current_exception());
+            }
+        }).detach();
+    }
 
     void Stream::ReadAsync(vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, int32_t)> callback)
     {

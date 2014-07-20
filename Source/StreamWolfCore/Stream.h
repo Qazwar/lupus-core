@@ -23,12 +23,16 @@ namespace StreamWolf {
         virtual ~Stream() = default;
 
         virtual void CopyToAsync(std::shared_ptr<Stream> destination, std::function<void(std::exception_ptr)> callback) NOEXCEPT;
+        virtual void FlushAsync(std::function<void(std::exception_ptr)> callback) NOEXCEPT;
         virtual void ReadAsync(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT;
         virtual void WriteAsync(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT;
 
-        virtual void CopyTo(std::shared_ptr<Stream> destination) throw(null_pointer, not_supported);
+        virtual bool CanRead() const = 0;
+        virtual bool CanWrite() const = 0;
+        virtual bool CanSeek() const = 0;
 
         virtual void Close() = 0;
+        virtual void CopyTo(std::shared_ptr<Stream> destination) throw(null_pointer, not_supported);
         virtual void Flush() throw(not_supported);
         virtual int64_t Length() const throw(not_supported);
         virtual void Length(int64_t) throw(not_supported, std::out_of_range);

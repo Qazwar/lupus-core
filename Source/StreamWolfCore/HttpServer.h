@@ -27,7 +27,7 @@ namespace StreamWolf {
             {
             public:
 
-                HttpServer(uint16_t port, int32_t backlog = 100);
+                HttpServer(uint16_t port, int32_t backlog);
                 virtual ~HttpServer() = default;
 
                 virtual void Start(std::function<void(std::shared_ptr<HttpRequest>, std::shared_ptr<HttpResponse>)>);
