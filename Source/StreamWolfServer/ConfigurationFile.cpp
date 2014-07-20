@@ -4,6 +4,7 @@
 
 using namespace std;
 using namespace pugi;
+using namespace Lupus;
 
 namespace StreamWolf {
     namespace Application {

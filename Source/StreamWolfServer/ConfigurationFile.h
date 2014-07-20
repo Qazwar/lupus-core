@@ -9,12 +9,6 @@
 #include "../StreamWolfCore/Utility.h"
 
 namespace StreamWolf {
-    namespace Net {
-        namespace Http {
-            class Request;
-            class Response;
-        }
-    }
 
     namespace Application {
         class ConfigurationFile : public boost::noncopyable

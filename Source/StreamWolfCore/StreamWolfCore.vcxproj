@@ -59,6 +59,7 @@
     <ClCompile Include="Win32Library.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="DataColumn.h" />
     <ClInclude Include="DataRow.h" />
@@ -93,6 +94,7 @@
     <ClInclude Include="SocketInformation.h" />
     <ClInclude Include="SslStream.h" />
     <ClInclude Include="Stream.h" />
+    <ClInclude Include="SymmetricAlgorithm.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="UdpClient.h" />
@@ -102,6 +104,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{40A04166-C40C-422E-93B4-B52CD76A296C}</ProjectGuid>
     <RootNamespace>StreamWolfCore</RootNamespace>
+    <ProjectName>LupusCore</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

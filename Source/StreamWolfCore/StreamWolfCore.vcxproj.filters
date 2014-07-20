@@ -305,5 +305,11 @@
     <ClInclude Include="X509Certificate.h">
       <Filter>Lupus\Security\Cryptography\X509Certificates\.h</Filter>
     </ClInclude>
+    <ClInclude Include="AsymmetricAlgorithm.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SymmetricAlgorithm.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

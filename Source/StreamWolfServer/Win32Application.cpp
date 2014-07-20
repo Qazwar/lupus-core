@@ -14,9 +14,10 @@
 #include <Windows.h> // Muss als letztes eingebunden werden
 
 using namespace std;
-using namespace StreamWolf::Net;
-using namespace StreamWolf::Net::Http;
-using namespace StreamWolf::Net::Sockets;
+using namespace Lupus;
+using namespace Lupus::Net;
+using namespace Lupus::Net::Http;
+using namespace Lupus::Net::Sockets;
 namespace po = boost::program_options;
 
 namespace StreamWolf {
