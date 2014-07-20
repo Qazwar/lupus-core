@@ -40,15 +40,9 @@ namespace StreamWolf {
             return mNodes;
         }
 
-        const vector<string>& ConfigurationFile::operator[](const string& node) const
+        const vector<string>& ConfigurationFile::operator[](const string& node)
         {
-            auto it = mNodes.find(node);
-
-            if (it == end(mNodes)) {
-                return vector<string>();
-            }
-
-            it->second;
+            return mNodes[node];
         }
     }
 }

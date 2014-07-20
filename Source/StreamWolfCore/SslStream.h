@@ -41,6 +41,9 @@ namespace StreamWolf {
                 virtual ExchangeAlgorithmType KeyExchangeAlgorithm() const NOEXCEPT;
                 virtual int32_t KeyExchangeStrength() const NOEXCEPT;
                 virtual SslProtocols SslProtocol() const NOEXCEPT;
+
+            private:
+
             };
         }
     }

@@ -147,6 +147,9 @@
     <ClCompile Include="MemoryStream.cpp">
       <Filter>StreamWolf\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="AuthenticatedStream.cpp">
+      <Filter>StreamWolf\Net\Security\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgCommand.h">
@@ -256,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="MemoryStream.h">
       <Filter>StreamWolf\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SslStream.h">
+      <Filter>StreamWolf\Net\Security\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="NetSecurityEnum.h">
+      <Filter>StreamWolf\Net\Security\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -27,8 +27,8 @@ namespace StreamWolf {
         virtual void Position(int64_t) throw(std::out_of_range) override;
         virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(std::out_of_range) override;
         virtual int32_t ReadByte() NOEXCEPT override;
-        virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(std::out_of_range) override;
-        virtual void WriteByte(uint8_t byte) NOEXCEPT override;
+        virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(not_supported, std::out_of_range) override;
+        virtual void WriteByte(uint8_t byte) throw(not_supported) override;
         virtual int64_t Seek(int64_t offset, SeekOrigin origin) NOEXCEPT override;
 
         virtual uint32_t Capacity() const;

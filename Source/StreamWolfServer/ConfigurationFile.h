@@ -26,7 +26,7 @@ namespace StreamWolf {
             virtual void Load(const std::string&) throw(io_error);
             virtual const std::unordered_map<std::string, std::vector<std::string>>& Options() const NOEXCEPT;
 
-            virtual const std::vector<std::string>& operator[](const std::string&) const NOEXCEPT;
+            virtual const std::vector<std::string>& operator[](const std::string&) NOEXCEPT;
 
         private:
 

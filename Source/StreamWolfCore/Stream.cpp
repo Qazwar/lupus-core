@@ -69,7 +69,7 @@ namespace StreamWolf {
             destination->Length(destination->Length() + size - dsize);
         }
 
-        vector<uint8_t> buffer(size);
+        vector<uint8_t> buffer((uint32_t)size);
         Read(buffer, 0, (uint32_t)size);
         destination->Write(buffer, 0, (uint32_t)size);
     }

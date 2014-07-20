@@ -88,7 +88,7 @@ namespace StreamWolf {
             throw out_of_range("length must be at least zero");
         }
 
-        mBuffer.resize(length);
+        mBuffer.resize((uint32_t)length);
     }
 
     int64_t MemoryStream::Position() const
@@ -102,7 +102,7 @@ namespace StreamWolf {
             throw out_of_range("position exceeds stream boundaries");
         }
 
-        advance((mIterator = begin(mBuffer)), position);
+        advance((mIterator = begin(mBuffer)), (int32_t)position);
     }
 
     int32_t MemoryStream::Read(vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
@@ -157,15 +157,15 @@ namespace StreamWolf {
     {
         switch (origin) {
             case SeekOrigin::Begin:
-                advance((mIterator = begin(mBuffer)), offset);
+                advance((mIterator = begin(mBuffer)), (int32_t)offset);
                 break;
 
             case SeekOrigin::Current:
-                mIterator += offset;
+                mIterator += (int32_t)offset;
                 break;
 
             case SeekOrigin::End:
-                advance((mIterator = end(mBuffer)), offset);
+                advance((mIterator = end(mBuffer)), (int32_t)offset);
                 break;
         }
 

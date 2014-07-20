@@ -27,6 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AuthenticatedStream.cpp" />
     <ClCompile Include="DataColumn.cpp" />
     <ClCompile Include="DataRow.cpp" />
     <ClCompile Include="DataTable.cpp" />
@@ -75,6 +76,7 @@
     <ClInclude Include="Library.h" />
     <ClInclude Include="MemoryStream.h" />
     <ClInclude Include="NetDefinitions.h" />
+    <ClInclude Include="NetSecurityEnum.h" />
     <ClInclude Include="NetUtility.h" />
     <ClInclude Include="NetworkStream.h" />
     <ClInclude Include="Parameter.h" />
@@ -86,6 +88,7 @@
     <ClInclude Include="Socket.h" />
     <ClInclude Include="SocketEnum.h" />
     <ClInclude Include="SocketInformation.h" />
+    <ClInclude Include="SslStream.h" />
     <ClInclude Include="Stream.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
