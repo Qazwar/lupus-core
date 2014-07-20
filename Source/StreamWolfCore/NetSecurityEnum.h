@@ -58,6 +58,12 @@ namespace StreamWolf {
                 Tsl11,
                 Tls12
             };
+
+            enum class EncryptionPolicy {
+                AllowNoEncryption,
+                NoEcryption,
+                RequireEncryption
+            };
         }
     }
 }

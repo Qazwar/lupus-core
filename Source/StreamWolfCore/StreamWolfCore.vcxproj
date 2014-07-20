@@ -53,6 +53,7 @@
     <ClCompile Include="TcpListener.cpp" />
     <ClCompile Include="UdpClient.cpp" />
     <ClCompile Include="UnixLibrary.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Win32Library.cpp" />
   </ItemGroup>
   <ItemGroup>

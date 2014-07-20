@@ -56,8 +56,9 @@ namespace StreamWolf {
     DefineError(io_error);
     DefineError(not_supported);
     DefineError(unauthorized_access);
+    DefineError(authentication_error);
 
-    template <unsigned N>
+    /*template <unsigned N>
     std::string RandomString()
     {
         static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -76,7 +77,8 @@ namespace StreamWolf {
         }
 
         return str;
-    }
+    }*/
+    SWC_API std::string RandomString(unsigned);
 
     template <typename Dest, typename Src>
     Dest force_cast(const Src& src)

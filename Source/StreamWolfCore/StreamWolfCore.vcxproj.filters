@@ -150,6 +150,9 @@
     <ClCompile Include="AuthenticatedStream.cpp">
       <Filter>StreamWolf\Net\Security\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>StreamWolf\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgCommand.h">

@@ -159,7 +159,7 @@ namespace StreamWolf {
                     }
                 });
 
-                mName = RandomString<8>().c_str();
+                mName = RandomString(8).c_str();
                 PGresult* result = PQprepare(mPgConn, mName.c_str(), mQuery.c_str(), (int)paramTypes.size(), paramTypes.data());
 
                 if (!result) {

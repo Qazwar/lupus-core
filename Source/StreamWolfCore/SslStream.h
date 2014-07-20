@@ -4,12 +4,24 @@
 #include "NetSecurityEnum.h"
 
 namespace StreamWolf {
+    namespace Security {
+        namespace Cryptography {
+            class SymmetricCipher;
+
+            namespace X509Certificates {
+                class X509Certificate;
+            }
+        }
+    }
+
     namespace Net {
         namespace Security {
             class SslStream : public AuthenticatedStream
             {
             public:
 
+                SslStream(std::shared_ptr<Stream>);
+                SslStream(std::shared_ptr<Stream>, bool);
                 virtual ~SslStream();
 
                 virtual bool CanRead() const NOEXCEPT override;
@@ -42,8 +54,11 @@ namespace StreamWolf {
                 virtual int32_t KeyExchangeStrength() const NOEXCEPT;
                 virtual SslProtocols SslProtocol() const NOEXCEPT;
 
+                virtual void AuthenticateAsClient(const std::string&);
+
             private:
 
+                std::shared_ptr<StreamWolf::Security::Cryptography::SymmetricCipher> mCipher;
             };
         }
     }
