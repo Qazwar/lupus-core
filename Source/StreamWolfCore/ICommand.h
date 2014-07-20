@@ -16,7 +16,7 @@ namespace StreamWolf {
         class ITransaction;
         class IDataReader;
 
-        class ICommand : public boost::noncopyable
+        class SWC_API ICommand : public boost::noncopyable
         {
         public:
 

@@ -6,6 +6,11 @@
 #include "Utility.h"
 #include "DataType.h"
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace StreamWolf {
     namespace Data {
         class SWC_API DataColumn
@@ -20,10 +25,13 @@ namespace StreamWolf {
             virtual int Index() const NOEXCEPT;
 
         private:
-
             std::string mName;
             DataType mType;
             int mIndex;
         };
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

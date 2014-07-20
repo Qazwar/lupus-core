@@ -8,6 +8,11 @@
 #include <cstdint>
 #include <boost/noncopyable.hpp>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace StreamWolf {
     namespace Net {
         namespace Sockets {
@@ -130,17 +135,25 @@ namespace StreamWolf {
                  */
                 static bool TryParse(const std::string& ipString, std::shared_ptr<IPAddress>& address) NOEXCEPT;
 
-                static const std::shared_ptr<IPAddress> Any; //!< Entspricht 0.0.0.0
-                static const std::shared_ptr<IPAddress> Broadcast; //!< Entspricht 255.255.255.255
-                static const std::shared_ptr<IPAddress> IPv6Any; //!< Entspricht 0:0:0:0:0:0:0:0
-                static const std::shared_ptr<IPAddress> IPv6Loopback; //!< Entspricht ::1
-                static const std::shared_ptr<IPAddress> IPv6None; //!< Entspricht 0:0:0:0:0:0:0:0
-                static const std::shared_ptr<IPAddress> Loopback; //!< Entspricht 127.0.0.1
-                static const std::shared_ptr<IPAddress> None; //!< Entspricht 0.0.0.0
+                static std::shared_ptr<IPAddress> Any();
+                static std::shared_ptr<IPAddress> Broadcast();
+                static std::shared_ptr<IPAddress> IPv6Any();
+                static std::shared_ptr<IPAddress> IPv6Loopback();
+                static std::shared_ptr<IPAddress> IPv6None();
+                static std::shared_ptr<IPAddress> Loopback();
+                static std::shared_ptr<IPAddress> None();
 
             protected:
 
             private:
+
+                static const std::shared_ptr<IPAddress> sAny; //!< Entspricht 0.0.0.0
+                static const std::shared_ptr<IPAddress> sBroadcast; //!< Entspricht 255.255.255.255
+                static const std::shared_ptr<IPAddress> sIPv6Any; //!< Entspricht 0:0:0:0:0:0:0:0
+                static const std::shared_ptr<IPAddress> sIPv6Loopback; //!< Entspricht ::1
+                static const std::shared_ptr<IPAddress> sIPv6None; //!< Entspricht 0:0:0:0:0:0:0:0
+                static const std::shared_ptr<IPAddress> sLoopback; //!< Entspricht 127.0.0.1
+                static const std::shared_ptr<IPAddress> sNone; //!< Entspricht 0.0.0.0
 
                 //! Standardkonstruktor ist nicht erlaubt.
                 IPAddress() = delete;
@@ -152,3 +165,7 @@ namespace StreamWolf {
         }
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

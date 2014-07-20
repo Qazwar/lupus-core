@@ -9,7 +9,7 @@
 
 namespace StreamWolf {
     namespace Data {
-        class IDataReader : public boost::noncopyable
+        class SWC_API IDataReader : public boost::noncopyable
         {
         public:
             

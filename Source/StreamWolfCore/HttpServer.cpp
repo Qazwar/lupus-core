@@ -18,7 +18,7 @@ namespace StreamWolf {
             HttpServer::HttpServer(uint16_t port, int32_t backlog)
             {
                 try {
-                    mListener = make_shared<TcpListener>(IPAddress::Any, port);
+                    mListener = make_shared<TcpListener>(IPAddress::Any(), port);
                     mListener->Start(backlog);
                 } catch (const exception& e) {
                     cerr << e.what() << endl;

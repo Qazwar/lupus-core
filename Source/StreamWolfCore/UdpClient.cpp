@@ -20,7 +20,7 @@ namespace StreamWolf {
             UdpClient::UdpClient(uint16_t port)
             {
                 mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
-                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback, port));
+                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback(), port));
             }
 
             UdpClient::UdpClient(shared_ptr<IPEndPoint> ep)
@@ -32,7 +32,7 @@ namespace StreamWolf {
             UdpClient::UdpClient(uint16_t port, AddressFamily family)
             {
                 mClient = make_shared<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
-                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback, port));
+                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback(), port));
             }
 
             UdpClient::UdpClient(const string& hostname, uint16_t port)

@@ -13,7 +13,7 @@ namespace StreamWolf {
         class ITransaction;
         class ICommand;
 
-        class IConnection : public boost::noncopyable
+        class SWC_API IConnection : public boost::noncopyable
         {
         public:
             

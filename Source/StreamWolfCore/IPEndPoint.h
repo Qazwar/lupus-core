@@ -9,6 +9,11 @@
 #include <cstdint>
 #include <boost/noncopyable.hpp>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace StreamWolf {
     namespace Net {
         namespace Sockets {
@@ -98,3 +103,7 @@ namespace StreamWolf {
         }
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

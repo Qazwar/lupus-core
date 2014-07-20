@@ -99,7 +99,7 @@ namespace StreamWolf {
 
                 switch (address->Family()) {
                     case AddressFamily::InterNetwork:
-                        comparer = IPAddress::Loopback->Bytes();
+                        comparer = IPAddress::Loopback()->Bytes();
 
                         for (size_t i = 0; i < comparer.size(); i++) {
                             if (addressBytes[i] != comparer[i]) {
@@ -110,7 +110,7 @@ namespace StreamWolf {
                         break;
 
                     case AddressFamily::InterNetworkV6:
-                        comparer = IPAddress::IPv6Loopback->Bytes();
+                        comparer = IPAddress::IPv6Loopback()->Bytes();
 
                         for (size_t i = 0; i < comparer.size(); i++) {
                             if (addressBytes[i] != comparer[i]) {
@@ -163,13 +163,48 @@ namespace StreamWolf {
                 return true;
             }
 
-            const std::shared_ptr<IPAddress> IPAddress::Any(new IPAddress(0));
-            const std::shared_ptr<IPAddress> IPAddress::Broadcast(new IPAddress(0xFFFFFFFF));
-            const std::shared_ptr<IPAddress> IPAddress::IPv6Any(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
-            const std::shared_ptr<IPAddress> IPAddress::IPv6Loopback(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01 })));
-            const std::shared_ptr<IPAddress> IPAddress::IPv6None(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
-            const std::shared_ptr<IPAddress> IPAddress::Loopback(new IPAddress(0x7F000001));
-            const std::shared_ptr<IPAddress> IPAddress::None(new IPAddress(0));
+            std::shared_ptr<IPAddress> IPAddress::Any()
+            {
+                return sAny;
+            }
+
+            std::shared_ptr<IPAddress> IPAddress::Broadcast()
+            {
+                return sBroadcast;
+            }
+
+            std::shared_ptr<IPAddress> IPAddress::IPv6Any()
+            {
+                return sIPv6Any;
+            }
+
+            std::shared_ptr<IPAddress> IPAddress::IPv6Loopback()
+            {
+                return sIPv6Loopback;
+            }
+
+            std::shared_ptr<IPAddress> IPAddress::IPv6None()
+            {
+                return sIPv6None;
+            }
+
+            std::shared_ptr<IPAddress> IPAddress::Loopback()
+            {
+                return sLoopback;
+            }
+
+            std::shared_ptr<IPAddress> IPAddress::None()
+            {
+                return sNone;
+            }
+
+            const std::shared_ptr<IPAddress> IPAddress::sAny(new IPAddress(0));
+            const std::shared_ptr<IPAddress> IPAddress::sBroadcast(new IPAddress(0xFFFFFFFF));
+            const std::shared_ptr<IPAddress> IPAddress::sIPv6Any(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
+            const std::shared_ptr<IPAddress> IPAddress::sIPv6Loopback(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01 })));
+            const std::shared_ptr<IPAddress> IPAddress::sIPv6None(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
+            const std::shared_ptr<IPAddress> IPAddress::sLoopback(new IPAddress(0x7F000001));
+            const std::shared_ptr<IPAddress> IPAddress::sNone(new IPAddress(0));
         }
     }
 }

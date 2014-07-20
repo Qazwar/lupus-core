@@ -2,6 +2,8 @@
 
 #include "SocketEnum.h"
 #include <cstdint>
+#include <memory>
+#include <vector>
 
 namespace StreamWolf {
     namespace Net {

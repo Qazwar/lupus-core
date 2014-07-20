@@ -16,7 +16,7 @@ namespace StreamWolf {
 
     namespace Net {
         namespace Security {
-            class SslStream : public AuthenticatedStream
+            class SWC_API SslStream : public AuthenticatedStream
             {
             public:
 

@@ -9,6 +9,11 @@
 
 #include "Utility.h"
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace StreamWolf {
     class ReadStream;
 
@@ -49,3 +54,7 @@ namespace StreamWolf {
         }
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

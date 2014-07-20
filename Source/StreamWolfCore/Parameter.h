@@ -7,6 +7,11 @@
 #include "Utility.h"
 #include "DataType.h"
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace StreamWolf {
     namespace Data {
         class SWC_API Parameter : public boost::noncopyable
@@ -32,3 +37,7 @@ namespace StreamWolf {
         };
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

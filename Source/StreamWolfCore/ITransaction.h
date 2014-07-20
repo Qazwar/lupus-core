@@ -7,7 +7,7 @@
 
 namespace StreamWolf {
     namespace Data {
-        class ITransaction : public boost::noncopyable
+        class SWC_API ITransaction : public boost::noncopyable
         {
         public:
 

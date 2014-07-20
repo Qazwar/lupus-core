@@ -2,6 +2,11 @@
 
 #include "Stream.h"
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace StreamWolf {
     class SWC_API MemoryStream : public Stream
     {
@@ -46,3 +51,7 @@ namespace StreamWolf {
         std::vector<uint8_t>::iterator mIterator;
     };
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

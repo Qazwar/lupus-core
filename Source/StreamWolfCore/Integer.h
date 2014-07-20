@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include "Utility.h"
+#include <cstdint>
 
 namespace StreamWolf {
 	//! conversion base for integer
