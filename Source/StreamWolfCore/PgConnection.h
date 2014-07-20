@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IConnection.h"
+#include "Connection.h"
 
 struct pg_conn;
 
 namespace StreamWolf {
     namespace Data {
         namespace Postgres {
-            class PgConnection : public IConnection
+            class PgConnection : public Connection
             {
             public:
 
@@ -16,15 +16,12 @@ namespace StreamWolf {
 
                 virtual ~PgConnection();
 
-                virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, std::shared_ptr<ITransaction>)>) NOEXCEPT override;
-                virtual void ConnectAsync(const std::string&, std::function<void(std::exception_ptr, IConnection*)>) NOEXCEPT override;
-
                 virtual std::string ConnectionString() const NOEXCEPT override;
 
                 virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) override;
                 virtual void Connect(const std::string&) throw(sql_error) override;
                 virtual void Close() NOEXCEPT override;
-                virtual std::shared_ptr<ICommand> CreateCommand() throw(sql_error) override;
+                virtual std::shared_ptr<Command> CreateCommand() throw(sql_error) override;
                 virtual void Open() throw(sql_error) override;
 
             private:

@@ -27,24 +27,24 @@ namespace StreamWolf {
                 return mSocket;
             }
 
-            void NetworkStream::ReadAsync(vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, int32_t)> callback)
+            void NetworkStream::ReadAsync(vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
             {
                 thread([this, &buffer, offset, size, &callback](shared_ptr<Sockets::Socket> socket) {
                     try {
-                        callback(nullptr, socket->Receive(buffer, offset, size));
+                        callback(nullptr, this, socket->Receive(buffer, offset, size));
                     } catch (...) {
-                        callback(current_exception(), -1);
+                        callback(current_exception(), this, -1);
                     }
                 }, mSocket).detach();
             }
             
-            void NetworkStream::WriteAsync(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, int32_t)> callback)
+            void NetworkStream::WriteAsync(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
             {
                 thread([this, &buffer, offset, size, &callback](shared_ptr<Sockets::Socket> socket) {
                     try {
-                        callback(nullptr, socket->Send(buffer, offset, size));
+                        callback(nullptr, this, socket->Send(buffer, offset, size));
                     } catch (...) {
-                        callback(current_exception(), -1);
+                        callback(current_exception(), this, -1);
                     }
                 }, mSocket).detach();
             }

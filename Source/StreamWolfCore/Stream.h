@@ -22,10 +22,10 @@ namespace StreamWolf {
 
         virtual ~Stream() = default;
 
-        virtual void CopyToAsync(std::shared_ptr<Stream> destination, std::function<void(std::exception_ptr)> callback) NOEXCEPT;
-        virtual void FlushAsync(std::function<void(std::exception_ptr)> callback) NOEXCEPT;
-        virtual void ReadAsync(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT;
-        virtual void WriteAsync(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT;
+        virtual void CopyToAsync(std::shared_ptr<Stream> destination, std::function<void(std::exception_ptr, Stream*)> callback) NOEXCEPT;
+        virtual void FlushAsync(std::function<void(std::exception_ptr, Stream*)> callback) NOEXCEPT;
+        virtual void ReadAsync(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, Stream*, int32_t)> callback) NOEXCEPT;
+        virtual void WriteAsync(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, Stream*, int32_t)> callback) NOEXCEPT;
 
         virtual bool CanRead() const = 0;
         virtual bool CanWrite() const = 0;

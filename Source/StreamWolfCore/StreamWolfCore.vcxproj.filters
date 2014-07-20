@@ -153,6 +153,12 @@
     <ClCompile Include="Utility.cpp">
       <Filter>StreamWolf\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>StreamWolf\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>StreamWolf\Data\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgCommand.h">
@@ -180,12 +186,6 @@
       <Filter>StreamWolf\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="DataType.h">
-      <Filter>StreamWolf\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommand.h">
-      <Filter>StreamWolf\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="IConnection.h">
       <Filter>StreamWolf\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="IDataReader.h">
@@ -268,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="NetSecurityEnum.h">
       <Filter>StreamWolf\Net\Security\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.h">
+      <Filter>StreamWolf\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>StreamWolf\Data\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

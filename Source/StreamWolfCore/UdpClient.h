@@ -38,10 +38,10 @@ namespace StreamWolf {
                 virtual bool ExclusiveAddressUse() const throw(socket_error);
                 virtual void ExclusiveAddressUse(bool) throw(socket_error);
 
-                virtual void ReceiveAsync(std::function<void(std::exception_ptr, std::shared_ptr<IPEndPoint>, const std::vector<uint8_t>&)>);
-                virtual void SendAsync(const std::vector<uint8_t>&, uint32_t, std::function<void(std::exception_ptr, int32_t)>);
-                virtual void SendAsync(const std::vector<uint8_t>&, uint32_t, std::shared_ptr<IPEndPoint>, std::function<void(std::exception_ptr, int32_t)>);
-                virtual void SendAsync(const std::vector<uint8_t>&, uint32_t, const std::string&, uint16_t, std::function<void(std::exception_ptr, int32_t)>);
+                virtual void ReceiveAsync(std::function<void(std::exception_ptr, UdpClient*, std::shared_ptr<IPEndPoint>, const std::vector<uint8_t>&)>);
+                virtual void SendAsync(const std::vector<uint8_t>&, uint32_t, std::function<void(std::exception_ptr, UdpClient*, int32_t)>);
+                virtual void SendAsync(const std::vector<uint8_t>&, uint32_t, std::shared_ptr<IPEndPoint>, std::function<void(std::exception_ptr, UdpClient*, int32_t)>);
+                virtual void SendAsync(const std::vector<uint8_t>&, uint32_t, const std::string&, uint16_t, std::function<void(std::exception_ptr, UdpClient*, int32_t)>);
 
                 virtual void Connect(std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
                 virtual void Connect(std::shared_ptr<IPAddress> address, uint16_t port) throw(socket_error, null_pointer);

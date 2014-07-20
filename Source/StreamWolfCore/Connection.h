@@ -11,23 +11,23 @@
 namespace StreamWolf {
     namespace Data {
         class ITransaction;
-        class ICommand;
+        class Command;
 
-        class SWC_API IConnection : public boost::noncopyable
+        class SWC_API Connection : public boost::noncopyable
         {
         public:
             
-            virtual ~IConnection() = default;
+            virtual ~Connection() = default;
 
-            virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, std::shared_ptr<ITransaction>)>) NOEXCEPT = 0;
-            virtual void ConnectAsync(const std::string&, std::function<void(std::exception_ptr, IConnection*)>) NOEXCEPT = 0;
+            virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, Connection*, std::shared_ptr<ITransaction>)>) NOEXCEPT;
+            virtual void ConnectAsync(const std::string&, std::function<void(std::exception_ptr, Connection*)>) NOEXCEPT;
 
             virtual std::string ConnectionString() const NOEXCEPT = 0;
             
             virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) = 0;
             virtual void Connect(const std::string&) throw(sql_error) = 0;
             virtual void Close() NOEXCEPT = 0;
-            virtual std::shared_ptr<ICommand> CreateCommand() throw(sql_error) = 0;
+            virtual std::shared_ptr<Command> CreateCommand() throw(sql_error) = 0;
             virtual void Open() throw(sql_error) = 0;
         };
     }

@@ -5,47 +5,47 @@
 using namespace std;
 
 namespace StreamWolf {
-    void Stream::CopyToAsync(shared_ptr<Stream> destination, function<void(exception_ptr)> callback)
+    void Stream::CopyToAsync(shared_ptr<Stream> destination, function<void(exception_ptr, Stream*)> callback)
     {
         thread([this, destination, callback]() {
             try {
                 this->CopyTo(destination);
-                callback(nullptr);
+                callback(nullptr, this);
             } catch (...) {
-                callback(current_exception());
+                callback(current_exception(), this);
             }
         }).detach();
     }
-    void Stream::FlushAsync(function<void(exception_ptr)> callback)
+    void Stream::FlushAsync(function<void(exception_ptr, Stream*)> callback)
     {
         thread([this, callback]() {
             try {
                 this->Flush();
-                callback(nullptr);
+                callback(nullptr, this);
             } catch (...) {
-                callback(current_exception());
+                callback(current_exception(), this);
             }
         }).detach();
     }
 
-    void Stream::ReadAsync(vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, int32_t)> callback)
+    void Stream::ReadAsync(vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
     {
         thread([this, &buffer, offset, size, callback]() {
             try {
-                callback(nullptr, this->Read(buffer, offset, size));
+                callback(nullptr, this, this->Read(buffer, offset, size));
             } catch (...) {
-                callback(current_exception(), -1);
+                callback(current_exception(), this, -1);
             }
         }).detach();
     }
 
-    void Stream::WriteAsync(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, int32_t)> callback)
+    void Stream::WriteAsync(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
     {
         thread([this, &buffer, offset, size, callback]() {
             try {
-                callback(nullptr, this->Write(buffer, offset, size));
+                callback(nullptr, this, this->Write(buffer, offset, size));
             } catch (...) {
-                callback(current_exception(), -1);
+                callback(current_exception(), this, -1);
             }
         }).detach();
     }

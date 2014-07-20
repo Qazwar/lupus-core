@@ -54,7 +54,24 @@ namespace StreamWolf {
                 virtual int32_t KeyExchangeStrength() const NOEXCEPT;
                 virtual SslProtocols SslProtocol() const NOEXCEPT;
 
-                virtual void AuthenticateAsClient(const std::string&);
+                virtual void AuthenticateAsClient(const std::string& host);
+                virtual void AuthenticateAsClient(
+                    const std::string& host, 
+                    std::vector<
+                        std::shared_ptr<
+                            StreamWolf::Security::Cryptography::X509Certificates::X509Certificate
+                        >
+                    > certificates, 
+                    SslProtocols protocols, 
+                    bool checkRevocation);
+                virtual void AuthenticateAsServer(std::shared_ptr<StreamWolf::Security::Cryptography::X509Certificates::X509Certificate> certificate);
+                virtual void AuthenticateAsServer(
+                    std::shared_ptr<
+                        StreamWolf::Security::Cryptography::X509Certificates::X509Certificate
+                    > certificate, 
+                    bool clientCertRequired, 
+                    SslProtocols protocols, 
+                    bool checkRevocation);
 
             private:
 

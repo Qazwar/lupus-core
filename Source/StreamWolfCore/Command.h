@@ -16,15 +16,15 @@ namespace StreamWolf {
         class ITransaction;
         class IDataReader;
 
-        class SWC_API ICommand : public boost::noncopyable
+        class SWC_API Command : public boost::noncopyable
         {
         public:
 
-            virtual ~ICommand() = default;
+            virtual ~Command() = default;
 
-            virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, int)>) NOEXCEPT = 0;
-            virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, std::shared_ptr<IDataReader>)>) NOEXCEPT = 0;
-            virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT = 0;
+            virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, Command*, int)>) NOEXCEPT;
+            virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, Command*, std::shared_ptr<IDataReader>)>) NOEXCEPT;
+            virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, Command*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT;
 
             virtual void Text(const std::string&) NOEXCEPT = 0;
             virtual std::string& Text() NOEXCEPT = 0;

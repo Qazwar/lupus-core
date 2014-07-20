@@ -92,47 +92,47 @@ namespace StreamWolf {
                 }
             }
 
-            void UdpClient::ReceiveAsync(function<void(exception_ptr, shared_ptr<IPEndPoint>, const vector<uint8_t>&)> callback)
+            void UdpClient::ReceiveAsync(function<void(exception_ptr, UdpClient*, shared_ptr<IPEndPoint>, const vector<uint8_t>&)> callback)
             {
                 thread([this, callback]() {
                     try {
                         shared_ptr<IPEndPoint> ep;
-                        callback(nullptr, ep, this->Receive(ep));
+                        callback(nullptr, this, ep, this->Receive(ep));
                     } catch (...) {
-                        callback(current_exception(), nullptr, vector<uint8_t>());
+                        callback(current_exception(), this, nullptr, vector<uint8_t>());
                     }
                 }).detach();
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, function<void(exception_ptr, int32_t)> callback)
+            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, function<void(exception_ptr, UdpClient*, int32_t)> callback)
             {
                 thread([this, &buffer, size, callback]() {
                     try {
-                        callback(nullptr, this->Send(buffer, size));
+                        callback(nullptr, this, this->Send(buffer, size));
                     } catch (...) {
-                        callback(current_exception(), -1);
+                        callback(current_exception(), this, -1);
                     }
                 }).detach();
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, shared_ptr<IPEndPoint> ep, function<void(exception_ptr, int32_t)> callback)
+            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, shared_ptr<IPEndPoint> ep, function<void(exception_ptr, UdpClient*, int32_t)> callback)
             {
                 thread([this, &buffer, size, ep, callback]() {
                     try {
-                        callback(nullptr, this->Send(buffer, size, ep));
+                        callback(nullptr, this, this->Send(buffer, size, ep));
                     } catch (...) {
-                        callback(current_exception(), -1);
+                        callback(current_exception(), this, -1);
                     }
                 }).detach();
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, const string& hostname, uint16_t port, function<void(exception_ptr, int32_t)> callback)
+            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, const string& hostname, uint16_t port, function<void(exception_ptr, UdpClient*, int32_t)> callback)
             {
                 thread([this, &buffer, size, hostname, port, callback]() {
                     try {
-                        callback(nullptr, this->Send(buffer, size, hostname, port));
+                        callback(nullptr, this, this->Send(buffer, size, hostname, port));
                     } catch (...) {
-                        callback(current_exception(), -1);
+                        callback(current_exception(), this, -1);
                     }
                 }).detach();
             }

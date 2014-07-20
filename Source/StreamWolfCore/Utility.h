@@ -14,7 +14,7 @@
 #endif
 
 #else
-#deifne NOEXCEPT noexcept
+#define NOEXCEPT noexcept
 
 #ifdef STREAMWOLFCORE_EXPORT
 

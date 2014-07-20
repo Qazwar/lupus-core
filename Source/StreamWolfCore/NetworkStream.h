@@ -22,8 +22,8 @@ namespace StreamWolf {
                 virtual uint32_t DataAvailable() const throw(socket_error);
                 virtual std::shared_ptr<Socket> Socket() const NOEXCEPT;
 
-                virtual void ReadAsync(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT override;
-                virtual void WriteAsync(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, int32_t)> callback) NOEXCEPT override;
+                virtual void ReadAsync(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, Stream*, int32_t)> callback) NOEXCEPT override;
+                virtual void WriteAsync(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::function<void(std::exception_ptr, Stream*, int32_t)> callback) NOEXCEPT override;
 
                 virtual bool CanRead() const NOEXCEPT override;
                 virtual bool CanWrite() const NOEXCEPT override;

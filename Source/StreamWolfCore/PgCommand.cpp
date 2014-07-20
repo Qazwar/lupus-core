@@ -25,39 +25,6 @@ namespace StreamWolf {
             {
             }
 
-            void PgCommand::ExecuteNonQueryAsync(function<void(std::exception_ptr, int)> callback)
-            {
-                thread([this, callback]() {
-                    try {
-                        callback(nullptr, this->ExecuteNonQuery());
-                    } catch (...) {
-                        callback(current_exception(), -1);
-                    }
-                }).detach();
-            }
-            
-            void PgCommand::ExecuteReaderAsync(function<void(std::exception_ptr, shared_ptr<IDataReader>)> callback)
-            {
-                thread([this, callback]() {
-                    try {
-                        callback(nullptr, this->ExecuteReader());
-                    } catch (...) {
-                        callback(current_exception(), nullptr);
-                    }
-                }).detach();
-            }
-            
-            void PgCommand::ExecuteScalarAsync(function<void(std::exception_ptr, const vector<unordered_map<string, boost::any>>&)> callback)
-            {
-                thread([this, callback]() {
-                    try {
-                        callback(nullptr, this->ExecuteScalar());
-                    } catch (...) {
-                        callback(current_exception(), vector<unordered_map<string, boost::any>>());
-                    }
-                }).detach();
-            }
-
             void PgCommand::Text(const string& PgCommand)
             {
                 mQuery = PgCommand;

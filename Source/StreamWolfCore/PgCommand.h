@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ICommand.h"
+#include "Command.h"
 
 struct pg_conn;
 struct pg_result;
@@ -8,16 +8,12 @@ struct pg_result;
 namespace StreamWolf {
     namespace Data {
         namespace Postgres {
-            class PgCommand : public ICommand
+            class PgCommand : public Command
             {
             public:
 
                 PgCommand(pg_conn* conn);
                 virtual ~PgCommand();
-
-                virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, int)>) NOEXCEPT override;
-                virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, std::shared_ptr<IDataReader>)>) NOEXCEPT override;
-                virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT override;
 
                 virtual void Text(const std::string&) NOEXCEPT override;
                 virtual std::string& Text() NOEXCEPT override;

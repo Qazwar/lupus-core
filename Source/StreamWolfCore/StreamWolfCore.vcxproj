@@ -28,6 +28,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AuthenticatedStream.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DataColumn.cpp" />
     <ClCompile Include="DataRow.cpp" />
     <ClCompile Include="DataTable.cpp" />
@@ -66,8 +68,8 @@
     <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="HttpResponse.h" />
     <ClInclude Include="HttpServer.h" />
-    <ClInclude Include="ICommand.h" />
-    <ClInclude Include="IConnection.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="Connection.h" />
     <ClInclude Include="IDataReader.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="IPAddress.h" />

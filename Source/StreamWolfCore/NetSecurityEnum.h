@@ -41,8 +41,8 @@ namespace StreamWolf {
 
             enum class ExchangeAlgorithmType {
                 None,
-                Dh,
-                Dh2,
+                DeffieHellman,
+                UnifiedDeffieHellman,
                 Mqv,
                 Ecdh,
                 Ecmqv,
@@ -52,8 +52,6 @@ namespace StreamWolf {
             enum class SslProtocols {
                 Default,
                 None,
-                Ssl2,
-                Ssl3,
                 Tls,
                 Tsl11,
                 Tls12
