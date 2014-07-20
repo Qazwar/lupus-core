@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             class Socket;

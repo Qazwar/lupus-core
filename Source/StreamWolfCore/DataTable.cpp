@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         void DataTable::Load(shared_ptr<IDataReader> reader)
         {

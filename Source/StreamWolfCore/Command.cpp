@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         void Command::ExecuteNonQueryAsync(function<void(exception_ptr, Command*, int)> callback)
         {

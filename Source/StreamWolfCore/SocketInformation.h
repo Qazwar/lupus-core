@@ -5,7 +5,7 @@
 #include <vector>
 #include <cstdint>
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             enum class SocketInformationOption {

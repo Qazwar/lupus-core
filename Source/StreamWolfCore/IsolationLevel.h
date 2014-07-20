@@ -1,6 +1,6 @@
 #pragma once
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         enum class IsolationLevel {
             Uncommitted,

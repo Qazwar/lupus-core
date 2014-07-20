@@ -19,7 +19,7 @@
 #define LU_SHUTDOWN_WRITE SD_SEND
 #define LU_SHUTDOWN_BOTH SD_BOTH
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             typedef SOCKET SocketHandle;
@@ -62,7 +62,7 @@ namespace StreamWolf {
 #define GetLastAddressInfoErrorString (gai_strerror(errno))
 
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             typedef int SocketHandle;
@@ -100,7 +100,7 @@ namespace StreamWolf {
 
 #endif
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             typedef socklen_t AddrLength;

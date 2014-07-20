@@ -5,7 +5,7 @@
 
 #include "Utility.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         class SWC_API ITransaction : public boost::noncopyable
         {

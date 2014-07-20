@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
 
         DataRow::DataRow(unordered_map<string, boost::any>& items)

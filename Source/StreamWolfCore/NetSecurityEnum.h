@@ -1,6 +1,6 @@
 #pragma once
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Security {
             enum class CipherAlgorithmType {
@@ -18,9 +18,9 @@ namespace StreamWolf {
                 Idea,
                 Camellia,
                 Seed,
-                Panama,
-                Sosemanuk,
-                Salsa20
+                Panama,  // high-speed
+                Sosemanuk,  // high-speed
+                Salsa20  // high-speed
             };
 
             enum class HashAlgorithmType {
@@ -36,7 +36,8 @@ namespace StreamWolf {
                 Ripemd160,
                 Ripemd320,
                 Ripemd128,
-                Ripemd256
+                Ripemd256,
+                Md5
             };
 
             enum class ExchangeAlgorithmType {
@@ -52,6 +53,7 @@ namespace StreamWolf {
             enum class SslProtocols {
                 Default,
                 None,
+                Ssl3,
                 Tls,
                 Tsl11,
                 Tls12

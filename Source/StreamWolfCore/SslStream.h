@@ -3,7 +3,14 @@
 #include "AuthenticatedStream.h"
 #include "NetSecurityEnum.h"
 
-namespace StreamWolf {
+#include <functional>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
+namespace Lupus {
     namespace Security {
         namespace Cryptography {
             class SymmetricCipher;
@@ -54,20 +61,41 @@ namespace StreamWolf {
                 virtual int32_t KeyExchangeStrength() const NOEXCEPT;
                 virtual SslProtocols SslProtocol() const NOEXCEPT;
 
+                virtual void AuthenticateAsClientAsync(const std::string& host, std::function<void(std::exception_ptr, SslStream*)>);
+                virtual void AuthenticateAsClientAsync(
+                    const std::string& host,
+                    std::vector<
+                        std::shared_ptr<
+                            Lupus::Security::Cryptography::X509Certificates::X509Certificate
+                        >
+                    > certificates,
+                    SslProtocols protocols,
+                    bool checkRevocation,
+                    std::function<void(std::exception_ptr, SslStream*)>);
+                virtual void AuthenticateAsServerAsync(std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate, std::function<void(std::exception_ptr, SslStream*)>);
+                virtual void AuthenticateAsServerAsync(
+                    std::shared_ptr<
+                        Lupus::Security::Cryptography::X509Certificates::X509Certificate
+                    > certificate,
+                    bool clientCertRequired,
+                    SslProtocols protocols,
+                    bool checkRevocation,
+                    std::function<void(std::exception_ptr, SslStream*)>);
+
                 virtual void AuthenticateAsClient(const std::string& host);
                 virtual void AuthenticateAsClient(
                     const std::string& host, 
                     std::vector<
                         std::shared_ptr<
-                            StreamWolf::Security::Cryptography::X509Certificates::X509Certificate
+                            Lupus::Security::Cryptography::X509Certificates::X509Certificate
                         >
                     > certificates, 
                     SslProtocols protocols, 
                     bool checkRevocation);
-                virtual void AuthenticateAsServer(std::shared_ptr<StreamWolf::Security::Cryptography::X509Certificates::X509Certificate> certificate);
+                virtual void AuthenticateAsServer(std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate);
                 virtual void AuthenticateAsServer(
                     std::shared_ptr<
-                        StreamWolf::Security::Cryptography::X509Certificates::X509Certificate
+                        Lupus::Security::Cryptography::X509Certificates::X509Certificate
                     > certificate, 
                     bool clientCertRequired, 
                     SslProtocols protocols, 
@@ -75,8 +103,12 @@ namespace StreamWolf {
 
             private:
 
-                std::shared_ptr<StreamWolf::Security::Cryptography::SymmetricCipher> mCipher;
+                std::shared_ptr<Lupus::Security::Cryptography::SymmetricCipher> mCipher;
             };
         }
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

@@ -97,6 +97,7 @@
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="UdpClient.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="X509Certificate.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{40A04166-C40C-422E-93B4-B52CD76A296C}</ProjectGuid>

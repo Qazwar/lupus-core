@@ -7,7 +7,7 @@
 #include "Utility.h"
 #include "DataType.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         class SWC_API IDataReader : public boost::noncopyable
         {

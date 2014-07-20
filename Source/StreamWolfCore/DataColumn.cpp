@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         DataColumn::DataColumn(const string& s, DataType t, int i)
         {

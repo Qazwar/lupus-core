@@ -9,7 +9,7 @@
 
 #include "Utility.h"
 
-namespace StreamWolf {
+namespace Lupus {
     enum class SeekOrigin {
         Begin,
         Current,

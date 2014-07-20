@@ -2,7 +2,7 @@
 
 #include <postgres/libpq-fe.h>
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         namespace Postgres {
 

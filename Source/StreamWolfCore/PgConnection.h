@@ -4,7 +4,7 @@
 
 struct pg_conn;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         namespace Postgres {
             class PgConnection : public Connection

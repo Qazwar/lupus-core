@@ -4,7 +4,7 @@
 
 struct pg_result;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         namespace Postgres {
             class PgDataReader : public IDataReader

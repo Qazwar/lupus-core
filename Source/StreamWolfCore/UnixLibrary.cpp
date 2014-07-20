@@ -6,7 +6,7 @@ using namespace std;
 #include <dlfcn.h>
 #include <cstdio>
 
-namespace StreamWolf {
+namespace Lupus {
     namespace System {
         Library::~Library()
         {

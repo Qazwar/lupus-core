@@ -8,7 +8,7 @@
 #include "Utility.h"
 #include "IsolationLevel.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         class ITransaction;
         class Command;

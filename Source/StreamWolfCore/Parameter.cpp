@@ -1,6 +1,6 @@
 #include "Parameter.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         Parameter::Parameter(DataType type, const boost::any& value)
         {

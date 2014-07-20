@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         namespace Postgres {
             PgConnection::PgConnection(const string& PgConnectionString)

@@ -5,7 +5,7 @@
 struct pg_conn;
 struct pg_result;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         namespace Postgres {
             class PgCommand : public Command

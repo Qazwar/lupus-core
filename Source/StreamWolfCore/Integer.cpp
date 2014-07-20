@@ -26,7 +26,7 @@
 #define snprintf_s snprintf
 #endif
 
-namespace StreamWolf {
+namespace Lupus {
     static const size_t sIntegerCount = 32;
 
     std::string Integer::ToString(int8_t value, IntegerBase base)

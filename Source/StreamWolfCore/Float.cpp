@@ -26,7 +26,7 @@
 #define snprintf_s snprintf
 #endif
 
-namespace StreamWolf {
+namespace Lupus {
     static const size_t sFloatCount = 32;
 
 	std::string Float::ToString(float value)

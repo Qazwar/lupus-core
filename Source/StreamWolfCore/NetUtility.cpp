@@ -3,7 +3,7 @@
 #include "IPEndPoint.h"
 #include "Socket.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             uint16_t HostToNetworkOrder(uint16_t host)

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Security {
             AuthenticatedStream::AuthenticatedStream(shared_ptr<Stream> innerStream, bool leaveOpen)

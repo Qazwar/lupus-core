@@ -5,7 +5,7 @@ using namespace std;
 #ifdef _MSC_VER
 #include <Windows.h>
 
-namespace StreamWolf {
+namespace Lupus {
     namespace System {
         Library::~Library()
         {

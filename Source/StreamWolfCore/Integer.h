@@ -3,7 +3,7 @@
 #include "Utility.h"
 #include <cstdint>
 
-namespace StreamWolf {
+namespace Lupus {
 	//! conversion base for integer
 	enum class IntegerBase {
 		Octal,

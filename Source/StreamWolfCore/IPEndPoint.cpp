@@ -2,7 +2,7 @@
 #include "IPAddress.h"
 #include "NetUtility.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             IPEndPoint::IPEndPoint(uint32_t address, uint16_t port) :

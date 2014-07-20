@@ -3,7 +3,7 @@
 #include <string>
 #include "Utility.h"
 
-namespace StreamWolf {
+namespace Lupus {
 	//! provides conversion routines for floating-point numbers
     class SWC_API Float
 	{

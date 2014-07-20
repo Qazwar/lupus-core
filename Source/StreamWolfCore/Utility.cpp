@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     string RandomString(unsigned N)
     {
         static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

@@ -5,7 +5,7 @@
 #include "IPEndPoint.h"
 #include "NetDefinitions.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             Socket::Socket(const SocketInformation& socketInformation)

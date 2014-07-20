@@ -10,9 +10,9 @@
 #include <iostream>
 
 using namespace std;
-using namespace StreamWolf::Net::Sockets;
+using namespace Lupus::Net::Sockets;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Http {
             HttpServer::HttpServer(uint16_t port, int32_t backlog)

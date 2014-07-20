@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     MemoryStream::MemoryStream(const vector<uint8_t>& buffer)
     {
         mBuffer = buffer;

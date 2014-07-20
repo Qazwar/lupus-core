@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         void Connection::BeginTransactionAsync(IsolationLevel level, std::function<void(std::exception_ptr, Connection*, std::shared_ptr<ITransaction>)> callback)
         {

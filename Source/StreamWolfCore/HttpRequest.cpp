@@ -2,9 +2,9 @@
 #include "TcpClient.h"
 
 using namespace std;
-using namespace StreamWolf::Net::Sockets;
+using namespace Lupus::Net::Sockets;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Http {
             HttpRequest::HttpRequest(shared_ptr<TcpClient> client)

@@ -7,7 +7,7 @@
 #pragma warning(disable: 4251)
 #endif
 
-namespace StreamWolf {
+namespace Lupus {
     class SWC_API MemoryStream : public Stream
     {
     public:

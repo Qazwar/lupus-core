@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             NetworkStream::NetworkStream(shared_ptr<Sockets::Socket> socket)

@@ -46,7 +46,7 @@
         virtual inline const char* what() const override { return mMessage.c_str(); } \
     }
 
-namespace StreamWolf {
+namespace Lupus {
     DefineError(null_pointer);
     DefineError(sql_error);
     DefineError(socket_error);

@@ -11,7 +11,7 @@
 #pragma warning(disable: 4251)
 #endif
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Data {
         class SWC_API DataColumn
         {

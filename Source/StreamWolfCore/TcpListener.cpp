@@ -8,7 +8,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             TcpListener::TcpListener(shared_ptr<IPEndPoint> localEP)

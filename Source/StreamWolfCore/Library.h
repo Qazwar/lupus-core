@@ -5,7 +5,7 @@
 
 #include "Utility.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace System {
         class SWC_API Library : public boost::noncopyable
         {

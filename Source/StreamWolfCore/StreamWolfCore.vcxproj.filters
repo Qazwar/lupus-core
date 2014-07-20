@@ -1,279 +1,309 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="StreamWolf">
+    <Filter Include="Lupus">
       <UniqueIdentifier>{ccff1adb-7701-483a-87fe-f3554b4308fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Data">
+    <Filter Include="Lupus\Data">
       <UniqueIdentifier>{0aeb258f-79a9-4558-a82f-8e49a5a2e93c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Data\Postgres">
+    <Filter Include="Lupus\Data\Postgres">
       <UniqueIdentifier>{a24a7abd-0ecd-439a-bbfe-c92412a46cc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Net">
-      <UniqueIdentifier>{b2a99a64-55ea-4dc1-85c9-ea2c47cc715f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\Net\Http">
-      <UniqueIdentifier>{b7135b63-473a-44de-b3ee-3a5ca198d6b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\Net\Sockets">
-      <UniqueIdentifier>{50f44233-935b-43d6-9540-afe097aed79a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\System">
-      <UniqueIdentifier>{c33a55f2-cc8c-4c38-bfc4-b23f4b31f229}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\Data\Postgres\.h">
+    <Filter Include="Lupus\Data\Postgres\.h">
       <UniqueIdentifier>{80e63aae-8f02-494b-8348-49e5d7a487fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Data\Postgres\.cpp">
+    <Filter Include="Lupus\Data\Postgres\.cpp">
       <UniqueIdentifier>{ed6659af-90fc-4e40-8a67-c1d2d672d2e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Data\.h">
+    <Filter Include="Lupus\Data\.h">
       <UniqueIdentifier>{58127197-5503-42a3-851a-cb36429df06e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Data\.cpp">
+    <Filter Include="Lupus\Data\.cpp">
       <UniqueIdentifier>{471e4aab-c1d5-42a1-b23f-7dea6dc57f8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Net\Http\.h">
+    <Filter Include="Lupus\Net">
+      <UniqueIdentifier>{b2a99a64-55ea-4dc1-85c9-ea2c47cc715f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Net\Http">
+      <UniqueIdentifier>{b7135b63-473a-44de-b3ee-3a5ca198d6b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Net\Http\.h">
       <UniqueIdentifier>{505ebd95-3025-40fe-9159-701a838df325}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Net\Http\.cpp">
+    <Filter Include="Lupus\Net\Http\.cpp">
       <UniqueIdentifier>{76abaa34-91a7-4dfc-8b83-d07b09206476}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Net\Sockets\.h">
+    <Filter Include="Lupus\Net\Sockets">
+      <UniqueIdentifier>{50f44233-935b-43d6-9540-afe097aed79a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Net\Sockets\.h">
       <UniqueIdentifier>{be62751a-7256-4ef8-8409-a9822ada1115}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Net\Sockets\.cpp">
+    <Filter Include="Lupus\Net\Sockets\.cpp">
       <UniqueIdentifier>{1f173b8e-0880-4539-a1aa-1c99a3055237}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\System\.h">
-      <UniqueIdentifier>{fe88f7cb-33b1-4939-a37b-3924e15ce124}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\System\.cpp">
-      <UniqueIdentifier>{85aaa0b8-7250-4bfc-a659-2519c6e0eecb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\.h">
-      <UniqueIdentifier>{9596ab73-ae54-415e-8d14-5026ab477ea4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\.cpp">
-      <UniqueIdentifier>{949f8896-c408-4a1c-b846-04788a31c2a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreamWolf\Net\Security">
+    <Filter Include="Lupus\Net\Security">
       <UniqueIdentifier>{7617eebf-de24-4014-be67-483902364316}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Net\Security\.cpp">
+    <Filter Include="Lupus\Net\Security\.cpp">
       <UniqueIdentifier>{fcbd49ca-32fe-4060-9b58-2342541d23ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StreamWolf\Net\Security\.h">
+    <Filter Include="Lupus\Net\Security\.h">
       <UniqueIdentifier>{534a666f-7048-468e-a98a-9875d1d24f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\System">
+      <UniqueIdentifier>{c33a55f2-cc8c-4c38-bfc4-b23f4b31f229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\System\.h">
+      <UniqueIdentifier>{fe88f7cb-33b1-4939-a37b-3924e15ce124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\System\.cpp">
+      <UniqueIdentifier>{85aaa0b8-7250-4bfc-a659-2519c6e0eecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\.h">
+      <UniqueIdentifier>{9596ab73-ae54-415e-8d14-5026ab477ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\.cpp">
+      <UniqueIdentifier>{949f8896-c408-4a1c-b846-04788a31c2a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security">
+      <UniqueIdentifier>{5dc42b90-c576-4930-987f-d91892086ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\.cpp">
+      <UniqueIdentifier>{e4ef45d4-2cff-4cf3-bdf4-9cf5028aee0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\.h">
+      <UniqueIdentifier>{b1572421-7d26-4f9a-8f55-4b66d672eace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\Cryptography">
+      <UniqueIdentifier>{830cdce9-0c3e-4a3e-bf03-1ecaf8c3c7f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\Cryptography\.h">
+      <UniqueIdentifier>{4f6c1d6a-96f5-4655-aead-f1d5c022a3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\Cryptography\.cpp">
+      <UniqueIdentifier>{1cbf569f-844e-48fc-bcd5-5d2d0c224f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\Cryptography\X509Certificates">
+      <UniqueIdentifier>{3d4c5011-207b-451b-9d60-c9b39580f5d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\Cryptography\X509Certificates\.cpp">
+      <UniqueIdentifier>{3753af5d-b058-41c8-8ab1-5136436cd5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\Cryptography\X509Certificates\.h">
+      <UniqueIdentifier>{ada1df3d-ff02-4db2-b611-cbc2640ad1f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgCommand.cpp">
-      <Filter>StreamWolf\Data\Postgres\.cpp</Filter>
+      <Filter>Lupus\Data\Postgres\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="PgConnection.cpp">
-      <Filter>StreamWolf\Data\Postgres\.cpp</Filter>
+      <Filter>Lupus\Data\Postgres\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="PgDataReader.cpp">
-      <Filter>StreamWolf\Data\Postgres\.cpp</Filter>
+      <Filter>Lupus\Data\Postgres\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="PgTransaction.cpp">
-      <Filter>StreamWolf\Data\Postgres\.cpp</Filter>
+      <Filter>Lupus\Data\Postgres\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="DataColumn.cpp">
-      <Filter>StreamWolf\Data\.cpp</Filter>
+      <Filter>Lupus\Data\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="DataRow.cpp">
-      <Filter>StreamWolf\Data\.cpp</Filter>
+      <Filter>Lupus\Data\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="DataTable.cpp">
-      <Filter>StreamWolf\Data\.cpp</Filter>
+      <Filter>Lupus\Data\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Parameter.cpp">
-      <Filter>StreamWolf\Data\.cpp</Filter>
+      <Filter>Lupus\Data\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="HttpRequest.cpp">
-      <Filter>StreamWolf\Net\Http\.cpp</Filter>
+      <Filter>Lupus\Net\Http\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="HttpResponse.cpp">
-      <Filter>StreamWolf\Net\Http\.cpp</Filter>
+      <Filter>Lupus\Net\Http\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="HttpServer.cpp">
-      <Filter>StreamWolf\Net\Http\.cpp</Filter>
+      <Filter>Lupus\Net\Http\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="IPAddress.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="IPEndPoint.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="NetUtility.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="NetworkStream.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Socket.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="SocketState.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="TcpClient.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="TcpListener.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="UdpClient.cpp">
-      <Filter>StreamWolf\Net\Sockets\.cpp</Filter>
+      <Filter>Lupus\Net\Sockets\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Win32Library.cpp">
-      <Filter>StreamWolf\System\.cpp</Filter>
+      <Filter>Lupus\System\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="UnixLibrary.cpp">
-      <Filter>StreamWolf\System\.cpp</Filter>
+      <Filter>Lupus\System\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Float.cpp">
-      <Filter>StreamWolf\.cpp</Filter>
+      <Filter>Lupus\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Integer.cpp">
-      <Filter>StreamWolf\.cpp</Filter>
+      <Filter>Lupus\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Stream.cpp">
-      <Filter>StreamWolf\.cpp</Filter>
+      <Filter>Lupus\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="MemoryStream.cpp">
-      <Filter>StreamWolf\.cpp</Filter>
+      <Filter>Lupus\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="AuthenticatedStream.cpp">
-      <Filter>StreamWolf\Net\Security\.cpp</Filter>
+      <Filter>Lupus\Net\Security\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Utility.cpp">
-      <Filter>StreamWolf\.cpp</Filter>
+      <Filter>Lupus\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Connection.cpp">
-      <Filter>StreamWolf\Data\.cpp</Filter>
+      <Filter>Lupus\Data\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>StreamWolf\Data\.cpp</Filter>
+      <Filter>Lupus\Data\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgCommand.h">
-      <Filter>StreamWolf\Data\Postgres\.h</Filter>
+      <Filter>Lupus\Data\Postgres\.h</Filter>
     </ClInclude>
     <ClInclude Include="PgConnection.h">
-      <Filter>StreamWolf\Data\Postgres\.h</Filter>
+      <Filter>Lupus\Data\Postgres\.h</Filter>
     </ClInclude>
     <ClInclude Include="PgDataReader.h">
-      <Filter>StreamWolf\Data\Postgres\.h</Filter>
+      <Filter>Lupus\Data\Postgres\.h</Filter>
     </ClInclude>
     <ClInclude Include="PgOid.h">
-      <Filter>StreamWolf\Data\Postgres\.h</Filter>
+      <Filter>Lupus\Data\Postgres\.h</Filter>
     </ClInclude>
     <ClInclude Include="PgTransaction.h">
-      <Filter>StreamWolf\Data\Postgres\.h</Filter>
+      <Filter>Lupus\Data\Postgres\.h</Filter>
     </ClInclude>
     <ClInclude Include="DataColumn.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="DataRow.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="DataTable.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="DataType.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="IDataReader.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="IsolationLevel.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="ITransaction.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="Parameter.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="HttpRequest.h">
-      <Filter>StreamWolf\Net\Http\.h</Filter>
+      <Filter>Lupus\Net\Http\.h</Filter>
     </ClInclude>
     <ClInclude Include="HttpResponse.h">
-      <Filter>StreamWolf\Net\Http\.h</Filter>
+      <Filter>Lupus\Net\Http\.h</Filter>
     </ClInclude>
     <ClInclude Include="HttpServer.h">
-      <Filter>StreamWolf\Net\Http\.h</Filter>
+      <Filter>Lupus\Net\Http\.h</Filter>
     </ClInclude>
     <ClInclude Include="IPAddress.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="IPEndPoint.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="NetDefinitions.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="NetUtility.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="NetworkStream.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="Socket.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="SocketEnum.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="SocketInformation.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="TcpClient.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="TcpListener.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="UdpClient.h">
-      <Filter>StreamWolf\Net\Sockets\.h</Filter>
+      <Filter>Lupus\Net\Sockets\.h</Filter>
     </ClInclude>
     <ClInclude Include="Library.h">
-      <Filter>StreamWolf\System\.h</Filter>
+      <Filter>Lupus\System\.h</Filter>
     </ClInclude>
     <ClInclude Include="Stream.h">
-      <Filter>StreamWolf\.h</Filter>
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
     <ClInclude Include="Utility.h">
-      <Filter>StreamWolf\.h</Filter>
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
     <ClInclude Include="Integer.h">
-      <Filter>StreamWolf\.h</Filter>
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
     <ClInclude Include="Float.h">
-      <Filter>StreamWolf\.h</Filter>
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
     <ClInclude Include="AuthenticatedStream.h">
-      <Filter>StreamWolf\Net\Security\.h</Filter>
+      <Filter>Lupus\Net\Security\.h</Filter>
     </ClInclude>
     <ClInclude Include="MemoryStream.h">
-      <Filter>StreamWolf\.h</Filter>
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
     <ClInclude Include="SslStream.h">
-      <Filter>StreamWolf\Net\Security\.h</Filter>
+      <Filter>Lupus\Net\Security\.h</Filter>
     </ClInclude>
     <ClInclude Include="NetSecurityEnum.h">
-      <Filter>StreamWolf\Net\Security\.h</Filter>
+      <Filter>Lupus\Net\Security\.h</Filter>
     </ClInclude>
     <ClInclude Include="Connection.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>StreamWolf\Data\.h</Filter>
+      <Filter>Lupus\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="X509Certificate.h">
+      <Filter>Lupus\Security\Cryptography\X509Certificates\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

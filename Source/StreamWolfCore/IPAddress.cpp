@@ -1,7 +1,7 @@
 ﻿#include "IPAddress.h"
 #include "NetUtility.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             IPAddress::IPAddress(uint32_t ipv4) :

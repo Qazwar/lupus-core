@@ -2,7 +2,7 @@
 
 #include "NetDefinitions.h"
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             //! Sockettyp

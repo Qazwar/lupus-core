@@ -7,7 +7,7 @@
 #pragma warning(disable: 4251)
 #endif
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             class Socket;

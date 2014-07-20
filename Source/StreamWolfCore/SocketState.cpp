@@ -5,7 +5,7 @@
 
 #include <thread>
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             std::shared_ptr<Socket> Socket::SocketState::Accept(Socket* socket)

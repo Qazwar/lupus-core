@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     namespace Net {
         namespace Sockets {
             UdpClient::UdpClient(AddressFamily family)

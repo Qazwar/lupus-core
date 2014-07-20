@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace StreamWolf {
+namespace Lupus {
     void Stream::CopyToAsync(shared_ptr<Stream> destination, function<void(exception_ptr, Stream*)> callback)
     {
         thread([this, destination, callback]() {
