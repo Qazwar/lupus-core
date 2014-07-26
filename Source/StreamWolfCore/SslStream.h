@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AuthenticatedStream.h"
-#include "NetSecurityEnum.h"
+#include "SecurityAuthEnum.h"
 
 #include <functional>
 
@@ -23,7 +23,7 @@ namespace Lupus {
 
     namespace Net {
         namespace Security {
-            class SWC_API SslStream : public AuthenticatedStream
+            class LUPUS_API SslStream : public AuthenticatedStream
             {
             public:
 
@@ -53,15 +53,15 @@ namespace Lupus {
                 virtual bool IsSigned() const override;
 
                 virtual bool CheckCertRevocationStatus() const NOEXCEPT;
-                virtual CipherAlgorithmType CipherAlgorithm() const NOEXCEPT;
+                virtual Lupus::Security::Authentication::CipherAlgorithmType CipherAlgorithm() const NOEXCEPT;
                 virtual int32_t CipherStrength() const NOEXCEPT;
-                virtual HashAlgorithmType HashAlgorithm() const NOEXCEPT;
+                virtual Lupus::Security::Authentication::HashAlgorithmType HashAlgorithm() const NOEXCEPT;
                 virtual int32_t HashStrength() const NOEXCEPT;
-                virtual ExchangeAlgorithmType KeyExchangeAlgorithm() const NOEXCEPT;
+                virtual Lupus::Security::Authentication::ExchangeAlgorithmType KeyExchangeAlgorithm() const NOEXCEPT;
                 virtual int32_t KeyExchangeStrength() const NOEXCEPT;
-                virtual SslProtocols SslProtocol() const NOEXCEPT;
+                virtual Lupus::Security::Authentication::SslProtocols SslProtocol() const NOEXCEPT;
 
-                virtual void AuthenticateAsClientAsync(const std::string& host, std::function<void(std::exception_ptr, SslStream*)>);
+                virtual void AuthenticateAsClientAsync(const std::string& host, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
                 virtual void AuthenticateAsClientAsync(
                     const std::string& host,
                     std::vector<
@@ -69,18 +69,18 @@ namespace Lupus {
                             Lupus::Security::Cryptography::X509Certificates::X509Certificate
                         >
                     > certificates,
-                    SslProtocols protocols,
+                    Lupus::Security::Authentication::SslProtocols protocols,
                     bool checkRevocation,
-                    std::function<void(std::exception_ptr, SslStream*)>);
-                virtual void AuthenticateAsServerAsync(std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate, std::function<void(std::exception_ptr, SslStream*)>);
+                    std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
+                virtual void AuthenticateAsServerAsync(std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
                 virtual void AuthenticateAsServerAsync(
                     std::shared_ptr<
                         Lupus::Security::Cryptography::X509Certificates::X509Certificate
                     > certificate,
                     bool clientCertRequired,
-                    SslProtocols protocols,
+                    Lupus::Security::Authentication::SslProtocols protocols,
                     bool checkRevocation,
-                    std::function<void(std::exception_ptr, SslStream*)>);
+                    std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
 
                 virtual void AuthenticateAsClient(const std::string& host);
                 virtual void AuthenticateAsClient(
@@ -90,7 +90,7 @@ namespace Lupus {
                             Lupus::Security::Cryptography::X509Certificates::X509Certificate
                         >
                     > certificates, 
-                    SslProtocols protocols, 
+                    Lupus::Security::Authentication::SslProtocols protocols,
                     bool checkRevocation);
                 virtual void AuthenticateAsServer(std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate);
                 virtual void AuthenticateAsServer(
@@ -98,7 +98,7 @@ namespace Lupus {
                         Lupus::Security::Cryptography::X509Certificates::X509Certificate
                     > certificate, 
                     bool clientCertRequired, 
-                    SslProtocols protocols, 
+                    Lupus::Security::Authentication::SslProtocols protocols,
                     bool checkRevocation);
 
             private:

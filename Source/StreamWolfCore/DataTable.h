@@ -19,7 +19,7 @@ namespace Lupus {
         class DataColumn;
         class DataRow;
 
-        class SWC_API DataTable : public boost::noncopyable
+        class LUPUS_API DataTable : public boost::noncopyable
         {
         public:
 

@@ -19,7 +19,7 @@ namespace Lupus {
         }
 
         namespace Http {
-            class SWC_API HttpResponse : boost::noncopyable
+            class LUPUS_API HttpResponse : boost::noncopyable
             {
             public:
 

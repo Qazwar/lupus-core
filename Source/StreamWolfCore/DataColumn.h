@@ -13,7 +13,7 @@
 
 namespace Lupus {
     namespace Data {
-        class SWC_API DataColumn
+        class LUPUS_API DataColumn
         {
         public:
 

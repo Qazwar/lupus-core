@@ -94,6 +94,12 @@
     <Filter Include="Lupus\Security\Cryptography\X509Certificates\.h">
       <UniqueIdentifier>{ada1df3d-ff02-4db2-b611-cbc2640ad1f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lupus\Security\Athentication">
+      <UniqueIdentifier>{d0daa45e-e5b1-4096-93b4-bb6f382b449a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Security\Athentication\.h">
+      <UniqueIdentifier>{e14b23aa-5abc-464f-aaf4-a85ecd07e701}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgCommand.cpp">
@@ -185,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Lupus\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HashAlgorithm.cpp">
+      <Filter>Lupus\Security\Cryptography\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +302,6 @@
     <ClInclude Include="SslStream.h">
       <Filter>Lupus\Net\Security\.h</Filter>
     </ClInclude>
-    <ClInclude Include="NetSecurityEnum.h">
-      <Filter>Lupus\Net\Security\.h</Filter>
-    </ClInclude>
     <ClInclude Include="Connection.h">
       <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
@@ -305,10 +311,22 @@
     <ClInclude Include="X509Certificate.h">
       <Filter>Lupus\Security\Cryptography\X509Certificates\.h</Filter>
     </ClInclude>
-    <ClInclude Include="AsymmetricAlgorithm.h">
+    <ClInclude Include="SecurityAuthEnum.h">
+      <Filter>Lupus\Security\Athentication\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="NetSecurityEnum.h">
+      <Filter>Lupus\Net\Security\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HashAlgorithm.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
-    <ClInclude Include="SymmetricAlgorithm.h">
+    <ClInclude Include="ICryptoTransform.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IClonable.h">
+      <Filter>Lupus\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptoHash.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
   </ItemGroup>

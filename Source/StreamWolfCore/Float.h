@@ -5,7 +5,7 @@
 
 namespace Lupus {
 	//! provides conversion routines for floating-point numbers
-    class SWC_API Float
+    class LUPUS_API Float
 	{
 	public:
 		/**

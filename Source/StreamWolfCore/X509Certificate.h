@@ -13,7 +13,7 @@ namespace Lupus {
     namespace Security {
         namespace Cryptography {
             namespace X509Certificates {
-                class SWC_API X509Certificate : public boost::noncopyable
+                class LUPUS_API X509Certificate : public boost::noncopyable
                 {
 
                 };

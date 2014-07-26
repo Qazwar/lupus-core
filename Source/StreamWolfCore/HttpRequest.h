@@ -27,7 +27,7 @@ namespace Lupus {
             class Uri;
             class Cookie;
 
-            class SWC_API HttpRequest : boost::noncopyable
+            class LUPUS_API HttpRequest : boost::noncopyable
             {
             public:
 

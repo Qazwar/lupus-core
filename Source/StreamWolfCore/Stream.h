@@ -16,7 +16,7 @@ namespace Lupus {
         End
     };
 
-    class SWC_API Stream : boost::noncopyable
+    class LUPUS_API Stream : boost::noncopyable
     {
     public:
 

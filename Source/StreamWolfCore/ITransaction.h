@@ -7,7 +7,7 @@
 
 namespace Lupus {
     namespace Data {
-        class SWC_API ITransaction : public boost::noncopyable
+        class LUPUS_API ITransaction : public boost::noncopyable
         {
         public:
 

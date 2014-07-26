@@ -22,7 +22,7 @@ namespace Lupus {
             class IPEndPoint;
             class NetworkStream;
 
-            class SWC_API TcpClient : public boost::noncopyable
+            class LUPUS_API TcpClient : public boost::noncopyable
             {
             public:
 

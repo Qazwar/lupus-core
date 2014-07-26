@@ -12,7 +12,7 @@ namespace Lupus {
 	};
 
 	//! conversion class for integer types
-    class SWC_API Integer
+    class LUPUS_API Integer
 	{
 	public:
 		//! \sa Integer::ToString(int, IntegerBase)

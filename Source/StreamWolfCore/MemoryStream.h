@@ -8,7 +8,7 @@
 #endif
 
 namespace Lupus {
-    class SWC_API MemoryStream : public Stream
+    class LUPUS_API MemoryStream : public Stream
     {
     public:
 

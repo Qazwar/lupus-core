@@ -25,7 +25,7 @@ namespace Lupus {
                 int LingerTime;
             };
 
-            class SWC_API Socket : public boost::noncopyable
+            class LUPUS_API Socket : public boost::noncopyable
             {
             public:
                 /*!

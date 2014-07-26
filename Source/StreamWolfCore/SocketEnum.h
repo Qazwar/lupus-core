@@ -61,27 +61,7 @@ namespace Lupus {
                 Timeout
             };
 
-            inline SocketPollFlags operator|(SocketPollFlags lhs, SocketPollFlags rhs)
-            {
-                return static_cast<SocketPollFlags>(static_cast<short>(lhs) | static_cast<short>(rhs));
-            }
-
-            inline SocketPollFlags operator&(SocketPollFlags lhs, SocketPollFlags rhs)
-            {
-                return static_cast<SocketPollFlags>(static_cast<short>(lhs)& static_cast<short>(rhs));
-            }
-
-            inline SocketPollFlags& operator|=(SocketPollFlags& lhs, SocketPollFlags rhs)
-            {
-                lhs = static_cast<SocketPollFlags>(static_cast<short>(lhs) | static_cast<short>(rhs));
-                return lhs;
-            }
-
-            inline SocketPollFlags& operator&=(SocketPollFlags& lhs, SocketPollFlags rhs)
-            {
-                lhs = static_cast<SocketPollFlags>(static_cast<short>(lhs)& static_cast<short>(rhs));
-                return lhs;
-            }
+            LupusFlagEnumeration(SocketPollFlags);
 
             enum class SocketShutdown {
                 Receive = LU_SHUTDOWN_READ, //!< Schließt die Leseverbindung.
@@ -97,27 +77,7 @@ namespace Lupus {
                 Truncated = MSG_CTRUNC
             };
 
-            inline SocketFlags operator|(SocketFlags lhs, SocketFlags rhs)
-            {
-                return static_cast<SocketFlags>(static_cast<int>(lhs) | static_cast<int>(rhs));
-            }
-
-            inline SocketFlags operator&(SocketFlags lhs, SocketFlags rhs)
-            {
-                return static_cast<SocketFlags>(static_cast<int>(lhs)& static_cast<int>(rhs));
-            }
-
-            inline SocketFlags& operator|=(SocketFlags& lhs, SocketFlags rhs)
-            {
-                lhs = static_cast<SocketFlags>(static_cast<int>(lhs) | static_cast<int>(rhs));
-                return lhs;
-            }
-
-            inline SocketFlags& operator&=(SocketFlags& lhs, SocketFlags rhs)
-            {
-                lhs = static_cast<SocketFlags>(static_cast<int>(lhs)& static_cast<int>(rhs));
-                return lhs;
-            }
+            LupusFlagEnumeration(SocketFlags);
 
             enum SocketError {
                 // TODO: Werte eintragen

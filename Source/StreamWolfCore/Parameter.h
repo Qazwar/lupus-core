@@ -14,7 +14,7 @@
 
 namespace Lupus {
     namespace Data {
-        class SWC_API Parameter : public boost::noncopyable
+        class LUPUS_API Parameter : public boost::noncopyable
         {
         public:
 

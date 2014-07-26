@@ -12,7 +12,7 @@ namespace Lupus {
         namespace Sockets {
             class Socket;
 
-            class SWC_API NetworkStream : public Stream
+            class LUPUS_API NetworkStream : public Stream
             {
             public:
 

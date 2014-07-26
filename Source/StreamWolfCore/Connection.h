@@ -13,7 +13,7 @@ namespace Lupus {
         class ITransaction;
         class Command;
 
-        class SWC_API Connection : public boost::noncopyable
+        class LUPUS_API Connection : public boost::noncopyable
         {
         public:
             

@@ -7,35 +7,35 @@
 #pragma warning(disable: 4290)
 #define NOEXCEPT throw()
 
-#ifdef STREAMWOLFCORE_EXPORT
-#define SWC_API __declspec(dllexport)
+#ifdef LUPUSCORE_EXPORT
+#define LUPUS_API __declspec(dllexport)
 #else
-#define SWC_API __declspec(dllimport)
+#define LUPUS_API __declspec(dllimport)
 #endif
 
 #else
 #define NOEXCEPT noexcept
 
-#ifdef STREAMWOLFCORE_EXPORT
+#ifdef LUPUSCORE_EXPORT
 
 #ifdef __CYGWIN__
-#define SWC_API __attribute__ ((dllexport))
+#define LUPUS_API __attribute__ ((dllexport))
 #else
-#define SWC_API __attribute__ ((visibility ("default")))
+#define LUPUS_API __attribute__ ((visibility ("default")))
 #endif
 
 #else
 
 #ifdef __CYGWIN__
-#define SWC_API __attribute__ ((dllimport))
+#define LUPUS_API __attribute__ ((dllimport))
 #else
-#define SWC_API __attribute__ ((visibility ("default")))
+#define LUPUS_API __attribute__ ((visibility ("default")))
 #endif
 
 #endif
 #endif
 
-#define DefineError(cls) \
+#define LupusDefineError(cls) \
     class cls : public virtual std::exception \
     { \
         std::string mMessage; \
@@ -46,17 +46,37 @@
         virtual inline const char* what() const override { return mMessage.c_str(); } \
     }
 
-namespace Lupus {
-    DefineError(null_pointer);
-    DefineError(sql_error);
-    DefineError(socket_error);
-    DefineError(http_error);
-    DefineError(io_error);
-    DefineError(not_supported);
-    DefineError(unauthorized_access);
-    DefineError(authentication_error);
+#define LupusFlagEnumeration(type) \
+    inline type operator|(type lhs, type rhs) \
+    { \
+        return static_cast<type>(static_cast<int>(lhs) | static_cast<int>(rhs)); \
+    } \
+    inline type operator&(type lhs, type rhs) \
+    { \
+        return static_cast<type>(static_cast<int>(lhs) & static_cast<int>(rhs)); \
+    } \
+    inline type& operator|=(type& lhs, type rhs) \
+    { \
+        lhs = static_cast<type>(static_cast<int>(lhs) | static_cast<int>(rhs)); \
+        return lhs; \
+    } \
+    inline type& operator&=(type& lhs, type rhs) \
+    { \
+        lhs = static_cast<type>(static_cast<int>(lhs) & static_cast<int>(rhs)); \
+        return lhs; \
+    }
 
-    SWC_API std::string RandomString(unsigned);
+namespace Lupus {
+    LupusDefineError(null_pointer);
+    LupusDefineError(sql_error);
+    LupusDefineError(socket_error);
+    LupusDefineError(http_error);
+    LupusDefineError(io_error);
+    LupusDefineError(not_supported);
+    LupusDefineError(unauthorized_access);
+    LupusDefineError(authentication_error);
+
+    LUPUS_API std::string RandomString(unsigned);
 
     template <typename Dest, typename Src>
     Dest force_cast(const Src& src)

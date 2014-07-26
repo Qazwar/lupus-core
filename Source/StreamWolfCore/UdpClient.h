@@ -20,7 +20,7 @@ namespace Lupus {
             class IPAddress;
             class IPEndPoint;
 
-            class SWC_API UdpClient : public boost::noncopyable
+            class LUPUS_API UdpClient : public boost::noncopyable
             {
             public:
 

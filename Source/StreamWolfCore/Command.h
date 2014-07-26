@@ -16,7 +16,7 @@ namespace Lupus {
         class ITransaction;
         class IDataReader;
 
-        class SWC_API Command : public boost::noncopyable
+        class LUPUS_API Command : public boost::noncopyable
         {
         public:
 

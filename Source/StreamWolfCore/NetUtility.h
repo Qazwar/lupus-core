@@ -17,42 +17,42 @@ namespace Lupus {
              *
              * \returns Die 16-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            SWC_API uint16_t HostToNetworkOrder(uint16_t host) NOEXCEPT;
+            LUPUS_API uint16_t HostToNetworkOrder(uint16_t host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            SWC_API uint32_t HostToNetworkOrder(uint32_t host) NOEXCEPT;
+            LUPUS_API uint32_t HostToNetworkOrder(uint32_t host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            SWC_API uint64_t HostToNetworkOrder(uint64_t host) NOEXCEPT;
+            LUPUS_API uint64_t HostToNetworkOrder(uint64_t host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 16-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 16-Bit Ganzzahl in Host Byteorder.
              */
-            SWC_API uint16_t NetworkToHostOrder(uint16_t network) NOEXCEPT;
+            LUPUS_API uint16_t NetworkToHostOrder(uint16_t network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Host Byteorder.
              */
-            SWC_API uint32_t NetworkToHostOrder(uint32_t network) NOEXCEPT;
+            LUPUS_API uint32_t NetworkToHostOrder(uint32_t network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Host Byteorder.
              */
-            SWC_API uint64_t NetworkToHostOrder(uint64_t network) NOEXCEPT;
+            LUPUS_API uint64_t NetworkToHostOrder(uint64_t network) NOEXCEPT;
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -61,7 +61,7 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -69,7 +69,7 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -77,7 +77,7 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, SocketType type) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, SocketType type) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -85,7 +85,7 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
              */
-            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, ProtocolType protocol) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, ProtocolType protocol) throw(std::runtime_error);
 
             /*!
              * Liest die Adressinformation des angegebenen Knotens mit dem
@@ -112,7 +112,7 @@ namespace Lupus {
              *
              * \returns Vektor mit allen gefunden Adressen.
              */
-            SWC_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(
                 const std::string& node,
                 const std::string& service,
                 AddressFamily family,

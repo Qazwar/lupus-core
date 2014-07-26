@@ -9,7 +9,7 @@
 
 namespace Lupus {
     namespace Data {
-        class SWC_API IDataReader : public boost::noncopyable
+        class LUPUS_API IDataReader : public boost::noncopyable
         {
         public:
             

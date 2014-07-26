@@ -19,7 +19,7 @@ namespace Lupus {
             class IPEndPoint;
 
             //! Repräsentiert einen IP-Adresse
-            class SWC_API IPAddress : public boost::noncopyable
+            class LUPUS_API IPAddress : public boost::noncopyable
             {
             public:
 

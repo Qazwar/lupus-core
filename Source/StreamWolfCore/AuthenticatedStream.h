@@ -10,7 +10,7 @@
 namespace Lupus {
     namespace Net {
         namespace Security {
-            class SWC_API AuthenticatedStream : public Stream
+            class LUPUS_API AuthenticatedStream : public Stream
             {
             public:
 

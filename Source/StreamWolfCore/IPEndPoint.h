@@ -20,7 +20,7 @@ namespace Lupus {
             class IPAddress;
 
             //! Repräsentiert einen Endpunkt mit dem Kommuniziert werden kann.
-            class SWC_API IPEndPoint : public boost::noncopyable
+            class LUPUS_API IPEndPoint : public boost::noncopyable
             {
             public:
 

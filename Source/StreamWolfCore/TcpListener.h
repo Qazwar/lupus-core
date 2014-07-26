@@ -21,7 +21,7 @@ namespace Lupus {
             class IPEndPoint;
             class TcpClient;
 
-            class SWC_API TcpListener : public boost::noncopyable
+            class LUPUS_API TcpListener : public boost::noncopyable
             {
             public:
 

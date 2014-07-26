@@ -34,6 +34,7 @@
     <ClCompile Include="DataRow.cpp" />
     <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="Float.cpp" />
+    <ClCompile Include="HashAlgorithm.cpp" />
     <ClCompile Include="HttpRequest.cpp" />
     <ClCompile Include="HttpResponse.cpp" />
     <ClCompile Include="HttpServer.cpp" />
@@ -59,18 +60,19 @@
     <ClCompile Include="Win32Library.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="DataColumn.h" />
     <ClInclude Include="DataRow.h" />
     <ClInclude Include="DataTable.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="Float.h" />
+    <ClInclude Include="HashAlgorithm.h" />
     <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="HttpResponse.h" />
     <ClInclude Include="HttpServer.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Connection.h" />
+    <ClInclude Include="ICryptoTransform.h" />
     <ClInclude Include="IDataReader.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="IPAddress.h" />
@@ -81,6 +83,8 @@
     <ClInclude Include="MemoryStream.h" />
     <ClInclude Include="NetDefinitions.h" />
     <ClInclude Include="NetSecurityEnum.h" />
+    <ClInclude Include="IClonable.h" />
+    <ClInclude Include="SecurityAuthEnum.h" />
     <ClInclude Include="NetUtility.h" />
     <ClInclude Include="NetworkStream.h" />
     <ClInclude Include="Parameter.h" />
@@ -89,12 +93,12 @@
     <ClInclude Include="PgDataReader.h" />
     <ClInclude Include="PgOid.h" />
     <ClInclude Include="PgTransaction.h" />
+    <ClInclude Include="CryptoHash.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="SocketEnum.h" />
     <ClInclude Include="SocketInformation.h" />
     <ClInclude Include="SslStream.h" />
     <ClInclude Include="Stream.h" />
-    <ClInclude Include="SymmetricAlgorithm.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="UdpClient.h" />
@@ -198,7 +202,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PreprocessorDefinitions>STREAMWOLFCORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -213,7 +217,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PreprocessorDefinitions>STREAMWOLFCORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -229,7 +233,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PreprocessorDefinitions>STREAMWOLFCORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -244,7 +248,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PreprocessorDefinitions>STREAMWOLFCORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -262,7 +266,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PreprocessorDefinitions>STREAMWOLFCORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -281,7 +285,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PreprocessorDefinitions>STREAMWOLFCORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

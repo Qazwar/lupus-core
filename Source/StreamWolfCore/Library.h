@@ -7,7 +7,7 @@
 
 namespace Lupus {
     namespace System {
-        class SWC_API Library : public boost::noncopyable
+        class LUPUS_API Library : public boost::noncopyable
         {
         public:
 
