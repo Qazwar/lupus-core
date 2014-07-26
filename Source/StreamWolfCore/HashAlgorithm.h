@@ -48,7 +48,7 @@ namespace Lupus {
 
             public:
                 
-                static std::shared_ptr<HashAlgorithmFactory> GetInstance();
+                static std::shared_ptr<HashAlgorithmFactory> GetInstance() NOEXCEPT;
 
                 /*!
                  * Unterstütze Algorithmen sind:
@@ -69,7 +69,7 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<HashAlgorithm> Create(const std::string& algorithm) const;
+                std::shared_ptr<HashAlgorithm> Create(const std::string& algorithm) NOEXCEPT const;
 
             private:
 
