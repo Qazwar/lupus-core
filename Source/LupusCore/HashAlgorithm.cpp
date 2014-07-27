@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cctype>
 #include <cryptopp/sha.h>
+#include <cryptopp/sha3.h>
 #include <cryptopp/md5.h>
 #include <cryptopp/ripemd.h>
 #include <cryptopp/whrlpool.h>
@@ -42,6 +43,11 @@ namespace Lupus {
                 mPrototypes["sha256"] = make_shared<CryptoHash<CryptoPP::SHA256>>();
                 mPrototypes["sha384"] = make_shared<CryptoHash<CryptoPP::SHA384>>();
                 mPrototypes["sha512"] = make_shared<CryptoHash<CryptoPP::SHA512>>();
+                mPrototypes["sha3"] = make_shared<CryptoHash<CryptoPP::SHA3>>();
+                mPrototypes["sha3-224"] = make_shared<CryptoHash<CryptoPP::SHA3_224>>();
+                mPrototypes["sha3-256"] = make_shared<CryptoHash<CryptoPP::SHA3_256>>();
+                mPrototypes["sha3-384"] = make_shared<CryptoHash<CryptoPP::SHA3_384>>();
+                mPrototypes["sha3-512"] = make_shared<CryptoHash<CryptoPP::SHA3_512>>();
                 mPrototypes["tiger"] = make_shared<CryptoHash<CryptoPP::Tiger>>();
                 mPrototypes["whirlpool"] = make_shared<CryptoHash<CryptoPP::Whirlpool>>();
                 mPrototypes["ripemd128"] = make_shared<CryptoHash<CryptoPP::RIPEMD128>>();

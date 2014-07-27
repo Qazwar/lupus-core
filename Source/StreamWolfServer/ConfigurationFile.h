@@ -6,10 +6,9 @@
 #include <string>
 #include <unordered_map>
 
-#include "../StreamWolfCore/Utility.h"
+#include "../LupusCore/Utility.h"
 
 namespace StreamWolf {
-
     namespace Application {
         class ConfigurationFile : public boost::noncopyable
         {
@@ -17,7 +16,7 @@ namespace StreamWolf {
 
             virtual ~ConfigurationFile() = default;
 
-            virtual void Load(const std::string&) throw(io_error);
+            virtual void Load(const std::string&) throw(Lupus::io_error);
             virtual const std::unordered_map<std::string, std::vector<std::string>>& Options() const NOEXCEPT;
 
             virtual const std::vector<std::string>& operator[](const std::string&) NOEXCEPT;

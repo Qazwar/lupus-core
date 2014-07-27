@@ -17,11 +17,11 @@
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
-            class LUPUS_API BlockCipher : public boost::noncopyable, public IClonable
+            class LUPUS_API SymmetricAlgorithm : public boost::noncopyable, public IClonable
             {
             public:
 
-                virtual ~BlockCipher() = default;
+                virtual ~SymmetricAlgorithm() = default;
 
                 virtual uint32_t BlockSize() const NOEXCEPT = 0;
                 virtual uint32_t MinKeyLength() const NOEXCEPT = 0;
@@ -53,13 +53,11 @@ namespace Lupus {
                     const std::vector<uint8_t>& iv) NOEXCEPT = 0;
             };
 
-            class LUPUS_API BlockCipherFactory : public boost::noncopyable
+            class LUPUS_API SymmetricAlgorithmFactory : public boost::noncopyable
             {
-                std::unordered_map<std::string, std::shared_ptr<BlockCipher>> mPrototypes;
-
             public:
 
-                static BlockCipherFactory& GetInstance() NOEXCEPT;
+                static SymmetricAlgorithmFactory& GetInstance() NOEXCEPT;
 
                 /*!
                  * Unterstütze Algorithmen sind:
@@ -79,12 +77,14 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<BlockCipher> Create(const std::string& algorithm) const NOEXCEPT;
+                std::shared_ptr<SymmetricAlgorithm> Create(const std::string& algorithm) const NOEXCEPT;
 
             private:
 
-                BlockCipherFactory();
-                ~BlockCipherFactory() = default;
+                SymmetricAlgorithmFactory();
+                virtual ~SymmetricAlgorithmFactory() = default;
+
+                std::unordered_map<std::string, std::shared_ptr<SymmetricAlgorithm>> mPrototypes;
             };
         }
     }

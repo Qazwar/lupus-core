@@ -268,7 +268,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\StreamWolfCore\StreamWolfCore.vcxproj">
+    <ProjectReference Include="..\..\Source\LupusCore\LupusCore.vcxproj">
       <Project>{40a04166-c40c-422e-93b4-b52cd76a296c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\StreamWolfServer\StreamWolfServer.vcxproj">

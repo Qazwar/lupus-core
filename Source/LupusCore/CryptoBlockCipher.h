@@ -22,7 +22,7 @@ namespace Lupus {
 
                 CryptoTransformAlgorithm(const uint8_t* key, size_t size, const uint8_t* iv)
                 {
-                    mAlgorithm = T((const byte*)key, size, (const byte*)iv);
+                    mAlgorithm = T(key, size, iv);
                 }
 
                 virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(std::out_of_range) override
@@ -58,7 +58,7 @@ namespace Lupus {
             };
 
             template <typename T>
-            class LUPUS_API CryptoBlockCipher : public BlockCipher
+            class LUPUS_API CryptoBlockCipher : public SymmetricAlgorithm
             {
             public:
 

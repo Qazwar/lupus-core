@@ -4,11 +4,11 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 
-#include "../StreamWolfCore/HttpRequest.h"
-#include "../StreamWolfCore/HttpResponse.h"
-#include "../StreamWolfCore/HttpServer.h"
-#include "../StreamWolfCore/Socket.h"
-#include "../StreamWolfCore/Integer.h"
+#include "../LupusCore/HttpRequest.h"
+#include "../LupusCore/HttpResponse.h"
+#include "../LupusCore/HttpServer.h"
+#include "../LupusCore/Socket.h"
+#include "../LupusCore/Integer.h"
 #include "Application.h"
 
 #include <Windows.h> // Muss als letztes eingebunden werden

@@ -45,8 +45,6 @@ namespace Lupus {
 
             class LUPUS_API HashAlgorithmFactory : public boost::noncopyable
             {
-                std::unordered_map<std::string, std::shared_ptr<HashAlgorithm>> mPrototypes;
-
             public:
                 
                 static HashAlgorithmFactory& GetInstance() NOEXCEPT;
@@ -58,6 +56,11 @@ namespace Lupus {
                  * - sha256
                  * - sha384
                  * - sha512
+                 * - sha3
+                 * - sha3-224
+                 * - sha3-256
+                 * - sha3-384
+                 * - sha3-512
                  * - tiger
                  * - whirlpool
                  * - ripemd128
@@ -75,7 +78,9 @@ namespace Lupus {
             private:
 
                 HashAlgorithmFactory();
-                ~HashAlgorithmFactory() = default;
+                virtual ~HashAlgorithmFactory() = default;
+
+                std::unordered_map<std::string, std::shared_ptr<HashAlgorithm>> mPrototypes;
             };
         }
     }

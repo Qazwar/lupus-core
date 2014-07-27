@@ -1,4 +1,4 @@
-#include "BlockCipher.h"
+#include "SymmetricAlgorithm.h"
 #include "CryptoBlockCipher.h"
 #include <cryptopp/aes.h>
 #include <cryptopp/des.h>
@@ -20,7 +20,7 @@ using namespace std;
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
-            BlockCipherFactory::BlockCipherFactory()
+            SymmetricAlgorithmFactory::SymmetricAlgorithmFactory()
             {
                 mPrototypes["aes"] = make_shared<CryptoBlockCipher<CryptoPP::AES>>();
                 mPrototypes["3des"] = make_shared<CryptoBlockCipher<CryptoPP::DES_EDE3>>();
@@ -35,18 +35,18 @@ namespace Lupus {
                 mPrototypes["seed"] = make_shared<CryptoBlockCipher<CryptoPP::SEED>>();
             }
 
-            BlockCipherFactory& BlockCipherFactory::GetInstance()
+            SymmetricAlgorithmFactory& SymmetricAlgorithmFactory::GetInstance()
             {
-                static BlockCipherFactory instance;
+                static SymmetricAlgorithmFactory instance;
                 return instance;
             }
 
-            shared_ptr<BlockCipher> BlockCipherFactory::Create(const string& algorithm) const
+            shared_ptr<SymmetricAlgorithm> SymmetricAlgorithmFactory::Create(const string& algorithm) const
             {
                 auto it = mPrototypes.find(algorithm);
 
                 if (it != end(mPrototypes)) {
-                    return dynamic_pointer_cast<BlockCipher>(it->second->Clone());
+                    return dynamic_pointer_cast<SymmetricAlgorithm>(it->second->Clone());
                 }
 
                 return nullptr;

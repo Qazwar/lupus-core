@@ -6,9 +6,6 @@ namespace Lupus {
             enum class CipherAlgorithmType {
                 None,
                 Aes,
-                Aes128,
-                Aes192,
-                Aes256,
                 TripleDes,
                 Serpent,
                 Rc5,
@@ -17,10 +14,7 @@ namespace Lupus {
                 Blowfish,
                 Idea,
                 Camellia,
-                Seed,
-                Panama,  // high-speed
-                Sosemanuk,  // high-speed
-                Salsa20  // high-speed
+                Seed
             };
 
             enum class HashAlgorithmType {
@@ -32,17 +26,17 @@ namespace Lupus {
                 Sha512,
                 Tiger,
                 Whirlpool,
-                Ripemd160,
-                Ripemd320,
                 Ripemd128,
+                Ripemd160,
                 Ripemd256,
+                Ripemd320,
                 Md5
             };
 
             enum class ExchangeAlgorithmType {
                 None,
-                DeffieHellman,
-                UnifiedDeffieHellman,
+                Dh,
+                Dh2,
                 Mqv,
                 Ecdh,
                 Ecmqv,
