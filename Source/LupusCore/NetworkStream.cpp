@@ -74,6 +74,11 @@ namespace Lupus {
                 mSocket->Close(timeout);
             }
 
+            int64_t NetworkStream::Position() const
+            {
+                return 0;
+            }
+
             int64_t NetworkStream::Length() const
             {
                 return (int64_t)mSocket->Available();

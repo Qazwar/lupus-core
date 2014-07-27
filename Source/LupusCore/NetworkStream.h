@@ -31,6 +31,7 @@ namespace Lupus {
                 
                 virtual void Close() throw(socket_error) override;
                 virtual void Close(uint32_t timeout) throw(socket_error);
+                virtual int64_t Position() const NOEXCEPT override;
                 virtual int64_t Length() const throw(socket_error) override;
                 virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error, io_error, std::out_of_range) override;
                 virtual int32_t ReadByte() throw(socket_error, io_error) override;

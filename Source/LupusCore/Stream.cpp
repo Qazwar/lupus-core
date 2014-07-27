@@ -79,17 +79,7 @@ namespace Lupus {
         throw not_supported();
     }
 
-    int64_t Stream::Length() const
-    {
-        throw not_supported();
-    }
-
     void Stream::Length(int64_t length)
-    {
-        throw not_supported();
-    }
-
-    int64_t Stream::Position() const
     {
         throw not_supported();
     }
