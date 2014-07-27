@@ -27,7 +27,7 @@ namespace Lupus {
                     uint32_t inputOffset,
                     uint32_t inputCount,
                     std::vector<uint8_t>& output,
-                    uint32_t outputCount) = 0;
+                    uint32_t outputOffset) = 0;
             };
         }
     }

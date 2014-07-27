@@ -7,6 +7,7 @@
 #include <vector>
 #include <memory>
 #include <unordered_map>
+#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -42,13 +43,13 @@ namespace Lupus {
                     uint32_t outputOffset) throw(std::out_of_range) override;
             };
 
-            class LUPUS_API HashAlgorithmFactory
+            class LUPUS_API HashAlgorithmFactory : public boost::noncopyable
             {
-                static std::unordered_map<std::string, std::shared_ptr<HashAlgorithm>> smPrototypes;
+                std::unordered_map<std::string, std::shared_ptr<HashAlgorithm>> mPrototypes;
 
             public:
                 
-                static std::shared_ptr<HashAlgorithmFactory> GetInstance() NOEXCEPT;
+                static HashAlgorithmFactory& GetInstance() NOEXCEPT;
 
                 /*!
                  * Unterstütze Algorithmen sind:
@@ -69,7 +70,7 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<HashAlgorithm> Create(const std::string& algorithm) NOEXCEPT const;
+                std::shared_ptr<HashAlgorithm> Create(const std::string& algorithm) const NOEXCEPT;
 
             private:
 

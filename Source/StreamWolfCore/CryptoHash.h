@@ -58,7 +58,7 @@ namespace Lupus {
 
                     mAlgorithm.CalculateDigest(digest, input.data() + inputOffset, inputCount);
 
-                    return std::vector<uint8_t>(digest, digest + digestsize);
+                    return std::move(std::vector<uint8_t>(digest, digest + digestsize));
                 }
 
             private:

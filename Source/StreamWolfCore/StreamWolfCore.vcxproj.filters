@@ -195,6 +195,9 @@
     <ClCompile Include="HashAlgorithm.cpp">
       <Filter>Lupus\Security\Cryptography\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="BlockCipher.cpp">
+      <Filter>Lupus\Security\Cryptography\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgCommand.h">
@@ -327,6 +330,15 @@
       <Filter>Lupus\.h</Filter>
     </ClInclude>
     <ClInclude Include="CryptoHash.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockCipher.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptoBlockCipher.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptoCipcherEnum.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
   </ItemGroup>

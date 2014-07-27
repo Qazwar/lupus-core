@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AuthenticatedStream.cpp" />
+    <ClCompile Include="BlockCipher.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DataColumn.cpp" />
@@ -61,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AuthenticatedStream.h" />
+    <ClInclude Include="BlockCipher.h" />
+    <ClInclude Include="CryptoBlockCipher.h" />
+    <ClInclude Include="CryptoCipcherEnum.h" />
     <ClInclude Include="DataColumn.h" />
     <ClInclude Include="DataRow.h" />
     <ClInclude Include="DataTable.h" />
