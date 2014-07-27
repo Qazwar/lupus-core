@@ -43,6 +43,7 @@ namespace Lupus {
                 {
                     uint32_t size = (uint32_t)(stream->Length() - stream->Position());
                     std::vector<uint8_t> buffer(size);
+                    stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
@@ -97,6 +98,7 @@ namespace Lupus {
                 {
                     uint32_t size = (uint32_t)(stream->Length() - stream->Position());
                     std::vector<uint8_t> buffer(size);
+                    stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
@@ -149,6 +151,7 @@ namespace Lupus {
                 {
                     uint32_t size = (uint32_t)(stream->Length() - stream->Position());
                     std::vector<uint8_t> buffer(size);
+                    stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
@@ -201,6 +204,7 @@ namespace Lupus {
                 {
                     uint32_t size = (uint32_t)(stream->Length() - stream->Position());
                     std::vector<uint8_t> buffer(size);
+                    stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
@@ -253,6 +257,7 @@ namespace Lupus {
                 {
                     uint32_t size = (uint32_t)(stream->Length() - stream->Position());
                     std::vector<uint8_t> buffer(size);
+                    stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
