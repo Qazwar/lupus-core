@@ -56,7 +56,6 @@ namespace Lupus {
                  * - sha256
                  * - sha384
                  * - sha512
-                 * - sha3
                  * - sha3-224
                  * - sha3-256
                  * - sha3-384

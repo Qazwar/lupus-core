@@ -27,8 +27,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AsymmetricAlgorithm.cpp" />
     <ClCompile Include="AuthenticatedStream.cpp" />
-    <ClCompile Include="BlockCipher.cpp" />
+    <ClCompile Include="SymmetricAlgorithm.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DataColumn.cpp" />
@@ -61,8 +62,10 @@
     <ClCompile Include="Win32Library.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
-    <ClInclude Include="BlockCipher.h" />
+    <ClInclude Include="CryptoKeyExchange.h" />
+    <ClInclude Include="SymmetricAlgorithm.h" />
     <ClInclude Include="CryptoBlockCipher.h" />
     <ClInclude Include="CryptoCipcherEnum.h" />
     <ClInclude Include="DataColumn.h" />

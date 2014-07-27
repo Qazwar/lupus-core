@@ -43,7 +43,6 @@ namespace Lupus {
                 mPrototypes["sha256"] = make_shared<CryptoHash<CryptoPP::SHA256>>();
                 mPrototypes["sha384"] = make_shared<CryptoHash<CryptoPP::SHA384>>();
                 mPrototypes["sha512"] = make_shared<CryptoHash<CryptoPP::SHA512>>();
-                mPrototypes["sha3"] = make_shared<CryptoHash<CryptoPP::SHA3>>();
                 mPrototypes["sha3-224"] = make_shared<CryptoHash<CryptoPP::SHA3_224>>();
                 mPrototypes["sha3-256"] = make_shared<CryptoHash<CryptoPP::SHA3_256>>();
                 mPrototypes["sha3-384"] = make_shared<CryptoHash<CryptoPP::SHA3_384>>();

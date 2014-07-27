@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ICryptoTransform.h"
-#include "BlockCipher.h"
+#include "SymmetricAlgorithm.h"
 #include <cryptopp/modes.h>
 #include <cryptopp/filters.h>
 

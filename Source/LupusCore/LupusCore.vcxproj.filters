@@ -195,7 +195,10 @@
     <ClCompile Include="HashAlgorithm.cpp">
       <Filter>Lupus\Security\Cryptography\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="BlockCipher.cpp">
+    <ClCompile Include="SymmetricAlgorithm.cpp">
+      <Filter>Lupus\Security\Cryptography\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AsymmetricAlgorithm.cpp">
       <Filter>Lupus\Security\Cryptography\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -332,13 +335,19 @@
     <ClInclude Include="CryptoHash.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
-    <ClInclude Include="BlockCipher.h">
-      <Filter>Lupus\Security\Cryptography\.h</Filter>
-    </ClInclude>
     <ClInclude Include="CryptoBlockCipher.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
     <ClInclude Include="CryptoCipcherEnum.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AsymmetricAlgorithm.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SymmetricAlgorithm.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptoKeyExchange.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
   </ItemGroup>

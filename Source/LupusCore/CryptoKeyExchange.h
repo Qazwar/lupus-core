@@ -13,12 +13,6 @@ namespace Lupus {
             public:
 
                 virtual ~CryptoKeyExchange() = default;
-
-                virtual void Generate() 
-                {
-                    CryptoPP::DH dh;
-                    dh.AccessGroupParameters().GenerateRandomWithKeySize(CryptoPP::AutoSeededRandomPool(), 1024);
-                }
             };
         }
     }
