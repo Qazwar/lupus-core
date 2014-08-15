@@ -92,49 +92,32 @@ namespace Lupus {
                 }
             }
 
-            void UdpClient::ReceiveAsync(function<void(exception_ptr, UdpClient*, shared_ptr<IPEndPoint>, const vector<uint8_t>&)> callback)
+            Task<std::vector<uint8_t>> UdpClient::ReceiveAsync(shared_ptr<IPEndPoint>& ep)
             {
-                thread([this, callback]() {
-                    try {
-                        shared_ptr<IPEndPoint> ep;
-                        callback(nullptr, this, ep, this->Receive(ep));
-                    } catch (...) {
-                        callback(current_exception(), this, nullptr, vector<uint8_t>());
-                    }
-                }).detach();
+                return Task<vector<uint8_t>>([this, &ep]() {
+                    return this->Receive(ep);
+                });
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, function<void(exception_ptr, UdpClient*, int)> callback)
+            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size)
             {
-                thread([this, &buffer, size, callback]() {
-                    try {
-                        callback(nullptr, this, this->Send(buffer, size));
-                    } catch (...) {
-                        callback(current_exception(), this, -1);
-                    }
-                }).detach();
+                return Task<int>([this, &buffer, size]() {
+                    return this->Send(buffer, size);
+                });
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, shared_ptr<IPEndPoint> ep, function<void(exception_ptr, UdpClient*, int)> callback)
+            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, shared_ptr<IPEndPoint> ep)
             {
-                thread([this, &buffer, size, ep, callback]() {
-                    try {
-                        callback(nullptr, this, this->Send(buffer, size, ep));
-                    } catch (...) {
-                        callback(current_exception(), this, -1);
-                    }
-                }).detach();
+                return Task<int>([this, &buffer, size, ep]() {
+                    return this->Send(buffer, size, ep);
+                });
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, const string& hostname, uint16_t port, function<void(exception_ptr, UdpClient*, int)> callback)
+            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, const string& hostname, uint16_t port)
             {
-                thread([this, &buffer, size, hostname, port, callback]() {
-                    try {
-                        callback(nullptr, this, this->Send(buffer, size, hostname, port));
-                    } catch (...) {
-                        callback(current_exception(), this, -1);
-                    }
-                }).detach();
+                return Task<int>([this, &buffer, size, &hostname, port]() {
+                    return this->Send(buffer, size, hostname, port);
+                });
             }
 
             void UdpClient::Connect(shared_ptr<IPEndPoint> remoteEndPoint)

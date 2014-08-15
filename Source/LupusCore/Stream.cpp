@@ -5,7 +5,7 @@
 using namespace std;
 
 namespace Lupus {
-    Task<void> Stream::CopyToAsync(shared_ptr<Stream> destination) throw(std::invalid_argument)
+    Task<void> Stream::CopyToAsync(shared_ptr<Stream> destination)
     {
         return Task<void>([this, destination]() {
             this->CopyTo(destination);
@@ -19,14 +19,14 @@ namespace Lupus {
         });
     }
 
-    Task<int> Stream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument)
+    Task<int> Stream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size)
     {
         return Task<int>([this, &buffer, offset, size]() {
             return this->Read(buffer, offset, size);
         });
     }
 
-    Task<int> Stream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument)
+    Task<int> Stream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size)
     {
         return Task<int>([this, &buffer, offset, size]() {
             return this->Write(buffer, offset, size);

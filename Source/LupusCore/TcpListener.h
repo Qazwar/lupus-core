@@ -7,6 +7,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "Utility.h"
+#include "Task.h"
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -35,8 +36,8 @@ namespace Lupus {
                 virtual std::shared_ptr<IPEndPoint> LocalEndPoint() const NOEXCEPT;
                 virtual std::shared_ptr<Socket> Server() const NOEXCEPT;
 
-                virtual void AcceptSocketAsync(std::function<void(std::exception_ptr, std::shared_ptr<Socket>)>) NOEXCEPT;
-                virtual void AcceptTcpClientAsync(std::function<void(std::exception_ptr, std::shared_ptr<TcpClient>)>) NOEXCEPT;
+                virtual Task<std::shared_ptr<Socket>> AcceptSocketAsync() NOEXCEPT;
+                virtual Task<std::shared_ptr<TcpClient>> AcceptTcpClientAsync() NOEXCEPT;
 
                 virtual std::shared_ptr<Socket> AcceptSocket() throw(socket_error);
                 virtual std::shared_ptr<TcpClient> AcceptTcpClient() throw(socket_error);

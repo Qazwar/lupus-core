@@ -5,27 +5,18 @@ using namespace std;
 
 namespace Lupus {
     namespace Data {
-        void Connection::BeginTransactionAsync(IsolationLevel level, std::function<void(std::exception_ptr, Connection*, std::shared_ptr<ITransaction>)> callback)
+        Task<shared_ptr<ITransaction>> Connection::BeginTransactionAsync(IsolationLevel level)
         {
-            thread([this, level, callback]() {
-                try {
-                    callback(nullptr, this, this->BeginTransaction(level));
-                } catch (...) {
-                    callback(current_exception(), this, nullptr);
-                }
-            }).detach();
+            return Task<shared_ptr<ITransaction>>([this, level]() {
+                return this->BeginTransaction(level);
+            });
         }
 
-        void Connection::ConnectAsync(const string& pgConnectionString, function<void(std::exception_ptr, Connection*)> callback)
+        Task<void> Connection::ConnectAsync(const string& connectionString)
         {
-            thread([this, pgConnectionString, callback]() {
-                try {
-                    this->Connect(pgConnectionString);
-                    callback(nullptr, this);
-                } catch (...) {
-                    callback(current_exception(), this);
-                }
-            }).detach();
+            return Task<void>([this, &connectionString]() {
+                this->Connect(connectionString);
+            });
         }
     }
 }

@@ -9,6 +9,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "Utility.h"
+#include "Task.h"
 
 namespace Lupus {
     namespace Data {
@@ -22,9 +23,9 @@ namespace Lupus {
 
             virtual ~Command() = default;
 
-            virtual void ExecuteNonQueryAsync(std::function<void(std::exception_ptr, Command*, int)>) NOEXCEPT;
-            virtual void ExecuteReaderAsync(std::function<void(std::exception_ptr, Command*, std::shared_ptr<IDataReader>)>) NOEXCEPT;
-            virtual void ExecuteScalarAsync(std::function<void(std::exception_ptr, Command*, const std::vector<std::unordered_map<std::string, boost::any>>&)>) NOEXCEPT;
+            virtual Task<int> ExecuteNonQueryAsync() NOEXCEPT;
+            virtual Task<std::shared_ptr<IDataReader>> ExecuteReaderAsync() NOEXCEPT;
+            virtual Task<std::vector<std::unordered_map<std::string, boost::any>>> ExecuteScalarAsync() NOEXCEPT;
 
             virtual void Text(const std::string&) NOEXCEPT = 0;
             virtual std::string& Text() NOEXCEPT = 0;

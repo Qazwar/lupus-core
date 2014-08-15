@@ -6,6 +6,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "Utility.h"
+#include "Task.h"
 #include "IsolationLevel.h"
 
 namespace Lupus {
@@ -19,8 +20,8 @@ namespace Lupus {
             
             virtual ~Connection() = default;
 
-            virtual void BeginTransactionAsync(IsolationLevel, std::function<void(std::exception_ptr, Connection*, std::shared_ptr<ITransaction>)>) NOEXCEPT;
-            virtual void ConnectAsync(const std::string&, std::function<void(std::exception_ptr, Connection*)>) NOEXCEPT;
+            virtual Task<std::shared_ptr<ITransaction>> BeginTransactionAsync(IsolationLevel) throw(std::invalid_argument);
+            virtual Task<void> ConnectAsync(const std::string&) throw(std::invalid_argument);
 
             virtual std::string ConnectionString() const NOEXCEPT = 0;
             

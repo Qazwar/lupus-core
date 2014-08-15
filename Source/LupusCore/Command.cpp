@@ -5,37 +5,25 @@ using namespace std;
 
 namespace Lupus {
     namespace Data {
-        void Command::ExecuteNonQueryAsync(function<void(exception_ptr, Command*, int)> callback)
+        Task<int> Command::ExecuteNonQueryAsync()
         {
-            thread([this, callback]() {
-                try {
-                    callback(nullptr, this, this->ExecuteNonQuery());
-                } catch (...) {
-                    callback(current_exception(), this, -1);
-                }
-            }).detach();
+            return Task<int>([this]() {
+                return this->ExecuteNonQuery();
+            });
         }
 
-        void Command::ExecuteReaderAsync(function<void(exception_ptr, Command*, shared_ptr<IDataReader>)> callback)
+        Task<shared_ptr<IDataReader>> Command::ExecuteReaderAsync()
         {
-            thread([this, callback]() {
-                try {
-                    callback(nullptr, this, this->ExecuteReader());
-                } catch (...) {
-                    callback(current_exception(), this, nullptr);
-                }
-            }).detach();
+            return Task<shared_ptr<IDataReader>>([this]() {
+                return this->ExecuteReader();
+            });
         }
 
-        void Command::ExecuteScalarAsync(function<void(exception_ptr, Command*, const vector<unordered_map<string, boost::any>>&)> callback)
+        Task<vector<unordered_map<string, boost::any>>> Command::ExecuteScalarAsync()
         {
-            thread([this, callback]() {
-                try {
-                    callback(nullptr, this, this->ExecuteScalar());
-                } catch (...) {
-                    callback(current_exception(), this, vector<unordered_map<string, boost::any>>());
-                }
-            }).detach();
+            return Task<vector<unordered_map<string, boost::any>>>([this]() {
+                return this->ExecuteScalar();
+            });
         }
     }
 }

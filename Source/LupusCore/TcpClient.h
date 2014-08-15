@@ -8,6 +8,7 @@
 
 #include "Utility.h"
 #include "SocketEnum.h"
+#include "Task.h"
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -49,10 +50,10 @@ namespace Lupus {
                 virtual int ReceiveTimeout() const throw(null_pointer);
                 virtual void ReceiveTimeout(int) throw(socket_error, null_pointer);
 
-                virtual void ConnectAsync(std::shared_ptr<IPEndPoint> remoteEndPoint, std::function<void(std::exception_ptr, TcpClient*)>) NOEXCEPT;
-                virtual void ConnectAsync(std::shared_ptr<IPAddress> address, uint16_t port, std::function<void(std::exception_ptr, TcpClient*)>) NOEXCEPT;
-                virtual void ConnectAsync(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints, std::function<void(std::exception_ptr, TcpClient*)>) NOEXCEPT;
-                virtual void ConnectAsync(const std::string& host, uint16_t port, std::function<void(std::exception_ptr, TcpClient*)>) NOEXCEPT;
+                virtual Task<void> ConnectAsync(std::shared_ptr<IPEndPoint> remoteEndPoint) NOEXCEPT;
+                virtual Task<void> ConnectAsync(std::shared_ptr<IPAddress> address, uint16_t port) NOEXCEPT;
+                virtual Task<void> ConnectAsync(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) NOEXCEPT;
+                virtual Task<void> ConnectAsync(const std::string& host, uint16_t port) throw(std::invalid_argument);
 
                 virtual void Connect(std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
                 virtual void Connect(std::shared_ptr<IPAddress> address, uint16_t port) throw(socket_error, null_pointer);

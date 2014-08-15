@@ -185,52 +185,32 @@ namespace Lupus {
                 mClient->ReceiveTimeout(i);
             }
 
-            void TcpClient::ConnectAsync(shared_ptr<IPEndPoint> remoteEndPoint, function<void(exception_ptr, TcpClient*)> callback)
+            Task<void> TcpClient::ConnectAsync(shared_ptr<IPEndPoint> remoteEndPoint)
             {
-                thread([this, remoteEndPoint, callback]() {
-                    try {
-                        this->Connect(remoteEndPoint);
-                        callback(nullptr, this);
-                    } catch (...) {
-                        callback(current_exception(), nullptr);
-                    }
-                }).detach();
+                return Task<void>([this, remoteEndPoint]() {
+                    this->Connect(remoteEndPoint);
+                });
             }
 
-            void TcpClient::ConnectAsync(shared_ptr<IPAddress> address, uint16_t port, function<void(exception_ptr, TcpClient*)> callback)
+            Task<void> TcpClient::ConnectAsync(shared_ptr<IPAddress> address, uint16_t port)
             {
-                thread([this, address, port, callback]() {
-                    try {
-                        this->Connect(address, port);
-                        callback(nullptr, this);
-                    } catch (...) {
-                        callback(current_exception(), nullptr);
-                    }
-                }).detach();
+                return Task<void>([this, address, port]() {
+                    this->Connect(address, port);
+                });
             }
 
-            void TcpClient::ConnectAsync(const vector<shared_ptr<IPEndPoint>>& endPoints, function<void(exception_ptr, TcpClient*)> callback)
+            Task<void> TcpClient::ConnectAsync(const vector<shared_ptr<IPEndPoint>>& endPoints)
             {
-                thread([this, endPoints, callback]() {
-                    try {
-                        this->Connect(endPoints);
-                        callback(nullptr, this);
-                    } catch (...) {
-                        callback(current_exception(), nullptr);
-                    }
-                }).detach();
+                return Task<void>([this, &endPoints]() {
+                    this->Connect(endPoints);
+                });
             }
 
-            void TcpClient::ConnectAsync(const string& host, uint16_t port, function<void(exception_ptr, TcpClient*)> callback)
+            Task<void> TcpClient::ConnectAsync(const string& host, uint16_t port)
             {
-                thread([this, host, port, callback]() {
-                    try {
-                        this->Connect(host, port);
-                        callback(nullptr, this);
-                    } catch (...) {
-                        callback(current_exception(), nullptr);
-                    }
-                }).detach();
+                return Task<void>([this, &host, port]() {
+                    this->Connect(host, port);
+                });
             }
 
             void TcpClient::Connect(shared_ptr<IPEndPoint> remoteEndPoint)

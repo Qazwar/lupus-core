@@ -67,26 +67,18 @@ namespace Lupus {
                 return mServer;
             }
 
-            void TcpListener::AcceptSocketAsync(function<void(exception_ptr, shared_ptr<Socket>)> callback)
+            Task<shared_ptr<Socket>> TcpListener::AcceptSocketAsync()
             {
-                thread([this, callback]() {
-                    try {
-                        callback(nullptr, this->AcceptSocket());
-                    } catch (...) {
-                        callback(current_exception(), nullptr);
-                    }
-                }).detach();
+                return Task<shared_ptr<Socket>>([this]() {
+                    return this->AcceptSocket();
+                });
             }
 
-            void TcpListener::AcceptTcpClientAsync(function<void(exception_ptr, shared_ptr<TcpClient>)> callback)
+            Task<shared_ptr<TcpClient>> TcpListener::AcceptTcpClientAsync()
             {
-                thread([this, callback]() {
-                    try {
-                        callback(nullptr, this->AcceptTcpClient());
-                    } catch (...) {
-                        callback(current_exception(), nullptr);
-                    }
-                }).detach();
+                return Task<shared_ptr<TcpClient>>([this]() {
+                    return this->AcceptTcpClient();
+                });
             }
 
             shared_ptr<Socket> TcpListener::AcceptSocket()

@@ -24,10 +24,10 @@ namespace Lupus {
 
         virtual ~Stream() = default;
 
-        virtual Task<void> CopyToAsync(std::shared_ptr<Stream> destination) throw(std::invalid_argument);
-        virtual Task<void> FlushAsync() throw(std::invalid_argument);
-        virtual Task<int> ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument);
-        virtual Task<int> WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument);
+        virtual Task<void> CopyToAsync(std::shared_ptr<Stream> destination) NOEXCEPT;
+        virtual Task<void> FlushAsync() NOEXCEPT;
+        virtual Task<int> ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
+        virtual Task<int> WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
 
         virtual bool CanRead() const = 0;
         virtual bool CanWrite() const = 0;

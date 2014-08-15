@@ -1,5 +1,6 @@
 #pragma once
 
+#include <tuple>
 #include <vector>
 #include <string>
 #include <memory>
@@ -7,6 +8,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "SocketEnum.h"
+#include "Task.h"
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -38,10 +40,10 @@ namespace Lupus {
                 virtual bool ExclusiveAddressUse() const throw(socket_error);
                 virtual void ExclusiveAddressUse(bool) throw(socket_error);
 
-                virtual void ReceiveAsync(std::function<void(std::exception_ptr, UdpClient*, std::shared_ptr<IPEndPoint>, const std::vector<uint8_t>&)>);
-                virtual void SendAsync(const std::vector<uint8_t>&, size_t, std::function<void(std::exception_ptr, UdpClient*, int)>);
-                virtual void SendAsync(const std::vector<uint8_t>&, size_t, std::shared_ptr<IPEndPoint>, std::function<void(std::exception_ptr, UdpClient*, int)>);
-                virtual void SendAsync(const std::vector<uint8_t>&, size_t, const std::string&, uint16_t, std::function<void(std::exception_ptr, UdpClient*, int)>);
+                virtual Task<std::vector<uint8_t>> ReceiveAsync(std::shared_ptr<IPEndPoint>&) NOEXCEPT;
+                virtual Task<int> SendAsync(const std::vector<uint8_t>&, size_t) NOEXCEPT;
+                virtual Task<int> SendAsync(const std::vector<uint8_t>&, size_t, std::shared_ptr<IPEndPoint>) NOEXCEPT;
+                virtual Task<int> SendAsync(const std::vector<uint8_t>&, size_t, const std::string&, uint16_t) NOEXCEPT;
 
                 virtual void Connect(std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
                 virtual void Connect(std::shared_ptr<IPAddress> address, uint16_t port) throw(socket_error, null_pointer);
