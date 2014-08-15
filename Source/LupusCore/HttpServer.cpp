@@ -15,7 +15,7 @@ using namespace Lupus::Net::Sockets;
 namespace Lupus {
     namespace Net {
         namespace Http {
-            HttpServer::HttpServer(uint16_t port, int32_t backlog)
+            HttpServer::HttpServer(uint16_t port, int backlog)
             {
                 try {
                     mListener = make_shared<TcpListener>(IPAddress::Any(), port);

@@ -32,7 +32,7 @@ namespace Lupus {
                 TcpClient(const std::string& hostname, uint16_t port) throw(socket_error, std::runtime_error);
                 virtual ~TcpClient() = default;
 
-                virtual uint32_t Available() const throw(null_pointer);
+                virtual size_t Available() const throw(null_pointer);
                 virtual std::shared_ptr<Socket> Client() const NOEXCEPT;
                 virtual void Client(std::shared_ptr<Socket>) throw(null_pointer);
                 virtual bool IsConnected() const NOEXCEPT;
@@ -40,14 +40,14 @@ namespace Lupus {
                 virtual void ExclusiveAddressUse(bool) throw(socket_error);
                 virtual bool NoDelay() const throw(socket_error, null_pointer);
                 virtual void NoDelay(bool) throw(socket_error, null_pointer);
-                virtual int32_t SendBuffer() const throw(socket_error, null_pointer);
-                virtual void SendBuffer(int32_t) throw(socket_error, null_pointer);
-                virtual int32_t ReceiveBuffer() const throw(socket_error, null_pointer);
-                virtual void ReceiveBuffer(int32_t) throw(socket_error, null_pointer);
-                virtual int32_t SendTimeout() const throw(null_pointer);
-                virtual void SendTimeout(int32_t) throw(socket_error, null_pointer);
-                virtual int32_t ReceiveTimeout() const throw(null_pointer);
-                virtual void ReceiveTimeout(int32_t) throw(socket_error, null_pointer);
+                virtual int SendBuffer() const throw(socket_error, null_pointer);
+                virtual void SendBuffer(int) throw(socket_error, null_pointer);
+                virtual int ReceiveBuffer() const throw(socket_error, null_pointer);
+                virtual void ReceiveBuffer(int) throw(socket_error, null_pointer);
+                virtual int SendTimeout() const throw(null_pointer);
+                virtual void SendTimeout(int) throw(socket_error, null_pointer);
+                virtual int ReceiveTimeout() const throw(null_pointer);
+                virtual void ReceiveTimeout(int) throw(socket_error, null_pointer);
 
                 virtual void ConnectAsync(std::shared_ptr<IPEndPoint> remoteEndPoint, std::function<void(std::exception_ptr, TcpClient*)>) NOEXCEPT;
                 virtual void ConnectAsync(std::shared_ptr<IPAddress> address, uint16_t port, std::function<void(std::exception_ptr, TcpClient*)>) NOEXCEPT;

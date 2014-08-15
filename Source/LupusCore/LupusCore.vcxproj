@@ -64,7 +64,7 @@
   <ItemGroup>
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
-    <ClInclude Include="CryptoKeyExchange.h" />
+    <ClInclude Include="CryptoPublicKey.h" />
     <ClInclude Include="SymmetricAlgorithm.h" />
     <ClInclude Include="CryptoBlockCipher.h" />
     <ClInclude Include="CryptoCipcherEnum.h" />

@@ -41,7 +41,7 @@ namespace Lupus {
                 virtual std::shared_ptr<Socket> AcceptSocket() throw(socket_error);
                 virtual std::shared_ptr<TcpClient> AcceptTcpClient() throw(socket_error);
                 virtual void Start() throw(socket_error);
-                virtual void Start(int32_t backlog) throw(socket_error);
+                virtual void Start(int backlog) throw(socket_error);
                 virtual void Stop() throw(socket_error);
 
             private:

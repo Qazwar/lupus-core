@@ -23,12 +23,12 @@ namespace Lupus {
 
                 virtual ~SymmetricAlgorithm() = default;
 
-                virtual uint32_t BlockSize() const NOEXCEPT = 0;
-                virtual uint32_t MinKeyLength() const NOEXCEPT = 0;
-                virtual uint32_t MaxKeyLength() const NOEXCEPT = 0;
-                virtual uint32_t DefaultKeyLength() const NOEXCEPT = 0;
-                virtual uint32_t IvRequirement() const NOEXCEPT = 0;
-                virtual uint32_t IvLength() const NOEXCEPT = 0;
+                virtual size_t BlockSize() const NOEXCEPT = 0;
+                virtual size_t MinKeyLength() const NOEXCEPT = 0;
+                virtual size_t MaxKeyLength() const NOEXCEPT = 0;
+                virtual size_t DefaultKeyLength() const NOEXCEPT = 0;
+                virtual size_t IvRequirement() const NOEXCEPT = 0;
+                virtual size_t IvLength() const NOEXCEPT = 0;
                 virtual CipherMode Mode() const NOEXCEPT = 0;
                 virtual void Mode(CipherMode) NOEXCEPT = 0;
                 virtual const std::vector<uint8_t>& Key() const NOEXCEPT = 0;

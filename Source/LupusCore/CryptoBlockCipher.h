@@ -25,7 +25,7 @@ namespace Lupus {
                     mAlgorithm = T(key, size, iv);
                 }
 
-                virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(std::out_of_range) override
+                virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override
                 {
                     if (offset > buffer.size() || size > buffer.size() - offset) {
                         throw std::out_of_range("offset and size does not match buffer size");
@@ -38,7 +38,7 @@ namespace Lupus {
                     return std::move(output);
                 }
 
-                virtual uint32_t TransformBlock(const std::vector<uint8_t>& input, uint32_t inputOffset, uint32_t inputCount, std::vector<uint8_t>& output, uint32_t outputOffset) throw(std::out_of_range) override
+                virtual size_t TransformBlock(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount, std::vector<uint8_t>& output, size_t outputOffset) throw(std::out_of_range) override
                 {
                     if (inputOffset > input.size() || inputCount > input.size() - inputOffset) {
                         throw std::out_of_range("offset and size does not match buffer size");
@@ -69,32 +69,32 @@ namespace Lupus {
                     return make_shared<CryptoBlockCipher<T>>();
                 }
 
-                virtual uint32_t BlockSize() const NOEXCEPT override
+                virtual size_t BlockSize() const NOEXCEPT override
                 {
                     return T::BLOCKSIZE;
                 }
 
-                virtual uint32_t MinKeyLength() const NOEXCEPT override
+                virtual size_t MinKeyLength() const NOEXCEPT override
                 {
                     return T::MIN_KEYLENGTH;
                 }
 
-                virtual uint32_t MaxKeyLength() const NOEXCEPT override
+                virtual size_t MaxKeyLength() const NOEXCEPT override
                 {
                     return T::MAX_KEYLENGTH;
                 }
 
-                virtual uint32_t DefaultKeyLength() const NOEXCEPT override
+                virtual size_t DefaultKeyLength() const NOEXCEPT override
                 {
                     return T::DEFAULT_KEYLENGTH;
                 }
 
-                virtual uint32_t IvRequirement() const NOEXCEPT override
+                virtual size_t IvRequirement() const NOEXCEPT override
                 {
                     return T::IV_REQUIREMENT;
                 }
 
-                virtual uint32_t IvLength() const NOEXCEPT override
+                virtual size_t IvLength() const NOEXCEPT override
                 {
                     return T::IV_LENGTH;
                 }

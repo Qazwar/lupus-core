@@ -14,12 +14,12 @@ using namespace std;
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
-            vector<uint8_t> HashAlgorithm::TransformFinalBlock(const vector<uint8_t>& input, uint32_t inputOffset, uint32_t inputCount)
+            vector<uint8_t> HashAlgorithm::TransformFinalBlock(const vector<uint8_t>& input, size_t inputOffset, size_t inputCount)
             {
                 return std::move(ComputeHash(input, inputOffset, inputCount));
             }
 
-            uint32_t HashAlgorithm::TransformBlock(const vector<uint8_t>& input, uint32_t inputOffset, uint32_t inputCount, vector<uint8_t>& output, uint32_t outputOffset)
+            size_t HashAlgorithm::TransformBlock(const vector<uint8_t>& input, size_t inputOffset, size_t inputCount, vector<uint8_t>& output, size_t outputOffset)
             {
                 vector<uint8_t> buffer = ComputeHash(input, inputOffset, inputCount);
                 auto iterator = begin(output) + outputOffset;
@@ -33,7 +33,7 @@ namespace Lupus {
                     *(iterator++) = byte;
                 });
 
-                return (uint32_t)buffer.size();
+                return (size_t)buffer.size();
             }
 
             HashAlgorithmFactory::HashAlgorithmFactory()

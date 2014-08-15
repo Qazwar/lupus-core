@@ -41,7 +41,7 @@ namespace Lupus {
                 mClient->Connect(GetAddressInformation(hostname, Integer::ToString(port), AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP));
             }
 
-            uint32_t UdpClient::Available() const
+            size_t UdpClient::Available() const
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -70,7 +70,7 @@ namespace Lupus {
                     throw null_pointer();
                 }
 
-                int32_t result, length = 4;
+                int result, length = 4;
 
                 if (getsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&result, (int*)&length) != 0) {
                     throw socket_error(GetLastSocketErrorString());
@@ -85,7 +85,7 @@ namespace Lupus {
                     throw null_pointer();
                 }
 
-                int32_t val = value ? 1 : 0;
+                int val = value ? 1 : 0;
 
                 if (setsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&val, 4) != 0) {
                     throw socket_error(GetLastSocketErrorString());
@@ -104,7 +104,7 @@ namespace Lupus {
                 }).detach();
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, function<void(exception_ptr, UdpClient*, int32_t)> callback)
+            void UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, function<void(exception_ptr, UdpClient*, int)> callback)
             {
                 thread([this, &buffer, size, callback]() {
                     try {
@@ -115,7 +115,7 @@ namespace Lupus {
                 }).detach();
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, shared_ptr<IPEndPoint> ep, function<void(exception_ptr, UdpClient*, int32_t)> callback)
+            void UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, shared_ptr<IPEndPoint> ep, function<void(exception_ptr, UdpClient*, int)> callback)
             {
                 thread([this, &buffer, size, ep, callback]() {
                     try {
@@ -126,7 +126,7 @@ namespace Lupus {
                 }).detach();
             }
 
-            void UdpClient::SendAsync(const vector<uint8_t>& buffer, uint32_t size, const string& hostname, uint16_t port, function<void(exception_ptr, UdpClient*, int32_t)> callback)
+            void UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, const string& hostname, uint16_t port, function<void(exception_ptr, UdpClient*, int)> callback)
             {
                 thread([this, &buffer, size, hostname, port, callback]() {
                     try {
@@ -184,7 +184,7 @@ namespace Lupus {
                 return vec;
             }
 
-            int32_t UdpClient::Send(const vector<uint8_t>& buffer, uint32_t bytes)
+            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes)
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -193,7 +193,7 @@ namespace Lupus {
                 return mClient->Send(buffer, 0, bytes);
             }
 
-            int32_t UdpClient::Send(const vector<uint8_t>& buffer, uint32_t bytes, shared_ptr<IPEndPoint> ep)
+            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, shared_ptr<IPEndPoint> ep)
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -204,7 +204,7 @@ namespace Lupus {
                 return mClient->SendTo(buffer, 0, bytes, ep);
             }
 
-            int32_t UdpClient::Send(const vector<uint8_t>& buffer, uint32_t bytes, const string& hostname, uint16_t port)
+            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, const string& hostname, uint16_t port)
             {
                 if (!mClient) {
                     throw null_pointer();

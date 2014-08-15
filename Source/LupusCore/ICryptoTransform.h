@@ -20,14 +20,14 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> TransformFinalBlock(
                     const std::vector<uint8_t>& input,
-                    uint32_t inputOffset,
-                    uint32_t inputCount) = 0;
-                virtual uint32_t TransformBlock(
+                    size_t inputOffset,
+                    size_t inputCount) = 0;
+                virtual size_t TransformBlock(
                     const std::vector<uint8_t>& input,
-                    uint32_t inputOffset,
-                    uint32_t inputCount,
+                    size_t inputOffset,
+                    size_t inputCount,
                     std::vector<uint8_t>& output,
-                    uint32_t outputOffset) = 0;
+                    size_t outputOffset) = 0;
             };
         }
     }

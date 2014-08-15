@@ -33,7 +33,7 @@ namespace Lupus {
                  * \param[in]   address Eine valide IPv4 Adresse.
                  * \param[in]   port    Die Portnummer.
                  */
-                IPEndPoint(uint32_t address, uint16_t port) NOEXCEPT;
+                IPEndPoint(size_t address, uint16_t port) NOEXCEPT;
 
                 /*!
                  * Erstellt einen IP-Endpunkt mit der angebenen IP-Adresse und bindet

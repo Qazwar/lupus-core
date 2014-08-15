@@ -4,7 +4,7 @@
 namespace Lupus {
     namespace Net {
         namespace Sockets {
-            IPAddress::IPAddress(uint32_t ipv4) :
+            IPAddress::IPAddress(size_t ipv4) :
                 mFamily(AddressFamily::InterNetwork)
             {
                 ipv4 = HostToNetworkOrder(ipv4);
@@ -16,7 +16,7 @@ namespace Lupus {
             {
             }
 
-            IPAddress::IPAddress(const std::vector<uint8_t>& ipv6, uint32_t scopeid) :
+            IPAddress::IPAddress(const std::vector<uint8_t>& ipv6, size_t scopeid) :
                 mFamily(AddressFamily::InterNetworkV6)
             {
                 if (ipv6.size() != 16) {
@@ -57,12 +57,12 @@ namespace Lupus {
                 return false;
             }
 
-            uint32_t IPAddress::ScopeId() const
+            size_t IPAddress::ScopeId() const
             {
                 return mScopeId;
             }
 
-            void IPAddress::ScopeId(uint32_t value)
+            void IPAddress::ScopeId(size_t value)
             {
                 mScopeId = value;
             }
@@ -135,7 +135,7 @@ namespace Lupus {
                 address->mAddress.clear();
 
                 if (inet_pton(AF_INET, ipString.c_str(), &(addr.sin_addr)) == 1) {
-                    address = new IPAddress(NetworkToHostOrder(*((uint32_t*)&addr.sin_addr)));
+                    address = new IPAddress(NetworkToHostOrder(*((size_t*)&addr.sin_addr)));
                 } else if (inet_pton(AF_INET6, ipString.c_str(), &(addr6.sin6_addr)) == 1) {
                     uint8_t* begin = (uint8_t*)&addr6.sin6_addr;
                     address = new IPAddress(0);

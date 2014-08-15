@@ -17,7 +17,7 @@ namespace Lupus {
                 mSocket = socket;
             }
 
-            uint32_t NetworkStream::DataAvailable() const
+            size_t NetworkStream::DataAvailable() const
             {
                 return mSocket->Available();
             }
@@ -27,7 +27,7 @@ namespace Lupus {
                 return mSocket;
             }
 
-            void NetworkStream::ReadAsync(vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
+            void NetworkStream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
             {
                 thread([this, &buffer, offset, size, &callback](shared_ptr<Sockets::Socket> socket) {
                     try {
@@ -38,7 +38,7 @@ namespace Lupus {
                 }, mSocket).detach();
             }
             
-            void NetworkStream::WriteAsync(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
+            void NetworkStream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
             {
                 thread([this, &buffer, offset, size, &callback](shared_ptr<Sockets::Socket> socket) {
                     try {
@@ -69,7 +69,7 @@ namespace Lupus {
                 mSocket->Close();
             }
             
-            void NetworkStream::Close(uint32_t timeout)
+            void NetworkStream::Close(size_t timeout)
             {
                 mSocket->Close(timeout);
             }
@@ -84,7 +84,7 @@ namespace Lupus {
                 return (int64_t)mSocket->Available();
             }
             
-            int32_t NetworkStream::Read(vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
+            int NetworkStream::Read(vector<uint8_t>& buffer, size_t offset, size_t size)
             {
                 if (!mRead) {
                     throw io_error("network stream is not readable");
@@ -93,7 +93,7 @@ namespace Lupus {
                 return mSocket->Receive(buffer, offset, size);
             }
             
-            int32_t NetworkStream::ReadByte()
+            int NetworkStream::ReadByte()
             {
                 if (!mRead) {
                     throw io_error("network stream is not readable");
@@ -108,7 +108,7 @@ namespace Lupus {
                 return vec[0];
             }
             
-            int32_t NetworkStream::Write(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size)
+            int NetworkStream::Write(const vector<uint8_t>& buffer, size_t offset, size_t size)
             {
                 if (!mWrite) {
                     throw io_error("network stream is not writable");

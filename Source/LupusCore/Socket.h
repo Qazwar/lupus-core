@@ -82,7 +82,7 @@ namespace Lupus {
                  * \param[in]   timeout Der Zeitintervall bis zum schließen, angegeben
                  *                      in Sekunden.
                  */
-                virtual void Close(uint32_t timeout) throw(socket_error);
+                virtual void Close(size_t timeout) throw(socket_error);
 
                 /*!
                  * Verbindet diesen Socket zu einen Remote-Endpunkt. Sobald die
@@ -136,7 +136,7 @@ namespace Lupus {
                  *
                  * \param[in]   backlog Die maximale Anzahl an Verbindungen im Queue.
                  */
-                virtual void Listen(uint32_t backlog) throw(socket_error);
+                virtual void Listen(size_t backlog) throw(socket_error);
 
                 /*!
                  * Überprüft im angegebenen Zeitintervall den Socket. Gültige Modi sind
@@ -152,37 +152,37 @@ namespace Lupus {
                  *
                  * \returns Das Resultat der Operation.
                  */
-                virtual SocketPollFlags Poll(uint32_t milliSeconds, SocketPollFlags mode) throw(socket_error);
+                virtual SocketPollFlags Poll(size_t milliSeconds, SocketPollFlags mode) throw(socket_error);
 
                 /*!
                  * Ruft Receive(buffer, 0, buffer.size(), SocketFlags::None, error)
                  * auf.
                  *
-                 * \sa Receive(std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Receive(std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Receive(std::vector<uint8_t>& buffer) throw(socket_error);
+                virtual int Receive(std::vector<uint8_t>& buffer) throw(socket_error);
 
                 /*!
                  * Ruft Receive(buffer, offset, buffer.size(), SocketFlags::None,
                  * error) auf.
                  *
-                 * \sa Receive(std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Receive(std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Receive(std::vector<uint8_t>& buffer, uint32_t offset) throw(socket_error, std::out_of_range);
+                virtual int Receive(std::vector<uint8_t>& buffer, size_t offset) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft Receive(buffer, offset, size, SocketFlags::None, error) auf.
                  *
-                 * \sa Receive(std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Receive(std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Receive(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error, std::out_of_range);
+                virtual int Receive(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft Receive(buffer, offset, size, socketFlats, error) auf.
                  *
-                 * \sa Receive(std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Receive(std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Receive(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags) throw(socket_error, std::out_of_range);
+                virtual int Receive(std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Liest Daten aus dem Empfangs-Buffer. Diese Methode ist blockiert
@@ -207,31 +207,31 @@ namespace Lupus {
                  *          geschlossen wurde dann Null. Oder einen Fehlercode, wenn
                  *          ein Fehler aufgetreten ist.
                  */
-                virtual int32_t Receive(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
+                virtual int Receive(std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft ReceiveFrom(buffer, 0, buffer.size(), SocketFlags::None,
                  * remoteEndPoint) auf.
                  *
-                 * \sa ReceiveFrom(std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, std::shared_ptr<IPEndPoint>&)
+                 * \sa ReceiveFrom(std::vector<uint8_t>&, size_t, size_t, SocketFlags, std::shared_ptr<IPEndPoint>&)
                  */
-                virtual int32_t ReceiveFrom(std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error);
+                virtual int ReceiveFrom(std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error);
 
                 /*!
                  * Ruft ReceiveFrom(buffer, 0, size, SocketFlags::None, remoteEndPoint)
                  * auf.
                  *
-                 * \sa ReceiveFrom(std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, std::shared_ptr<IPEndPoint>&)
+                 * \sa ReceiveFrom(std::vector<uint8_t>&, size_t, size_t, SocketFlags, std::shared_ptr<IPEndPoint>&)
                  */
-                virtual int32_t ReceiveFrom(std::vector<uint8_t>& buffer, uint32_t offset, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
+                virtual int ReceiveFrom(std::vector<uint8_t>& buffer, size_t offset, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft ReceiveFrom(buffer, 0, size, SocketFlags::None, remoteEndPoint)
                  * auf.
                  *
-                 * \sa ReceiveFrom(std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, std::shared_ptr<IPEndPoint>&)
+                 * \sa ReceiveFrom(std::vector<uint8_t>&, size_t, size_t, SocketFlags, std::shared_ptr<IPEndPoint>&)
                  */
-                virtual int32_t ReceiveFrom(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
+                virtual int ReceiveFrom(std::vector<uint8_t>& buffer, size_t offset, size_t size, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Liest eingehende Daten aus. Diese Daten können von einen belieben
@@ -258,36 +258,36 @@ namespace Lupus {
                  *          geschlossen wurde dann Null. Oder einen Fehlercode, wenn
                  *          ein Fehler aufgetreten ist.
                  */
-                virtual int32_t ReceiveFrom(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
+                virtual int ReceiveFrom(std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft Send(buffer, 0, buffer.size(), SocketFlags::None, error) auf.
                  *
-                 * \sa Send(const std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Send(const std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Send(const std::vector<uint8_t>& buffer) throw(socket_error);
+                virtual int Send(const std::vector<uint8_t>& buffer) throw(socket_error);
 
                 /*!
                  * Ruft Send(buffer, offset, buffer.size(), SocketFlags::None, error)
                  * auf.
                  *
-                 * \sa Send(const std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Send(const std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Send(const std::vector<uint8_t>& buffer, uint32_t offset) throw(socket_error, std::out_of_range);
+                virtual int Send(const std::vector<uint8_t>& buffer, size_t offset) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft Send(buffer, offset, size, SocketFlags::None, error) auf.
                  *
-                 * \sa Send(const std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Send(const std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Send(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(socket_error, std::out_of_range);
+                virtual int Send(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft Send(buffer, offset, size, socketFlags, error) auf.
                  *
-                 * \sa Send(const std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, SocketError&)
+                 * \sa Send(const std::vector<uint8_t>&, size_t, size_t, SocketFlags, SocketError&)
                  */
-                virtual int32_t Send(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags) throw(socket_error, std::out_of_range);
+                virtual int Send(const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Schreibt Daten zu den verbundenen Endpunkt. Wenn der Socket
@@ -305,31 +305,31 @@ namespace Lupus {
                  *          geschlossen wurde dann Null. Oder einen Fehlercode, wenn
                  *          ein Fehler aufgetreten ist.
                  */
-                virtual int32_t Send(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
+                virtual int Send(const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft SendTo(buffer, 0, buffer.size(), SocketFlags::None,
                  * remoteEndPoint) auf.
                  *
-                 * \sa SendTo(const std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, std::shared_ptr<IPEndPoint>)
+                 * \sa SendTo(const std::vector<uint8_t>&, size_t, size_t, SocketFlags, std::shared_ptr<IPEndPoint>)
                  */
-                virtual int32_t SendTo(const std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error);
+                virtual int SendTo(const std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error);
 
                 /*!
                  * Ruft SendTo(buffer, offset, buffer.size(), SocketFlags::None,
                  * remoteEndPoint) auf.
                  *
-                 * \sa SendTo(const std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, std::shared_ptr<IPEndPoint>)
+                 * \sa SendTo(const std::vector<uint8_t>&, size_t, size_t, SocketFlags, std::shared_ptr<IPEndPoint>)
                  */
-                virtual int32_t SendTo(const std::vector<uint8_t>& buffer, uint32_t offset, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
+                virtual int SendTo(const std::vector<uint8_t>& buffer, size_t offset, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Ruft SendTo(buffer, offset, size, SocketFlags::None remoteEndPoint)
                  * auf.
                  *
-                 * \sa SendTo(const std::vector<uint8_t>&, uint32_t, uint32_t, SocketFlags, std::shared_ptr<IPEndPoint>)
+                 * \sa SendTo(const std::vector<uint8_t>&, size_t, size_t, SocketFlags, std::shared_ptr<IPEndPoint>)
                  */
-                virtual int32_t SendTo(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
+                virtual int SendTo(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Sendet Daten an einen gewissen Endpunkt. Falls die Daten nicht
@@ -347,7 +347,7 @@ namespace Lupus {
                  *          geschlossen wurde dann Null. Oder einen Fehlercode, wenn
                  *          ein Fehler aufgetreten ist.
                  */
-                virtual int32_t SendTo(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
+                virtual int SendTo(const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
 
                 /*!
                  * Schließt die Verbindung nicht komplett, sondern lediglich den
@@ -406,7 +406,7 @@ namespace Lupus {
                  *
                  * \returns Die Byteanzahl zum lesen.
                  */
-                virtual uint32_t Available() const throw(socket_error);
+                virtual size_t Available() const throw(socket_error);
 
                 /*!
                  * Überprüft ob der Socket auf Anfragen wartet. Standardwert ist TRUE.
@@ -458,52 +458,52 @@ namespace Lupus {
                 /*!
                  * \returns Die Größe des Schreib-Buffers.
                  */
-                virtual int32_t SendBuffer() const throw(socket_error);
+                virtual int SendBuffer() const throw(socket_error);
 
                 /*!
                  * Setzt die Größe des Schreib-Buffers.
                  */
-                virtual void SendBuffer(int32_t) throw(socket_error);
+                virtual void SendBuffer(int) throw(socket_error);
 
                 /*!
                  * \returns Die Größe des Lese-Buffers.
                  */
-                virtual int32_t ReceiveBuffer() const throw(socket_error);
+                virtual int ReceiveBuffer() const throw(socket_error);
 
                 /*!
                  * Setzt die Größe des Lese-Buffers.
                  */
-                virtual void ReceiveBuffer(int32_t) throw(socket_error);
+                virtual void ReceiveBuffer(int) throw(socket_error);
 
                 /*!
                  * Retouniert den Timeout für das blocken von Schreibbefehlen.
                  */
-                virtual int32_t SendTimeout() const NOEXCEPT;
+                virtual int SendTimeout() const NOEXCEPT;
 
                 /*!
                  * Setzt den Timeout für das blocken von Schreibbefehlen.
                  */
-                virtual void SendTimeout(int32_t) throw(socket_error);
+                virtual void SendTimeout(int) throw(socket_error);
 
                 /*!
                  * Retouniert den Timeout für das blocken von Lesebefehlen.
                  */
-                virtual int32_t ReceiveTimeout() const NOEXCEPT;
+                virtual int ReceiveTimeout() const NOEXCEPT;
 
                 /*!
                  * Setzt den Timeout für das blocken von Lesebefehlen.
                  */
-                virtual void ReceiveTimeout(int32_t) throw(socket_error);
+                virtual void ReceiveTimeout(int) throw(socket_error);
 
                 /*!
                  * \warning Noch nicht implementiert.
                  */
-                static void Select(const std::vector<std::shared_ptr<Socket>>& checkRead, const std::vector<std::shared_ptr<Socket>>& checkWrite, const std::vector<std::shared_ptr<Socket>>& checkError, uint32_t microSeconds) throw(socket_error);
+                static void Select(const std::vector<std::shared_ptr<Socket>>& checkRead, const std::vector<std::shared_ptr<Socket>>& checkWrite, const std::vector<std::shared_ptr<Socket>>& checkError, size_t microSeconds) throw(socket_error);
 
             protected:
 
-                int32_t GetSocketDomain(SocketHandle h) const throw(socket_error);
-                int32_t GetSocketProtocol(SocketHandle h) const throw(socket_error);
+                int GetSocketDomain(SocketHandle h) const throw(socket_error);
+                int GetSocketProtocol(SocketHandle h) const throw(socket_error);
 
             private:
 
@@ -515,14 +515,14 @@ namespace Lupus {
                     virtual std::shared_ptr<Socket> Accept(Socket* socket) throw(socket_error);
                     virtual void Bind(Socket* socket, std::shared_ptr<IPEndPoint> localEndPoint) throw(socket_error);
                     virtual void Close(Socket* socket) throw(socket_error);
-                    virtual void Close(Socket* socket, uint32_t timeout) throw(socket_error);
+                    virtual void Close(Socket* socket, size_t timeout) throw(socket_error);
                     virtual void Connect(Socket* socket, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
                     virtual SocketInformation DuplicateAndClose(Socket* socket) throw(null_pointer, socket_error);
-                    virtual void Listen(Socket* socket, uint32_t backlog) throw(socket_error);
-                    virtual int32_t Receive(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
-                    virtual int32_t ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
-                    virtual int32_t Send(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
-                    virtual int32_t SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
+                    virtual void Listen(Socket* socket, size_t backlog) throw(socket_error);
+                    virtual int Receive(Socket* socket, std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
+                    virtual int ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range);
+                    virtual int Send(Socket* socket, const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range);
+                    virtual int SendTo(Socket* socket, const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range);
                     virtual void Shutdown(Socket* socket, SocketShutdown how) throw(socket_error);
 
                 protected:
@@ -547,7 +547,7 @@ namespace Lupus {
                     virtual ~SocketBound() = default;
 
                     virtual void Connect(Socket* socket, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer) override;
-                    virtual void Listen(Socket* socket, uint32_t backlog) throw(socket_error) override;
+                    virtual void Listen(Socket* socket, size_t backlog) throw(socket_error) override;
                 };
 
                 class SocketListen : public SocketState
@@ -567,8 +567,8 @@ namespace Lupus {
                     virtual ~SocketConnected() = default;
 
                     virtual void Connect(Socket* socket, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
-                    virtual int32_t Receive(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range) override;
-                    virtual int32_t Send(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range) override;
+                    virtual int Receive(Socket* socket, std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range) override;
+                    virtual int Send(Socket* socket, const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode) throw(socket_error, std::out_of_range) override;
                     virtual void Shutdown(Socket* socket, SocketShutdown how) throw(socket_error) override;
                 };
 
@@ -589,17 +589,17 @@ namespace Lupus {
                     virtual ~SocketClosed() = default;
 
                     virtual void Close(Socket* socket) NOEXCEPT override;
-                    virtual void Close(Socket* socket, uint32_t timeout) NOEXCEPT override;
+                    virtual void Close(Socket* socket, size_t timeout) NOEXCEPT override;
                     virtual SocketInformation DuplicateAndClose(Socket* socket) throw(socket_error) override;
-                    virtual int32_t ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range) override;
-                    virtual int32_t SendTo(Socket* socket, const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range) override;
+                    virtual int ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint) throw(socket_error, std::out_of_range) override;
+                    virtual int SendTo(Socket* socket, const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, std::out_of_range) override;
                 };
 
                 Socket() = default;
 
                 SocketHandle mHandle = INVALID_SOCKET;
-                int32_t mSendTime = 0; // Windows support
-                int32_t mRecvTime = 0; // Windows support
+                int mSendTime = 0; // Windows support
+                int mRecvTime = 0; // Windows support
                 bool mBlocking = true;
                 std::shared_ptr<IPEndPoint> mLocal;
                 std::shared_ptr<IPEndPoint> mRemote;

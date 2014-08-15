@@ -32,7 +32,7 @@ namespace Lupus {
             {
             public:
 
-                HttpServer(uint16_t port, int32_t backlog);
+                HttpServer(uint16_t port, int backlog);
                 virtual ~HttpServer() = default;
 
                 virtual void Start(std::function<void(std::shared_ptr<HttpRequest>, std::shared_ptr<HttpResponse>)>);

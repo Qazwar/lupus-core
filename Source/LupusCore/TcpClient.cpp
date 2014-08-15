@@ -35,7 +35,7 @@ namespace Lupus {
                 mClient->Connect(GetAddressInformation(hostname, Integer::ToString(port), AddressFamily::Unspecified, SocketType::Stream, ProtocolType::TCP));
             }
 
-            uint32_t TcpClient::Available() const
+            size_t TcpClient::Available() const
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -73,7 +73,7 @@ namespace Lupus {
                     throw null_pointer();
                 }
 
-                int32_t result, length = 4;
+                int result, length = 4;
 
                 if (getsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&result, (int*)&length) != 0) {
                     throw socket_error(GetLastSocketErrorString());
@@ -88,7 +88,7 @@ namespace Lupus {
                     throw null_pointer();
                 }
 
-                int32_t val = value ? 1 : 0;
+                int val = value ? 1 : 0;
 
                 if (setsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&val, 4) != 0) {
                     throw socket_error(GetLastSocketErrorString());
@@ -113,7 +113,7 @@ namespace Lupus {
                 mClient->NoDelay(b);
             }
 
-            int32_t TcpClient::SendBuffer() const
+            int TcpClient::SendBuffer() const
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -122,7 +122,7 @@ namespace Lupus {
                 return mClient->SendBuffer();
             }
 
-            void TcpClient::SendBuffer(int32_t i)
+            void TcpClient::SendBuffer(int i)
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -131,7 +131,7 @@ namespace Lupus {
                 mClient->SendBuffer(i);
             }
 
-            int32_t TcpClient::ReceiveBuffer() const
+            int TcpClient::ReceiveBuffer() const
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -140,7 +140,7 @@ namespace Lupus {
                 return mClient->ReceiveBuffer();
             }
 
-            void TcpClient::ReceiveBuffer(int32_t i)
+            void TcpClient::ReceiveBuffer(int i)
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -149,7 +149,7 @@ namespace Lupus {
                 mClient->ReceiveBuffer(i);
             }
 
-            int32_t TcpClient::SendTimeout() const
+            int TcpClient::SendTimeout() const
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -158,7 +158,7 @@ namespace Lupus {
                 return mClient->SendTimeout();
             }
 
-            void TcpClient::SendTimeout(int32_t i)
+            void TcpClient::SendTimeout(int i)
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -167,7 +167,7 @@ namespace Lupus {
                 mClient->SendTimeout(i);
             }
 
-            int32_t TcpClient::ReceiveTimeout() const
+            int TcpClient::ReceiveTimeout() const
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -176,7 +176,7 @@ namespace Lupus {
                 return mClient->ReceiveTimeout();
             }
 
-            void TcpClient::ReceiveTimeout(int32_t i)
+            void TcpClient::ReceiveTimeout(int i)
             {
                 if (!mClient) {
                     throw null_pointer();

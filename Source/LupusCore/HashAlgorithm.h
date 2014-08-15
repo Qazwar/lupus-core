@@ -25,22 +25,22 @@ namespace Lupus {
 
                 virtual ~HashAlgorithm() = default;
 
-                virtual uint32_t BlockSize() const NOEXCEPT = 0;
-                virtual uint32_t HashSize() const NOEXCEPT = 0;
+                virtual size_t BlockSize() const NOEXCEPT = 0;
+                virtual size_t HashSize() const NOEXCEPT = 0;
 
                 virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>&) NOEXCEPT = 0;
                 virtual std::vector<uint8_t> ComputeHash(std::shared_ptr<Stream>) = 0;
                 virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input,
-                    uint32_t inputOffset,
-                    uint32_t inputCount) throw(std::out_of_range) = 0;
+                    size_t inputOffset,
+                    size_t inputCount) throw(std::out_of_range) = 0;
 
-                virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& input, uint32_t offset, uint32_t count) throw(std::out_of_range) override;
-                virtual uint32_t TransformBlock(
+                virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& input, size_t offset, size_t count) throw(std::out_of_range) override;
+                virtual size_t TransformBlock(
                     const std::vector<uint8_t>& input,
-                    uint32_t inputOffset,
-                    uint32_t inputCount,
+                    size_t inputOffset,
+                    size_t inputCount,
                     std::vector<uint8_t>& output,
-                    uint32_t outputOffset) throw(std::out_of_range) override;
+                    size_t outputOffset) throw(std::out_of_range) override;
             };
 
             class LUPUS_API HashAlgorithmFactory : public boost::noncopyable

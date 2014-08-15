@@ -39,7 +39,7 @@ namespace Lupus {
 
             bool TcpListener::ExclusiveAddressUse() const
             {
-                int32_t result, length = 4;
+                int result, length = 4;
 
                 if (getsockopt(mServer->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&result, (int*)&length) != 0) {
                     throw socket_error(GetLastSocketErrorString());
@@ -50,7 +50,7 @@ namespace Lupus {
 
             void TcpListener::ExclusiveAddressUse(bool value)
             {
-                int32_t val = value ? 1 : 0;
+                int val = value ? 1 : 0;
 
                 if (setsockopt(mServer->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&val, 4) != 0) {
                     throw socket_error(GetLastSocketErrorString());
@@ -106,7 +106,7 @@ namespace Lupus {
                 mServer->Listen(10);
             }
 
-            void TcpListener::Start(int32_t backlog)
+            void TcpListener::Start(int backlog)
             {
                 mServer->Listen(backlog);
             }

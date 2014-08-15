@@ -40,9 +40,9 @@ namespace Lupus {
                 virtual void Length(int64_t) throw(std::out_of_range) override;
                 virtual int64_t Position() const override;
                 virtual void Position(int64_t) throw(std::out_of_range) override;
-                virtual int32_t Read(std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(std::out_of_range) override;
-                virtual int32_t ReadByte() override;
-                virtual int32_t Write(const std::vector<uint8_t>& buffer, uint32_t offset, uint32_t size) throw(std::out_of_range) override;
+                virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override;
+                virtual int ReadByte() override;
+                virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override;
                 virtual void WriteByte(uint8_t byte) override;
                 virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
 
@@ -54,11 +54,11 @@ namespace Lupus {
 
                 virtual bool CheckCertRevocationStatus() const NOEXCEPT;
                 virtual Lupus::Security::Authentication::CipherAlgorithmType CipherAlgorithm() const NOEXCEPT;
-                virtual int32_t CipherStrength() const NOEXCEPT;
+                virtual int CipherStrength() const NOEXCEPT;
                 virtual Lupus::Security::Authentication::HashAlgorithmType HashAlgorithm() const NOEXCEPT;
-                virtual int32_t HashStrength() const NOEXCEPT;
+                virtual int HashStrength() const NOEXCEPT;
                 virtual Lupus::Security::Authentication::ExchangeAlgorithmType KeyExchangeAlgorithm() const NOEXCEPT;
-                virtual int32_t KeyExchangeStrength() const NOEXCEPT;
+                virtual int KeyExchangeStrength() const NOEXCEPT;
                 virtual Lupus::Security::Authentication::SslProtocols SslProtocol() const NOEXCEPT;
 
                 virtual void AuthenticateAsClientAsync(const std::string& host, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;

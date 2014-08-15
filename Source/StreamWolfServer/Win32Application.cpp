@@ -37,7 +37,7 @@ namespace StreamWolf {
             desc.add_options()
                 ("help", "produce help message")
                 ("port", po::value<uint16_t>(&mPort), "set port to listen")
-                ("backlog", po::value<uint32_t>(&mBacklog), "set backlog queue length");
+                ("backlog", po::value<size_t>(&mBacklog), "set backlog queue length");
             po::store(po::parse_command_line(argc, argv, desc), vm);
 
             mHttp = vm.count("http") > 0 || vm.count("http only") > 0;

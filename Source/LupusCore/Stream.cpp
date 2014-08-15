@@ -28,7 +28,7 @@ namespace Lupus {
         }).detach();
     }
 
-    void Stream::ReadAsync(vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
+    void Stream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
     {
         thread([this, &buffer, offset, size, callback]() {
             try {
@@ -39,7 +39,7 @@ namespace Lupus {
         }).detach();
     }
 
-    void Stream::WriteAsync(const vector<uint8_t>& buffer, uint32_t offset, uint32_t size, function<void(exception_ptr, Stream*, int32_t)> callback)
+    void Stream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
     {
         thread([this, &buffer, offset, size, callback]() {
             try {
@@ -69,9 +69,9 @@ namespace Lupus {
             destination->Length(destination->Length() + size - dsize);
         }
 
-        vector<uint8_t> buffer((uint32_t)size);
-        Read(buffer, 0, (uint32_t)size);
-        destination->Write(buffer, 0, (uint32_t)size);
+        vector<uint8_t> buffer((size_t)size);
+        Read(buffer, 0, (size_t)size);
+        destination->Write(buffer, 0, (size_t)size);
     }
 
     void Stream::Flush()

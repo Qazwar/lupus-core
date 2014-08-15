@@ -347,7 +347,7 @@
     <ClInclude Include="SymmetricAlgorithm.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
-    <ClInclude Include="CryptoKeyExchange.h">
+    <ClInclude Include="CryptoPublicKey.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
   </ItemGroup>
