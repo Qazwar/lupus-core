@@ -350,5 +350,8 @@
     <ClInclude Include="CryptographyEnum.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Lupus\.h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

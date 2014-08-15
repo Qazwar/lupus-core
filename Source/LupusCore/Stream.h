@@ -2,12 +2,14 @@
 
 #include <vector>
 #include <memory>
+#include <future>
 #include <cstdint>
 #include <exception>
 #include <functional>
 #include <boost/noncopyable.hpp>
 
 #include "Utility.h"
+#include "Task.h"
 
 namespace Lupus {
     enum class SeekOrigin {
@@ -22,10 +24,10 @@ namespace Lupus {
 
         virtual ~Stream() = default;
 
-        virtual void CopyToAsync(std::shared_ptr<Stream> destination, std::function<void(std::exception_ptr, Stream*)> callback) NOEXCEPT;
-        virtual void FlushAsync(std::function<void(std::exception_ptr, Stream*)> callback) NOEXCEPT;
-        virtual void ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size, std::function<void(std::exception_ptr, Stream*, int)> callback) NOEXCEPT;
-        virtual void WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::function<void(std::exception_ptr, Stream*, int)> callback) NOEXCEPT;
+        virtual Task<void> CopyToAsync(std::shared_ptr<Stream> destination) throw(std::invalid_argument);
+        virtual Task<void> FlushAsync() throw(std::invalid_argument);
+        virtual Task<int> ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument);
+        virtual Task<int> WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument);
 
         virtual bool CanRead() const = 0;
         virtual bool CanWrite() const = 0;

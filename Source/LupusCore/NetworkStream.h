@@ -22,8 +22,8 @@ namespace Lupus {
                 virtual size_t DataAvailable() const throw(socket_error);
                 virtual std::shared_ptr<Socket> Socket() const NOEXCEPT;
 
-                virtual void ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size, std::function<void(std::exception_ptr, Stream*, int)> callback) NOEXCEPT override;
-                virtual void WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::function<void(std::exception_ptr, Stream*, int)> callback) NOEXCEPT override;
+                virtual Task<int> ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument) override;
+                virtual Task<int> WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size)  throw(std::invalid_argument) override;
 
                 virtual bool CanRead() const NOEXCEPT override;
                 virtual bool CanWrite() const NOEXCEPT override;

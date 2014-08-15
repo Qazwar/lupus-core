@@ -1,0 +1,297 @@
+#pragma once
+
+#include "Utility.h"
+#include <chrono>
+#include <future>
+#include <thread>
+#include <functional>
+#include <type_traits>
+#include <boost/noncopyable.hpp>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
+#if _MSC_VER <= 1800
+namespace std {
+    template<class... _ArgTypes>
+    class LUPUS_API packaged_task<void(_ArgTypes...)>
+    {
+        promise<void> _my_promise;
+        function<void(_ArgTypes...)> _my_func;
+
+    public:
+        packaged_task() {
+        }
+
+        template<class _Fty2>
+        explicit packaged_task(_Fty2&& _Fnarg)
+            : _my_func(_Fnarg) {
+        }
+
+        packaged_task(packaged_task&& _Other)
+            : _my_promise(move(_Other._my_promise)),
+            _my_func(move(_Other._my_func)) {
+        }
+
+        packaged_task& operator=(packaged_task&& _Other) {
+            _my_promise = move(_Other._my_promise);
+            _my_func = move(_Other._my_func);
+            return (*this);
+        }
+
+        packaged_task(const packaged_task&) = delete;
+        packaged_task& operator=(const packaged_task&) = delete;
+
+        ~packaged_task() {
+        }
+
+        void swap(packaged_task& _Other) {
+            _my_promise.swap(_Other._my_promise);
+            _my_func.swap(_Other._my_func);
+        }
+
+        explicit operator bool() const {
+            return _my_func != false;
+        }
+
+        bool valid() const {
+            return _my_func != false;
+        }
+
+        future<void> get_future() {
+            return _my_promise.get_future();
+        }
+
+        void operator()(_ArgTypes... _Args) {
+            _my_func(forward<_ArgTypes>(_Args)...);
+            _my_promise.set_value();
+        }
+
+        void reset() {
+            swap(packaged_task());
+        }
+    };
+}
+#endif
+
+namespace Lupus {
+    template <typename R>
+    class LUPUS_API Task : public boost::noncopyable
+    {
+    public:
+
+        Task() = default;
+
+        Task(Task&& task)
+        {
+            std::swap(mFuture, task.mFuture);
+            std::swap(mThread, task.mThread);
+            std::swap(mBlock, task.mBlock);
+            std::swap(mIsRunning, task.mIsRunning);
+        }
+
+        template <typename Function, typename... Args>
+        Task(Function&& f, Args&&... args) throw(std::invalid_argument)
+        {
+            if (!std::is_same<typename std::result_of<Function(Args...)>::type, R>::value) {
+                throw std::invalid_argument("Return type does not match");
+            }
+
+            std::packaged_task<R(Args...)> task(f);
+            mFuture = task.get_future();
+            mThread = std::thread(std::move(task), std::forward<Args>(args)...);
+            mIsRunning = true;
+        }
+
+        virtual ~Task()
+        {
+            if (mBlock && mThread.joinable()) {
+                mThread.join();
+            } else {
+                mThread.detach();
+            }
+        }
+
+        template <typename Function, typename... Args>
+        void Start(Function&& f, Args&&... args) throw(std::invalid_argument, std::runtime_error)
+        {
+            if (mIsRunning) {
+                throw std::runtime_error("Task is already running");
+            } else if (!std::is_same<typename std::result_of<Function(Args...)>::type, R>::value) {
+                throw std::invalid_argument("Return type does not match");
+            }
+
+            std::packaged_task<R(Args...)> task(f);
+            mFuture = task.get_future();
+            mThread = std::thread(std::move(task), std::forward<Args>(args)...);
+            mIsRunning = true;
+        }
+
+        R Get()
+        {
+            return mFuture.get();
+        }
+
+        bool Valid() const
+        {
+            return mFuture.valid();
+        }
+
+        void Wait() const
+        {
+            mFuture.wait();
+        }
+
+        template <typename Rep, typename Period>
+        bool WaitFor(const std::chrono::duration<Rep, Period>& duration) const
+        {
+            mFuture.wait_for(duration);
+        }
+
+        template <typename Clock, typename Duration>
+        bool WaitUntil(const std::chrono::time_point<Clock, Duration>& time) const
+        {
+            mFuture.wait_until(time);
+        }
+
+        bool Blocking() const
+        {
+            return (mBlock && mThread.joinable());
+        }
+
+        void Blocking(bool b)
+        {
+            mBlock = b;
+        }
+
+        bool IsRunning() const
+        {
+            return mIsRunning;
+        }
+
+    private:
+
+        Task(const Task&) = delete;
+
+        std::future<R> mFuture;
+        std::thread mThread;
+        bool mBlock = false;
+        bool mIsRunning = false;
+
+        template <typename Function, typename... Args>
+        friend Task<typename std::result_of<Function(Args...)>::type> CreateTask(Function&& f, Args&&... args);
+    };
+
+    template <>
+    class LUPUS_API Task<void> : public boost::noncopyable
+    {
+    public:
+
+        Task() = default;
+
+        Task(Task&& task)
+        {
+            std::swap(mFuture, task.mFuture);
+            std::swap(mThread, task.mThread);
+            std::swap(mBlock, task.mBlock);
+            std::swap(mIsRunning, task.mIsRunning);
+        }
+
+        template <typename Function, typename... Args>
+        Task(Function&& f, Args&&... args) throw(std::invalid_argument)
+        {
+            if (!std::is_void<typename std::result_of<Function(Args...)>::type>::value) {
+                throw std::invalid_argument("Return type does not match");
+            }
+
+            std::packaged_task<void(Args...)> task(f);
+            mFuture = task.get_future();
+            mThread = std::thread(std::move(task), std::forward<Args>(args)...);
+            mIsRunning = true;
+        }
+
+        virtual ~Task()
+        {
+            if (mBlock && mThread.joinable()) {
+                mThread.join();
+            } else {
+                mThread.detach();
+            }
+        }
+
+        template <typename Function, typename... Args>
+        void Start(Function&& f, Args&&... args) throw(std::invalid_argument, std::runtime_error)
+        {
+            if (mIsRunning) {
+                throw std::runtime_error("Task is already running");
+            } else if (!std::is_void<typename std::result_of<Function(Args...)>::type>::value) {
+                throw std::invalid_argument("Return type does not match");
+            }
+
+            std::packaged_task<void(Args...)> task(f);
+            mFuture = task.get_future();
+            mThread = std::thread(std::move(task), std::forward<Args>(args)...);
+            mIsRunning = true;
+        }
+
+        void Get()
+        {
+            mFuture.get();
+        }
+
+        bool Valid() const
+        {
+            return mFuture.valid();
+        }
+
+        void Wait() const
+        {
+            mFuture.wait();
+        }
+
+        template <typename Rep, typename Period>
+        bool WaitFor(const std::chrono::duration<Rep, Period>& duration) const
+        {
+            mFuture.wait_for(duration);
+        }
+
+        template <typename Clock, typename Duration>
+        bool WaitUntil(const std::chrono::time_point<Clock, Duration>& time) const
+        {
+            mFuture.wait_until(time);
+        }
+
+        bool Blocking() const
+        {
+            return (mBlock && mThread.joinable());
+        }
+
+        void Blocking(bool b)
+        {
+            mBlock = b;
+        }
+
+        bool IsRunning() const
+        {
+            return mIsRunning;
+        }
+
+    private:
+
+        Task(const Task&) = delete;
+
+        std::future<void> mFuture;
+        std::thread mThread;
+        bool mBlock = false;
+        bool mIsRunning = false;
+
+        template <typename Function, typename... Args>
+        friend Task<typename std::result_of<Function(Args...)>::type> CreateTask(Function&& f, Args&&... args);
+    };
+}
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

@@ -5,49 +5,32 @@
 using namespace std;
 
 namespace Lupus {
-    void Stream::CopyToAsync(shared_ptr<Stream> destination, function<void(exception_ptr, Stream*)> callback)
+    Task<void> Stream::CopyToAsync(shared_ptr<Stream> destination) throw(std::invalid_argument)
     {
-        thread([this, destination, callback]() {
-            try {
-                this->CopyTo(destination);
-                callback(nullptr, this);
-            } catch (...) {
-                callback(current_exception(), this);
-            }
-        }).detach();
-    }
-    void Stream::FlushAsync(function<void(exception_ptr, Stream*)> callback)
-    {
-        thread([this, callback]() {
-            try {
-                this->Flush();
-                callback(nullptr, this);
-            } catch (...) {
-                callback(current_exception(), this);
-            }
-        }).detach();
+        return Task<void>([this, destination]() {
+            this->CopyTo(destination);
+        });
     }
 
-    void Stream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
+    Task<void> Stream::FlushAsync() throw(std::invalid_argument)
     {
-        thread([this, &buffer, offset, size, callback]() {
-            try {
-                callback(nullptr, this, this->Read(buffer, offset, size));
-            } catch (...) {
-                callback(current_exception(), this, -1);
-            }
-        }).detach();
+        return Task<void>([this]() {
+            this->Flush();
+        });
     }
 
-    void Stream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
+    Task<int> Stream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument)
     {
-        thread([this, &buffer, offset, size, callback]() {
-            try {
-                callback(nullptr, this, this->Write(buffer, offset, size));
-            } catch (...) {
-                callback(current_exception(), this, -1);
-            }
-        }).detach();
+        return Task<int>([this, &buffer, offset, size]() {
+            return this->Read(buffer, offset, size);
+        });
+    }
+
+    Task<int> Stream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::invalid_argument)
+    {
+        return Task<int>([this, &buffer, offset, size]() {
+            return this->Write(buffer, offset, size);
+        });
     }
 
     void Stream::CopyTo(shared_ptr<Stream> destination)

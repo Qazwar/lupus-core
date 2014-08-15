@@ -106,6 +106,7 @@
     <ClInclude Include="SocketInformation.h" />
     <ClInclude Include="SslStream.h" />
     <ClInclude Include="Stream.h" />
+    <ClInclude Include="Task.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="UdpClient.h" />

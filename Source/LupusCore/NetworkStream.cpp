@@ -27,26 +27,18 @@ namespace Lupus {
                 return mSocket;
             }
 
-            void NetworkStream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
+            Task<int> NetworkStream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size)
             {
-                thread([this, &buffer, offset, size, &callback](shared_ptr<Sockets::Socket> socket) {
-                    try {
-                        callback(nullptr, this, socket->Receive(buffer, offset, size));
-                    } catch (...) {
-                        callback(current_exception(), this, -1);
-                    }
-                }, mSocket).detach();
+                return Task<int>([&buffer, offset, size](shared_ptr<Sockets::Socket> socket) {
+                    return socket->Receive(buffer, offset, size);
+                }, mSocket);
             }
             
-            void NetworkStream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size, function<void(exception_ptr, Stream*, int)> callback)
+            Task<int> NetworkStream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size)
             {
-                thread([this, &buffer, offset, size, &callback](shared_ptr<Sockets::Socket> socket) {
-                    try {
-                        callback(nullptr, this, socket->Send(buffer, offset, size));
-                    } catch (...) {
-                        callback(current_exception(), this, -1);
-                    }
-                }, mSocket).detach();
+                return Task<int>([&buffer, offset, size](shared_ptr<Sockets::Socket> socket) {
+                    return socket->Send(buffer, offset, size);
+                }, mSocket);
             }
 
             bool NetworkStream::CanRead() const
