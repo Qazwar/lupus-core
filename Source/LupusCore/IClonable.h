@@ -8,6 +8,6 @@ namespace Lupus {
     {
     public:
         virtual ~IClonable() = default;
-        virtual std::shared_ptr<IClonable> Clone() const = 0;
+        virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT = 0;
     };
 }

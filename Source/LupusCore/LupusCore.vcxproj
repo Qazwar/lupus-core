@@ -64,10 +64,10 @@
   <ItemGroup>
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
-    <ClInclude Include="CryptoPublicKey.h" />
+    <ClInclude Include="CryptoRSA.h" />
     <ClInclude Include="SymmetricAlgorithm.h" />
     <ClInclude Include="CryptoBlockCipher.h" />
-    <ClInclude Include="CryptoCipcherEnum.h" />
+    <ClInclude Include="CryptographyEnum.h" />
     <ClInclude Include="DataColumn.h" />
     <ClInclude Include="DataRow.h" />
     <ClInclude Include="DataTable.h" />

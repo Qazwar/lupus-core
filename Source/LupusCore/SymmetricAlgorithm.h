@@ -2,7 +2,7 @@
 
 #include "Utility.h"
 #include "IClonable.h"
-#include "CryptoCipcherEnum.h"
+#include "CryptographyEnum.h"
 
 #include <vector>
 #include <memory>

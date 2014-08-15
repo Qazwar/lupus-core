@@ -16,20 +16,30 @@
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
+            enum class KeyValidationLevel {
+                BasicCheck = 0,
+                FunctionalityCheck,
+                WeaknessCheck,
+                SecurityCheck
+            };
+
             class LUPUS_API AsymmetricAlgorithm : public IClonable, public boost::noncopyable
             {
             public:
 
                 virtual ~AsymmetricAlgorithm() = default;
 
-				virtual std::vector<uint8_t> Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size) const NOEXCEPT = 0;
-				virtual size_t Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::vector<uint8_t>& output, size_t outputOffset) const NOEXCEPT = 0;
-				virtual std::vector<uint8_t> Decrypt(std::vector<uint8_t>& buffer, size_t offset, size_t size) const NOEXCEPT = 0;
-				virtual size_t Decrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::vector<uint8_t>& output, size_t outputOffset) const NOEXCEPT = 0;
-				virtual const std::vector<uint8_t>& PublicKey() const NOEXCEPT = 0;
-				virtual const std::vector<uint8_t>& PrivateKey() const NOEXCEPT = 0;
-				virtual void PrivateKey(const std::vector<uint8_t>&) NOEXCEPT = 0;
-				virtual void GenerateRandomKey(size_t bitSize) NOEXCEPT = 0;
+                virtual std::vector<uint8_t> Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) = 0;
+                virtual size_t Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::vector<uint8_t>& output, size_t outputOffset) const throw(std::out_of_range) = 0;
+                virtual std::vector<uint8_t> Decrypt(std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) = 0;
+                virtual size_t Decrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::vector<uint8_t>& output, size_t outputOffset) const throw(std::out_of_range) = 0;
+                virtual std::vector<uint8_t> PublicKey() const NOEXCEPT = 0;
+                virtual void PublicKey(const std::vector<uint8_t>&) NOEXCEPT = 0;
+                virtual std::vector<uint8_t> PrivateKey() const NOEXCEPT = 0;
+                virtual void PrivateKey(const std::vector<uint8_t>&) NOEXCEPT = 0;
+                virtual void GenerateRandomKey(unsigned bitSize) NOEXCEPT = 0;
+                virtual bool ValidatePrivateKey(KeyValidationLevel level) const NOEXCEPT = 0;
+                virtual bool ValidatePublicKey(KeyValidationLevel level) const NOEXCEPT = 0;
             };
 
 
@@ -39,6 +49,15 @@ namespace Lupus {
 
                 static AsymmetricAlgorithmFactory& GetInstance() NOEXCEPT;
 
+                /*!
+                 * Unterstütze Algorithmen sind:
+                 * - rsaes-oaep-sha
+                 * - rsaes-pkcs
+                 *
+                 * \param[in]   algorithm Der zu klonende Algorithmus.
+                 *
+                 * \returns Zeiger auf den geklonten Algorithmus.
+                 */
                 std::shared_ptr<AsymmetricAlgorithm> Create(const std::string& algorithm) const NOEXCEPT;
 
             private:

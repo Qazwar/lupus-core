@@ -338,16 +338,16 @@
     <ClInclude Include="CryptoBlockCipher.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
-    <ClInclude Include="CryptoCipcherEnum.h">
-      <Filter>Lupus\Security\Cryptography\.h</Filter>
-    </ClInclude>
     <ClInclude Include="AsymmetricAlgorithm.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
     <ClInclude Include="SymmetricAlgorithm.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
-    <ClInclude Include="CryptoPublicKey.h">
+    <ClInclude Include="CryptoRSA.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptographyEnum.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
   </ItemGroup>
