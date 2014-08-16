@@ -1,12 +1,33 @@
 #include "AsymmetricAlgorithm.h"
 #include "CryptoRSA.h"
 #include <cryptopp/rsa.h>
+#include <cryptopp/files.h>
 
 using namespace std;
 
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
+            vector<uint8_t> AsymmetricAlgorithm::LoadFromFile(const string& path)
+            {
+                CryptoPP::ByteQueue bt;
+                CryptoPP::FileSource file(path.c_str(), true /*pumpAll*/);
+
+                file.TransferTo(bt);
+                vector<uint8_t> buffer(bt.MaxRetrievable());
+                bt.Get(buffer.data(), buffer.size());
+                return buffer;
+            }
+
+            void AsymmetricAlgorithm::SaveToFile(const string& path, const vector<uint8_t>& key)
+            {
+                CryptoPP::ByteQueue bt;
+                CryptoPP::FileSink file(path.c_str());
+
+                bt.Put(key.data(), key.size());
+                bt.CopyTo(file);                
+            }
+
             AsymmetricAlgorithmFactory::AsymmetricAlgorithmFactory()
             {
                 using namespace CryptoPP;

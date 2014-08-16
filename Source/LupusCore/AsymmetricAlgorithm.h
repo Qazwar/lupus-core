@@ -40,6 +40,12 @@ namespace Lupus {
                 virtual void GenerateRandomKey(unsigned bitSize) NOEXCEPT = 0;
                 virtual bool ValidatePrivateKey(KeyValidationLevel level) const NOEXCEPT = 0;
                 virtual bool ValidatePublicKey(KeyValidationLevel level) const NOEXCEPT = 0;
+
+                virtual size_t MessageLength(size_t) const NOEXCEPT = 0;
+                virtual size_t CiphertextLength(size_t) const NOEXCEPT = 0;
+
+                static std::vector<uint8_t> LoadFromFile(const std::string& path);
+                static void SaveToFile(const std::string& path, const std::vector<uint8_t>& key);
             };
 
 

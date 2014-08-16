@@ -33,7 +33,7 @@ namespace Lupus {
 
                 virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
                 {
-                    return std::make_shared<CryptoRSA<T>>(PrivateKey());
+                    return std::dynamic_pointer_cast<IClonable>(std::make_shared<CryptoRSA<T>>(PrivateKey()));
                 }
 
                 virtual std::vector<uint8_t> Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) override
@@ -45,7 +45,7 @@ namespace Lupus {
                     CryptoPP::AutoSeededRandomPool rng;
                     std::vector<uint8_t> result(mEncryptor.CiphertextLength(size));
 
-                    mEncryptor.Encrypt(rng, buffer.data() + offset, size, &result[0]);
+                    mEncryptor.Encrypt(rng, buffer.data() + offset, size, result.data());
                     return result;
                 }
 
@@ -61,7 +61,7 @@ namespace Lupus {
 
                     CryptoPP::AutoSeededRandomPool rng;
 
-                    mEncryptor.Encrypt(rng, buffer.data() + offset, size, &output[0] + outputOffset);
+                    mEncryptor.Encrypt(rng, buffer.data() + offset, size, output.data() + outputOffset);
                     return length;
                 }
 
@@ -74,7 +74,7 @@ namespace Lupus {
                     CryptoPP::AutoSeededRandomPool rng;
                     std::vector<uint8_t> result(mDecryptor.MaxPlaintextLength(size));
 
-                    mDecryptor.Decrypt(rng, buffer.data() + offset, size, &result[0]);
+                    mDecryptor.Decrypt(rng, buffer.data() + offset, size, result.data());
                     return result;
                 }
 
@@ -90,7 +90,7 @@ namespace Lupus {
 
                     CryptoPP::AutoSeededRandomPool rng;
 
-                    mDecryptor.Decrypt(rng, buffer.data() + offset, size, &output[0] + outputOffset);
+                    mDecryptor.Decrypt(rng, buffer.data() + offset, size, output.data() + outputOffset);
                     return length;
                 }
 
@@ -100,7 +100,7 @@ namespace Lupus {
                     std::vector<uint8_t> buffer;
 
                     mEncryptor.GetPublicKey().Save(byteQueue);
-                    byteQueue.Get(&buffer[0], byteQueue.MaxRetrievable());
+                    byteQueue.Get(buffer.data(), byteQueue.MaxRetrievable());
                     return buffer;
                 }
 
@@ -117,7 +117,7 @@ namespace Lupus {
                     std::vector<uint8_t> buffer;
 
                     mDecryptor.GetPrivateKey().Save(byteQueue);
-                    byteQueue.Get(&buffer[0], byteQueue.MaxRetrievable());
+                    byteQueue.Get(buffer.data(), byteQueue.MaxRetrievable());
                     return buffer;
                 }
 
@@ -146,6 +146,16 @@ namespace Lupus {
                 {
                     CryptoPP::AutoSeededRandomPool rng;
                     return mEncryptor.GetPublicKey().Validate(rng, (unsigned)level);
+                }
+
+                virtual size_t MessageLength(size_t length) const NOEXCEPT override
+                {
+                    return mDecryptor.MaxPlaintextLength(length);
+                }
+
+                virtual size_t CiphertextLength(size_t length) const NOEXCEPT override
+                {
+                    return mEncryptor.CiphertextLength(length);
                 }
 
             private:

@@ -66,7 +66,7 @@ namespace Lupus {
 
                 virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
                 {
-                    return make_shared<CryptoBlockCipher<T>>();
+                    return std::dynamic_pointer_cast<IClonable>(make_shared<CryptoBlockCipher<T>>());
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override
