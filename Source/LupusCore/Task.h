@@ -93,34 +93,30 @@ namespace Lupus {
         }
 
         template <typename Function, typename... Args>
-        Task(Function&& f, Args&&... args) throw(std::invalid_argument)
+        Task(Function&& f, Args&&... args)
         {
-            if (!std::is_same<typename std::result_of<Function(Args...)>::type, R>::value) {
-                throw std::invalid_argument("Return type does not match");
-            }
-
             std::packaged_task<R(Args...)> task(f);
             mFuture = task.get_future();
             mThread = std::thread(std::move(task), std::forward<Args>(args)...);
             mIsRunning = true;
         }
 
-        virtual ~Task()
+        ~Task()
         {
-            if (mBlock && mThread.joinable()) {
-                mThread.join();
-            } else {
-                mThread.detach();
+            if (mThread.joinable()) {
+                if (mBlock) {
+                    mThread.join();
+                } else {
+                    mThread.detach();
+                }
             }
         }
 
         template <typename Function, typename... Args>
-        void Start(Function&& f, Args&&... args) throw(std::invalid_argument, std::runtime_error)
+        void Start(Function&& f, Args&&... args) throw(std::runtime_error)
         {
             if (mIsRunning) {
                 throw std::runtime_error("Task is already running");
-            } else if (!std::is_same<typename std::result_of<Function(Args...)>::type, R>::value) {
-                throw std::invalid_argument("Return type does not match");
             }
 
             std::packaged_task<R(Args...)> task(f);
@@ -132,6 +128,7 @@ namespace Lupus {
         R Get()
         {
             return mFuture.get();
+            mIsRunning = false;
         }
 
         bool Valid() const
@@ -142,26 +139,29 @@ namespace Lupus {
         void Wait() const
         {
             mFuture.wait();
+            mIsRunning = false;
         }
 
         template <typename Rep, typename Period>
         bool WaitFor(const std::chrono::duration<Rep, Period>& duration) const
         {
-            mFuture.wait_for(duration);
+            mIsRunning = !mFuture.wait_for(duration);
+            return mIsRunning;
         }
 
         template <typename Clock, typename Duration>
         bool WaitUntil(const std::chrono::time_point<Clock, Duration>& time) const
         {
-            mFuture.wait_until(time);
+            mIsRunning = !mFuture.wait_until(time);
+            return mIsRunning;
         }
 
-        bool Blocking() const
+        bool IsBlocking() const
         {
-            return (mBlock && mThread.joinable());
+            return mBlock;
         }
 
-        void Blocking(bool b)
+        void SetBlocking(bool b)
         {
             mBlock = b;
         }
@@ -178,10 +178,7 @@ namespace Lupus {
         std::future<R> mFuture;
         std::thread mThread;
         bool mBlock = false;
-        bool mIsRunning = false;
-
-        template <typename Function, typename... Args>
-        friend Task<typename std::result_of<Function(Args...)>::type> CreateTask(Function&& f, Args&&... args);
+        mutable bool mIsRunning = false;
     };
 
     template <>
@@ -200,34 +197,30 @@ namespace Lupus {
         }
 
         template <typename Function, typename... Args>
-        Task(Function&& f, Args&&... args) throw(std::invalid_argument)
+        Task(Function&& f, Args&&... args)
         {
-            if (!std::is_void<typename std::result_of<Function(Args...)>::type>::value) {
-                throw std::invalid_argument("Return type does not match");
-            }
-
             std::packaged_task<void(Args...)> task(f);
             mFuture = task.get_future();
             mThread = std::thread(std::move(task), std::forward<Args>(args)...);
             mIsRunning = true;
         }
 
-        virtual ~Task()
+        ~Task()
         {
-            if (mBlock && mThread.joinable()) {
-                mThread.join();
-            } else {
-                mThread.detach();
+            if (mThread.joinable()) {
+                if (mBlock) {
+                    mThread.join();
+                } else {
+                    mThread.detach();
+                }
             }
         }
 
         template <typename Function, typename... Args>
-        void Start(Function&& f, Args&&... args) throw(std::invalid_argument, std::runtime_error)
+        void Start(Function&& f, Args&&... args) throw(std::runtime_error)
         {
             if (mIsRunning) {
                 throw std::runtime_error("Task is already running");
-            } else if (!std::is_void<typename std::result_of<Function(Args...)>::type>::value) {
-                throw std::invalid_argument("Return type does not match");
             }
 
             std::packaged_task<void(Args...)> task(f);
@@ -239,6 +232,7 @@ namespace Lupus {
         void Get()
         {
             mFuture.get();
+            mIsRunning = false;
         }
 
         bool Valid() const
@@ -249,26 +243,29 @@ namespace Lupus {
         void Wait() const
         {
             mFuture.wait();
+            mIsRunning = false;
         }
 
         template <typename Rep, typename Period>
         bool WaitFor(const std::chrono::duration<Rep, Period>& duration) const
         {
-            mFuture.wait_for(duration);
+            mIsRunning = !mFuture.wait_for(duration);
+            return mIsRunning;
         }
 
         template <typename Clock, typename Duration>
         bool WaitUntil(const std::chrono::time_point<Clock, Duration>& time) const
         {
-            mFuture.wait_until(time);
+            mIsRunning = !mFuture.wait_until(time);
+            return mIsRunning;
         }
 
-        bool Blocking() const
+        bool IsBlocking() const
         {
-            return (mBlock && mThread.joinable());
+            return mBlock;
         }
 
-        void Blocking(bool b)
+        void SetBlocking(bool b)
         {
             mBlock = b;
         }
@@ -285,10 +282,7 @@ namespace Lupus {
         std::future<void> mFuture;
         std::thread mThread;
         bool mBlock = false;
-        bool mIsRunning = false;
-
-        template <typename Function, typename... Args>
-        friend Task<typename std::result_of<Function(Args...)>::type> CreateTask(Function&& f, Args&&... args);
+        mutable bool mIsRunning = false;
     };
 }
 

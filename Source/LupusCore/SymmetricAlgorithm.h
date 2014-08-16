@@ -2,7 +2,6 @@
 
 #include "Utility.h"
 #include "IClonable.h"
-#include "CryptographyEnum.h"
 
 #include <vector>
 #include <memory>
@@ -17,6 +16,14 @@
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
+            enum class CipherMode {
+                Ecb,
+                Cbc,
+                Cfb,
+                Ofb,
+                Ctr
+            };
+
             class LUPUS_API SymmetricAlgorithm : public boost::noncopyable, public IClonable
             {
             public:

@@ -18,7 +18,7 @@ namespace Lupus {
                 {
                     CryptoPP::AutoSeededRandomPool rng;
 
-                    mDecryptor.AccessPrivateKey().GenerateRandomWithKeySize(rng, 1024);
+                    mDecryptor.AccessPrivateKey().GenerateRandomWithKeySize(rng, 512);
                     mEncryptor = typename T::Encryptor(mDecryptor.AccessPrivateKey());
                 }
 

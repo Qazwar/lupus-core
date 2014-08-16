@@ -347,11 +347,11 @@
     <ClInclude Include="CryptoRSA.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
-    <ClInclude Include="CryptographyEnum.h">
-      <Filter>Lupus\Security\Cryptography\.h</Filter>
-    </ClInclude>
     <ClInclude Include="Task.h">
       <Filter>Lupus\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyAgreementAlgorithm.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
