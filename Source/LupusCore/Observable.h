@@ -138,12 +138,6 @@ namespace Lupus {
         }
 
         template <typename T>
-        T& Get(const std::string& propertyName)
-        {
-            return boost::any_cast<const T&>(mProperties[propertyName]);
-        }
-
-        template <typename T>
         const T& Get(const std::string& propertyName) const
         {
             return boost::any_cast<const T&>(mProperties[propertyName]);
