@@ -66,6 +66,7 @@
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="CryptoRSA.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
+    <ClInclude Include="Observable.h" />
     <ClInclude Include="SymmetricAlgorithm.h" />
     <ClInclude Include="CryptoBlockCipher.h" />
     <ClInclude Include="DataColumn.h" />

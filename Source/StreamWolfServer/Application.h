@@ -18,7 +18,7 @@ namespace StreamWolf {
         private:
             
             uint16_t mPort = 8080;
-            size_t mBacklog = 1024;
+            int mBacklog = 1024;
             bool mHttp = false;
         };
     }

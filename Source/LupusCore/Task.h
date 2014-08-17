@@ -171,9 +171,21 @@ namespace Lupus {
             return mIsRunning;
         }
 
+        Task& operator=(Task&& task)
+        {
+            std::swap(mFuture, task.mFuture);
+            std::swap(mThread, task.mThread);
+            std::swap(mBlock, task.mBlock);
+            std::swap(mIsRunning, task.mIsRunning);
+            Task<R> tmp(std::move(task));
+
+            return *this;
+        }
+
     private:
 
         Task(const Task&) = delete;
+        Task& operator=(const Task&) = delete;
 
         std::future<R> mFuture;
         std::thread mThread;
@@ -275,9 +287,21 @@ namespace Lupus {
             return mIsRunning;
         }
 
+        Task& operator=(Task&& task)
+        {
+            std::swap(mFuture, task.mFuture);
+            std::swap(mThread, task.mThread);
+            std::swap(mBlock, task.mBlock);
+            std::swap(mIsRunning, task.mIsRunning);
+            Task<void> tmp(std::move(task));
+
+            return *this;
+        }
+
     private:
 
         Task(const Task&) = delete;
+        Task& operator=(const Task&) = delete;
 
         std::future<void> mFuture;
         std::thread mThread;
