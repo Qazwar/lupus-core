@@ -4,6 +4,7 @@
 #include <memory>
 #include <algorithm>
 #include <functional>
+#include <unordered_map>
 
 #include "Utility.h"
 #include "Event.h"
@@ -75,6 +76,9 @@ namespace Lupus {
     class LUPUS_API ObservableProperty : public IObservable<T>, public boost::noncopyable
     {
     public:
+
+        typedef Event<ObservableProperty<T>, const T&> ValueChangedEventHandle;
+
         ObservableProperty() = default;
         ObservableProperty(ObservableProperty&&) = delete;
         ObservableProperty& operator=(ObservableProperty&&) = delete;
@@ -93,7 +97,14 @@ namespace Lupus {
         {
             mValue = value;
             OnUpdate(value);
+            mValueChanged.Fire(this, value);
+
             return *this;
+        }
+
+        ValueChangedEventHandle& ValueChanged() NOEXCEPT
+        {
+            return mValueChanged;
         }
 
         operator T() const
@@ -105,27 +116,52 @@ namespace Lupus {
         {
             mValue = value;
             OnUpdate(value);
+            mValueChanged.Fire(this, value);
+
             return *this;
         }
 
     private:
 
         T mValue;
+        ValueChangedEventHandle mValueChanged;
     };
 
     class LUPUS_API ObservableObject : public IObservable<std::string>, public boost::noncopyable
     {
     public:
 
-        typedef Event<ObservableObject, const std::string&> PropertyChangedEvent;
+        typedef Event<ObservableObject, const std::string&> PropertyChangedEventHandle;
 
         virtual ~ObservableObject();
 
-        virtual PropertyChangedEvent& PropertyChanged() NOEXCEPT;
+        virtual PropertyChangedEventHandle& PropertyChanged() NOEXCEPT;
+
+        template <typename T>
+        void Add(const std::string& propertyName, const T& value = T())
+        {
+            mProperties[propertyName] = boost::any(value);
+        }
+
+        template <typename T>
+        void Get(const std::string& propertyName) const
+        {
+            return boost::any_cast<T>(mProperties[propertyName]);
+        }
+
+        template <typename T>
+        void Set(const std::string& propertyName, const T& value)
+        {
+            mProperties[propertyName] = boost::any(value);
+        }
+
+        void Remove(const std::string& propertyName) NOEXCEPT;
+        bool HasProperty(const std::string& propertyName) const NOEXCEPT;
 
     private:
 
-        PropertyChangedEvent mPropertyChanged;
+        PropertyChangedEventHandle mPropertyChanged;
+        std::unordered_map<std::string, boost::any> mProperties;
     };
 }
 
