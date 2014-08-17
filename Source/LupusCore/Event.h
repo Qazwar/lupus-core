@@ -5,6 +5,7 @@
 #include <functional>
 
 #include "Utility.h"
+#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -13,7 +14,7 @@
 
 namespace Lupus {
     template <typename Sender, typename... Args>
-    class LUPUS_API Event
+    class LUPUS_API Event : public boost::noncopyable
     {
     public:
 
@@ -21,33 +22,35 @@ namespace Lupus {
 
         Event() = default;
         ~Event() = default;
+        Event(Event&&) = delete;
+        Event& operator=(Event&&) = delete;
 
-        void Add(Handle&& f) const
+        void Add(Handle&& f)
         {
-            mCallback.push_back(f);
+            mCallbacks.push_back(f);
         }
 
-        void Clear() const
+        void Clear()
         {
-            mCallback.clear();
+            mCallbacks.clear();
         }
 
-        void Fire(Sender* sender, Args&&... args)
+        void operator()(Sender* sender, Args&&... args)
         {
-            std::for_each(std::begin(mCallback), std::end(mCallback), [&](Handle& callback) {
+            std::for_each(std::begin(mCallbacks), std::end(mCallbacks), [&](Handle& callback) {
                 callback(sender, std::forward<Args>(args)...);
             });
         }
 
         Event& operator+=(Handle&& f)
         {
-            mCallback.push_back(f);
+            mCallbacks.push_back(f);
             return *this;
         }
 
     private:
 
-        mutable std::vector<Handle> mCallback;
+        std::vector<Handle> mCallbacks = std::vector<Handle>(32);
     };
 }
 

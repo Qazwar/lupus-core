@@ -8,11 +8,6 @@ namespace Lupus {
         OnComplete();
     }
 
-    ObservableObject::PropertyChangedEventHandle& ObservableObject::PropertyChanged()
-    {
-        return mPropertyChanged;
-    }
-
     void ObservableObject::Remove(const string& propertyName)
     {
         mProperties.erase(propertyName);

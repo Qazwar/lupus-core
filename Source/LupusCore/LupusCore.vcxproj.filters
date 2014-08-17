@@ -213,6 +213,9 @@
     <ClCompile Include="Observable.cpp">
       <Filter>Lupus\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Lupus\Windows\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgCommand.h">
@@ -370,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="Observable.h">
       <Filter>Lupus\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Lupus\Windows\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

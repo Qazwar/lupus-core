@@ -61,6 +61,7 @@
     <ClCompile Include="UnixLibrary.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Win32Library.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsymmetricAlgorithm.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="UdpClient.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="X509Certificate.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

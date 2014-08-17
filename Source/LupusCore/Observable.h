@@ -69,7 +69,7 @@ namespace Lupus {
 
     private:
 
-        std::vector<std::shared_ptr<IObserver<T>>> mObservers;
+        std::vector<std::shared_ptr<IObserver<T>>> mObservers = std::vector<std::shared_ptr<IObserver<T>>>(32);
     };
 
     template <typename T>
@@ -77,7 +77,7 @@ namespace Lupus {
     {
     public:
 
-        typedef Event<ObservableProperty<T>, const T&> ValueChangedEventHandle;
+        Event<ObservableProperty<T>, const T&> ValueChanged;
 
         ObservableProperty() = default;
         ObservableProperty(ObservableProperty&&) = delete;
@@ -97,14 +97,9 @@ namespace Lupus {
         {
             mValue = value;
             OnUpdate(value);
-            mValueChanged.Fire(this, value);
+            mValueChanged(this, value);
 
             return *this;
-        }
-
-        ValueChangedEventHandle& ValueChanged() NOEXCEPT
-        {
-            return mValueChanged;
         }
 
         operator T() const
@@ -116,26 +111,23 @@ namespace Lupus {
         {
             mValue = value;
             OnUpdate(value);
-            mValueChanged.Fire(this, value);
+            mValueChanged(this, value);
 
             return *this;
         }
 
     private:
 
-        T mValue;
-        ValueChangedEventHandle mValueChanged;
+        T mValue = T();
     };
 
     class LUPUS_API ObservableObject : public IObservable<std::string>, public boost::noncopyable
     {
     public:
 
-        typedef Event<ObservableObject, const std::string&> PropertyChangedEventHandle;
+        Event<ObservableObject, const std::string&> PropertyChanged;
 
         virtual ~ObservableObject();
-
-        virtual PropertyChangedEventHandle& PropertyChanged() NOEXCEPT;
 
         template <typename T>
         void Add(const std::string& propertyName, const T& value = T())
@@ -153,6 +145,8 @@ namespace Lupus {
         void Set(const std::string& propertyName, const T& value)
         {
             mProperties[propertyName] = boost::any(value);
+            OnUpdate(propertyName);
+            PropertyChanged(this, propertyName);
         }
 
         void Remove(const std::string& propertyName) NOEXCEPT;
@@ -160,7 +154,6 @@ namespace Lupus {
 
     private:
 
-        PropertyChangedEventHandle mPropertyChanged;
         std::unordered_map<std::string, boost::any> mProperties;
     };
 }

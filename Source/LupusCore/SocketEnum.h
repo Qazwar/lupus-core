@@ -80,7 +80,7 @@ namespace Lupus {
             LupusFlagEnumeration(SocketFlags);
 
             enum SocketError {
-                // TODO: Werte eintragen
+                // TODO: Werte eintragen.
             };
         }
     }

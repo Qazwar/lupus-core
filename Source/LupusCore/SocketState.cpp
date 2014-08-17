@@ -278,6 +278,7 @@ namespace Lupus {
                     throw std::out_of_range("offset and size does not match buffer size");
                 }
 
+                // TODO: SocketError setzen.
                 return recv(socket->Handle(), (char*)buffer.data() + offset, (int)size, (int)socketFlags);
             }
 
@@ -287,6 +288,7 @@ namespace Lupus {
                     throw std::out_of_range("offset and size does not match buffer size");
                 }
 
+                // TODO: SocketError setzen.
                 return send(socket->Handle(), (const char*)buffer.data() + offset, (int)size, (int)socketFlags);
             }
 

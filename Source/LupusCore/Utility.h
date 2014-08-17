@@ -89,4 +89,50 @@ namespace Lupus {
         t.s = src;
         return t.d;
     }
+
+    template <typename T>
+    class readonly
+    {
+    public:
+        readonly() = delete;
+        readonly(const readonly&) = delete;
+        readonly(readonly&&) = delete;
+        ~readonly() = default;
+        readonly& operator=(const readonly&) = delete;
+        readonly& operator=(readonly&&) = delete;
+
+        T& operator->()
+        {
+            return mValue;
+        }
+
+        const T& operator->() const
+        {
+            return mValue;
+        }
+
+        T* operator&()
+        {
+            return std::addressof(mValue);
+        }
+
+        const T* operator&() const
+        {
+            return std::addressof(mValue);
+        }
+
+        operator T()
+        {
+            return mValue;
+        }
+
+        operator T() const
+        {
+            return mValue;
+        }
+
+    private:
+
+        T mValue;
+    };
 }
