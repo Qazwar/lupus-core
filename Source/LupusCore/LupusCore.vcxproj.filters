@@ -100,6 +100,15 @@
     <Filter Include="Lupus\Security\Athentication\.h">
       <UniqueIdentifier>{e14b23aa-5abc-464f-aaf4-a85ecd07e701}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lupus\Windows">
+      <UniqueIdentifier>{8cd60b62-9b2e-40c7-9a83-86eed2336e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Windows\.cpp">
+      <UniqueIdentifier>{ca36a466-1416-4ceb-8edc-2a7570573e51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Windows\.h">
+      <UniqueIdentifier>{fd2d645a-654f-48cc-a56f-f01aeff24fc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgCommand.cpp">
@@ -200,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="AsymmetricAlgorithm.cpp">
       <Filter>Lupus\Security\Cryptography\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Observable.cpp">
+      <Filter>Lupus\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +364,12 @@
     </ClInclude>
     <ClInclude Include="KeyAgreementAlgorithm.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Lupus\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Observable.h">
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

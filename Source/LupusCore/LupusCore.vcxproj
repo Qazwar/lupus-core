@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="AsymmetricAlgorithm.cpp" />
     <ClCompile Include="AuthenticatedStream.cpp" />
+    <ClCompile Include="Observable.cpp" />
     <ClCompile Include="SymmetricAlgorithm.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Connection.cpp" />
@@ -65,6 +66,7 @@
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="CryptoRSA.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="SymmetricAlgorithm.h" />
