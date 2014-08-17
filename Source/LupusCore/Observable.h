@@ -36,31 +36,31 @@ namespace Lupus {
 
         virtual ~IObservable() = default;
 
-        void Attach(std::shared_ptr<IObserver<T>> observer)
+        virtual void Attach(std::shared_ptr<IObserver<T>> observer) final
         {
             mObservers.push_back(observer);
         }
 
-        void Detach(std::shared_ptr<IObserver<T>> observer) NOEXCEPT
+        virtual void Detach(std::shared_ptr<IObserver<T>> observer) NOEXCEPT final
         {
             std::remove(std::begin(mObservers), std::end(mObservers), observer);
         }
 
-        void OnUpdate(const T& value) NOEXCEPT
+        virtual void OnUpdate(const T& value) NOEXCEPT final
         {
             std::for_each(std::begin(mObservers), std::end(mObservers), [&](std::shared_ptr<IObserver<T>> observer) {
                 observer->OnUpdate(value);
             });
         }
 
-        void OnError(std::exception& ex) NOEXCEPT
+        virtual void OnError(std::exception& ex) NOEXCEPT final
         {
             std::for_each(std::begin(mObservers), std::end(mObservers), [&](std::shared_ptr<IObserver<T>> observer) {
                 observer->OnError(ex);
             });
         }
 
-        void OnComplete() NOEXCEPT
+        virtual void OnComplete() NOEXCEPT final
         {
             std::for_each(std::begin(mObservers), std::end(mObservers), [](std::shared_ptr<IObserver<T>> observer) {
                 observer->OnComplete();
@@ -88,30 +88,30 @@ namespace Lupus {
             OnComplete();
         }
 
-        const T& Get() const
+        virtual const T& Get() const final
         {
             return mValue;
         }
 
-        ObservableProperty& Set(const T& value)
+        virtual ObservableProperty& Set(const T& value) final
         {
             mValue = value;
             OnUpdate(value);
-            mValueChanged(this, value);
+            ValueChanged(this, value);
 
             return *this;
         }
 
-        operator T() const
+        virtual operator T() const final
         {
             return mValue;
         }
 
-        ObservableProperty& operator=(const T& value)
+        virtual ObservableProperty& operator=(const T& value) final
         {
             mValue = value;
             OnUpdate(value);
-            mValueChanged(this, value);
+            ValueChanged(this, value);
 
             return *this;
         }
@@ -133,12 +133,20 @@ namespace Lupus {
         void Add(const std::string& propertyName, const T& value = T())
         {
             mProperties[propertyName] = boost::any(value);
+            OnUpdate(propertyName);
+            PropertyChanged(this, propertyName);
         }
 
         template <typename T>
-        void Get(const std::string& propertyName) const
+        T& Get(const std::string& propertyName)
         {
-            return boost::any_cast<T>(mProperties[propertyName]);
+            return boost::any_cast<const T&>(mProperties[propertyName]);
+        }
+
+        template <typename T>
+        const T& Get(const std::string& propertyName) const
+        {
+            return boost::any_cast<const T&>(mProperties[propertyName]);
         }
 
         template <typename T>
@@ -149,8 +157,8 @@ namespace Lupus {
             PropertyChanged(this, propertyName);
         }
 
-        void Remove(const std::string& propertyName) NOEXCEPT;
-        bool HasProperty(const std::string& propertyName) const NOEXCEPT;
+        virtual void Remove(const std::string& propertyName) NOEXCEPT final;
+        virtual bool HasProperty(const std::string& propertyName) const NOEXCEPT final;
 
     private:
 
