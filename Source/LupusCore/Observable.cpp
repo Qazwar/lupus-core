@@ -19,4 +19,14 @@ namespace Lupus {
             return (it.first == propertyName);
         }) != end(mProperties));
     }
+
+    boost::any& ObservableObject::operator[](const string& propertyName)
+    {
+        return mProperties.at(propertyName);
+    }
+
+    const boost::any& ObservableObject::operator[](const string& propertyName) const
+    {
+        return mProperties.at(propertyName);
+    }
 }

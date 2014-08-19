@@ -1,5 +1,7 @@
 #pragma once
 
+// TODO: Factory für Datenbanken einbauen.
+
 #include "Connection.h"
 
 struct pg_conn;

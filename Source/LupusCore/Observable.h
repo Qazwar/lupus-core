@@ -129,6 +129,11 @@ namespace Lupus {
 
         virtual ~ObservableObject();
 
+        virtual void Remove(const std::string& propertyName) NOEXCEPT final;
+        virtual bool HasProperty(const std::string& propertyName) const NOEXCEPT final;
+        virtual boost::any& operator[](const std::string& propertyName) NOEXCEPT final;
+        virtual const boost::any& operator[](const std::string& propertyName) const NOEXCEPT final;
+
         template <typename T>
         void Add(const std::string& propertyName, const T& value = T())
         {
@@ -150,9 +155,6 @@ namespace Lupus {
             OnUpdate(propertyName);
             PropertyChanged(this, propertyName);
         }
-
-        virtual void Remove(const std::string& propertyName) NOEXCEPT final;
-        virtual bool HasProperty(const std::string& propertyName) const NOEXCEPT final;
 
     private:
 
