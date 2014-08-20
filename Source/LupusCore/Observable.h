@@ -30,11 +30,11 @@ namespace Lupus {
     };
 
     template <typename T>
-    class LUPUS_API IObservable
+    class LUPUS_API Observable
     {
     public:
 
-        virtual ~IObservable() = default;
+        virtual ~Observable() = default;
 
         virtual void Attach(std::shared_ptr<IObserver<T>> observer) final
         {
@@ -72,21 +72,79 @@ namespace Lupus {
         std::vector<std::shared_ptr<IObserver<T>>> mObservers = std::vector<std::shared_ptr<IObserver<T>>>(32);
     };
 
-    template <typename T>
-    class LUPUS_API ObservableProperty : public IObservable<T>, public boost::noncopyable
+    template <typename Owner, typename T>
+    class LUPUS_API ObservableProperty : public boost::noncopyable
     {
+        friend Owner;
+
     public:
 
-        Event<ObservableProperty<T>, const T&> ValueChanged;
+        Event<ObservableProperty<Owner, T>, const T&> ValueChanged;
 
         ObservableProperty() = default;
         ObservableProperty(ObservableProperty&&) = delete;
         ObservableProperty& operator=(ObservableProperty&&) = delete;
+        ~ObservableProperty() = default;
 
-        virtual ~ObservableProperty()
+        virtual const T& Get() const final
         {
-            OnComplete();
+            if (mGetter) {
+                return mGetter();
+            } else {
+                throw std::runtime_error("getter is not set");
+            }
         }
+
+        virtual ObservableProperty& Set(const T& value) final
+        {
+            if (mSetter) {
+                mSetter(value);
+            } else {
+                throw std::runtime_error("setter is not set");
+            }
+
+            ValueChanged(this, value);
+            return *this;
+        }
+
+        virtual operator T() const final
+        {
+            if (mGetter) {
+                return mGetter();
+            } else {
+                throw std::runtime_error("getter is not set");
+            }
+        }
+
+        virtual ObservableProperty& operator=(const T& value) final
+        {
+            if (mSetter) {
+                mSetter(value);
+            } else {
+                throw std::runtime_error("setter is not set");
+            }
+
+            ValueChanged(this, value);
+            return *this;
+        }
+
+    private:
+
+        std::function<const T&()> mGetter;
+        std::function<void(const T&)> mSetter;
+    };
+
+    template <typename T>
+    class ObservableProperty < void, T >
+    {
+    public:
+
+        Event<ObservableProperty<void, T>, const T&> ValueChanged;
+
+        ObservableProperty() = default;
+        ObservableProperty(ObservableProperty&&) = delete;
+        ObservableProperty& operator=(ObservableProperty&&) = delete;
+        ~ObservableProperty() = default;
 
         virtual const T& Get() const final
         {
@@ -96,7 +154,6 @@ namespace Lupus {
         virtual ObservableProperty& Set(const T& value) final
         {
             mValue = value;
-            OnUpdate(value);
             ValueChanged(this, value);
 
             return *this;
@@ -110,7 +167,6 @@ namespace Lupus {
         virtual ObservableProperty& operator=(const T& value) final
         {
             mValue = value;
-            OnUpdate(value);
             ValueChanged(this, value);
 
             return *this;
@@ -121,13 +177,14 @@ namespace Lupus {
         T mValue = T();
     };
 
-    class LUPUS_API ObservableObject : public IObservable<std::string>, public boost::noncopyable
+    class LUPUS_API ObservableObject : public boost::noncopyable
     {
     public:
 
         Event<ObservableObject, const std::string&> PropertyChanged;
 
-        virtual ~ObservableObject();
+        ObservableObject() = default;
+        virtual ~ObservableObject() = default;
 
         virtual void Remove(const std::string& propertyName) NOEXCEPT final;
         virtual bool HasProperty(const std::string& propertyName) const NOEXCEPT final;
@@ -138,7 +195,6 @@ namespace Lupus {
         void Add(const std::string& propertyName, const T& value = T())
         {
             mProperties[propertyName] = boost::any(value);
-            OnUpdate(propertyName);
             PropertyChanged(this, propertyName);
         }
 
@@ -152,7 +208,6 @@ namespace Lupus {
         void Set(const std::string& propertyName, const T& value)
         {
             mProperties[propertyName] = boost::any(value);
-            OnUpdate(propertyName);
             PropertyChanged(this, propertyName);
         }
 

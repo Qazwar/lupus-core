@@ -3,6 +3,8 @@
 #include "Utility.h"
 #include "Event.h"
 #include "Observable.h"
+#include "Size.h"
+#include "Point.h"
 
 #include <boost/noncopyable.hpp>
 
@@ -15,23 +17,30 @@ namespace Lupus {
             template <typename... Args>
             using WindowEvent = Event < Window, Args... > ;
 
+            template <typename T>
+            using WindowProperty = ObservableProperty < Window, T > ;
+
             Window();
             virtual ~Window();
 
             // Properties
 
-            ObservableProperty<std::string> Uid;
-            ObservableProperty<std::string> Title;
-            ObservableProperty<float> Brightness;
-            ObservableProperty<bool> Grabbed;
-            ObservableProperty<int> MaxWidth;
-            ObservableProperty<int> MinWidth;
-            ObservableProperty<int> MaxHeight;
-            ObservableProperty<int> MinHeight;
-            ObservableProperty<int> Width;
-            ObservableProperty<int> Height;
-            ObservableProperty<int> Left;
-            ObservableProperty<int> Top;
+            ObservableProperty<void, std::string> Uid;
+            WindowProperty<std::string> Title;
+            WindowProperty<float> Brightness;
+            WindowProperty<bool> Grabbed;
+            WindowProperty<int> MaxWidth;
+            WindowProperty<int> MinWidth;
+            WindowProperty<int> MaxHeight;
+            WindowProperty<int> MinHeight;
+            WindowProperty<int> Width;
+            WindowProperty<int> Height;
+            WindowProperty<int> Left;
+            WindowProperty<int> Top;
+            WindowProperty<Math::Size<int>> MaxSize;
+            WindowProperty<Math::Size<int>> MinSize;
+            WindowProperty<Math::Size<int>> Size;
+            WindowProperty<Math::Point<int>> Position;
 
             // Methods
 

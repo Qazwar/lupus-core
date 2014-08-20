@@ -3,11 +3,6 @@
 using namespace std;
 
 namespace Lupus {
-    ObservableObject::~ObservableObject()
-    {
-        OnComplete();
-    }
-
     void ObservableObject::Remove(const string& propertyName)
     {
         mProperties.erase(propertyName);

@@ -70,6 +70,9 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
     <ClInclude Include="Observable.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Size.h" />
     <ClInclude Include="SymmetricAlgorithm.h" />
     <ClInclude Include="CryptoBlockCipher.h" />
     <ClInclude Include="DataColumn.h" />

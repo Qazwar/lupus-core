@@ -1,6 +1,6 @@
 #include "Utility.h"
 
-#include <cryptopp/cryptlib.h>
+#include <cryptopp/osrng.h>
 
 using namespace std;
 
@@ -9,7 +9,7 @@ namespace Lupus {
     {
         static const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const size_t size = sizeof(alphanum);
-        CryptoPP::RandomNumberGenerator rng;
+        CryptoPP::AutoSeededRandomPool rng;
         string str(N, ' ');
 
         if (N == 0) {

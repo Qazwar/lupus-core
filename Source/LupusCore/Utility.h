@@ -75,8 +75,9 @@ namespace Lupus {
     LupusDefineError(not_supported);
     LupusDefineError(unauthorized_access);
     LupusDefineError(authentication_error);
+    LupusDefineError(format_error);
 
-    LUPUS_API std::string RandomString(unsigned);
+    LUPUS_API std::string RandomString(unsigned length);
 
     template <typename Dest, typename Src>
     Dest force_cast(const Src& src)

@@ -109,6 +109,15 @@
     <Filter Include="Lupus\Windows\.h">
       <UniqueIdentifier>{fd2d645a-654f-48cc-a56f-f01aeff24fc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lupus\Math">
+      <UniqueIdentifier>{850aaf51-6418-46d5-b31d-0ef5e9d28e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Math\.cpp">
+      <UniqueIdentifier>{bb5da345-b7a1-446f-b1d7-f719693b6a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Math\.h">
+      <UniqueIdentifier>{1c122002-63be-43ed-aa6f-bd7bd582de68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgCommand.cpp">
@@ -376,6 +385,15 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Lupus\Windows\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Lupus\Math\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Lupus\Math\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Lupus\Math\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
