@@ -86,7 +86,7 @@ namespace Lupus {
         ObservableProperty& operator=(ObservableProperty&&) = delete;
         ~ObservableProperty() = default;
 
-        virtual const T& Get() const final
+        virtual T Get() const final
         {
             if (mGetter) {
                 return mGetter();
@@ -130,7 +130,7 @@ namespace Lupus {
 
     private:
 
-        std::function<const T&()> mGetter;
+        std::function<T()> mGetter;
         std::function<void(const T&)> mSetter;
     };
 

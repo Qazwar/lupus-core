@@ -62,14 +62,17 @@ namespace Lupus {
 
             bool Contains(const Point<T>& point) const NOEXCEPT
             {
+                return false;
             }
 
             bool Contains(const Rectangle<T>& rect) const NOEXCEPT
             {
+                return false;
             }
 
             bool Contains(T x, T y) const NOEXCEPT
             {
+                return false;
             }
 
             std::string ToString() const

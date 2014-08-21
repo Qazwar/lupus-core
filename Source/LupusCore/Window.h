@@ -6,7 +6,13 @@
 #include "Size.h"
 #include "Point.h"
 
+#include <unordered_map>
 #include <boost/noncopyable.hpp>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 
 namespace Lupus {
     namespace Windows {
@@ -20,7 +26,7 @@ namespace Lupus {
             template <typename T>
             using WindowProperty = ObservableProperty < Window, T > ;
 
-            Window();
+            Window() throw(std::runtime_error);
             virtual ~Window();
 
             // Properties
@@ -29,18 +35,11 @@ namespace Lupus {
             WindowProperty<std::string> Title;
             WindowProperty<float> Brightness;
             WindowProperty<bool> Grabbed;
-            WindowProperty<int> MaxWidth;
-            WindowProperty<int> MinWidth;
-            WindowProperty<int> MaxHeight;
-            WindowProperty<int> MinHeight;
-            WindowProperty<int> Width;
-            WindowProperty<int> Height;
-            WindowProperty<int> Left;
-            WindowProperty<int> Top;
             WindowProperty<Math::Size<int>> MaxSize;
             WindowProperty<Math::Size<int>> MinSize;
             WindowProperty<Math::Size<int>> Size;
             WindowProperty<Math::Point<int>> Position;
+            //WindowProperty<Math::Rectangle<int>> Rectangle;
 
             // Methods
 
@@ -51,8 +50,9 @@ namespace Lupus {
             virtual void Minimize() final;
             virtual void Raise() final;
             virtual void Restore() final;
-            virtual void Show(bool modal = false) final;
-            virtual void Refresh() final;
+            virtual void Show() final;
+            virtual void ShowDialog() final;
+            virtual void Refresh() throw(std::runtime_error) final;
 
             // Events
 
@@ -85,9 +85,19 @@ namespace Lupus {
             //! Fenster soll geschlossen werden.
             WindowEvent<> Close;
 
-        protected:
+            static Window* GetWindowFromId(uint32_t);
+
+            static const int PositionCentered;
+            static const int PositionUndefined;
+
+        private:
 
             void* mHandle = nullptr;
+            static std::unordered_map<uint32_t, Window*> smMappedWindows;
         };
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
