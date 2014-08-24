@@ -5,6 +5,7 @@
 #include "Observable.h"
 #include "Size.h"
 #include "Point.h"
+#include "Rectangle.h"
 
 #include <unordered_map>
 #include <boost/noncopyable.hpp>
@@ -16,6 +17,23 @@
 
 namespace Lupus {
     namespace Windows {
+        enum class WindowFlags {
+            None = LupusNoFlag,
+            Fullscreen = LupusFlagNumber(0),
+            FullscreenDesktop = LupusFlagNumber(1),
+            Shown = LupusFlagNumber(2),
+            Hidden = LupusFlagNumber(3),
+            Borderless = LupusFlagNumber(4),
+            Resizable = LupusFlagNumber(5),
+            Minimized = LupusFlagNumber(6),
+            Maximized = LupusFlagNumber(7),
+            InputGrabbed = LupusFlagNumber(8),
+            InptuFocus = LupusFlagNumber(9),
+            MouseFocus = LupusFlagNumber(10),
+            AllowHighDPI = LupusFlagNumber(11)
+        };
+        LupusFlagEnumeration(WindowFlags);
+
         // TODO: Schnittstelle ausbauen und Klasse implementieren.
         class LUPUS_API Window : public boost::noncopyable
         {
@@ -26,7 +44,12 @@ namespace Lupus {
             template <typename T>
             using WindowProperty = ObservableProperty < Window, T > ;
 
-            Window() throw(std::runtime_error);
+            Window(WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(int x, int y, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(int x, int y, int w, int h, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(const Math::Point<int>& position, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(const Math::Point<int>& position, const Math::Size<int>& size, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
             virtual ~Window();
 
             // Properties
@@ -39,7 +62,7 @@ namespace Lupus {
             WindowProperty<Math::Size<int>> MinSize;
             WindowProperty<Math::Size<int>> Size;
             WindowProperty<Math::Point<int>> Position;
-            //WindowProperty<Math::Rectangle<int>> Rectangle;
+            WindowProperty<Math::Rectangle<int>> Rectangle;
 
             // Methods
 
@@ -91,6 +114,9 @@ namespace Lupus {
             static const int PositionUndefined;
 
         private:
+
+            uint32_t ConvertFlags(WindowFlags flags);
+            void SetPropertyHandles();
 
             void* mHandle = nullptr;
             static std::unordered_map<uint32_t, Window*> smMappedWindows;

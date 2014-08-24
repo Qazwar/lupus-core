@@ -66,6 +66,10 @@
         return lhs; \
     }
 
+#define LupusFlagNumber(x) (0x00000001 << x)
+#define LupusNoFlag 0
+#define LupusHasFlag(flag, flags) ((flags & flag) == flag)
+
 namespace Lupus {
     LupusDefineError(null_pointer);
     LupusDefineError(sql_error);

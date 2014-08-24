@@ -10,10 +10,30 @@ namespace Lupus {
         template <typename T>
         struct LUPUS_API Rectangle
         {
-            T X;
-            T Y;
-            T Width;
-            T Height;
+            T X = T();
+            T Y = T();
+            T Width = T();
+            T Height = T();
+
+            Rectangle() = default;
+            Rectangle(const Rectangle&) = default;
+            Rectangle& operator=(const Rectangle&) = default;
+
+            Rectangle(T x, T y, T w, T h)
+            {
+                X = x;
+                Y = y;
+                Width = w;
+                Height = h;
+            }
+
+            Rectangle(const Math::Point<T>& p, const Math::Size<T>& size)
+            {
+                X = p.X;
+                Y = p.Y;
+                Width = size.Width;
+                Height = size.Height;
+            }
 
             T Left() const NOEXCEPT
             {
@@ -53,6 +73,11 @@ namespace Lupus {
             Point<T> BottomRight() const NOEXCEPT
             {
                 return Point<T>(Right(), Bottom());
+            }
+
+            Point<T> Position() const NOEXCEPT
+            {
+                return TopLeft();
             }
 
             Math::Size<T> Size() const NOEXCEPT
