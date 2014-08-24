@@ -66,9 +66,8 @@
         return lhs; \
     }
 
-#define LupusFlagNumber(x) (0x00000001 << x)
-#define LupusNoFlag 0
-#define LupusHasFlag(flag, flags) ((flags & flag) == flag)
+#define LupusCreateFlag(name, n) name = (0x00000001 << n)
+#define LupusCreateNoFlag(name) name = 0
 
 namespace Lupus {
     LupusDefineError(null_pointer);
@@ -93,5 +92,11 @@ namespace Lupus {
 
         t.s = src;
         return t.d;
+    }
+
+    template <typename FlagType>
+    bool HasFlag(FlagType flag, FlagType flags)
+    {
+        return ((flags & flag) == flag);
     }
 }

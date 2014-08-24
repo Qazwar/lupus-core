@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "UIElement.h"
 #include <SDL/SDL_video.h>
 #include <SDL/SDL_render.h>
 
@@ -21,7 +22,24 @@ namespace Lupus {
             }
 
             mHandle = window;
-            SetPropertyHandles();
+            Initialize();
+        }
+        Window::Window(const string& title, WindowFlags flags)
+        {
+            SDL_Window* window = SDL_CreateWindow(
+                title.c_str(),
+                SDL_WINDOWPOS_UNDEFINED,
+                SDL_WINDOWPOS_UNDEFINED,
+                128,
+                128,
+                ConvertFlags(flags));
+
+            if (!window || !SDL_CreateRenderer(window, -1, 0)) {
+                throw runtime_error(SDL_GetError());
+            }
+
+            mHandle = window;
+            Initialize();
         }
 
         Window::Window(int x, int y, WindowFlags flags)
@@ -39,15 +57,15 @@ namespace Lupus {
             }
 
             mHandle = window;
-            SetPropertyHandles();
+            Initialize();
         }
         
         Window::Window(int x, int y, int w, int h, WindowFlags flags)
         {
             SDL_Window* window = SDL_CreateWindow(
                 "",
-                SDL_WINDOWPOS_UNDEFINED,
-                SDL_WINDOWPOS_UNDEFINED,
+                x,
+                y,
                 w,
                 h,
                 ConvertFlags(flags));
@@ -57,7 +75,7 @@ namespace Lupus {
             }
 
             mHandle = window;
-            SetPropertyHandles();
+            Initialize();
         }
         
         Window::Window(const Math::Point<int>& position, WindowFlags flags)
@@ -75,7 +93,7 @@ namespace Lupus {
             }
 
             mHandle = window;
-            SetPropertyHandles();
+            Initialize();
         }
         
         Window::Window(const Math::Point<int>& position, const Math::Size<int>& size, WindowFlags flags)
@@ -93,9 +111,9 @@ namespace Lupus {
             }
 
             mHandle = window;
-            SetPropertyHandles();
+            Initialize();
         }
-        
+
         Window::Window(const Math::Rectangle<int>& rect, WindowFlags flags)
         {
             SDL_Window* window = SDL_CreateWindow(
@@ -111,7 +129,25 @@ namespace Lupus {
             }
 
             mHandle = window;
-            SetPropertyHandles();
+            Initialize();
+        }
+
+        Window::Window(const string& title, const Math::Rectangle<int>& rect, WindowFlags flags)
+        {
+            SDL_Window* window = SDL_CreateWindow(
+                title.c_str(),
+                rect.X,
+                rect.Y,
+                rect.Width,
+                rect.Height,
+                ConvertFlags(flags));
+
+            if (!window || !SDL_CreateRenderer(window, -1, 0)) {
+                throw runtime_error(SDL_GetError());
+            }
+
+            mHandle = window;
+            Initialize();
         }
 
         Window::~Window()
@@ -134,6 +170,11 @@ namespace Lupus {
             return SDL_GetWindowDisplayIndex(force_cast<SDL_Window*>(mHandle));
         }
 
+        shared_ptr<UIElement> Window::Grid() const
+        {
+            return mGrid;
+        }
+
         void Window::Hide()
         {
             SDL_HideWindow(force_cast<SDL_Window*>(mHandle));
@@ -154,6 +195,18 @@ namespace Lupus {
             SDL_RaiseWindow(force_cast<SDL_Window*>(mHandle));
         }
 
+        void Window::Refresh()
+        {
+            auto renderer = SDL_GetRenderer(force_cast<SDL_Window*>(mHandle));
+            SDL_RenderPresent(renderer);
+
+            if (SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0) != 0) {
+                throw runtime_error(SDL_GetError());
+            } else if (SDL_RenderClear(renderer) != 0) {
+                throw runtime_error(SDL_GetError());
+            }
+        }
+
         void Window::Restore()
         {
             SDL_RestoreWindow(force_cast<SDL_Window*>(mHandle));
@@ -169,16 +222,14 @@ namespace Lupus {
             // TODO: Fenster anzeigen.
         }
 
-        void Window::Refresh()
+        shared_ptr<ObservableObject> Window::ViewModel() const
         {
-            auto renderer = SDL_GetRenderer(force_cast<SDL_Window*>(mHandle));
-            SDL_RenderPresent(renderer);
-            
-            if (SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0) != 0) {
-                throw runtime_error(SDL_GetError());
-            } else if (SDL_RenderClear(renderer) != 0) {
-                throw runtime_error(SDL_GetError());
-            }
+            return mViewModel;
+        }
+
+        void Window::ViewModel(shared_ptr<ObservableObject> viewModel)
+        {
+            mViewModel = viewModel;
         }
 
         Window* Window::GetWindowFromId(uint32_t id)
@@ -190,58 +241,58 @@ namespace Lupus {
         {
             uint32_t sdlFlags = 0;
 
-            if (LupusHasFlag(WindowFlags::AllowHighDPI, flags)) {
+            if (HasFlag(WindowFlags::AllowHighDPI, flags)) {
                 sdlFlags |= SDL_WINDOW_ALLOW_HIGHDPI;
             }
 
-            if (LupusHasFlag(WindowFlags::Borderless, flags)) {
+            if (HasFlag(WindowFlags::Borderless, flags)) {
                 sdlFlags |= SDL_WINDOW_BORDERLESS;
             }
 
-            if (LupusHasFlag(WindowFlags::Fullscreen, flags)) {
+            if (HasFlag(WindowFlags::Fullscreen, flags)) {
                 sdlFlags |= SDL_WINDOW_FULLSCREEN;
             }
 
-            if (LupusHasFlag(WindowFlags::FullscreenDesktop, flags)) {
+            if (HasFlag(WindowFlags::FullscreenDesktop, flags)) {
                 sdlFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
             }
 
-            if (LupusHasFlag(WindowFlags::Hidden, flags)) {
+            if (HasFlag(WindowFlags::Hidden, flags)) {
                 sdlFlags |= SDL_WINDOW_HIDDEN;
             }
 
-            if (LupusHasFlag(WindowFlags::InptuFocus, flags)) {
+            if (HasFlag(WindowFlags::InputFocus, flags)) {
                 sdlFlags |= SDL_WINDOW_INPUT_FOCUS;
             }
 
-            if (LupusHasFlag(WindowFlags::InputGrabbed, flags)) {
+            if (HasFlag(WindowFlags::InputGrabbed, flags)) {
                 sdlFlags |= SDL_WINDOW_INPUT_GRABBED;
             }
 
-            if (LupusHasFlag(WindowFlags::Maximized, flags)) {
+            if (HasFlag(WindowFlags::Maximized, flags)) {
                 sdlFlags |= SDL_WINDOW_MAXIMIZED;
             }
 
-            if (LupusHasFlag(WindowFlags::Minimized, flags)) {
+            if (HasFlag(WindowFlags::Minimized, flags)) {
                 sdlFlags |= SDL_WINDOW_MINIMIZED;
             }
 
-            if (LupusHasFlag(WindowFlags::MouseFocus, flags)) {
+            if (HasFlag(WindowFlags::MouseFocus, flags)) {
                 sdlFlags |= SDL_WINDOW_MOUSE_FOCUS;
             }
 
-            if (LupusHasFlag(WindowFlags::Resizable, flags)) {
+            if (HasFlag(WindowFlags::Resizable, flags)) {
                 sdlFlags |= SDL_WINDOW_RESIZABLE;
             }
 
-            if (LupusHasFlag(WindowFlags::Shown, flags)) {
+            if (HasFlag(WindowFlags::Shown, flags)) {
                 sdlFlags |= SDL_WINDOW_SHOWN;
             }
 
             return sdlFlags;
         }
 
-        void Window::SetPropertyHandles()
+        void Window::Initialize()
         {
             auto window = force_cast<SDL_Window*>(mHandle);
 
@@ -299,6 +350,7 @@ namespace Lupus {
             };
 
             smMappedWindows[SDL_GetWindowID(window)] = this;
+            mGrid = make_shared<UIElement>(); // TODO: Grid anstatt UIElement erstellen.
         }
 
         const int Window::PositionUndefined = SDL_WINDOWPOS_UNDEFINED;

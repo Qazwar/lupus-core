@@ -395,5 +395,8 @@
     <ClInclude Include="Point.h">
       <Filter>Lupus\Math\.h</Filter>
     </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Lupus\Windows\.h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -68,6 +68,7 @@
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="CryptoRSA.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="UIElement.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Point.h" />
