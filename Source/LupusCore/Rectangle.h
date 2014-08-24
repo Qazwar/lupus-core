@@ -5,7 +5,7 @@
 
 namespace Lupus {
     namespace Math {
-        // TODO: Rechteck ausbauen und implementieren
+        // TODO: Rechteck ausbauen und implementieren.
 
         template <typename T>
         struct LUPUS_API Rectangle
