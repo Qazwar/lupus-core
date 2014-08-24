@@ -227,21 +227,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PgCommand.h">
-      <Filter>Lupus\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="PgConnection.h">
-      <Filter>Lupus\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="PgDataReader.h">
-      <Filter>Lupus\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="PgOid.h">
-      <Filter>Lupus\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="PgTransaction.h">
-      <Filter>Lupus\Data\Postgres\.h</Filter>
-    </ClInclude>
     <ClInclude Include="DataColumn.h">
       <Filter>Lupus\Data\.h</Filter>
     </ClInclude>
@@ -356,19 +341,10 @@
     <ClInclude Include="IClonable.h">
       <Filter>Lupus\.h</Filter>
     </ClInclude>
-    <ClInclude Include="CryptoHash.h">
-      <Filter>Lupus\Security\Cryptography\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="CryptoBlockCipher.h">
-      <Filter>Lupus\Security\Cryptography\.h</Filter>
-    </ClInclude>
     <ClInclude Include="AsymmetricAlgorithm.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
     <ClInclude Include="SymmetricAlgorithm.h">
-      <Filter>Lupus\Security\Cryptography\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="CryptoRSA.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
     <ClInclude Include="Task.h">
@@ -397,6 +373,30 @@
     </ClInclude>
     <ClInclude Include="UIElement.h">
       <Filter>Lupus\Windows\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.PgCommand.h">
+      <Filter>Lupus\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.PgConnection.h">
+      <Filter>Lupus\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.PgDataReader.h">
+      <Filter>Lupus\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.PgOid.h">
+      <Filter>Lupus\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.PgTransaction.h">
+      <Filter>Lupus\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.CryptoRSA.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.CryptoHash.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Private.CryptoBlockCipher.h">
+      <Filter>Lupus\Security\Cryptography\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

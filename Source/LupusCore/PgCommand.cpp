@@ -1,6 +1,6 @@
-#include "PgCommand.h"
-#include "PgOid.h"
-#include "PgDataReader.h"
+#include "Private.PgCommand.h"
+#include "Private.PgOid.h"
+#include "Private.PgDataReader.h"
 #include "Parameter.h"
 #include "Utility.h"
 

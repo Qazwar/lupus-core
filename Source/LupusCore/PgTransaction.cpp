@@ -1,4 +1,4 @@
-#include "PgTransaction.h"
+#include "Private.PgTransaction.h"
 
 #include <postgres/libpq-fe.h>
 

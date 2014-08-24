@@ -1,5 +1,5 @@
 #include "HashAlgorithm.h"
-#include "CryptoHash.h"
+#include "Private.CryptoHash.h"
 #include <algorithm>
 #include <cctype>
 #include <cryptopp/sha.h>

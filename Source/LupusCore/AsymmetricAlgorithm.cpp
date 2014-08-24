@@ -1,5 +1,5 @@
 #include "AsymmetricAlgorithm.h"
-#include "CryptoRSA.h"
+#include "Private.CryptoRSA.h"
 #include <cryptopp/rsa.h>
 #include <cryptopp/files.h>
 

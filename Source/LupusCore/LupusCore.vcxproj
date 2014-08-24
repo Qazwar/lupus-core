@@ -66,7 +66,7 @@
   <ItemGroup>
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
-    <ClInclude Include="CryptoRSA.h" />
+    <ClInclude Include="Private.CryptoRSA.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
@@ -75,7 +75,7 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="SymmetricAlgorithm.h" />
-    <ClInclude Include="CryptoBlockCipher.h" />
+    <ClInclude Include="Private.CryptoBlockCipher.h" />
     <ClInclude Include="DataColumn.h" />
     <ClInclude Include="DataRow.h" />
     <ClInclude Include="DataTable.h" />
@@ -103,12 +103,12 @@
     <ClInclude Include="NetUtility.h" />
     <ClInclude Include="NetworkStream.h" />
     <ClInclude Include="Parameter.h" />
-    <ClInclude Include="PgCommand.h" />
-    <ClInclude Include="PgConnection.h" />
-    <ClInclude Include="PgDataReader.h" />
-    <ClInclude Include="PgOid.h" />
-    <ClInclude Include="PgTransaction.h" />
-    <ClInclude Include="CryptoHash.h" />
+    <ClInclude Include="Private.PgCommand.h" />
+    <ClInclude Include="Private.PgConnection.h" />
+    <ClInclude Include="Private.PgDataReader.h" />
+    <ClInclude Include="Private.PgOid.h" />
+    <ClInclude Include="Private.PgTransaction.h" />
+    <ClInclude Include="Private.CryptoHash.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="SocketEnum.h" />
     <ClInclude Include="SocketInformation.h" />

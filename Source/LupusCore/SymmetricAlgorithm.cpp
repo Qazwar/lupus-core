@@ -1,5 +1,5 @@
 #include "SymmetricAlgorithm.h"
-#include "CryptoBlockCipher.h"
+#include "Private.CryptoBlockCipher.h"
 #include <cryptopp/aes.h>
 #include <cryptopp/des.h>
 #include <cryptopp/serpent.h>

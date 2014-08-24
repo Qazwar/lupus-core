@@ -1,6 +1,6 @@
-#include "PgConnection.h"
-#include "PgCommand.h"
-#include "PgTransaction.h"
+#include "Private.PgConnection.h"
+#include "Private.PgCommand.h"
+#include "Private.PgTransaction.h"
 
 #include <thread>
 #include <postgres/libpq-fe.h>
