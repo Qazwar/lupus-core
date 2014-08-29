@@ -225,6 +225,9 @@
     <ClCompile Include="Window.cpp">
       <Filter>Lupus\Windows\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Uri.cpp">
+      <Filter>Lupus\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataColumn.h">
@@ -397,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="Private.CryptoBlockCipher.h">
       <Filter>Lupus\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Uri.h">
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -59,6 +59,7 @@
     <ClCompile Include="TcpListener.cpp" />
     <ClCompile Include="UdpClient.cpp" />
     <ClCompile Include="UnixLibrary.cpp" />
+    <ClCompile Include="Uri.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Win32Library.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="UdpClient.h" />
+    <ClInclude Include="Uri.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="X509Certificate.h" />
