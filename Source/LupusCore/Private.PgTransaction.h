@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "IsolationLevel.h"
 #include "ITransaction.h"

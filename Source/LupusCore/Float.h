@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include "Utility.h"
 
 namespace Lupus {
-	//! Klasse für die Konvertierung von Gleitpunktzahlen
+	//! Klasse fï¿½r die Konvertierung von Gleitpunktzahlen
     class LUPUS_API Float
 	{
 	public:

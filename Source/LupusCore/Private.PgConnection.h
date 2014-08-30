@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// TODO: Factory für Datenbanken einbauen.
+// TODO: Factory fï¿½r Datenbanken einbauen.
 
 #include "Connection.h"
 

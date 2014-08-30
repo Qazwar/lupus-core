@@ -1,4 +1,4 @@
-#include "SymmetricAlgorithm.h"
+﻿#include "SymmetricAlgorithm.h"
 #include "Private.CryptoBlockCipher.h"
 #include <cryptopp/aes.h>
 #include <cryptopp/des.h>

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <boost/any.hpp>
 #include <boost/noncopyable.hpp>

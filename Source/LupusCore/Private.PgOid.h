@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define BOOLOID			16
 #define BYTEAOID		17

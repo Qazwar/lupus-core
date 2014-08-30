@@ -1,17 +1,17 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Utility.h"
 #include <cstdint>
 
 namespace Lupus {
-	//! Basis für die Ganzzahlkonversion.
+	//! Basis fï¿½r die Ganzzahlkonversion.
 	enum class IntegerBase {
 		Octal,
 		Decimal,
 		Hexadecimal
 	};
 
-	//! Klasse für Ganzzahl konversionen.
+	//! Klasse fï¿½r Ganzzahl konversionen.
     class LUPUS_API Integer
 	{
 	public:
@@ -22,7 +22,7 @@ namespace Lupus {
 		/**
 		 * Konvertiert eine Ganzzahl zu ihrer entsprechenden Zeichenkette.
 		 *
-		 * \param[in] value Ganzzahl für die Konvertierung
+		 * \param[in] value Ganzzahl fï¿½r die Konvertierung
 		 * \param[in] base Basis der Ganzzahl (8, 10, 16)
 		 * \returns Entsprechende Zeichenkette der Ganzzahl
 		 */

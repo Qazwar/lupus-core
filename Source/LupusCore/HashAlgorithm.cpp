@@ -1,4 +1,4 @@
-#include "HashAlgorithm.h"
+﻿#include "HashAlgorithm.h"
 #include "Private.CryptoHash.h"
 #include <algorithm>
 #include <cctype>

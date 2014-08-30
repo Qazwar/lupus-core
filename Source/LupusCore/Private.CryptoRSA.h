@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "AsymmetricAlgorithm.h"
 #include <cryptopp/osrng.h>

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "HashAlgorithm.h"
 #include "Stream.h"

@@ -1,4 +1,4 @@
-#include "NetworkStream.h"
+﻿#include "NetworkStream.h"
 #include "Socket.h"
 
 #include <thread>

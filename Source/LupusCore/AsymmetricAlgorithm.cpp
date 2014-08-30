@@ -1,4 +1,4 @@
-#include "AsymmetricAlgorithm.h"
+﻿#include "AsymmetricAlgorithm.h"
 #include "Private.CryptoRSA.h"
 #include <cryptopp/rsa.h>
 #include <cryptopp/files.h>

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Utility.h"
 #include "IClonable.h"
@@ -67,7 +67,7 @@ namespace Lupus {
                 static SymmetricAlgorithmFactory& GetInstance() NOEXCEPT;
 
                 /*!
-                 * Unterstütze Algorithmen sind:
+                 * Unterstï¿½tze Algorithmen sind:
                  * - aes
                  * - 3des
                  * - tripledes

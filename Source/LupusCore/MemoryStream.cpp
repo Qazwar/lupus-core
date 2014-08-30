@@ -1,4 +1,4 @@
-#include "MemoryStream.h"
+﻿#include "MemoryStream.h"
 
 #include <iterator>
 

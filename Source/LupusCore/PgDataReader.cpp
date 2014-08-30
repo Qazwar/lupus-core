@@ -1,4 +1,4 @@
-#include "Private.PgDataReader.h"
+﻿#include "Private.PgDataReader.h"
 #include "Private.PgOid.h"
 
 #include <postgres/libpq-fe.h>

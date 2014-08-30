@@ -1,4 +1,4 @@
-#include "Window.h"
+﻿#include "Window.h"
 #include "UIElement.h"
 #include <SDL/SDL_video.h>
 #include <SDL/SDL_render.h>

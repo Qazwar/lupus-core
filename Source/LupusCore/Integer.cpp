@@ -1,4 +1,4 @@
-/* Copyright © 2014 David Wolf <d.wolf@live.at>
+ï»¿/* Copyright ï¿½ 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of LupusFramwork.
  *

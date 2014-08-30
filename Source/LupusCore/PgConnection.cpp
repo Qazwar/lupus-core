@@ -1,4 +1,4 @@
-#include "Private.PgConnection.h"
+﻿#include "Private.PgConnection.h"
 #include "Private.PgCommand.h"
 #include "Private.PgTransaction.h"
 

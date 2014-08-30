@@ -1,4 +1,4 @@
-#include "Private.PgCommand.h"
+ï»¿#include "Private.PgCommand.h"
 #include "Private.PgOid.h"
 #include "Private.PgDataReader.h"
 #include "Parameter.h"
@@ -170,7 +170,7 @@ namespace Lupus {
                         paramValues.push_back("");
                     }
 
-                    paramFormats.push_back(0); // 0 = string, 1 = binäre
+                    paramFormats.push_back(0); // 0 = string, 1 = binï¿½re
                 });
 
                 result = PQexecPrepared(mPgConn, mName.c_str(), (int)mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);

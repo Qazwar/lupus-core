@@ -1,4 +1,4 @@
-#include "Parameter.h"
+﻿#include "Parameter.h"
 
 namespace Lupus {
     namespace Data {

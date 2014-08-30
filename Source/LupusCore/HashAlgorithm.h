@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Utility.h"
 #include "IClonable.h"
@@ -50,7 +50,7 @@ namespace Lupus {
                 static HashAlgorithmFactory& GetInstance() NOEXCEPT;
 
                 /*!
-                 * Unterstütze Algorithmen sind:
+                 * Unterstï¿½tze Algorithmen sind:
                  * - sha1
                  * - sha224
                  * - sha256

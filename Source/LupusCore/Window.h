@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Utility.h"
 #include "Event.h"
@@ -96,15 +96,15 @@ namespace Lupus {
             WindowEvent<> Exposed;
             //! Fenster wurde bewegt.
             WindowEvent<> Moved;
-            //! Fenstergröße wurde verändert.
+            //! Fenstergrï¿½ï¿½e wurde verï¿½ndert.
             WindowEvent<> Resized;
-            //! Fentergröße hat sich verändert, wird nach Resized aufgerufen.
+            //! Fentergrï¿½ï¿½e hat sich verï¿½ndert, wird nach Resized aufgerufen.
             WindowEvent<> SizeChanged;
             //! Fenster wurde minimiert.
             WindowEvent<> Minimized;
             //! Fenster wurde maximiert.
             WindowEvent<> Maximized;
-            //! Fenster hat wieder Normalgröße.
+            //! Fenster hat wieder Normalgrï¿½ï¿½e.
             WindowEvent<> Restored;
             //! Fenster hat jetzt Mausfokus.
             WindowEvent<> Enter;
