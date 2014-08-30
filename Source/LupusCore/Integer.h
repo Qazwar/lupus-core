@@ -4,14 +4,14 @@
 #include <cstdint>
 
 namespace Lupus {
-	//! Basis f�r die Ganzzahlkonversion.
+	//! Basis für die Ganzzahlkonversion.
 	enum class IntegerBase {
 		Octal,
 		Decimal,
 		Hexadecimal
 	};
 
-	//! Klasse f�r Ganzzahl konversionen.
+	//! Klasse für Ganzzahl konversionen.
     class LUPUS_API Integer
 	{
 	public:
@@ -22,7 +22,7 @@ namespace Lupus {
 		/**
 		 * Konvertiert eine Ganzzahl zu ihrer entsprechenden Zeichenkette.
 		 *
-		 * \param[in] value Ganzzahl f�r die Konvertierung
+		 * \param[in] value Ganzzahl für die Konvertierung
 		 * \param[in] base Basis der Ganzzahl (8, 10, 16)
 		 * \returns Entsprechende Zeichenkette der Ganzzahl
 		 */

@@ -4,7 +4,7 @@
 #include "Utility.h"
 
 namespace Lupus {
-	//! Klasse f�r die Konvertierung von Gleitpunktzahlen
+	//! Klasse für die Konvertierung von Gleitpunktzahlen
     class LUPUS_API Float
 	{
 	public:
