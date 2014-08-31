@@ -25,15 +25,6 @@
     <Filter Include="Lupus\Net">
       <UniqueIdentifier>{b2a99a64-55ea-4dc1-85c9-ea2c47cc715f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lupus\Net\Http">
-      <UniqueIdentifier>{b7135b63-473a-44de-b3ee-3a5ca198d6b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lupus\Net\Http\.h">
-      <UniqueIdentifier>{505ebd95-3025-40fe-9159-701a838df325}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lupus\Net\Http\.cpp">
-      <UniqueIdentifier>{76abaa34-91a7-4dfc-8b83-d07b09206476}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Lupus\Net\Sockets">
       <UniqueIdentifier>{50f44233-935b-43d6-9540-afe097aed79a}</UniqueIdentifier>
     </Filter>
@@ -118,6 +109,12 @@
     <Filter Include="Lupus\Math\.h">
       <UniqueIdentifier>{1c122002-63be-43ed-aa6f-bd7bd582de68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lupus\Net\.cpp">
+      <UniqueIdentifier>{1143999c-0b62-4849-a723-4e3ac1bdf978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Net\.h">
+      <UniqueIdentifier>{928c131d-1194-4da4-8969-25c6e5dc47bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgCommand.cpp">
@@ -143,15 +140,6 @@
     </ClCompile>
     <ClCompile Include="Parameter.cpp">
       <Filter>Lupus\Data\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpRequest.cpp">
-      <Filter>Lupus\Net\Http\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpResponse.cpp">
-      <Filter>Lupus\Net\Http\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpServer.cpp">
-      <Filter>Lupus\Net\Http\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="IPAddress.cpp">
       <Filter>Lupus\Net\Sockets\.cpp</Filter>
@@ -228,6 +216,12 @@
     <ClCompile Include="Uri.cpp">
       <Filter>Lupus\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Version.cpp">
+      <Filter>Lupus\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpListenerRequest.cpp">
+      <Filter>Lupus\Net\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataColumn.h">
@@ -253,15 +247,6 @@
     </ClInclude>
     <ClInclude Include="Parameter.h">
       <Filter>Lupus\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpRequest.h">
-      <Filter>Lupus\Net\Http\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpResponse.h">
-      <Filter>Lupus\Net\Http\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpServer.h">
-      <Filter>Lupus\Net\Http\.h</Filter>
     </ClInclude>
     <ClInclude Include="IPAddress.h">
       <Filter>Lupus\Net\Sockets\.h</Filter>
@@ -403,6 +388,18 @@
     </ClInclude>
     <ClInclude Include="Uri.h">
       <Filter>Lupus\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Lupus\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListenerRequest.h">
+      <Filter>Lupus\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListenerContext.h">
+      <Filter>Lupus\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListener.h">
+      <Filter>Lupus\Net\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -155,9 +155,9 @@ namespace Lupus {
         }
 
         string result;
-        char* buffer = new char[value.size() * 3 + 1];
+        char* buffer = new char[value.size() * 6 + 1];
 
-        memset(buffer, 0, value.size() * 3 + 1);
+        memset(buffer, 0, value.size() * 6 + 1);
         uriEscapeA(value.c_str(), buffer, true, true);
         result = buffer;
         
@@ -195,9 +195,9 @@ namespace Lupus {
         }
 
         wstring result;
-        wchar_t* buffer = new wchar_t[value.size() * 3 + 1];
+        wchar_t* buffer = new wchar_t[value.size() * 6 + 1];
 
-        wmemset(buffer, 0, value.size() * 3 + 1);
+        wmemset(buffer, 0, value.size() * 6 + 1);
         uriEscapeW(value.c_str(), buffer, true, true);
         result = buffer;
 

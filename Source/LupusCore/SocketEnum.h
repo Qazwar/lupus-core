@@ -80,6 +80,47 @@ namespace Lupus {
             LupusFlagEnumeration(SocketFlags);
 
             enum SocketError {
+#ifdef _MSC_VER
+                NotInitialized = WSANOTINITIALISED,
+                NetworkDown = WSAENETDOWN,
+                SegFault = WSAEFAULT,
+                NotConnected = WSAENOTCONN,
+                Interrupted = WSAEINTR,
+                InProgress = WSAEINPROGRESS,
+                NetworkReset = WSAENETRESET,
+                NotSocket = WSAENOTSOCK,
+                NotSupported = WSAEOPNOTSUPP,
+                Shutdown = WSAESHUTDOWN,
+                WouldBlock = WSAEWOULDBLOCK,
+                MessageSize = WSAEMSGSIZE,
+                InvalidArgument = WSAEINVAL,
+                ConnectionAborted = WSAECONNABORTED,
+                Timeout = WSAETIMEDOUT,
+                ConnectionRefused = WSAECONNREFUSED,
+                Access = WSAEACCES,
+                NoBufferAvailable = WSAENOBUFS,
+                NotConnected = WSAENOTCONN,
+                RemoteHostUnreachable = WSAEHOSTUNREACH,
+                ConnectionReset = WSAECONNRESET
+#else
+                WouldBlock = EWOULDBLOCK,
+                InvalidSocket = EDADF,
+                ConnectionRefused = ECONNREFUSED,
+                SegFault = EFAULT,
+                Interrupted = EINTR,
+                InvalidArgument = EINVAL,
+                NotConnected = ENOTCONN,
+                NotSocket = ENOTSOCK,
+                Access = EACCES,
+                ConnectionReset = ECONNRESET,
+                NoAddressSet = EDESTADDRREQ,
+                IsAlreadyConnected = EISCONN,
+                MessageSize = EMSGSIZE,
+                NoBufferAvailable = ENOBUFS,
+                NoMemory = ENOMEM,
+                NotSupported = EOPNOTSUPP,
+                LocalEndShutdown = EPIPE
+#endif
                 // TODO: Werte eintragen.
             };
         }

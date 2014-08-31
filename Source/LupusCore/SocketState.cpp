@@ -278,8 +278,13 @@ namespace Lupus {
                     throw std::out_of_range("offset and size does not match buffer size");
                 }
 
-                // TODO: SocketError setzen.
-                return recv(socket->Handle(), (char*)buffer.data() + offset, (int)size, (int)socketFlags);
+                int result = recv(socket->Handle(), (char*)buffer.data() + offset, (int)size, (int)socketFlags);
+
+                if (result < 0) {
+                    errorCode = force_cast<SocketError>(result);
+                }
+
+                return result;
             }
 
             int Socket::SocketConnected::Send(Socket* socket, const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode)
@@ -288,8 +293,13 @@ namespace Lupus {
                     throw std::out_of_range("offset and size does not match buffer size");
                 }
 
-                // TODO: SocketError setzen.
-                return send(socket->Handle(), (const char*)buffer.data() + offset, (int)size, (int)socketFlags);
+                int result = send(socket->Handle(), (const char*)buffer.data() + offset, (int)size, (int)socketFlags);
+
+                if (result < 0) {
+                    errorCode = force_cast<SocketError>(result);
+                }
+
+                return result;
             }
 
             void Socket::SocketConnected::Shutdown(Socket* socket, SocketShutdown how)

@@ -36,7 +36,7 @@ namespace Lupus {
             {
                 auto index = string.find_first_of(',');
                 auto x = string.substr(0, index);
-                auto y = string.substr(index);
+                auto y = string.substr(index + 1);
 
                 if (index != string.find_last_not_of(',')) {
                     throw format_error();

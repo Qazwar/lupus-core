@@ -1,4 +1,5 @@
 ﻿#include "Utility.h"
+#include "Version.h"
 
 #include <cryptopp/osrng.h>
 
@@ -23,5 +24,11 @@ namespace Lupus {
         }
 
         return str;
+    }
+
+    shared_ptr<Version> GetLupusVersion()
+    {
+        static const shared_ptr<Version> sVersion = make_shared<Version>(0, 1);
+        return sVersion;
     }
 }

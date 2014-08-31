@@ -20,7 +20,7 @@ namespace Lupus {
         Uri(const std::wstring& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
         Uri(std::shared_ptr<Uri> baseUri, const std::string& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
         Uri(std::shared_ptr<Uri> baseUri, const std::wstring& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
-        Uri(std::shared_ptr<Uri> absoluteUri, std::shared_ptr<Uri> relativeUri) throw(std::runtime_error, std::bad_alloc, format_error);
+        Uri(std::shared_ptr<Uri> baseUri, std::shared_ptr<Uri> relativeUri) throw(std::runtime_error, std::bad_alloc, format_error);
 
         const std::string& Scheme() const NOEXCEPT;
         const std::string& UserInfo() const NOEXCEPT;

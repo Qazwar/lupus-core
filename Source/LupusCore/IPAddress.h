@@ -30,7 +30,7 @@ namespace Lupus {
                  *
                  * \param[in]   ipv4    Ganzzahl die eine IPv4 Adresse beinhaltet.
                  */
-                explicit IPAddress(size_t ipv4) NOEXCEPT;
+                explicit IPAddress(uint32_t ipv4) NOEXCEPT;
 
                 /*!
                  * Dieser Konstruktor ruft IPAddress(address, 0) auf.
@@ -90,14 +90,14 @@ namespace Lupus {
                 /*!
                  * \returns Den Scope Identifier der IPv6 Adresse.
                  */
-                virtual size_t ScopeId() const throw(socket_error);
+                virtual uint32_t ScopeId() const throw(socket_error);
 
                 /*!
                  * Setzt den Scope Identifier der IPv6 Adresse.
                  *
                  * \param[in]   value   Der neue Wert des Scope Identifiers.
                  */
-                virtual void ScopeId(size_t value) throw(socket_error);
+                virtual void ScopeId(uint32_t value) throw(socket_error);
 
                 /*!
                  * \returns Das Präsentationsformat der IP-Adresse.
@@ -160,7 +160,7 @@ namespace Lupus {
 
                 AddressFamily mFamily;
                 std::vector<uint8_t> mAddress;
-                size_t mScopeId = 0;
+                uint32_t mScopeId = 0;
             };
         }
     }

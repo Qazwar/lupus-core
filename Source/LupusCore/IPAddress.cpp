@@ -4,7 +4,7 @@
 namespace Lupus {
     namespace Net {
         namespace Sockets {
-            IPAddress::IPAddress(size_t ipv4) :
+            IPAddress::IPAddress(uint32_t ipv4) :
                 mFamily(AddressFamily::InterNetwork)
             {
                 ipv4 = HostToNetworkOrder(ipv4);
@@ -57,12 +57,12 @@ namespace Lupus {
                 return false;
             }
 
-            size_t IPAddress::ScopeId() const
+            uint32_t IPAddress::ScopeId() const
             {
                 return mScopeId;
             }
 
-            void IPAddress::ScopeId(size_t value)
+            void IPAddress::ScopeId(uint32_t value)
             {
                 mScopeId = value;
             }

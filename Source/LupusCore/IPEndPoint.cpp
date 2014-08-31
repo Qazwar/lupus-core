@@ -5,7 +5,7 @@
 namespace Lupus {
     namespace Net {
         namespace Sockets {
-            IPEndPoint::IPEndPoint(size_t address, uint16_t port) :
+            IPEndPoint::IPEndPoint(uint32_t address, uint16_t port) :
                 IPEndPoint(std::make_shared<IPAddress>(address), port)
             {
             }

@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="AsymmetricAlgorithm.cpp" />
     <ClCompile Include="AuthenticatedStream.cpp" />
+    <ClCompile Include="HttpListenerRequest.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="SymmetricAlgorithm.cpp" />
     <ClCompile Include="Command.cpp" />
@@ -38,9 +39,6 @@
     <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="Float.cpp" />
     <ClCompile Include="HashAlgorithm.cpp" />
-    <ClCompile Include="HttpRequest.cpp" />
-    <ClCompile Include="HttpResponse.cpp" />
-    <ClCompile Include="HttpServer.cpp" />
     <ClCompile Include="Integer.cpp" />
     <ClCompile Include="IPAddress.cpp" />
     <ClCompile Include="IPEndPoint.cpp" />
@@ -61,12 +59,16 @@
     <ClCompile Include="UnixLibrary.cpp" />
     <ClCompile Include="Uri.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Version.cpp" />
     <ClCompile Include="Win32Library.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
+    <ClInclude Include="HttpListener.h" />
+    <ClInclude Include="HttpListenerContext.h" />
+    <ClInclude Include="HttpListenerRequest.h" />
     <ClInclude Include="Private.CryptoRSA.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="UIElement.h" />
@@ -83,9 +85,6 @@
     <ClInclude Include="DataType.h" />
     <ClInclude Include="Float.h" />
     <ClInclude Include="HashAlgorithm.h" />
-    <ClInclude Include="HttpRequest.h" />
-    <ClInclude Include="HttpResponse.h" />
-    <ClInclude Include="HttpServer.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="ICryptoTransform.h" />
@@ -121,6 +120,7 @@
     <ClInclude Include="UdpClient.h" />
     <ClInclude Include="Uri.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="Version.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="X509Certificate.h" />
   </ItemGroup>
@@ -228,6 +228,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;$(DXSDK_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
     <ClCompile>
@@ -244,6 +248,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;$(DXSDK_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -259,6 +267,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;$(DXSDK_DIR)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
@@ -275,6 +287,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;$(DXSDK_DIR)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -294,6 +310,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Release;$(DXSDK_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -313,6 +333,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Release;$(DXSDK_DIR)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

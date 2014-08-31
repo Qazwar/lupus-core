@@ -1,7 +1,12 @@
 ﻿#pragma once
 
 #include <string>
+#include <memory>
 #include <exception>
+
+#ifdef NOEXCEPT
+#undef NOEXCEPT
+#endif
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4290)
@@ -99,4 +104,6 @@ namespace Lupus {
     {
         return ((flags & flag) == flag);
     }
+
+    LUPUS_API std::shared_ptr<class Version> GetLupusVersion();
 }
