@@ -2,6 +2,8 @@
 Bin/*
 Temp/*
 Assets/*
+Source/*/[Bb]in/*
+Source/*/[Oo]bj/*
 
 ## Specific un-ignores
 !Temp/delete.me

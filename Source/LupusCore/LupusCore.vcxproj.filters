@@ -115,6 +115,9 @@
     <Filter Include="Lupus\Net\.h">
       <UniqueIdentifier>{928c131d-1194-4da4-8969-25c6e5dc47bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{260fe07a-f209-4cb7-a46a-502eb1b32e8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgCommand.cpp">

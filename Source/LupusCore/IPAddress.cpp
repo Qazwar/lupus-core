@@ -16,7 +16,7 @@ namespace Lupus {
             {
             }
 
-            IPAddress::IPAddress(const std::vector<uint8_t>& ipv6, size_t scopeid) :
+            IPAddress::IPAddress(const std::vector<uint8_t>& ipv6, uint32_t scopeid) :
                 mFamily(AddressFamily::InterNetworkV6)
             {
                 if (ipv6.size() != 16) {
@@ -135,7 +135,7 @@ namespace Lupus {
                 address->mAddress.clear();
 
                 if (inet_pton(AF_INET, ipString.c_str(), &(addr.sin_addr)) == 1) {
-                    address = new IPAddress(NetworkToHostOrder(*((size_t*)&addr.sin_addr)));
+                    address = new IPAddress(NetworkToHostOrder(*((uint32_t*)&addr.sin_addr)));
                 } else if (inet_pton(AF_INET6, ipString.c_str(), &(addr6.sin6_addr)) == 1) {
                     uint8_t* begin = (uint8_t*)&addr6.sin6_addr;
                     address = new IPAddress(0);

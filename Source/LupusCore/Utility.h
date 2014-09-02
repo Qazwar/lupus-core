@@ -105,5 +105,5 @@ namespace Lupus {
         return ((flags & flag) == flag);
     }
 
-    LUPUS_API std::shared_ptr<class Version> GetLupusVersion();
+    LUPUS_API std::shared_ptr<class Version> GetVersion();
 }

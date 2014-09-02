@@ -254,9 +254,6 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="StreamWolfServer.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\LupusCore\LupusCore.vcxproj">
       <Project>{40a04166-c40c-422e-93b4-b52cd76a296c}</Project>
     </ProjectReference>

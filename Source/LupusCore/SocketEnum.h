@@ -99,7 +99,6 @@ namespace Lupus {
                 ConnectionRefused = WSAECONNREFUSED,
                 Access = WSAEACCES,
                 NoBufferAvailable = WSAENOBUFS,
-                NotConnected = WSAENOTCONN,
                 RemoteHostUnreachable = WSAEHOSTUNREACH,
                 ConnectionReset = WSAECONNRESET
 #else

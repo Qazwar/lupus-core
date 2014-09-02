@@ -1,0 +1,16 @@
+## LupusCore ##
+- 0.1 HTTP/HTTPS Protokoll funktioniert.
+- 0.2 Streamingklassen funktionieren.
+-- ::Stream
+-- ::InputStream
+-- ::OutputStream
+-- IO::MemoryStream
+-- IO::FileStream
+-- IO::BufferedStream
+-- IO::Compression::DeflateStream
+-- IO::Compression::GZipStream
+-- IO::Compression::ZLibStream
+-- Net::Security::AuthenticatedStream
+-- Net::Security::SslStream
+-- Net::Sockets::NetworkStream
+-- Security::Cryptography::CryptoStream

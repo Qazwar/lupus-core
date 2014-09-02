@@ -1,4 +1,4 @@
-#include "Version.h"
+﻿#include "Version.h"
 #include "Integer.h"
 #include <vector>
 
@@ -22,42 +22,42 @@ namespace Lupus {
         Version::Version(numbers[0], numbers[1], numbers[2], numbers[3]);
     }
 
-    Version::Version(int major, int minor) :
+    Version::Version(int32_t major, int32_t minor) :
         Version(major, minor, -1, -1)
     {
     }
 
-    Version::Version(int major, int minor, int build) :
+    Version::Version(int32_t major, int32_t minor, int32_t build) :
         Version(major, minor, build, -1)
     {
     }
 
-    Version::Version(int major, int minor, int build, int revision) :
+    Version::Version(int32_t major, int32_t minor, int32_t build, int32_t revision) :
         mMajor(major), mMinor(minor), mBuild(build), mRevision(revision)
     {
     }
 
-    int Version::Major() const
+    int32_t Version::Major() const
     {
         return mMajor;
     }
 
-    int Version::Minor() const
+    int32_t Version::Minor() const
     {
         return mMinor;
     }
 
-    int Version::Build() const
+    int32_t Version::Build() const
     {
         return mBuild;
     }
 
-    int Version::Revision() const
+    int32_t Version::Revision() const
     {
         return mRevision;
     }
 
-    short Version::MajorRevision() const
+    int16_t Version::MajorRevision() const
     {
         if (mRevision == -1) {
             return -1;
@@ -66,7 +66,7 @@ namespace Lupus {
         }
     }
 
-    short Version::MinorRevision() const
+    int16_t Version::MinorRevision() const
     {
         if (mRevision == -1) {
             return -1;
@@ -173,7 +173,7 @@ namespace Lupus {
     {
         try {
             result = Version::Parse(value);
-        } catch (format_error& e) {
+        } catch (format_error&) {
             return false;
         }
 

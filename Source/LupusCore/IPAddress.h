@@ -52,7 +52,7 @@ namespace Lupus {
                  * \param[in]   ipv6    Die IPv6 Adresse in Netzwerkformat.
                  * \param[in]   scopeid Der Scope Identifier der IPv6 Adresse.
                  */
-                IPAddress(const std::vector<uint8_t>& ipv6, size_t scopeid) throw(std::length_error);
+                IPAddress(const std::vector<uint8_t>& ipv6, uint32_t scopeid) throw(std::length_error);
 
                 /*!
                  * \sa IPAddress::IPAddress(const std::vector<uint8_t>&, size_t)
