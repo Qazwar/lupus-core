@@ -55,7 +55,7 @@ namespace Lupus {
 		/// <param name="nDefault">Specifies the default value to return if the key name cannot be found in the initialization file.</param>
 		/// <param name="lpFileName">Pointer to a null-terminated string that specifies the name of the initialization file. If this parameter does not contain a full path to the file, the system searches for the file in the Windows directory.</param>
 		/// <returns>The return value is the integer equivalent of the string following the specified key name in the specified initialization file. If the key is not found, the return value is the specified default value. If the value of the key is less than zero, the return value is zero.</returns>
-		[DllImport("KERNEL32.DLL", EntryPoint="GetPrivateProfileIntA", CharSet=CharSet.Ansi)]
+        [DllImport("KERNEL32.DLL", EntryPoint = "GetPrivateProfileIntW", CharSet = CharSet.Unicode)]
 		private static extern int GetPrivateProfileInt(string lpApplicationName, string lpKeyName, int nDefault, string lpFileName);
 		/// <summary>
 		/// The WritePrivateProfileString function copies a string into the specified section of an initialization file.
@@ -65,7 +65,7 @@ namespace Lupus {
 		/// <param name="lpString">Pointer to a null-terminated string to be written to the file. If this parameter is NULL, the key pointed to by the lpKeyName parameter is deleted.</param>
 		/// <param name="lpFileName">Pointer to a null-terminated string that specifies the name of the initialization file.</param>
 		/// <returns>If the function successfully copies the string to the initialization file, the return value is nonzero; if the function fails, or if it flushes the cached version of the most recently accessed initialization file, the return value is zero.</returns>
-		[DllImport("KERNEL32.DLL", EntryPoint="WritePrivateProfileStringA", CharSet=CharSet.Ansi)]
+        [DllImport("KERNEL32.DLL", EntryPoint = "WritePrivateProfileStringW", CharSet = CharSet.Unicode)]
 		private static extern int WritePrivateProfileString (string lpApplicationName, string lpKeyName, string lpString, string lpFileName);
 		/// <summary>
 		/// The GetPrivateProfileString function retrieves a string from the specified section in an initialization file.
@@ -77,7 +77,7 @@ namespace Lupus {
 		/// <param name="nSize">Specifies the size, in TCHARs, of the buffer pointed to by the lpReturnedString parameter.</param>
 		/// <param name="lpFileName">Pointer to a null-terminated string that specifies the name of the initialization file. If this parameter does not contain a full path to the file, the system searches for the file in the Windows directory.</param>
 		/// <returns>The return value is the number of characters copied to the buffer, not including the terminating null character.</returns>
-		[DllImport("KERNEL32.DLL", EntryPoint="GetPrivateProfileStringA",  CharSet=CharSet.Ansi)]
+        [DllImport("KERNEL32.DLL", EntryPoint = "GetPrivateProfileStringW", CharSet = CharSet.Unicode)]
 		private static extern int GetPrivateProfileString (string lpApplicationName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 		/// <summary>
 		/// The GetPrivateProfileSectionNames function retrieves the names of all sections in an initialization file.
@@ -86,7 +86,7 @@ namespace Lupus {
 		/// <param name="nSize">Specifies the size, in TCHARs, of the buffer pointed to by the lpszReturnBuffer parameter.</param>
 		/// <param name="lpFileName">Pointer to a null-terminated string that specifies the name of the initialization file. If this parameter is NULL, the function searches the Win.ini file. If this parameter does not contain a full path to the file, the system searches for the file in the Windows directory.</param>
 		/// <returns>The return value specifies the number of characters copied to the specified buffer, not including the terminating null character. If the buffer is not large enough to contain all the section names associated with the specified initialization file, the return value is equal to the length specified by nSize minus two.</returns>
-		[DllImport("KERNEL32.DLL", EntryPoint="GetPrivateProfileSectionNamesA", CharSet=CharSet.Ansi)]
+        [DllImport("KERNEL32.DLL", EntryPoint = "GetPrivateProfileSectionNamesW", CharSet = CharSet.Unicode)]
 		private static extern int GetPrivateProfileSectionNames (byte[] lpszReturnBuffer, int nSize, string lpFileName);
 		/// <summary>
 		/// The WritePrivateProfileSection function replaces the keys and values for the specified section in an initialization file.
@@ -95,7 +95,7 @@ namespace Lupus {
 		/// <param name="lpString">Pointer to a buffer containing the new key names and associated values that are to be written to the named section.</param>
 		/// <param name="lpFileName">Pointer to a null-terminated string containing the name of the initialization file. If this parameter does not contain a full path for the file, the function searches the Windows directory for the file. If the file does not exist and lpFileName does not contain a full path, the function creates the file in the Windows directory. The function does not create a file if lpFileName contains the full path and file name of a file that does not exist.</param>
 		/// <returns>If the function succeeds, the return value is nonzero.<br>If the function fails, the return value is zero.</br></returns>
-		[DllImport("KERNEL32.DLL", EntryPoint="WritePrivateProfileSectionA", CharSet=CharSet.Ansi)]
+        [DllImport("KERNEL32.DLL", EntryPoint = "WritePrivateProfileSectionW", CharSet = CharSet.Unicode)]
 		private static extern int WritePrivateProfileSection (string lpAppName, string lpString, string lpFileName);
 		/// <summary>Constructs a new IniReader instance.</summary>
 		/// <param name="file">Specifies the full path to the INI file (the file doesn't have to exist).</param>

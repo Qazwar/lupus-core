@@ -12,36 +12,16 @@ namespace AutoIncrementVersion
     {
         static void Main(string[] args)
         {
-            if (args == null) {
-                Console.WriteLine("Usage:");
-                Console.WriteLine("-v: Variablename(s) to set.");
-                Console.WriteLine("-p: Section name in Versin.ini.");
-                Console.WriteLine("-i: Increment version number.");
-                Console.WriteLine("-f: Path to file with version string.");
-                Console.WriteLine("-h: Print this message.");
-                Console.WriteLine("Press enter to end this program.");
-                Console.ReadLine();
+            if (args == null || args.Length == 0) {
+                Console.WriteLine("No arguments provided.");
                 return;
             }
 
-            IniReader reader = new IniReader("./Version.ini");
-            Arguments arguments = new Arguments(args);
-
-            if (arguments["p"] == null || arguments["v"] == null || arguments["f"] == null || arguments["h"] != null) {
-                Console.WriteLine("Usage:");
-                Console.WriteLine("-v: Variablename(s) to set.");
-                Console.WriteLine("-p: Section name in Versin.ini.");
-                Console.WriteLine("-i: Increment version number.");
-                Console.WriteLine("-f: Path to file with version string.");
-                Console.WriteLine("-h: Print this message.");
-                Console.WriteLine("Press enter to end this program.");
-                Console.ReadLine();
-                return;
-            }
-
-            string file = File.ReadAllText(args[1], Encoding.UTF8);
-            string[] variables = args[5].Split(' ');
-            string[] increment = args[7].Split(' ');
+            string iniFileName = "./" + args[0] + ".ini";
+            IniReader reader = new IniReader(iniFileName);
+            string file = File.ReadAllText(reader.ReadString(args[0], "File"), Encoding.UTF8);
+            string[] variables = reader.ReadString(args[0], "Variables").Split(' ');
+            string[] increment = reader.ReadString(args[0], "Increment").Split(' ');
 
             foreach (string variable in variables) {
                 if (variable.Length == 0) {
@@ -53,10 +33,10 @@ namespace AutoIncrementVersion
                     int vi = file.IndexOf(v);
                     int semicolon = file.IndexOf(';', vi);
                     int length = semicolon - vi;
-                    int version = reader.ReadInteger(args[3], variable);
+                    int version = reader.ReadInteger(args[0], variable);
 
                     if (increment.Contains(variable)) {
-                        reader.Write(args[3], variable, ++version);
+                        reader.Write(args[0], variable, ++version);
                     }
 
                     file = file.Replace(file.Substring(vi, length), v + version.ToString());
@@ -67,7 +47,7 @@ namespace AutoIncrementVersion
             }
 
             Console.WriteLine("Finished.");
-            File.WriteAllText(args[1], file, Encoding.UTF8);
+            File.WriteAllText(reader.ReadString(args[0], "File"), file, Encoding.UTF8);
         }
     }
 }

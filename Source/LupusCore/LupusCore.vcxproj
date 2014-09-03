@@ -229,8 +229,8 @@
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe -d $(ProjectDir)
-$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp -p $(ProjectName) -v "sMajor sMinor sBuild sRevision" -i sBuild</Command>
+      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe LupusCore
+$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe LupusCore</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
@@ -249,8 +249,8 @@ $(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe -d $(ProjectDir)
-$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp -p $(ProjectName) -v "sMajor sMinor sBuild sRevision" -i sBuild</Command>
+      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe LupusCore
+$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe LupusCore</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -268,8 +268,8 @@ $(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe -d $(ProjectDir)
-$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp -p $(ProjectName) -v "sMajor sMinor sBuild sRevision" -i sBuild</Command>
+      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe LupusCore
+$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe LupusCore</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
@@ -288,8 +288,8 @@ $(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe -d $(ProjectDir)
-$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp -p $(ProjectName) -v "sMajor sMinor sBuild sRevision" -i sBuild</Command>
+      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe LupusCore
+$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe LupusCore</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -311,7 +311,8 @@ $(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe -d $(ProjectDir)</Command>
+      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe LupusCore
+$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe LupusCore</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -333,7 +334,8 @@ $(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe -f $(ProjectDir)\Utility.cpp
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;angelscript.lib;cryptlib.lib;libpq.lib;pugixml.lib;SDL2_static.lib;uriparser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe -d $(ProjectDir)</Command>
+      <Command>$(SolutionDir)..\Bin\Debug\ToUTF8.exe LupusCore
+$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe LupusCore</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
