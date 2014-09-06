@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <string>
 #include <boost/noncopyable.hpp>
 
 #include "Utility.h"

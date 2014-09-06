@@ -100,7 +100,7 @@ namespace Lupus {
                 return false;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (
                     Integer::ToString(X) + "," +

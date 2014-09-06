@@ -22,10 +22,10 @@ namespace Lupus {
 
                     X509Certificate();
                     X509Certificate(const std::vector<uint8_t>& buffer);
-                    X509Certificate(const std::string& fileName);
+                    X509Certificate(const String& fileName);
                     X509Certificate(std::shared_ptr<X509Certificate> cert);
-                    X509Certificate(const std::vector<uint8_t>& buffer, const std::string& password);
-                    X509Certificate(const std::string& fileName, const std::string& password);
+                    X509Certificate(const std::vector<uint8_t>& buffer, const String& password);
+                    X509Certificate(const String& fileName, const String& password);
                 };
             }
         }

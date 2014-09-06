@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 
 #ifdef _MSC_VER
 

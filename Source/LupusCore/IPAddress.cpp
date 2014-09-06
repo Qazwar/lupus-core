@@ -67,15 +67,20 @@ namespace Lupus {
                 mScopeId = value;
             }
 
-            std::string IPAddress::ToString() const
+            String IPAddress::ToString() const
             {
                 in_addr addr;
                 in6_addr addr6;
-                char str[INET6_ADDRSTRLEN];
+#ifdef _UNICODE
+                wchar_t str[INET6_ADDRSTRLEN];
+                wmemset(str, 0, INET6_ADDRSTRLEN);
 
+#else
+                char str[INET6_ADDRSTRLEN];
+                memset(str, 0, INET6_ADDRSTRLEN);
+#endif
                 memset(&addr, 0, sizeof(in_addr));
                 memset(&addr6, 0, sizeof(in6_addr));
-                memset(str, 0, INET6_ADDRSTRLEN);
 
                 switch (Family()) {
                     case AddressFamily::InterNetwork:
@@ -124,7 +129,7 @@ namespace Lupus {
                 return true;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::Parse(const std::string& ipString)
+            std::shared_ptr<IPAddress> IPAddress::Parse(const String& ipString)
             {
                 IPAddress* address = new IPAddress(0);
                 AddrIn addr;
@@ -134,9 +139,10 @@ namespace Lupus {
                 memset(&addr6, 0, sizeof(AddrIn6));
                 address->mAddress.clear();
 
-                if (inet_pton(AF_INET, ipString.c_str(), &(addr.sin_addr)) == 1) {
+#ifdef _UNICODE
+                if (inet_pton(AF_INET, ipString.Data(), &(addr.sin_addr)) == 1) {
                     address = new IPAddress(NetworkToHostOrder(*((uint32_t*)&addr.sin_addr)));
-                } else if (inet_pton(AF_INET6, ipString.c_str(), &(addr6.sin6_addr)) == 1) {
+                } else if (inet_pton(AF_INET6, ipString.Data(), &(addr6.sin6_addr)) == 1) {
                     uint8_t* begin = (uint8_t*)&addr6.sin6_addr;
                     address = new IPAddress(0);
                     address->mAddress.clear();
@@ -148,11 +154,27 @@ namespace Lupus {
                 } else {
                     throw std::invalid_argument("Not a valid IP address presentation");
                 }
+#else
+                if (inet_pton(AF_INET, ipString.ToUTF8().c_str(), &(addr.sin_addr)) == 1) {
+                    address = new IPAddress(NetworkToHostOrder(*((uint32_t*)&addr.sin_addr)));
+                } else if (inet_pton(AF_INET6, ipString.ToUTF8().c_str(), &(addr6.sin6_addr)) == 1) {
+                    uint8_t* begin = (uint8_t*)&addr6.sin6_addr;
+                    address = new IPAddress(0);
+                    address->mAddress.clear();
+                    address->mAddress.reserve(16);
+
+                    for (int i = 0; i < 16; i++) { // Konvertiere von Netzwerk zu Host.
+                        address->mAddress.push_back(*(begin + i));
+                    }
+                } else {
+                    throw std::invalid_argument("Not a valid IP address presentation");
+                }
+#endif
 
                 return std::shared_ptr<IPAddress>(address);
             }
 
-            bool IPAddress::TryParse(const std::string& ipString, std::shared_ptr<IPAddress>& address)
+            bool IPAddress::TryParse(const String& ipString, std::shared_ptr<IPAddress>& address)
             {
                 try {
                     address = IPAddress::Parse(ipString);

@@ -13,7 +13,7 @@ namespace Lupus {
     namespace Security {
         namespace Cryptography {
             // TODO: Schnittstelle ausbauen und Klasse implementieren.
-            class LUPUS_API KeyExchangeAlgorithm : public IClonable, public boost::noncopyable
+            class LUPUS_API KeyExchangeAlgorithm : public IClonable<KeyExchangeAlgorithm>, public boost::noncopyable
             {
             public:
 

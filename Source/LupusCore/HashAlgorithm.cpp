@@ -25,7 +25,7 @@ namespace Lupus {
                 auto iterator = begin(output) + outputOffset;
 
                 if (buffer.size() > output.size() - outputOffset) {
-                    throw out_of_range("transformed bytes exceeding output vector");
+                    throw out_of_range("Transformed bytes exceeding output vector");
                 }
 
 
@@ -62,12 +62,12 @@ namespace Lupus {
                 return instance;
             }
 
-            shared_ptr<HashAlgorithm> HashAlgorithmFactory::Create(const string& hash) const
+            shared_ptr<HashAlgorithm> HashAlgorithmFactory::Create(const String& hash) const
             {
                 auto it = mPrototypes.find(hash);
 
                 if (it != end(mPrototypes)) {
-                    return dynamic_pointer_cast<HashAlgorithm>(it->second->Clone());
+                    return it->second->Clone();
                 }
 
                 return nullptr;

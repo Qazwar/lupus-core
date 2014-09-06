@@ -25,17 +25,17 @@ namespace Lupus {
             {
             }
 
-            void PgCommand::Text(const string& PgCommand)
+            void PgCommand::Text(const String& PgCommand)
             {
                 mQuery = PgCommand;
             }
 
-            string& PgCommand::Text()
+            String& PgCommand::Text()
             {
                 return mQuery;
             }
 
-            const string& PgCommand::Text() const
+            const String& PgCommand::Text() const
             {
                 return mQuery;
             }
@@ -70,9 +70,9 @@ namespace Lupus {
                 return make_shared<PgDataReader>(GetResult());
             }
             
-            vector<unordered_map<string, boost::any>> PgCommand::ExecuteScalar()
+            vector<unordered_map<String, boost::any>> PgCommand::ExecuteScalar()
             {
-                vector<unordered_map<string, boost::any>> scalar;
+                vector<unordered_map<String, boost::any>> scalar;
                 PGresult* result = GetResult();
                 
                 if (!result) {
@@ -84,7 +84,7 @@ namespace Lupus {
                 scalar.reserve(rows);
 
                 for (int i = 0; i < rows; i++) {
-                    unordered_map<string, boost::any> row;
+                    unordered_map<String, boost::any> row;
 
                     for (int j = 0; j < fields; j++) {
                         row[PQfname(result, j)] = (PQgetisnull(result, i, j) == 1) ? "" : PQgetvalue(result, i, j);
@@ -126,8 +126,8 @@ namespace Lupus {
                     }
                 });
 
-                mName = RandomString(8).c_str();
-                PGresult* result = PQprepare(mPgConn, mName.c_str(), mQuery.c_str(), (int)paramTypes.size(), paramTypes.data());
+                mName = RandomString(8);
+                PGresult* result = PQprepare(mPgConn, mName.ToUTF8().c_str(), mQuery.ToUTF8().c_str(), (int)paramTypes.size(), paramTypes.data());
 
                 if (!result) {
                     throw sql_error("database is not connected");
@@ -143,7 +143,7 @@ namespace Lupus {
                 PGresult* result = nullptr;
 
                 if (!mPrepared) {
-                    if (!(result = PQexec(mPgConn, mQuery.c_str()))) {
+                    if (!(result = PQexec(mPgConn, mQuery.ToUTF8().c_str()))) {
                         throw sql_error("database is not connected");
                     } else if (PQresultStatus(result) != PGRES_COMMAND_OK) {
                         throw sql_error("error while executing command");
@@ -159,21 +159,21 @@ namespace Lupus {
                 paramLengths.reserve(mParameters.size());
 
                 for_each(begin(mParameters), end(mParameters), [&paramValues, &paramLengths, &paramFormats](shared_ptr<Parameter>& param) {
-                    string value = boost::any_cast<string>(param->Value());
-                    paramLengths.push_back((int)value.length());
+                    String value = boost::any_cast<String>(param->Value());
+                    paramLengths.push_back((int)value.Length());
 
-                    if (value.empty()) {
-                        char* buffer = new char[value.length()];
-                        strncpy_s(buffer, value.length(), value.c_str(), value.length());
+                    if (value.IsEmpty()) {
+                        char* buffer = new char[value.Length()];
+                        strncpy_s(buffer, value.Length(), value.ToUTF8().c_str(), value.Length());
                         paramValues.push_back(buffer);
                     } else {
                         paramValues.push_back("");
                     }
 
-                    paramFormats.push_back(0); // 0 = string, 1 = bin�re
+                    paramFormats.push_back(0); // 0 = String, 1 = binär
                 });
 
-                result = PQexecPrepared(mPgConn, mName.c_str(), (int)mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);
+                result = PQexecPrepared(mPgConn, mName.ToUTF8().c_str(), (int)mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);
 
                 for_each(begin(paramValues), end(paramValues), [](const char* s) {
                     delete s;

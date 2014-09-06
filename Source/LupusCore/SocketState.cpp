@@ -141,11 +141,12 @@ namespace Lupus {
                 throw socket_error("Socket is not in an valid state for Shutdown");
             }
 
-            std::shared_ptr<Socket> Socket::SocketState::CreateSocket(SocketHandle h, AddrStorage s)
+            std::shared_ptr<Socket> Socket::SocketState::CreateSocket(Socket* socket, SocketHandle h, AddrStorage s)
             {
                 Socket* sock = new Socket();
                 sock->mHandle = h;
                 sock->mConnected = true;
+                sock->mLocal = socket->LocalEndPoint();
                 sock->mRemote = IPEndPointPtr(new IPEndPoint(std::vector<uint8_t>((uint8_t*)&s, (uint8_t*)&s + sizeof(AddrStorage))));
                 sock->mState = std::shared_ptr<Socket::SocketState>(new Socket::SocketConnected(sock));
                 return SocketPtr(sock);
@@ -242,7 +243,7 @@ namespace Lupus {
                     throw socket_error(GetLastSocketErrorString());
                 }
 
-                return CreateSocket(handle, storage);
+                return CreateSocket(socket, handle, storage);
             }
 
             Socket::SocketConnected::SocketConnected(Socket* s)

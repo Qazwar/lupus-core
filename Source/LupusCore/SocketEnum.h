@@ -120,7 +120,6 @@ namespace Lupus {
                 NotSupported = EOPNOTSUPP,
                 LocalEndShutdown = EPIPE
 #endif
-                // TODO: Werte eintragen.
             };
         }
     }

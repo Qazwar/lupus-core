@@ -8,7 +8,7 @@ using namespace std;
 namespace Lupus {
     namespace Data {
 
-        DataRow::DataRow(unordered_map<string, boost::any>& items)
+        DataRow::DataRow(unordered_map<String, boost::any>& items)
         {
             mItems = move(items);
 
@@ -35,19 +35,19 @@ namespace Lupus {
             return *mRefItems[i];
         }
 
-        boost::any& DataRow::operator[](const string& str)
+        boost::any& DataRow::operator[](const String& str)
         {
             if (mItems.find(str) == end(mItems)) {
-                throw std::invalid_argument("key does not exist");
+                throw std::invalid_argument("Key does not exist");
             }
 
             return mItems.at(str);
         }
 
-        const boost::any& DataRow::operator[](const string& str) const
+        const boost::any& DataRow::operator[](const String& str) const
         {
             if (mItems.find(str) == end(mItems)) {
-                throw std::invalid_argument("key does not exist");
+                throw std::invalid_argument("Key does not exist");
             }
 
             return mItems.at(str);
@@ -58,7 +58,7 @@ namespace Lupus {
             if (!column) {
                 throw null_pointer();
             } else if (mItems.find(column->Name()) == end(mItems)) {
-                throw std::invalid_argument("key does not exist");
+                throw std::invalid_argument("Key does not exist");
             }
 
             return mItems.at(column->Name());
@@ -69,7 +69,7 @@ namespace Lupus {
             if (!column) {
                 throw null_pointer();
             } else if (mItems.find(column->Name()) == end(mItems)) {
-                throw std::invalid_argument("key does not exist");
+                throw std::invalid_argument("Key does not exist");
             }
 
             return mItems.at(column->Name());
@@ -85,7 +85,7 @@ namespace Lupus {
             return mItems.empty();
         }
 
-        unordered_map<string, boost::any> DataRow::Items() const
+        unordered_map<String, boost::any> DataRow::Items() const
         {
             return mItems;
         }

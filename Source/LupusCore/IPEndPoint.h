@@ -4,7 +4,6 @@
 #include "SocketEnum.h"
 
 #include <vector>
-#include <string>
 #include <memory>
 #include <cstdint>
 #include <boost/noncopyable.hpp>

@@ -64,9 +64,9 @@ namespace Lupus {
 
                 virtual ~CryptoBlockCipher() = default;
 
-                virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
+                virtual std::shared_ptr<SymmetricAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::dynamic_pointer_cast<IClonable>(make_shared<CryptoBlockCipher<T>>());
+                    return std::dynamic_pointer_cast<SymmetricAlgorithm>(make_shared<CryptoBlockCipher<T>>());
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override

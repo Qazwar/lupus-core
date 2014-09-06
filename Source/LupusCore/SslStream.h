@@ -61,9 +61,9 @@ namespace Lupus {
                 virtual int KeyExchangeStrength() const NOEXCEPT;
                 virtual Lupus::Security::Authentication::SslProtocols SslProtocol() const NOEXCEPT;
 
-                virtual void AuthenticateAsClientAsync(const std::string& host, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
+                virtual void AuthenticateAsClientAsync(const String& host, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
                 virtual void AuthenticateAsClientAsync(
-                    const std::string& host,
+                    const String& host,
                     std::vector<
                         std::shared_ptr<
                             Lupus::Security::Cryptography::X509Certificates::X509Certificate
@@ -82,9 +82,9 @@ namespace Lupus {
                     bool checkRevocation,
                     std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
 
-                virtual void AuthenticateAsClient(const std::string& host);
+                virtual void AuthenticateAsClient(const String& host);
                 virtual void AuthenticateAsClient(
-                    const std::string& host, 
+                    const String& host, 
                     std::vector<
                         std::shared_ptr<
                             Lupus::Security::Cryptography::X509Certificates::X509Certificate

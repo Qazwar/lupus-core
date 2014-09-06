@@ -13,8 +13,8 @@ namespace Lupus {
 
             virtual ~Library();
 
-            virtual void* GetFunctionHandle(const std::string&) NOEXCEPT;
-            virtual void Load(const std::string&) throw(io_error);
+            virtual void* GetFunctionHandle(const String&) NOEXCEPT;
+            virtual void Load(const String&) throw(io_error);
             virtual void Unload() NOEXCEPT;
 
         private:

@@ -19,7 +19,7 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
+                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
                 {
                     return std::make_shared<CryptoHash<T>>();
                 }
@@ -74,7 +74,7 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
+                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
                 {
                     return std::make_shared<CryptoHash<CryptoPP::SHA3_224>>();
                 }
@@ -127,7 +127,7 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
+                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
                 {
                     return std::make_shared<CryptoHash<CryptoPP::SHA3_256>>();
                 }
@@ -180,7 +180,7 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
+                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
                 {
                     return std::make_shared<CryptoHash<CryptoPP::SHA3_384>>();
                 }
@@ -233,7 +233,7 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
+                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
                 {
                     return std::make_shared<CryptoHash<CryptoPP::SHA3_512>>();
                 }

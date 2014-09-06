@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 #include "Integer.h"
 #include "Float.h"
 
@@ -27,24 +27,24 @@ namespace Lupus {
                 Y = y;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Integer::ToString(X) + "," + Integer::ToString(Y));
             }
 
-            static Point Parse(const std::string& string) throw(format_error)
+            static Point Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto x = string.substr(0, index);
-                auto y = string.substr(index + 1);
+                auto index = str.IndexOf(",");
+                auto x = str.Substring(0, index);
+                auto y = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Point point;
                 if (!Integer::TryParse(x, point.X) || !Integer::TryParse(y, point.Y)) {
-                    throw format_error();
+                    throw format_error("Invalid number");
                 }
 
                 return point;
@@ -82,19 +82,19 @@ namespace Lupus {
                 Y = y;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Float::ToString(X) + "," + Float::ToString(Y));
             }
 
-            static Point Parse(const std::string& string) throw(format_error)
+            static Point Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto x = string.substr(0, index);
-                auto y = string.substr(index);
+                auto index = str.IndexOf(",");
+                auto x = str.Substring(0, index);
+                auto y = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Point point;
@@ -137,19 +137,19 @@ namespace Lupus {
                 Y = y;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Float::ToString(X) + "," + Float::ToString(Y));
             }
 
-            static Point Parse(const std::string& string) throw(format_error)
+            static Point Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto x = string.substr(0, index);
-                auto y = string.substr(index);
+                auto index = str.IndexOf(",");
+                auto x = str.Substring(0, index);
+                auto y = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Point point;
@@ -192,19 +192,19 @@ namespace Lupus {
                 Y = y;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Float::ToString(X) + "," + Float::ToString(Y));
             }
 
-            static Point Parse(const std::string& string) throw(format_error)
+            static Point Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto x = string.substr(0, index);
-                auto y = string.substr(index);
+                auto index = str.IndexOf(",");
+                auto x = str.Substring(0, index);
+                auto y = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Point point;

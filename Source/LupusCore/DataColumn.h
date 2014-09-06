@@ -1,9 +1,8 @@
 ﻿#pragma once
 
-#include <string>
 #include <boost/noncopyable.hpp>
 
-#include "Utility.h"
+#include "String.h"
 #include "DataType.h"
 
 #ifdef _MSC_VER
@@ -17,15 +16,15 @@ namespace Lupus {
         {
         public:
 
-            DataColumn(const std::string&, DataType, int);
+            DataColumn(const String&, DataType, int);
             virtual ~DataColumn() = default;
 
-            virtual std::string Name() const NOEXCEPT;
+            virtual String Name() const NOEXCEPT;
             virtual DataType Type() const NOEXCEPT;
             virtual int Index() const NOEXCEPT;
 
         private:
-            std::string mName;
+            String mName;
             DataType mType;
             int mIndex;
         };

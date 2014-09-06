@@ -3,7 +3,6 @@
 #include "SocketEnum.h"
 
 #include <vector>
-#include <string>
 #include <memory>
 #include <cstdint>
 #include <boost/noncopyable.hpp>
@@ -102,7 +101,7 @@ namespace Lupus {
                 /*!
                  * \returns Das Präsentationsformat der IP-Adresse.
                  */
-                virtual std::string ToString() const;
+                virtual String ToString() const;
 
                 /*!
                  * \returns TRUE wenn die IP-Adresse eine Loopback Adresse ist.
@@ -118,7 +117,7 @@ namespace Lupus {
                  *
                  * \param[in]   ipString    Das Präsentationsformat der IP-Adresse.
                  */
-                static std::shared_ptr<IPAddress> Parse(const std::string& ipString) throw(std::invalid_argument);
+                static std::shared_ptr<IPAddress> Parse(const String& ipString) throw(std::invalid_argument);
 
                 /*!
                  * Ähnlich wie \sa IPAddress::Parse konvertiert diese Methode eine
@@ -133,7 +132,7 @@ namespace Lupus {
                  * \returns TRUE wenn erfolgreich konvertiert wurde, bei einem Fehler
                  *          FALSE.
                  */
-                static bool TryParse(const std::string& ipString, std::shared_ptr<IPAddress>& address) NOEXCEPT;
+                static bool TryParse(const String& ipString, std::shared_ptr<IPAddress>& address) NOEXCEPT;
 
                 static std::shared_ptr<IPAddress> Any();
                 static std::shared_ptr<IPAddress> Broadcast();

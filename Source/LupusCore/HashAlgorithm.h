@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 #include "IClonable.h"
 #include "ICryptoTransform.h"
 
@@ -19,7 +19,7 @@ namespace Lupus {
 
     namespace Security {
         namespace Cryptography {
-            class LUPUS_API HashAlgorithm : public ICryptoTransform, public IClonable
+            class LUPUS_API HashAlgorithm : public ICryptoTransform, public IClonable<HashAlgorithm>
             {
             public:
 
@@ -50,7 +50,7 @@ namespace Lupus {
                 static HashAlgorithmFactory& GetInstance() NOEXCEPT;
 
                 /*!
-                 * Unterst�tze Algorithmen sind:
+                 * Unterstützte Algorithmen sind:
                  * - sha1
                  * - sha224
                  * - sha256
@@ -72,14 +72,14 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<HashAlgorithm> Create(const std::string& algorithm) const NOEXCEPT;
+                std::shared_ptr<HashAlgorithm> Create(const String& algorithm) const NOEXCEPT;
 
             private:
 
                 HashAlgorithmFactory();
                 virtual ~HashAlgorithmFactory() = default;
 
-                std::unordered_map<std::string, std::shared_ptr<HashAlgorithm>> mPrototypes;
+                std::unordered_map<String, std::shared_ptr<HashAlgorithm>> mPrototypes;
             };
         }
     }

@@ -6,6 +6,7 @@
 #include "Size.h"
 #include "Point.h"
 #include "Rectangle.h"
+#include "String.h"
 
 #include <unordered_map>
 #include <boost/noncopyable.hpp>
@@ -49,19 +50,19 @@ namespace Lupus {
             using WindowProperty = ObservableProperty < Window, T > ;
 
             Window(WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const std::string& title, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(const String& title, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
             Window(int x, int y, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
             Window(int x, int y, int w, int h, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
             Window(const Math::Point<int>& position, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
             Window(const Math::Point<int>& position, const Math::Size<int>& size, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
             Window(const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const std::string& title, const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(const String& title, const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
             virtual ~Window();
 
             // Properties
 
-            ObservableProperty<void, std::string> Uid;
-            WindowProperty<std::string> Title;
+            ObservableProperty<void, String> Uid;
+            WindowProperty<String> Title;
             WindowProperty<float> Brightness;
             WindowProperty<bool> Grabbed;
             WindowProperty<Math::Size<int>> MaxSize;

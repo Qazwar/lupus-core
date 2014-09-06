@@ -8,10 +8,10 @@ using namespace std;
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
-            vector<uint8_t> AsymmetricAlgorithm::LoadFromFile(const string& path)
+            vector<uint8_t> AsymmetricAlgorithm::LoadFromFile(const String& path)
             {
                 CryptoPP::ByteQueue bt;
-                CryptoPP::FileSource file(path.c_str(), true /*pumpAll*/);
+                CryptoPP::FileSource file(path.ToUTF8().c_str(), true /*pumpAll*/);
 
                 file.TransferTo(bt);
                 vector<uint8_t> buffer(bt.MaxRetrievable());
@@ -19,10 +19,10 @@ namespace Lupus {
                 return buffer;
             }
 
-            void AsymmetricAlgorithm::SaveToFile(const string& path, const vector<uint8_t>& key)
+            void AsymmetricAlgorithm::SaveToFile(const String& path, const vector<uint8_t>& key)
             {
                 CryptoPP::ByteQueue bt;
-                CryptoPP::FileSink file(path.c_str());
+                CryptoPP::FileSink file(path.ToUTF8().c_str());
 
                 bt.Put(key.data(), key.size());
                 bt.CopyTo(file);                
@@ -41,12 +41,12 @@ namespace Lupus {
                 return instance;
             }
 
-            shared_ptr<AsymmetricAlgorithm> AsymmetricAlgorithmFactory::Create(const string& algorithm) const
+            shared_ptr<AsymmetricAlgorithm> AsymmetricAlgorithmFactory::Create(const String& algorithm) const
             {
                 auto it = mPrototypes.find(algorithm);
 
                 if (it != end(mPrototypes)) {
-                    return dynamic_pointer_cast<AsymmetricAlgorithm>(it->second->Clone());
+                    return it->second->Clone();
                 }
 
                 return nullptr;

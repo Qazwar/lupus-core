@@ -1,7 +1,10 @@
 ﻿#pragma once
 
+#include <cwchar>
 #include <string>
 #include <memory>
+#include <cstdint>
+#include <algorithm>
 #include <exception>
 
 #ifdef NOEXCEPT
@@ -85,7 +88,7 @@ namespace Lupus {
     LupusDefineError(authentication_error);
     LupusDefineError(format_error);
 
-    LUPUS_API std::string RandomString(unsigned length);
+    LUPUS_API class String RandomString(unsigned length);
 
     template <typename Dest, typename Src>
     Dest force_cast(const Src& src)

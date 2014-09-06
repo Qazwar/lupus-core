@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 #include "Task.h"
 #include <vector>
 #include <memory>
@@ -37,14 +37,14 @@ namespace Lupus {
             HttpListenerRequest();
             ~HttpListenerRequest();
 
-            std::vector<std::string> AcceptTypes() const NOEXCEPT;
+            std::vector<String> AcceptTypes() const NOEXCEPT;
             std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
             int64_t ContentLength() const NOEXCEPT;
-            std::string ContentType() const NOEXCEPT;
-            std::unordered_map<std::string, std::string> Cookies() const NOEXCEPT;
+            String ContentType() const NOEXCEPT;
+            std::unordered_map<String, String> Cookies() const NOEXCEPT;
             bool HasEntityBody() const NOEXCEPT;
-            std::unordered_map<std::string, std::string> Headers() const NOEXCEPT;
-            std::string HttpMethod() const NOEXCEPT;
+            std::unordered_map<String, String> Headers() const NOEXCEPT;
+            String HttpMethod() const NOEXCEPT;
             std::shared_ptr<Stream> InputStream() const NOEXCEPT;
             bool IsAuntheticated() const NOEXCEPT;
             bool IsLocal() const NOEXCEPT;
@@ -52,15 +52,15 @@ namespace Lupus {
             bool KeepAlive() const NOEXCEPT;
             std::shared_ptr<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
             std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
-            std::unordered_map<std::string, std::string> QueryString() const NOEXCEPT;
-            std::string RawUrl() const NOEXCEPT;
+            std::unordered_map<String, String> QueryString() const NOEXCEPT;
+            String RawUrl() const NOEXCEPT;
             std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
-            std::string ServiceName() const NOEXCEPT;
+            String ServiceName() const NOEXCEPT;
             std::shared_ptr<Uri> Url() const NOEXCEPT;
-            std::string UserAgend() const NOEXCEPT;
-            std::string UserHostAddress() const NOEXCEPT;
-            std::string UserHostName() const NOEXCEPT;
-            std::vector<std::string> UserLanguages() const NOEXCEPT;
+            String UserAgend() const NOEXCEPT;
+            String UserHostAddress() const NOEXCEPT;
+            String UserHostName() const NOEXCEPT;
+            std::vector<String> UserLanguages() const NOEXCEPT;
 
             Task<std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
 

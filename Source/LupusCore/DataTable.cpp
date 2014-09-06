@@ -22,7 +22,7 @@ namespace Lupus {
             }
 
             do {
-                unordered_map<string, boost::any> row;
+                unordered_map<String, boost::any> row;
 
                 for (int i = 0; i < fieldCount; i++) {
                     row[reader->ColumnName(i)] = reader->Value(i);

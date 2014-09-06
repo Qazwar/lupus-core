@@ -5,14 +5,14 @@
 using namespace std;
 
 namespace Lupus {
-    Version::Version(const string& version)
+    Version::Version(const String& version)
     {
         vector<int> numbers(4, -1);
         
-        for (size_t n = version.find('.'), o = 0, i = 0; n != version.npos && i < 4; o = n, n = version.find('.', n), i++) {
+        for (int n = version.IndexOf("."), o = 0, i = 0; n != -1 && i < 4; o = n, n = version.IndexOf(".", n), i++) {
             int num = -1;
 
-            if (!Integer::TryParse(version.substr(o, n), num)) {
+            if (!Integer::TryParse(version.Substring(o, n), num)) {
                 throw format_error("Invalid version number");
             }
 
@@ -75,19 +75,19 @@ namespace Lupus {
         }
     }
 
-    shared_ptr<IClonable> Version::Clone() const
+    shared_ptr<Version> Version::Clone() const
     {
         return make_shared<Version>(mMajor, mMinor, mBuild, mRevision);
     }
 
-    string Version::ToString() const
+    String Version::ToString() const
     {
-        string result;
+        String result;
 
-        result += mMajor > 0 ? (result.empty() ? "" : ".") + Integer::ToString(mMajor) : "";
-        result += mMinor > 0 ? (result.empty() ? "" : ".") + Integer::ToString(mMinor) : "";
-        result += mBuild > 0 ? (result.empty() ? "" : ".") + Integer::ToString(mBuild) : "";
-        result += mRevision > 0 ? (result.empty() ? "" : ".") + Integer::ToString(mRevision) : "";
+        result += mMajor > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mMajor) : "";
+        result += mMinor > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mMinor) : "";
+        result += mBuild > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mBuild) : "";
+        result += mRevision > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mRevision) : "";
 
         return result;
     }
@@ -152,14 +152,14 @@ namespace Lupus {
         );
     }
 
-    shared_ptr<Version> Version::Parse(const string& value)
+    shared_ptr<Version> Version::Parse(const String& value)
     {
         vector<int> numbers(4, -1);
 
-        for (size_t n = value.find('.'), o = 0, i = 0; n != value.npos && i < 4; o = n, n = value.find('.', n), i++) {
+        for (int n = value.IndexOf("."), o = 0, i = 0; n != -1 && i < 4; o = n, n = value.IndexOf(".", n), i++) {
             int num = -1;
 
-            if (!Integer::TryParse(value.substr(o, n), num)) {
+            if (!Integer::TryParse(value.Substring(o, n), num)) {
                 throw format_error("Invalid version number");
             }
 
@@ -169,7 +169,7 @@ namespace Lupus {
         return make_shared<Version>(numbers[0], numbers[1], numbers[2], numbers[3]);
     }
 
-    bool Version::TryParse(const string& value, shared_ptr<Version>& result)
+    bool Version::TryParse(const String& value, shared_ptr<Version>& result)
     {
         try {
             result = Version::Parse(value);

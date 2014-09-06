@@ -12,7 +12,7 @@ namespace Lupus {
             });
         }
 
-        Task<void> Connection::ConnectAsync(const string& connectionString)
+        Task<void> Connection::ConnectAsync(const String& connectionString)
         {
             return Task<void>([this, &connectionString]() {
                 this->Connect(connectionString);

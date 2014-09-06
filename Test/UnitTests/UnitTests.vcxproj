@@ -267,9 +267,6 @@
     <ProjectReference Include="..\..\Source\LupusCore\LupusCore.vcxproj">
       <Project>{40a04166-c40c-422e-93b4-b52cd76a296c}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\StreamWolfServer\StreamWolfServer.vcxproj">
-      <Project>{78132e93-9a9e-44a4-a197-9ab73521e689}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -28,14 +28,14 @@ namespace Lupus {
                 return PQnfields(mPgResult);
             }
             
-            string PgDataReader::ColumnName(int i) const
+            String PgDataReader::ColumnName(int i) const
             {
                 return PQfname(mPgResult, i);
             }
             
-            int PgDataReader::ColumnNumber(const string& str) const
+            int PgDataReader::ColumnNumber(const String& str) const
             {
-                return PQfnumber(mPgResult, str.c_str());
+                return PQfnumber(mPgResult, str.ToUTF8().c_str());
             }
             
             DataType PgDataReader::Type(int i) const

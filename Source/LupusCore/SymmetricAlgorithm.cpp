@@ -41,12 +41,12 @@ namespace Lupus {
                 return instance;
             }
 
-            shared_ptr<SymmetricAlgorithm> SymmetricAlgorithmFactory::Create(const string& algorithm) const
+            shared_ptr<SymmetricAlgorithm> SymmetricAlgorithmFactory::Create(const String& algorithm) const
             {
                 auto it = mPrototypes.find(algorithm);
 
                 if (it != end(mPrototypes)) {
-                    return dynamic_pointer_cast<SymmetricAlgorithm>(it->second->Clone());
+                    return it->second->Clone();
                 }
 
                 return nullptr;

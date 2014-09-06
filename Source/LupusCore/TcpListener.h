@@ -1,12 +1,11 @@
 ﻿#pragma once
 
 #include <vector>
-#include <string>
 #include <memory>
 #include <functional>
 #include <boost/noncopyable.hpp>
 
-#include "Utility.h"
+#include "String.h"
 #include "Task.h"
 
 #ifdef _MSC_VER

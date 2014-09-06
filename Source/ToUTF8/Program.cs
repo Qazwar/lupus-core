@@ -18,9 +18,9 @@ namespace to_utf8
                 Console.WriteLine("No arguments provide.");
             }
 
-            string iniFileName = "./" + args[0] + ".ini";
+            string iniFileName = args[0];
             IniReader reader = new IniReader(iniFileName);
-            string[] endings = reader.ReadString(args[0], "Endings").Split(' ');
+            string[] endings = reader.ReadString("Encoding", "Endings").Split(' ');
 
             foreach (var end in endings) {
                 foreach (var f in new DirectoryInfo(".").GetFiles(end, SearchOption.AllDirectories)) {

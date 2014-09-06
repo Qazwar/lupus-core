@@ -1,12 +1,11 @@
 ﻿#pragma once
 
 #include <vector>
-#include <string>
 #include <memory>
 #include <functional>
 #include <boost/noncopyable.hpp>
 
-#include "Utility.h"
+#include "String.h"
 #include "SocketEnum.h"
 #include "Task.h"
 
@@ -30,7 +29,7 @@ namespace Lupus {
                 TcpClient() = default;
                 TcpClient(AddressFamily family) NOEXCEPT;
                 TcpClient(std::shared_ptr<IPEndPoint> localEP) throw(socket_error, null_pointer);
-                TcpClient(const std::string& hostname, uint16_t port) throw(socket_error, std::runtime_error);
+                TcpClient(const String& hostname, uint16_t port) throw(socket_error, std::runtime_error);
                 virtual ~TcpClient() = default;
 
                 virtual size_t Available() const throw(null_pointer);
@@ -53,12 +52,12 @@ namespace Lupus {
                 virtual Task<void> ConnectAsync(std::shared_ptr<IPEndPoint> remoteEndPoint) NOEXCEPT;
                 virtual Task<void> ConnectAsync(std::shared_ptr<IPAddress> address, uint16_t port) NOEXCEPT;
                 virtual Task<void> ConnectAsync(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) NOEXCEPT;
-                virtual Task<void> ConnectAsync(const std::string& host, uint16_t port) throw(std::invalid_argument);
+                virtual Task<void> ConnectAsync(const String& host, uint16_t port) throw(std::invalid_argument);
 
                 virtual void Connect(std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
                 virtual void Connect(std::shared_ptr<IPAddress> address, uint16_t port) throw(socket_error, null_pointer);
                 virtual void Connect(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) throw(null_pointer);
-                virtual void Connect(const std::string& host, uint16_t port) throw(socket_error, std::invalid_argument, null_pointer);
+                virtual void Connect(const String& host, uint16_t port) throw(socket_error, std::invalid_argument, null_pointer);
                 virtual void Close() throw(socket_error, null_pointer);
                 virtual std::shared_ptr<NetworkStream> GetStream() const throw(null_pointer);
 

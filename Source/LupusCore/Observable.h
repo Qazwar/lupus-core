@@ -6,7 +6,7 @@
 #include <functional>
 #include <unordered_map>
 
-#include "Utility.h"
+#include "String.h"
 #include "Event.h"
 #include <boost/any.hpp>
 #include <boost/noncopyable.hpp>
@@ -181,31 +181,31 @@ namespace Lupus {
     {
     public:
 
-        Event<ObservableObject, const std::string&> PropertyChanged;
+        Event<ObservableObject, const String&> PropertyChanged;
 
         ObservableObject() = default;
         virtual ~ObservableObject() = default;
 
-        virtual void Remove(const std::string& propertyName) NOEXCEPT final;
-        virtual bool HasProperty(const std::string& propertyName) const NOEXCEPT final;
-        virtual boost::any& operator[](const std::string& propertyName) NOEXCEPT final;
-        virtual const boost::any& operator[](const std::string& propertyName) const NOEXCEPT final;
+        virtual void Remove(const String& propertyName) NOEXCEPT final;
+        virtual bool HasProperty(const String& propertyName) const NOEXCEPT final;
+        virtual boost::any& operator[](const String& propertyName) NOEXCEPT final;
+        virtual const boost::any& operator[](const String& propertyName) const NOEXCEPT final;
 
         template <typename T>
-        void Add(const std::string& propertyName, const T& value = T())
+        void Add(const String& propertyName, const T& value = T())
         {
             mProperties[propertyName] = boost::any(value);
             PropertyChanged(this, propertyName);
         }
 
         template <typename T>
-        const T& Get(const std::string& propertyName) const
+        const T& Get(const String& propertyName) const
         {
             return boost::any_cast<const T&>(mProperties[propertyName]);
         }
 
         template <typename T>
-        void Set(const std::string& propertyName, const T& value)
+        void Set(const String& propertyName, const T& value)
         {
             mProperties[propertyName] = boost::any(value);
             PropertyChanged(this, propertyName);
@@ -213,7 +213,7 @@ namespace Lupus {
 
     private:
 
-        std::unordered_map<std::string, boost::any> mProperties;
+        std::unordered_map<String, boost::any> mProperties;
     };
 }
 

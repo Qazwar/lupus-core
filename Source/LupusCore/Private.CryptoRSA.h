@@ -36,9 +36,9 @@ namespace Lupus {
                     mEncryptor = typename T::Encryptor(mDecryptor.AccessPrivateKey());
                 }
 
-                virtual std::shared_ptr<IClonable> Clone() const NOEXCEPT override
+                virtual std::shared_ptr<AsymmetricAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::dynamic_pointer_cast<IClonable>(std::make_shared<CryptoRSA<T>>(PrivateKey()));
+                    return std::dynamic_pointer_cast<AsymmetricAlgorithm>(std::make_shared<CryptoRSA<T>>(PrivateKey()));
                 }
 
                 virtual std::vector<uint8_t> Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) override

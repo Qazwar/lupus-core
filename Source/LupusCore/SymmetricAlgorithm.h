@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 #include "IClonable.h"
 
 #include <vector>
@@ -24,7 +24,7 @@ namespace Lupus {
                 Ctr
             };
 
-            class LUPUS_API SymmetricAlgorithm : public boost::noncopyable, public IClonable
+            class LUPUS_API SymmetricAlgorithm : public boost::noncopyable, public IClonable<SymmetricAlgorithm>
             {
             public:
 
@@ -84,14 +84,14 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<SymmetricAlgorithm> Create(const std::string& algorithm) const NOEXCEPT;
+                std::shared_ptr<SymmetricAlgorithm> Create(const String& algorithm) const NOEXCEPT;
 
             private:
 
                 SymmetricAlgorithmFactory();
                 virtual ~SymmetricAlgorithmFactory() = default;
 
-                std::unordered_map<std::string, std::shared_ptr<SymmetricAlgorithm>> mPrototypes;
+                std::unordered_map<String, std::shared_ptr<SymmetricAlgorithm>> mPrototypes;
             };
         }
     }

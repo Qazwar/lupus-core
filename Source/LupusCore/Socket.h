@@ -3,7 +3,6 @@
 #include "SocketEnum.h"
 
 #include <vector>
-#include <string>
 #include <memory>
 #include <cstdint>
 #include <boost/noncopyable.hpp>
@@ -109,7 +108,7 @@ namespace Lupus {
                  * Der erste Endpunkt mit dem sich erfolgreich Verbunden wurde, beendet
                  * den aufruf.
                  *
-                 * \sa GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family, SocketType type, ProtocolType protocol)
+                 * \sa GetAddressInformation(const String& node, const String& service, AddressFamily family, SocketType type, ProtocolType protocol)
                  *
                  * \param[in]   endPoints   Endpunkte mit denen sich Verbunden werden
                  *                          soll.
@@ -120,7 +119,7 @@ namespace Lupus {
                  * Ruft Connect(std::shared_ptr<IPEndPoint>) auf.
                  * \sa Connect(std::shared_ptr<IPEndPoint>)
                  */
-                virtual void Connect(const std::string& host, uint16_t port) throw(socket_error, std::invalid_argument);
+                virtual void Connect(const String& host, uint16_t port) throw(socket_error, std::invalid_argument);
 
                 /*!
                  * Serialisiert den Socket und schließt in anschließend. Die
@@ -527,7 +526,7 @@ namespace Lupus {
 
                 protected:
 
-                    std::shared_ptr<Socket> CreateSocket(SocketHandle, AddrStorage) NOEXCEPT;
+                    std::shared_ptr<Socket> CreateSocket(Socket*, SocketHandle, AddrStorage) NOEXCEPT;
 
                     void ChangeState(Socket* socket, std::shared_ptr<SocketState> state) NOEXCEPT;
                     void SetLocalEndPoint(Socket* socket, std::shared_ptr<IPEndPoint>) NOEXCEPT;

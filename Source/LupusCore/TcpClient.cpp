@@ -28,7 +28,7 @@ namespace Lupus {
                 mClient->Connect(localEP);
             }
 
-            TcpClient::TcpClient(const string& hostname, uint16_t port)
+            TcpClient::TcpClient(const String& hostname, uint16_t port)
             {
                 GetAddressInformation(hostname, Integer::ToString(port), AddressFamily::Unspecified, SocketType::Stream, ProtocolType::TCP);
                 mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Stream, ProtocolType::TCP);
@@ -206,7 +206,7 @@ namespace Lupus {
                 });
             }
 
-            Task<void> TcpClient::ConnectAsync(const string& host, uint16_t port)
+            Task<void> TcpClient::ConnectAsync(const String& host, uint16_t port)
             {
                 return Task<void>([this, &host, port]() {
                     this->Connect(host, port);
@@ -240,7 +240,7 @@ namespace Lupus {
                 mClient->Connect(endPoints);
             }
 
-            void TcpClient::Connect(const string& host, uint16_t port)
+            void TcpClient::Connect(const String& host, uint16_t port)
             {
                 if (!mClient) {
                     throw null_pointer();

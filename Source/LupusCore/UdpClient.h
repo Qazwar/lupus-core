@@ -2,7 +2,6 @@
 
 #include <tuple>
 #include <vector>
-#include <string>
 #include <memory>
 #include <functional>
 #include <boost/noncopyable.hpp>
@@ -31,7 +30,7 @@ namespace Lupus {
                 UdpClient(uint16_t port); // Bind
                 UdpClient(std::shared_ptr<IPEndPoint>); // Bind
                 UdpClient(uint16_t port, AddressFamily); // Bind
-                UdpClient(const std::string& hostname, uint16_t port); // Connect
+                UdpClient(const String& hostname, uint16_t port); // Connect
                 virtual ~UdpClient() = default;
 
                 virtual size_t Available() const throw(null_pointer);
@@ -43,16 +42,16 @@ namespace Lupus {
                 virtual Task<std::vector<uint8_t>> ReceiveAsync(std::shared_ptr<IPEndPoint>&) NOEXCEPT;
                 virtual Task<int> SendAsync(const std::vector<uint8_t>&, size_t) NOEXCEPT;
                 virtual Task<int> SendAsync(const std::vector<uint8_t>&, size_t, std::shared_ptr<IPEndPoint>) NOEXCEPT;
-                virtual Task<int> SendAsync(const std::vector<uint8_t>&, size_t, const std::string&, uint16_t) NOEXCEPT;
+                virtual Task<int> SendAsync(const std::vector<uint8_t>&, size_t, const String&, uint16_t) NOEXCEPT;
 
                 virtual void Connect(std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
                 virtual void Connect(std::shared_ptr<IPAddress> address, uint16_t port) throw(socket_error, null_pointer);
-                virtual void Connect(const std::string& host, uint16_t port) throw(socket_error, std::invalid_argument, null_pointer);
+                virtual void Connect(const String& host, uint16_t port) throw(socket_error, std::invalid_argument, null_pointer);
                 virtual void Close() throw(socket_error, null_pointer);
                 virtual std::vector<uint8_t> Receive(std::shared_ptr<IPEndPoint>&) throw(socket_error);
                 virtual int Send(const std::vector<uint8_t>&, size_t) throw(socket_error);
                 virtual int Send(const std::vector<uint8_t>&, size_t, std::shared_ptr<IPEndPoint>);
-                virtual int Send(const std::vector<uint8_t>&, size_t, const std::string&, uint16_t) throw(std::invalid_argument);
+                virtual int Send(const std::vector<uint8_t>&, size_t, const String&, uint16_t) throw(std::invalid_argument);
 
             private:
 

@@ -35,7 +35,7 @@ namespace Lupus {
                 mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback(), port));
             }
 
-            UdpClient::UdpClient(const string& hostname, uint16_t port)
+            UdpClient::UdpClient(const String& hostname, uint16_t port)
             {
                 mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
                 mClient->Connect(GetAddressInformation(hostname, Integer::ToString(port), AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP));
@@ -113,7 +113,7 @@ namespace Lupus {
                 });
             }
 
-            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, const string& hostname, uint16_t port)
+            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, const String& hostname, uint16_t port)
             {
                 return Task<int>([this, &buffer, size, &hostname, port]() {
                     return this->Send(buffer, size, hostname, port);
@@ -138,7 +138,7 @@ namespace Lupus {
                 mClient->Connect(address, port);
             }
 
-            void UdpClient::Connect(const string& host, uint16_t port)
+            void UdpClient::Connect(const String& host, uint16_t port)
             {
                 if (!mClient) {
                     throw null_pointer();
@@ -187,7 +187,7 @@ namespace Lupus {
                 return mClient->SendTo(buffer, 0, bytes, ep);
             }
 
-            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, const string& hostname, uint16_t port)
+            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, const String& hostname, uint16_t port)
             {
                 if (!mClient) {
                     throw null_pointer();

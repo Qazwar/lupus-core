@@ -19,9 +19,9 @@ namespace Lupus {
             });
         }
 
-        Task<vector<unordered_map<string, boost::any>>> Command::ExecuteScalarAsync()
+        Task<vector<unordered_map<String, boost::any>>> Command::ExecuteScalarAsync()
         {
-            return Task<vector<unordered_map<string, boost::any>>>([this]() {
+            return Task<vector<unordered_map<String, boost::any>>>([this]() {
                 return this->ExecuteScalar();
             });
         }

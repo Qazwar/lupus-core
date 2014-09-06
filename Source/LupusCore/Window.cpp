@@ -24,10 +24,10 @@ namespace Lupus {
             mHandle = window;
             Initialize();
         }
-        Window::Window(const string& title, WindowFlags flags)
+        Window::Window(const String& title, WindowFlags flags)
         {
             SDL_Window* window = SDL_CreateWindow(
-                title.c_str(),
+                title.ToUTF8().c_str(),
                 SDL_WINDOWPOS_UNDEFINED,
                 SDL_WINDOWPOS_UNDEFINED,
                 128,
@@ -132,10 +132,10 @@ namespace Lupus {
             Initialize();
         }
 
-        Window::Window(const string& title, const Math::Rectangle<int>& rect, WindowFlags flags)
+        Window::Window(const String& title, const Math::Rectangle<int>& rect, WindowFlags flags)
         {
             SDL_Window* window = SDL_CreateWindow(
-                title.c_str(),
+                title.ToUTF8().c_str(),
                 rect.X,
                 rect.Y,
                 rect.Width,
@@ -299,7 +299,7 @@ namespace Lupus {
             Uid = RandomString(sizeof(void*));
 
             Title.mGetter = [window]() { return SDL_GetWindowTitle(window); };
-            Title.mSetter = [window](const string& value) { SDL_SetWindowTitle(window, value.c_str()); };
+            Title.mSetter = [window](const String& value) { SDL_SetWindowTitle(window, value.ToUTF8().c_str()); };
             Brightness.mGetter = [window]() { return SDL_GetWindowBrightness(window); };
             Brightness.mSetter = [window](const float& value) { SDL_SetWindowBrightness(window, value); };
             Grabbed.mGetter = [window]() { return SDL_GetWindowGrab(window) == SDL_TRUE; };

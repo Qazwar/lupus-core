@@ -127,7 +127,7 @@ namespace Lupus {
                 }
             }
 
-            void Socket::Connect(const std::string& host, uint16_t port)
+            void Socket::Connect(const String& host, uint16_t port)
             {
                 mState->Connect(this, IPEndPointPtr(new IPEndPoint(IPAddress::Parse(host), port)));
             }

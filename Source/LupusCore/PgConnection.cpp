@@ -10,9 +10,9 @@ using namespace std;
 namespace Lupus {
     namespace Data {
         namespace Postgres {
-            PgConnection::PgConnection(const string& PgConnectionString)
+            PgConnection::PgConnection(const String& PgConnectionString)
             {
-                mPgConn = PQconnectdb(PgConnectionString.c_str());
+                mPgConn = PQconnectdb(PgConnectionString.ToUTF8().c_str());
             }
 
             PgConnection::~PgConnection()
@@ -20,7 +20,7 @@ namespace Lupus {
                 Close();
             }
             
-            string PgConnection::ConnectionString() const
+            String PgConnection::ConnectionString() const
             {
                 return mConnString;
             }
@@ -30,11 +30,11 @@ namespace Lupus {
                 return make_shared<PgTransaction>(mPgConn, level);
             }
             
-            void PgConnection::Connect(const string& pgConnectionString)
+            void PgConnection::Connect(const String& pgConnectionString)
             {
                 Close();
 
-                if (!(mPgConn = PQconnectdb(pgConnectionString.c_str()))) {
+                if (!(mPgConn = PQconnectdb(pgConnectionString.ToUTF8().c_str()))) {
                     throw sql_error("could not connect to postgres database");
                 }
             }

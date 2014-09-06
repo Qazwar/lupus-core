@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 #include "IClonable.h"
 #include <cstdint>
 #include <boost/noncopyable.hpp>
@@ -8,12 +8,12 @@
 namespace Lupus {
     // TODO: Code schreiben.
 
-    class Version : public boost::noncopyable, public IClonable
+    class Version : public boost::noncopyable, public IClonable<Version>
     {
     public:
 
         Version() = default;
-        Version(const std::string&) throw(format_error);
+        Version(const String&) throw(format_error);
         Version(int32_t major, int32_t minor) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build, int32_t revision) NOEXCEPT;
@@ -25,8 +25,8 @@ namespace Lupus {
         int16_t MajorRevision() const NOEXCEPT;
         int16_t MinorRevision() const NOEXCEPT;
 
-        std::shared_ptr<IClonable> Clone() const NOEXCEPT override;
-        std::string ToString() const NOEXCEPT;
+        std::shared_ptr<Version> Clone() const NOEXCEPT override;
+        String ToString() const NOEXCEPT;
 
         bool operator==(std::shared_ptr<Version>) const;
         bool operator!=(std::shared_ptr<Version>) const;
@@ -35,8 +35,8 @@ namespace Lupus {
         bool operator<=(std::shared_ptr<Version>) const;
         bool operator<(std::shared_ptr<Version>) const;
 
-        static std::shared_ptr<Version> Parse(const std::string& value) throw(format_error);
-        static bool TryParse(const std::string& value, std::shared_ptr<Version>& result) NOEXCEPT;
+        static std::shared_ptr<Version> Parse(const String& value) throw(format_error);
+        static bool TryParse(const String& value, std::shared_ptr<Version>& result) NOEXCEPT;
 
     private:
 

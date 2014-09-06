@@ -13,7 +13,7 @@ namespace Lupus {
             Unload();
         }
 
-        void* Library::GetFunctionHandle(const string& name)
+        void* Library::GetFunctionHandle(const String& name)
         {
             if (!mHandle) {
                 return nullptr;
@@ -22,7 +22,7 @@ namespace Lupus {
             return dlsym(force_cast<void*>(mHandle), name.c_str());
         }
 
-        void Library::Load(const string& path)
+        void Library::Load(const String& path)
         {
             if (!(mHandle = force_cast<uintptr_t>(dlopen(path.c_str(), RTLD_NOW)))) {
                 throw io_error();

@@ -36,34 +36,66 @@ namespace Lupus {
                 return ntohll(network);
             }
 
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service)
+            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service)
             {
                 return GetAddressInformation(node, service, AddressFamily::Unspecified, SocketType::Unspecified, ProtocolType::Unspecified);
             }
 
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family)
+            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, AddressFamily family)
             {
                 return GetAddressInformation(node, service, family, SocketType::Unspecified, ProtocolType::Unspecified);
             }
 
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, SocketType type)
+            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, SocketType type)
             {
                 return GetAddressInformation(node, service, AddressFamily::Unspecified, type, ProtocolType::Unspecified);
             }
 
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, ProtocolType protocol)
+            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, ProtocolType protocol)
             {
                 return GetAddressInformation(node, service, AddressFamily::Unspecified, SocketType::Unspecified, protocol);
             }
 
-            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family, SocketType type, ProtocolType protocol)
+            std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, AddressFamily family, SocketType type, ProtocolType protocol)
             {
-                if (service.empty()) {
+                if (service.IsEmpty()) {
                     throw std::invalid_argument("service argument must have a valid value");
                 }
-
+#ifdef _UNICODE
                 std::vector<std::shared_ptr<IPEndPoint>> addresses;
-                const char* nodename = node.empty() ? node.c_str() : nullptr;
+                const wchar_t* nodename = node.IsEmpty() ? nullptr : node.Data();
+                ADDRINFOW hints, *begin = nullptr, *it = nullptr;
+
+                memset(&hints, 0, sizeof(hints));
+                hints.ai_family = (int)family;
+                hints.ai_socktype = (int)type;
+                hints.ai_protocol = (int)protocol;
+
+                if (!nodename) {
+                    hints.ai_flags = AI_PASSIVE;
+                }
+
+                if (GetAddrInfoW(nodename, service.Data(), &hints, &begin) != 0) {
+                    if (begin) {
+                        FreeAddrInfoW(begin);
+                    }
+
+                    throw std::runtime_error(GetLastAddressInfoErrorString());
+                }
+
+                for (it = begin; it; it = it->ai_next) {
+                    AddrStorage storage;
+
+                    memset(&storage, 0, sizeof(AddrStorage));
+                    memcpy(&storage, it->ai_addr, it->ai_addrlen);
+                    addresses.push_back(IPEndPointPtr(new IPEndPoint(std::vector<uint8_t>((uint8_t*)&storage, (uint8_t*)&storage + sizeof(AddrStorage)))));
+                }
+
+                FreeAddrInfoW(begin);
+                return addresses;
+#else
+                std::vector<std::shared_ptr<IPEndPoint>> addresses;
+                const char* nodename = node.IsEmpty() ? nullptr : node.ToUTF8().c_str();
                 AddrInfo hints, *begin = nullptr, *it = nullptr;
 
                 memset(&hints, 0, sizeof(hints));
@@ -75,7 +107,7 @@ namespace Lupus {
                     hints.ai_flags = AI_PASSIVE;
                 }
 
-                if (getaddrinfo(nodename, service.c_str(), &hints, &begin) != 0) {
+                if (getaddrinfo(nodename, service.ToUTF8().c_str(), &hints, &begin) != 0) {
                     if (begin) {
                         freeaddrinfo(begin);
                     }
@@ -93,6 +125,7 @@ namespace Lupus {
 
                 freeaddrinfo(begin);
                 return addresses;
+#endif
             }
         }
     }

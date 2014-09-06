@@ -115,8 +115,14 @@
     <Filter Include="Lupus\Net\.h">
       <UniqueIdentifier>{928c131d-1194-4da4-8969-25c6e5dc47bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{260fe07a-f209-4cb7-a46a-502eb1b32e8b}</UniqueIdentifier>
+    <Filter Include="Lupus\Text">
+      <UniqueIdentifier>{a74c820b-d9d3-4545-8dff-4fedcc5e57a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Text\.cpp">
+      <UniqueIdentifier>{07821799-8eea-4687-a23f-5f7db547a98e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\Text\.h">
+      <UniqueIdentifier>{4693a64f-8cd0-4244-9705-8e3f2e5f0b44}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -216,14 +222,17 @@
     <ClCompile Include="Window.cpp">
       <Filter>Lupus\Windows\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Uri.cpp">
-      <Filter>Lupus\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Version.cpp">
       <Filter>Lupus\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="HttpListenerRequest.cpp">
       <Filter>Lupus\Net\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Lupus\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Uri.cpp">
+      <Filter>Lupus\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +412,12 @@
     </ClInclude>
     <ClInclude Include="HttpListener.h">
       <Filter>Lupus\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Encoding.h">
+      <Filter>Lupus\Text\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Lupus\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

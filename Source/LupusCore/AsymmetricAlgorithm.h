@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 #include "IClonable.h"
 
 #include <vector>
@@ -22,8 +22,8 @@ namespace Lupus {
                 WeaknessCheck,
                 SecurityCheck
             };
-
-            class LUPUS_API AsymmetricAlgorithm : public IClonable, public boost::noncopyable
+            
+            class LUPUS_API AsymmetricAlgorithm : public IClonable<AsymmetricAlgorithm>, public boost::noncopyable
             {
             public:
 
@@ -44,8 +44,8 @@ namespace Lupus {
                 virtual size_t MessageLength(size_t ciphertextLength) const NOEXCEPT = 0;
                 virtual size_t CiphertextLength(size_t messageLength) const NOEXCEPT = 0;
 
-                static std::vector<uint8_t> LoadFromFile(const std::string& path);
-                static void SaveToFile(const std::string& path, const std::vector<uint8_t>& key);
+                static std::vector<uint8_t> LoadFromFile(const String& path);
+                static void SaveToFile(const String& path, const std::vector<uint8_t>& key);
             };
 
 
@@ -64,14 +64,14 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<AsymmetricAlgorithm> Create(const std::string& algorithm) const NOEXCEPT;
+                std::shared_ptr<AsymmetricAlgorithm> Create(const String& algorithm) const NOEXCEPT;
 
             private:
 
                 AsymmetricAlgorithmFactory();
                 virtual ~AsymmetricAlgorithmFactory() = default;
 
-                std::unordered_map<std::string, std::shared_ptr<AsymmetricAlgorithm>> mPrototypes;
+                std::unordered_map<String, std::shared_ptr<AsymmetricAlgorithm>> mPrototypes;
             };
         }
     }

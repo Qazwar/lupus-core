@@ -59,33 +59,33 @@ namespace Lupus {
              * AddressFamily::Unspecified, SocketType::Unspecified,
              * ProtocolType::Unspecified) auf.
              *
-             * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
+             * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
              * family, SocketType::Unspecified, ProtocolType::Unspecified) auf.
              *
-             * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
+             * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, AddressFamily family) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, AddressFamily family) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
              * AddressFamily::Unspecified, type, ProtocolType::Unspecified) auf.
              *
-             * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
+             * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, SocketType type) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, SocketType type) throw(std::runtime_error);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
              * AddressFamily::Unspecified, SocketType::Unspecified, protocol) auf.
              *
-             * \sa GetAddressInformation(const std::string&, const std::string&, AddressFamily, SocketType, ProtocolType)
+             * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const std::string& node, const std::string& service, ProtocolType protocol) throw(std::runtime_error);
+            LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, ProtocolType protocol) throw(std::runtime_error);
 
             /*!
              * Liest die Adressinformation des angegebenen Knotens mit dem
@@ -113,8 +113,8 @@ namespace Lupus {
              * \returns Vektor mit allen gefunden Adressen.
              */
             LUPUS_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(
-                const std::string& node,
-                const std::string& service,
+                const String& node,
+                const String& service,
                 AddressFamily family,
                 SocketType type,
                 ProtocolType protocol

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
 #include "Integer.h"
 #include "Float.h"
 
@@ -27,19 +27,19 @@ namespace Lupus {
                 Height = height;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Integer::ToString(Width) + "," + Integer::ToString(Height));
             }
 
-            static Size Parse(const std::string& string) throw(format_error)
+            static Size Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto width = string.substr(0, index);
-                auto height = string.substr(index + 1);
+                auto index = str.IndexOf(",");
+                auto width = str.Substring(0, index);
+                auto height = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Size size;
@@ -82,19 +82,19 @@ namespace Lupus {
                 Height = height;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Float::ToString(Width) + "," + Float::ToString(Height));
             }
 
-            static Size Parse(const std::string& string) throw(format_error)
+            static Size Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto width = string.substr(0, index);
-                auto height = string.substr(index);
+                auto index = str.IndexOf(",");
+                auto width = str.Substring(0, index);
+                auto height = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Size size;
@@ -137,19 +137,19 @@ namespace Lupus {
                 Height = height;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Float::ToString(Width) + "," + Float::ToString(Height));
             }
 
-            static Size Parse(const std::string& string) throw(format_error)
+            static Size Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto width = string.substr(0, index);
-                auto height = string.substr(index);
+                auto index = str.IndexOf(",");
+                auto width = str.Substring(0, index);
+                auto height = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Size size;
@@ -192,19 +192,19 @@ namespace Lupus {
                 Height = height;
             }
 
-            std::string ToString() const
+            String ToString() const
             {
                 return (Float::ToString(Width) + "," + Float::ToString(Height));
             }
 
-            static Size Parse(const std::string& string) throw(format_error)
+            static Size Parse(const String& str) throw(format_error)
             {
-                auto index = string.find_first_of(',');
-                auto width = string.substr(0, index);
-                auto height = string.substr(index);
+                auto index = str.IndexOf(",");
+                auto width = str.Substring(0, index);
+                auto height = str.Substring(index + 1);
 
-                if (index != string.find_last_not_of(',')) {
-                    throw format_error();
+                if (str.IndexOf(",", index + 1) != -1) {
+                    throw format_error("Invalid point string");
                 }
 
                 Size size;
