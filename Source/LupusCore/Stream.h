@@ -52,6 +52,7 @@ namespace Lupus {
         virtual int64_t Seek(int64_t offset, SeekOrigin origin) throw(not_supported);
     };
 
+    //! Readonly adapter
     class LUPUS_API InputStream : public Stream
     {
     public:
@@ -82,6 +83,7 @@ namespace Lupus {
         std::shared_ptr<Stream> mInnerStream;
     };
 
+    // Writeonly adapter
     class LUPUS_API OutputStream : public Stream
     {
     public:

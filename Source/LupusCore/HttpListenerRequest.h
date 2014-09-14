@@ -15,6 +15,7 @@
 
 namespace Lupus {
     class Stream;
+    class InputStream;
     class Uri;
     class Version;
 
@@ -39,7 +40,7 @@ namespace Lupus {
         {
         public:
 
-            HttpListenerRequest();
+            HttpListenerRequest() = delete;
             ~HttpListenerRequest();
 
             std::vector<String> AcceptTypes() const NOEXCEPT;
@@ -62,7 +63,7 @@ namespace Lupus {
             std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
             String ServiceName() const NOEXCEPT;
             std::shared_ptr<Uri> Url() const NOEXCEPT;
-            String UserAgend() const NOEXCEPT;
+            String UserAgent() const NOEXCEPT;
             String UserHostAddress() const NOEXCEPT;
             String UserHostName() const NOEXCEPT;
             std::vector<String> UserLanguages() const NOEXCEPT;
@@ -72,6 +73,29 @@ namespace Lupus {
             std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> GetClientCertificate() const NOEXCEPT;
 
         private:
+
+            friend class HttpListener;
+
+            HttpListenerRequest(
+                std::shared_ptr<Lupus::InputStream> stream, 
+                std::shared_ptr<Sockets::IPEndPoint> localEP, 
+                std::shared_ptr<Sockets::IPEndPoint> remoteEP);
+
+            std::shared_ptr<Lupus::InputStream> mStream;
+            std::shared_ptr<Sockets::IPEndPoint> mLocalEP;
+            std::shared_ptr<Sockets::IPEndPoint> mRemoteEP;
+            std::shared_ptr<Uri> mUrl;
+            std::shared_ptr<Version> mVersion;
+            std::shared_ptr<Text::Encoding> mEncoding;
+            std::unordered_map<String, String> mCookies;
+            std::unordered_map<String, String> mHeaders;
+            std::unordered_map<String, String> mQuery;
+            std::vector<String> mAcceptedTypes;
+            std::vector<String> mLanguages;
+            String mContentType;
+            String mMethod;
+            String mServiceName;
+            String mUserAgent;
         };
     }
 }
