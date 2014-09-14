@@ -76,4 +76,172 @@ namespace Lupus {
     {
         throw not_supported();
     }
+
+    InputStream::InputStream(shared_ptr<Stream> innerStream)
+    {
+        if (!innerStream->CanRead()) {
+            throw invalid_argument("innerStream is not readable.");
+        }
+
+        mInnerStream = innerStream;
+    }
+
+    bool InputStream::CanRead() const
+    {
+        return true;
+    }
+
+    bool InputStream::CanWrite() const
+    {
+        return false;
+    }
+
+    bool InputStream::CanSeek() const
+    {
+        return mInnerStream->CanSeek();
+    }
+
+    void InputStream::Close()
+    {
+        mInnerStream->Close();
+    }
+
+    void InputStream::CopyTo(std::shared_ptr<Stream> destination)
+    {
+        mInnerStream->CopyTo(destination);
+    }
+
+    void InputStream::Flush()
+    {
+        mInnerStream->Flush();
+    }
+
+    int64_t InputStream::Length() const
+    {
+        return mInnerStream->Length();
+    }
+
+    void InputStream::Length(int64_t)
+    {
+        throw not_supported();
+    }
+
+    int64_t InputStream::Position() const
+    {
+        return mInnerStream->Position();
+    }
+
+    void InputStream::Position(int64_t pos)
+    {
+        mInnerStream->Position(pos);
+    }
+
+    int InputStream::Read(std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    {
+        return mInnerStream->Read(buffer, offset, size);
+    }
+
+    int InputStream::ReadByte()
+    {
+        return mInnerStream->ReadByte();
+    }
+
+    int InputStream::Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    {
+        throw not_supported();
+    }
+
+    void InputStream::WriteByte(uint8_t byte)
+    {
+        throw not_supported();
+    }
+
+    int64_t InputStream::Seek(int64_t offset, SeekOrigin origin)
+    {
+        return mInnerStream->Seek(offset, origin);
+    }
+
+    OutputStream::OutputStream(shared_ptr<Stream> innerStream)
+    {
+        if (!innerStream->CanWrite()) {
+            throw invalid_argument("innerStream is not readable.");
+        }
+
+        mInnerStream = innerStream;
+    }
+
+    bool OutputStream::CanRead() const
+    {
+        return false;
+    }
+
+    bool OutputStream::CanWrite() const
+    {
+        return true;
+    }
+
+    bool OutputStream::CanSeek() const
+    {
+        return mInnerStream->CanSeek();
+    }
+
+    void OutputStream::Close()
+    {
+        mInnerStream->Close();
+    }
+
+    void OutputStream::CopyTo(std::shared_ptr<Stream> destination)
+    {
+        mInnerStream->CopyTo(destination);
+    }
+
+    void OutputStream::Flush()
+    {
+        mInnerStream->Flush();
+    }
+
+    int64_t OutputStream::Length() const
+    {
+        return mInnerStream->Length();
+    }
+
+    void OutputStream::Length(int64_t len)
+    {
+        mInnerStream->Length(len);
+    }
+
+    int64_t OutputStream::Position() const
+    {
+        return mInnerStream->Position();
+    }
+
+    void OutputStream::Position(int64_t pos)
+    {
+        mInnerStream->Position(pos);
+    }
+
+    int OutputStream::Read(std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    {
+        throw not_supported();
+    }
+
+    int OutputStream::ReadByte()
+    {
+        throw not_supported();
+    }
+
+    int OutputStream::Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    {
+        return mInnerStream->Write(buffer, offset, size);
+    }
+
+    void OutputStream::WriteByte(uint8_t byte)
+    {
+        mInnerStream->WriteByte(byte);
+    }
+
+    int64_t OutputStream::Seek(int64_t offset, SeekOrigin origin)
+    {
+        return mInnerStream->Seek(offset, origin);
+    }
 }

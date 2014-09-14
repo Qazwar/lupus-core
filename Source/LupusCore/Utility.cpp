@@ -33,7 +33,7 @@ namespace Lupus {
         static const int32_t sMajor = 0;
         static const int32_t sMinor = 1;
         static const int32_t sBuild = 0;
-        static const int32_t sRevision = 102;
+        static const int32_t sRevision = 105;
         static const shared_ptr<Version> sVersion = make_shared<Version>(sMajor, sMinor, sBuild, sRevision);
         return sVersion;
     }
