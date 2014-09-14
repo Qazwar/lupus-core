@@ -1,19 +1,31 @@
 ﻿#pragma once
 
-#include "Utility.h"
+#include "String.h"
+#include "IClonable.h"
+#include "EncodingEnum.h"
 #include <vector>
 #include <boost/noncopyable.hpp>
 
 namespace Lupus {
     namespace Text {
-        class LUPUS_API Encoding : public boost::noncopyable
+        class LUPUS_API Encoding : public boost::noncopyable, public IClonable<Encoding>
         {
         public:
 
-            virtual String GetString(const std::vector<uint8_t>& buffer) const NOEXCEPT;
+            Encoding(EncodingType = EncodingType::Default) throw(std::runtime_error);
+            virtual ~Encoding();
+
+            virtual std::shared_ptr<Encoding> Clone() const NOEXCEPT override;
+
+            virtual String GetString(const std::vector<uint8_t>& buffer) const throw(format_error, std::runtime_error);
             virtual String GetString(
-                const std::vector<uint8_t>& buffer, 
-                size_t offset, size_t count) const NOEXCEPT;
+                const std::vector<uint8_t>& buffer,
+                size_t offset, size_t count) const throw(format_error, std::runtime_error);
+            virtual std::vector<uint8_t> GetBytes(const String& str) const throw(format_error, std::runtime_error);
+            virtual std::vector<uint8_t> GetBytes(
+                const String& str,
+                size_t offset, size_t count) const throw(format_error, std::runtime_error);
+            virtual EncodingType Type() const NOEXCEPT;
 
             static std::shared_ptr<Encoding> ASCII() NOEXCEPT;
             static std::shared_ptr<Encoding> Default() NOEXCEPT;
@@ -22,22 +34,10 @@ namespace Lupus {
             static std::shared_ptr<Encoding> UTF8() NOEXCEPT;
             static std::shared_ptr<Encoding> UTF7() NOEXCEPT;
 
-            static std::vector<uint8_t> Convert(
-                std::shared_ptr<Encoding> src,
-                std::shared_ptr<Encoding> dst,
-                const std::vector<uint8_t>& buffer);
+        private:
 
-            static std::vector<uint8_t> Convert(
-                std::shared_ptr<Encoding> src,
-                std::shared_ptr<Encoding> dst,
-                const std::vector<uint8_t>& buffer,
-                size_t offset, size_t count);
-
-        protected:
-
-            Encoding();
-            Encoding(int32_t codePage);
-            virtual ~Encoding();
+            UConverter* mConverter = nullptr;
+            EncodingType mType = EncodingType::Default;
         };
     }
 }

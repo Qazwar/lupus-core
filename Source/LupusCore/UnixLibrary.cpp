@@ -19,12 +19,12 @@ namespace Lupus {
                 return nullptr;
             }
 
-            return dlsym(force_cast<void*>(mHandle), name.c_str());
+            return dlsym(force_cast<void*>(mHandle), name.ToUTF8().c_str());
         }
 
         void Library::Load(const String& path)
         {
-            if (!(mHandle = force_cast<uintptr_t>(dlopen(path.c_str(), RTLD_NOW)))) {
+            if (!(mHandle = force_cast<uintptr_t>(dlopen(path.ToUTF8().c_str(), RTLD_NOW)))) {
                 throw io_error();
             }
         }

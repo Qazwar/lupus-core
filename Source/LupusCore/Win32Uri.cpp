@@ -61,12 +61,12 @@ namespace Lupus {
     }
 
     Uri::Uri(shared_ptr<Uri> baseUri, const String& uriString) :
-        Uri(baseUri->ToString() + uriString)
+        Uri(baseUri->ToString() + L'/' + uriString)
     {
     }
 
     Uri::Uri(shared_ptr<Uri> baseUri, shared_ptr<Uri> relativeUri) :
-        Uri(baseUri->ToString() + relativeUri->ToString())
+        Uri(baseUri->ToString() + L'/' + relativeUri->ToString())
     {
     }
 
@@ -132,11 +132,11 @@ namespace Lupus {
         String uri;
 
         uri += mScheme.IsEmpty() ? "" : mScheme + "://";
-        uri += mUserInfo.IsEmpty() ? "" : mUserInfo + '@';
-        uri += mHostText.IsEmpty() ? "" : mHostText + '/';
+        uri += mUserInfo.IsEmpty() ? "" : mUserInfo + L'@';
+        uri += mHostText.IsEmpty() ? "" : mHostText + L'/';
         uri += mPathHead.empty() ? "" : FullPath();
-        uri += mQuery.IsEmpty() ? "" : '?' + mQuery;
-        uri += mFragment.IsEmpty() ? "" : '#' + mFragment;
+        uri += mQuery.IsEmpty() ? "" : L'?' + mQuery;
+        uri += mFragment.IsEmpty() ? "" : L'#' + mFragment;
 
         return uri;
     }

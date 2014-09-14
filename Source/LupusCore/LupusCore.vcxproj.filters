@@ -234,6 +234,9 @@
     <ClCompile Include="Win32Uri.cpp">
       <Filter>Lupus\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Encoding.cpp">
+      <Filter>Lupus\Text\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataColumn.h">
@@ -418,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Lupus\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="EncodingEnum.h">
+      <Filter>Lupus\Text\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
