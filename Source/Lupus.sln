@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "..\Test\UnitTests\UnitTests.vcxproj", "{B7FAC30D-FBD3-4D43-B434-B69F3E0C83AB}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -23,6 +23,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CPP", "CPP", "{C18548A9-8B34-4510-8EE7-DFB29376ECCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoIncrementVersion", "AutoIncrementVersion\AutoIncrementVersion.csproj", "{F54D26B7-7802-4DAF-AADC-EF5C57CB2C88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LupusTest", "LupusTest\LupusTest.vcxproj", "{06737314-331B-48E2-9C2F-B2B3B6FC5334}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +138,25 @@ Global
 		{F54D26B7-7802-4DAF-AADC-EF5C57CB2C88}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F54D26B7-7802-4DAF-AADC-EF5C57CB2C88}.Release|Win32.ActiveCfg = Release|Any CPU
 		{F54D26B7-7802-4DAF-AADC-EF5C57CB2C88}.Release|x64.ActiveCfg = Release|Any CPU
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Debug|Win32.ActiveCfg = Debug|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Debug|Win32.Build.0 = Debug|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Debug|x64.ActiveCfg = Debug|x64
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Debug|x64.Build.0 = Debug|x64
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Profile|Any CPU.ActiveCfg = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Profile|Mixed Platforms.ActiveCfg = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Profile|Mixed Platforms.Build.0 = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Profile|Win32.ActiveCfg = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Profile|Win32.Build.0 = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Profile|x64.ActiveCfg = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Release|Any CPU.ActiveCfg = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Release|Win32.ActiveCfg = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Release|Win32.Build.0 = Release|Win32
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,5 +167,6 @@ Global
 		{BB141509-46C7-4212-96B7-452F5CA69B55} = {178E02D6-7C88-47DE-948A-A4BBF9973558}
 		{9160C045-9A7A-4229-A7FA-B41C1DBCEEE4} = {178E02D6-7C88-47DE-948A-A4BBF9973558}
 		{F54D26B7-7802-4DAF-AADC-EF5C57CB2C88} = {178E02D6-7C88-47DE-948A-A4BBF9973558}
+		{06737314-331B-48E2-9C2F-B2B3B6FC5334} = {C18548A9-8B34-4510-8EE7-DFB29376ECCA}
 	EndGlobalSection
 EndGlobal

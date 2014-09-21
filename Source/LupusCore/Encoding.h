@@ -26,6 +26,7 @@ namespace Lupus {
                 const String& str,
                 size_t offset, size_t count) const throw(format_error, std::runtime_error);
             virtual EncodingType Type() const NOEXCEPT;
+            virtual String Name() const NOEXCEPT;
 
             static std::shared_ptr<Encoding> ASCII() NOEXCEPT;
             static std::shared_ptr<Encoding> Default() NOEXCEPT;

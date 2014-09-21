@@ -38,7 +38,7 @@ namespace Lupus {
         Encoding::Encoding(EncodingType type) :
             mType(type)
         {
-            UErrorCode error;
+            UErrorCode error = U_ZERO_ERROR;
 
             switch (type) {
                 case EncodingType::Default:
@@ -92,9 +92,10 @@ namespace Lupus {
             }
         }
 
-        Encoding::Encoding(String str)
+        Encoding::Encoding(String str) :
+            mType(EncodingType::Other)
         {
-            UErrorCode error;
+            UErrorCode error = U_ZERO_ERROR;
             mConverter = ucnv_openU(str.Data(), &error);
 
             if (error != U_ZERO_ERROR) {
@@ -131,7 +132,7 @@ namespace Lupus {
                 throw out_of_range("offset and size does not match buffer size");
             }
 
-            UErrorCode error;
+            UErrorCode error = U_ZERO_ERROR;
             int32_t length = (int32_t)size * 4;
             UChar* dest = new UChar[length + 1];
             memset(dest, 0, length + 1);
@@ -180,7 +181,7 @@ namespace Lupus {
                 throw out_of_range("offset and size does not match string length");
             }
             
-            UErrorCode error;
+            UErrorCode error = U_ZERO_ERROR;
             int32_t length = UCNV_GET_MAX_BYTES_FOR_STRING(str.Length(), ucnv_getMaxCharSize(mConverter));
             char* dest = new char[length];
             memset(dest, 0, length);
@@ -221,6 +222,18 @@ namespace Lupus {
         EncodingType Encoding::Type() const
         {
             return mType;
+        }
+
+        String Encoding::Name() const
+        {
+            UErrorCode error = U_ZERO_ERROR;
+            const char* result = ucnv_getName(mConverter, &error);
+
+            if (error != U_ZERO_ERROR) {
+                return "invalid converter";
+            } else {
+                return result;
+            }
         }
 
         shared_ptr<Encoding> Encoding::GetEncoding(String encoding)

@@ -42,11 +42,11 @@ namespace Lupus {
             }
         }
 
-        mScheme = String(uri.scheme.first, 0, uri.scheme.afterLast - uri.scheme.first);
-        mUserInfo = String(uri.userInfo.first, 0, uri.userInfo.afterLast - uri.userInfo.first);
-        mHostText = String(uri.hostText.first, 0, uri.hostText.afterLast - uri.hostText.first);
-        mQuery = String(uri.query.first, 0, uri.query.afterLast - uri.query.first);
-        mFragment = String(uri.fragment.first, 0, uri.fragment.afterLast - uri.fragment.first);
+        mScheme = uri.scheme.first ? String(uri.scheme.first, 0, uri.scheme.afterLast - uri.scheme.first) : "";
+        mUserInfo = uri.userInfo.first ? String(uri.userInfo.first, 0, uri.userInfo.afterLast - uri.userInfo.first) : "";
+        mHostText = uri.hostText.first ? String(uri.hostText.first, 0, uri.hostText.afterLast - uri.hostText.first) : "";
+        mQuery = uri.query.first ? String(uri.query.first, 0, uri.query.afterLast - uri.query.first) : "";
+        mFragment = uri.fragment.first ? String(uri.fragment.first, 0, uri.fragment.afterLast - uri.fragment.first) : "";
         mIsAbosultePath = uri.absolutePath != 0;
 
         for (auto it = uri.pathHead; it != NULL; it = it->next) {

@@ -8,6 +8,7 @@ using namespace std;
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable: 4267)
+#pragma warning(disable: 4715)
 #endif
 
 namespace Lupus {
@@ -17,18 +18,27 @@ namespace Lupus {
     {
         mString = new UnicodeString();
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(Char ch, size_t count)
     {
         mString = new UnicodeString(ComputeCapacity(count), ch, count);
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(const char* str)
     {
         mString = new UnicodeString(UnicodeString::fromUTF8(StringPiece(str, strlen(str))));
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(const Char* str) : String(str, 0, u_strlen(str))
@@ -45,12 +55,18 @@ namespace Lupus {
 
         mString = new UnicodeString(str + offset, size);
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(const string& str)
     {
         mString = new UnicodeString(UnicodeString::fromUTF8(StringPiece(str.c_str(), str.length())));
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(const string& str, size_t offset, size_t size)
@@ -61,6 +77,9 @@ namespace Lupus {
 
         mString = new UnicodeString(UnicodeString::fromUTF8(StringPiece(str.c_str() + offset, size)));
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(const String& str)
@@ -68,6 +87,9 @@ namespace Lupus {
         mString = str.mString;
         mCount = str.mCount;
         AddRef();
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(const String& str, size_t offset, size_t size)
@@ -78,6 +100,9 @@ namespace Lupus {
 
         mString = new UnicodeString(*str.mString, offset, size);
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(String&& str)
@@ -86,12 +111,18 @@ namespace Lupus {
         mCount = str.mCount;
         str.mString = nullptr;
         str.mCount = nullptr;
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::String(UnicodeString* string)
     {
         mString = string;
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
     }
 
     String::~String()
@@ -110,7 +141,7 @@ namespace Lupus {
             throw out_of_range("index exceeds size of string");
         }
 
-        return *(const_cast<Char*>(mString->getBuffer() + index));
+        return *(const_cast<Char*>(mString->getTerminatedBuffer() + index));
     }
 
     const Char& String::operator[](size_t index) const
@@ -119,7 +150,7 @@ namespace Lupus {
             throw out_of_range("index exceeds size of internal buffer");
         }
 
-        return *(mString->getBuffer() + index);
+        return *(mString->getTerminatedBuffer() + index);
     }
 
     String String::Clone() const
@@ -129,7 +160,7 @@ namespace Lupus {
 
     const Char* String::Data() const
     {
-        return mString->getBuffer();
+        return mString->getTerminatedBuffer();
     }
 
     const Char* String::Data(size_t startIndex) const
@@ -138,7 +169,7 @@ namespace Lupus {
             throw out_of_range("startIndex exceeds size of internal buffer");
         }
 
-        return mString->getBuffer() + startIndex;
+        return mString->getTerminatedBuffer() + startIndex;
     }
 
     bool String::IsEmpty() const
@@ -175,11 +206,6 @@ namespace Lupus {
         result->append(*str.mString, offset, size);
         return String(result);
     }
-
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4715)
-#endif
 
     int String::Compare(String str, StringCaseSensitivity sens) const
     {
@@ -220,10 +246,6 @@ namespace Lupus {
                 return mString->caseCompare(offset, size, *cmpStr.mString, offset, size, 0);
         }
     }
-
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
     bool String::Contains(String str) const
     {
@@ -531,30 +553,34 @@ namespace Lupus {
             throw format_error("Could not create RegexMatcher");
         }
 
-        UnicodeString* dest = new UnicodeString[m.groupCount() + 1];
-        int32_t count = m.split(*mString, dest, m.groupCount() + 1, status);
+        vector<UnicodeString> dest(1024);
+        int32_t count = m.split(*mString, &dest[0], 1024, status) / 2 + 1;
 
         if (status != U_ZERO_ERROR) {
-            delete dest;
             throw format_error("Could not split string with given pattern");
         }
 
-        vector<String> result(count);
+        vector<String> result;
 
-        for (UnicodeString* it = dest; it < dest + count; it++) {
-            result.push_back(String(it));
-        }
+        for (auto& it : dest) {
+            bool add = true;
+            String tmp(it.getTerminatedBuffer());
 
-        if (option == StringSplitOption::RemoveEmptyEntries) {
-            vector<String> tmp;
-
-            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
-                if (!str.IsEmpty()) {
-                    tmp.push_back(str);
+            for (Char cmp : delimiter) {
+                if (!(add = !(tmp == String(cmp)))) {
+                    break;
                 }
-            });
+            }
 
-            result = tmp;
+            if (add) {
+                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
+                    result.push_back(tmp);
+                }
+
+                if (result.size() == count) {
+                    break;
+                }
+            }
         }
 
         return result;
@@ -577,30 +603,34 @@ namespace Lupus {
             throw format_error("Could not create RegexMatcher");
         }
 
-        UnicodeString* dest = new UnicodeString[count];
-        int32_t c = m.split(*mString, dest, count, status);
+        vector<UnicodeString> dest(count * 2);
+        int32_t c = m.split(*mString, &dest[0], count * 2, status) / 2 + 1;
 
         if (status != U_ZERO_ERROR) {
-            delete dest;
             throw format_error("Could not split string with given pattern");
         }
 
-        vector<String> result(count);
+        vector<String> result;
 
-        for (UnicodeString* it = dest; it < dest + count; it++) {
-            result.push_back(String(it));
-        }
+        for (auto& it : dest) {
+            bool add = true;
+            String tmp(it.getTerminatedBuffer());
 
-        if (option == StringSplitOption::RemoveEmptyEntries) {
-            vector<String> tmp;
-
-            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
-                if (!str.IsEmpty()) {
-                    tmp.push_back(str);
+            for (Char cmp : delimiter) {
+                if (!(add = !(tmp == String(cmp)))) {
+                    break;
                 }
-            });
+            }
 
-            result = tmp;
+            if (add) {
+                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
+                    result.push_back(tmp);
+                }
+
+                if (result.size() == c) {
+                    break;
+                }
+            }
         }
 
         return result;
@@ -612,7 +642,7 @@ namespace Lupus {
         UErrorCode status = U_ZERO_ERROR;
 
         for_each(std::begin(delimiter), std::end(delimiter), [&str](String s) {
-            if (s.IsEmpty()) {
+            if (str.Length() == 1) {
                 str += s;
             } else {
                 str += "|" + s;
@@ -627,30 +657,34 @@ namespace Lupus {
             throw format_error("Could not create RegexMatcher");
         }
 
-        UnicodeString* dest = new UnicodeString[m.groupCount() + 1];
-        int32_t count = m.split(*mString, dest, m.groupCount() + 1, status);
+        vector<UnicodeString> dest(1024);
+        int32_t count = m.split(*mString, &dest[0], 1024, status) / 2 + 1;
 
         if (status != U_ZERO_ERROR) {
-            delete dest;
             throw format_error("Could not split string with given pattern");
         }
 
-        vector<String> result(count);
+        vector<String> result;
 
-        for (UnicodeString* it = dest; it < dest + count; it++) {
-            result.push_back(String(it));
-        }
+        for (auto& it : dest) {
+            bool add = true;
+            String tmp(it.getTerminatedBuffer());
 
-        if (option == StringSplitOption::RemoveEmptyEntries) {
-            vector<String> tmp;
-
-            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
-                if (!str.IsEmpty()) {
-                    tmp.push_back(str);
+            for (String cmp : delimiter) {
+                if (!(add = !(tmp == cmp))) {
+                    break;
                 }
-            });
+            }
 
-            result = tmp;
+            if (add) {
+                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
+                    result.push_back(tmp);
+                }
+
+                if (result.size() == count) {
+                    break;
+                }
+            }
         }
 
         return result;
@@ -662,7 +696,7 @@ namespace Lupus {
         UErrorCode status = U_ZERO_ERROR;
 
         for_each(std::begin(delimiter), std::end(delimiter), [&str](String s) {
-            if (s.IsEmpty()) {
+            if (str.Length() == 1) {
                 str += s;
             } else {
                 str += "|" + s;
@@ -677,30 +711,34 @@ namespace Lupus {
             throw format_error("Could not create RegexMatcher");
         }
 
-        UnicodeString* dest = new UnicodeString[count];
-        int32_t c = m.split(*mString, dest, count, status);
+        vector<UnicodeString> dest(count * 2);
+        int32_t c = m.split(*mString, &dest[0], count * 2, status) / 2 + 1;
 
         if (status != U_ZERO_ERROR) {
-            delete dest;
             throw format_error("Could not split string with given pattern");
         }
 
-        vector<String> result(count);
+        vector<String> result;
 
-        for (UnicodeString* it = dest; it < dest + count; it++) {
-            result.push_back(String(it));
-        }
+        for (auto& it : dest) {
+            bool add = true;
+            String tmp(it.getTerminatedBuffer());
 
-        if (option == StringSplitOption::RemoveEmptyEntries) {
-            vector<String> tmp;
-
-            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
-                if (!str.IsEmpty()) {
-                    tmp.push_back(str);
+            for (String cmp : delimiter) {
+                if (!(add = !(tmp == cmp))) {
+                    break;
                 }
-            });
+            }
 
-            result = tmp;
+            if (add) {
+                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
+                    result.push_back(tmp);
+                }
+
+                if (result.size() == c) {
+                    break;
+                }
+            }
         }
 
         return result;
@@ -726,7 +764,7 @@ namespace Lupus {
             throw out_of_range("startIndex exceeds size of internal buffer");
         }
 
-        return String(new UnicodeString(mString->getBuffer() + startIndex));
+        return String(new UnicodeString(mString->getTerminatedBuffer() + startIndex));
     }
 
     String String::Substring(size_t startIndex, size_t count) const
@@ -735,7 +773,7 @@ namespace Lupus {
             throw out_of_range("startIndex or count exceeds size of internal buffer");
         }
 
-        return String(new UnicodeString(mString->getBuffer() + startIndex, count));
+        return String(new UnicodeString(mString->getTerminatedBuffer() + startIndex, count));
     }
 
     String String::ToLower() const
@@ -760,7 +798,7 @@ namespace Lupus {
 
     u16string String::ToUTF16() const
     {
-        return u16string((const char16_t*)mString->getBuffer());
+        return u16string((const char16_t*)mString->getTerminatedBuffer());
     }
 
     u32string String::ToUTF32() const
@@ -838,6 +876,9 @@ namespace Lupus {
 
         mString = new UnicodeString(ch);
         mCount = new size_t(1);
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
         return *this;
     }
 
@@ -851,6 +892,9 @@ namespace Lupus {
         mString = str.mString;
         mCount = str.mCount;
         AddRef();
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
         return *this;
     }
 
@@ -860,18 +904,27 @@ namespace Lupus {
         mCount = str.mCount;
         str.mString = nullptr;
         str.mCount = nullptr;
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
         return *this;
     }
 
     String& String::operator+=(Char ch)
     {
         *mString += ch;
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
         return *this;
     }
 
     String& String::operator+=(const String& string)
     {
         *mString += *string.mString;
+#ifdef _DEBUG
+        mDebugString = ToUTF8();
+#endif
         return *this;
     }
 

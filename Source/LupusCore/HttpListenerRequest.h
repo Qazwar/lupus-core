@@ -41,44 +41,44 @@ namespace Lupus {
         public:
 
             HttpListenerRequest() = delete;
-            ~HttpListenerRequest();
+            HttpListenerRequest(
+                String header,
+                std::shared_ptr<Lupus::InputStream> body,
+                std::shared_ptr<Sockets::IPEndPoint> localEP,
+                std::shared_ptr<Sockets::IPEndPoint> remoteEP,
+                bool authenticated = false,
+                bool secure = false);
+            virtual ~HttpListenerRequest() = default;
 
-            std::vector<String> AcceptTypes() const NOEXCEPT;
+            const std::vector<String>& AcceptTypes() const NOEXCEPT;
             std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
             int64_t ContentLength() const NOEXCEPT;
             String ContentType() const NOEXCEPT;
-            std::unordered_map<String, String> Cookies() const NOEXCEPT;
+            const std::unordered_map<String, String>& Cookies() const NOEXCEPT;
             bool HasEntityBody() const NOEXCEPT;
-            std::unordered_map<String, String> Headers() const NOEXCEPT;
+            const std::unordered_map<String, String>& Headers() const NOEXCEPT;
             String HttpMethod() const NOEXCEPT;
             std::shared_ptr<Stream> InputStream() const NOEXCEPT;
-            bool IsAuntheticated() const NOEXCEPT;
+            bool IsAuthenticated() const NOEXCEPT;
             bool IsLocal() const NOEXCEPT;
             bool IsSecureConnection() const NOEXCEPT;
             bool KeepAlive() const NOEXCEPT;
             std::shared_ptr<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
             std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
-            std::unordered_map<String, String> QueryString() const NOEXCEPT;
-            String RawUrl() const NOEXCEPT;
+            const std::unordered_map<String, String>& QueryString() const NOEXCEPT;
+            String RawHeader() const NOEXCEPT;
             std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
             std::shared_ptr<Uri> Url() const NOEXCEPT;
             String UserAgent() const NOEXCEPT;
-            String UserHostAddress() const NOEXCEPT;
-            String UserHostName() const NOEXCEPT;
-            std::vector<String> UserLanguages() const NOEXCEPT;
+            String UserLocalAddress() const NOEXCEPT;
+            String UserRemoteAddress() const NOEXCEPT;
+            const std::vector<String>& UserLanguages() const NOEXCEPT;
 
             Task<std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
 
             std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> GetClientCertificate() const NOEXCEPT;
 
         private:
-
-            friend class HttpListener;
-
-            HttpListenerRequest(
-                std::shared_ptr<Lupus::InputStream> stream, 
-                std::shared_ptr<Sockets::IPEndPoint> localEP, 
-                std::shared_ptr<Sockets::IPEndPoint> remoteEP);
 
             std::shared_ptr<Lupus::InputStream> mStream; //
             std::shared_ptr<Sockets::IPEndPoint> mLocalEP; //
@@ -94,6 +94,9 @@ namespace Lupus {
             String mContentType; //
             String mMethod; //
             String mUserAgent; //
+            String mRawHeader; //
+            bool mAuthenticated = false;
+            bool mSecure = false;
         };
     }
 }

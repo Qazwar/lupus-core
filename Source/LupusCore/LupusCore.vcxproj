@@ -33,7 +33,6 @@
     <ClCompile Include="HttpListenerRequest.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="String.cpp" />
-    <ClCompile Include="StringStream.cpp" />
     <ClCompile Include="SymmetricAlgorithm.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Connection.cpp" />
@@ -77,7 +76,6 @@
     <ClInclude Include="Private.CryptoRSA.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="String.h" />
-    <ClInclude Include="StringStream.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
     <ClInclude Include="Observable.h" />

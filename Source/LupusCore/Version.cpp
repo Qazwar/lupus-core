@@ -156,11 +156,17 @@ namespace Lupus {
     {
         vector<int> numbers(4, -1);
 
-        for (int n = value.IndexOf("."), o = 0, i = 0; n != -1 && i < 4; o = n, n = value.IndexOf(".", n), i++) {
+        for (int n = value.IndexOf("."), o = 0, i = 0; o != -1 && i < 4; o = n == -1 ? -1 : n + 1, n = value.IndexOf(".", n + 1), i++) {
             int num = -1;
 
-            if (!Integer::TryParse(value.Substring(o, n), num)) {
-                throw format_error("Invalid version number");
+            if (n != -1) {
+                if (!Integer::TryParse(value.Substring(o, n), num)) {
+                    throw format_error("Invalid version number");
+                }
+            } else {
+                if (!Integer::TryParse(value.Substring(o), num)) {
+                    throw format_error("Invalid version number");
+                }
             }
 
             numbers[i] = num;

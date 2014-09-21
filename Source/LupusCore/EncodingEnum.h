@@ -14,7 +14,8 @@ namespace Lupus{
             UTF32,
             UTF32LE,
             UTF32BE,
-            ASCII
+            ASCII,
+            Other
         };
 
         /*enum class EncodingConvertError {

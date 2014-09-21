@@ -246,9 +246,6 @@
     <ClCompile Include="Encoding.cpp">
       <Filter>Lupus\Text\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="StringStream.cpp">
-      <Filter>Lupus\IO\.cpp</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataColumn.h">
@@ -436,9 +433,6 @@
     </ClInclude>
     <ClInclude Include="EncodingEnum.h">
       <Filter>Lupus\Text\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="StringStream.h">
-      <Filter>Lupus\IO\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

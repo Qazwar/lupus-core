@@ -148,6 +148,9 @@ namespace Lupus {
 
         icu::UnicodeString* mString = nullptr;
         size_t* mCount = nullptr;
+#ifdef _DEBUG
+        std::string mDebugString;
+#endif
     };
 
     template <typename CharT>
