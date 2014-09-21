@@ -84,10 +84,6 @@ namespace Lupus {
 
     void MemoryStream::Length(int64_t length)
     {
-        if (length < 0) {
-            throw out_of_range("length must be at least zero");
-        }
-
         mBuffer.resize((size_t)length);
     }
 
@@ -98,10 +94,6 @@ namespace Lupus {
 
     void MemoryStream::Position(int64_t position)
     {
-        if (position < 0 || position > (int64_t)mBuffer.size()) {
-            throw out_of_range("position exceeds stream boundaries");
-        }
-
         advance((mIterator = begin(mBuffer)), (int)position);
     }
 

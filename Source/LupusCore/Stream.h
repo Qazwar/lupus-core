@@ -42,9 +42,9 @@ namespace Lupus {
         virtual void CopyTo(std::shared_ptr<Stream> destination) throw(null_pointer, not_supported);
         virtual void Flush() throw(not_supported);
         virtual int64_t Length() const = 0;
-        virtual void Length(int64_t) throw(not_supported, std::out_of_range);
+        virtual void Length(int64_t) throw(not_supported);
         virtual int64_t Position() const = 0;
-        virtual void Position(int64_t) throw(not_supported, std::out_of_range);
+        virtual void Position(int64_t) throw(not_supported);
         virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) = 0;
         virtual int ReadByte() = 0;
         virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) = 0;

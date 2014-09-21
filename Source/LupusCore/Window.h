@@ -97,15 +97,15 @@ namespace Lupus {
             WindowEvent<> Exposed;
             //! Fenster wurde bewegt.
             WindowEvent<> Moved;
-            //! Fenstergr��e wurde ver�ndert.
+            //! Fenstergröße wurde verändert.
             WindowEvent<> Resized;
-            //! Fentergr��e hat sich ver�ndert, wird nach Resized aufgerufen.
+            //! Fentergröße hat sich verändert, wird nach Resized aufgerufen.
             WindowEvent<> SizeChanged;
             //! Fenster wurde minimiert.
             WindowEvent<> Minimized;
             //! Fenster wurde maximiert.
             WindowEvent<> Maximized;
-            //! Fenster hat wieder Normalgr��e.
+            //! Fenster hat wieder Normalgröße.
             WindowEvent<> Restored;
             //! Fenster hat jetzt Mausfokus.
             WindowEvent<> Enter;

@@ -34,7 +34,12 @@ namespace Lupus {
             static std::shared_ptr<Encoding> UTF8() NOEXCEPT;
             static std::shared_ptr<Encoding> UTF7() NOEXCEPT;
 
+            static std::shared_ptr<Encoding> GetEncoding(String encoding) NOEXCEPT;
+            static std::vector<String> GetEncodings() NOEXCEPT;
+
         private:
+
+            Encoding(String str) throw(std::runtime_error);
 
             UConverter* mConverter = nullptr;
             EncodingType mType = EncodingType::Default;

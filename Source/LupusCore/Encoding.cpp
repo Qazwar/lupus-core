@@ -83,6 +83,26 @@ namespace Lupus {
             }
 
             if (error != U_ZERO_ERROR) {
+                if (mConverter) {
+                    ucnv_close(mConverter);
+                    mConverter = nullptr;
+                }
+
+                throw runtime_error("Could not create converter.");
+            }
+        }
+
+        Encoding::Encoding(String str)
+        {
+            UErrorCode error;
+            mConverter = ucnv_openU(str.Data(), &error);
+
+            if (error != U_ZERO_ERROR) {
+                if (mConverter) {
+                    ucnv_close(mConverter);
+                    mConverter = nullptr;
+                }
+
                 throw runtime_error("Could not create converter.");
             }
         }
@@ -201,6 +221,27 @@ namespace Lupus {
         EncodingType Encoding::Type() const
         {
             return mType;
+        }
+
+        shared_ptr<Encoding> Encoding::GetEncoding(String encoding)
+        {
+            try {
+                return shared_ptr<Encoding>(new Encoding(encoding));
+            } catch (runtime_error&) {
+                return nullptr;
+            }
+        }
+
+        vector<String> Encoding::GetEncodings()
+        {
+            vector<String> result;
+            int32_t count = ucnv_countAvailable();
+
+            for (int32_t i = 0; i < count; i++) {
+                result.push_back(ucnv_getAvailableName(i));
+            }
+
+            return result;
         }
     }
 }

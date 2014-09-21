@@ -6,9 +6,7 @@
 #include <boost/noncopyable.hpp>
 
 namespace Lupus {
-    // TODO: Code schreiben.
-
-    class Version : public boost::noncopyable, public IClonable<Version>
+    class LUPUS_API Version : public boost::noncopyable, public IClonable<Version>
     {
     public:
 

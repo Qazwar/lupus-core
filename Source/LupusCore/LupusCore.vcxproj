@@ -33,6 +33,7 @@
     <ClCompile Include="HttpListenerRequest.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="StringStream.cpp" />
     <ClCompile Include="SymmetricAlgorithm.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Connection.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="Private.CryptoRSA.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="StringStream.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
     <ClInclude Include="Observable.h" />
@@ -264,6 +266,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -273,6 +276,9 @@
     <PreBuildEvent>
       <Command>$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe ./LupusCore.ini</Command>
     </PreBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>

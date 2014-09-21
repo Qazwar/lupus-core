@@ -124,6 +124,15 @@
     <Filter Include="Lupus\Text\.h">
       <UniqueIdentifier>{4693a64f-8cd0-4244-9705-8e3f2e5f0b44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lupus\IO">
+      <UniqueIdentifier>{b6f88957-1651-4100-bb61-1ff89f132c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\IO\.cpp">
+      <UniqueIdentifier>{830e13d0-a5ab-4c4b-b3a6-c6c205995ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lupus\IO\.h">
+      <UniqueIdentifier>{d1510af0-0d43-494b-98a3-13a08fca8e21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgCommand.cpp">
@@ -236,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="Encoding.cpp">
       <Filter>Lupus\Text\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="StringStream.cpp">
+      <Filter>Lupus\IO\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="EncodingEnum.h">
       <Filter>Lupus\Text\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="StringStream.h">
+      <Filter>Lupus\IO\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -100,10 +100,10 @@ namespace Lupus {
         virtual String Replace(String oldStr, String newStr) const throw(std::out_of_range);
         virtual String Reverse() const NOEXCEPT;
         virtual String Reverse(size_t startIndex, size_t count) const throw(std::out_of_range);
-        virtual std::vector<String> Split(const std::vector<Char>& delimiter, StringSplitOption = StringSplitOption::None) const NOEXCEPT;
-        virtual std::vector<String> Split(const std::vector<Char>& delimiter, size_t count, StringSplitOption = StringSplitOption::None) const NOEXCEPT;
-        virtual std::vector<String> Split(const std::vector<String>& delimiter, StringSplitOption = StringSplitOption::None) const NOEXCEPT;
-        virtual std::vector<String> Split(const std::vector<String>& delimiter, size_t count, StringSplitOption = StringSplitOption::None) const NOEXCEPT;
+        virtual std::vector<String> Split(const std::vector<Char>& delimiter, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
+        virtual std::vector<String> Split(const std::vector<Char>& delimiter, size_t count, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
+        virtual std::vector<String> Split(const std::vector<String>& delimiter, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
+        virtual std::vector<String> Split(const std::vector<String>& delimiter, size_t count, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
         virtual bool StartsWith(String str) const NOEXCEPT;
         virtual bool StartsWith(String str, size_t offset, size_t size) const throw(std::out_of_range);
         virtual String Substring(size_t startIndex) const throw(std::out_of_range);

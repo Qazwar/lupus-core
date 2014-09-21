@@ -1,6 +1,7 @@
 ﻿#include "String.h"
 #include <unicode/ustring.h>
 #include <unicode/unistr.h>
+#include <unicode/regex.h>
 
 using namespace std;
 
@@ -513,126 +514,194 @@ namespace Lupus {
         return String(result);
     }
 
-    vector<String> String::Split(const vector<Char>& delimiter, StringSplitOption option) const
+    vector<String> String::Split(const vector<Char>& delimiter, StringSplitOption option, StringCaseSensitivity sens) const
     {
-        vector<String> result;
-        int lastIndex;
+        String str("[");
+        UErrorCode status = U_ZERO_ERROR;
 
-        for_each(std::begin(delimiter), std::end(delimiter), [&](Char ch) {
-            lastIndex = this->IndexOf(ch);
-            int index = this->IndexOf(ch, lastIndex + 1);
+        for_each(std::begin(delimiter), std::end(delimiter), [&str](Char ch) {
+            str += ch;
+        });
 
-            if (lastIndex != -1) {
-                if (index != -1) {
-                    if (lastIndex + 1 == index - lastIndex - 1 && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->IndexOf(lastIndex + 1, index - lastIndex - 1));
-                    }
-                } else {
-                    if (lastIndex + 1 == this->Length() && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->Substring(lastIndex + 1));
-                    }
+        str += "]";
+
+        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
+
+        if (status != U_ZERO_ERROR) {
+            throw format_error("Could not create RegexMatcher");
+        }
+
+        UnicodeString* dest = new UnicodeString[m.groupCount() + 1];
+        int32_t count = m.split(*mString, dest, m.groupCount() + 1, status);
+
+        if (status != U_ZERO_ERROR) {
+            delete dest;
+            throw format_error("Could not split string with given pattern");
+        }
+
+        vector<String> result(count);
+
+        for (UnicodeString* it = dest; it < dest + count; it++) {
+            result.push_back(String(it));
+        }
+
+        if (option == StringSplitOption::RemoveEmptyEntries) {
+            vector<String> tmp;
+
+            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
+                if (!str.IsEmpty()) {
+                    tmp.push_back(str);
                 }
+            });
+
+            result = tmp;
+        }
+
+        return result;
+    }
+
+    vector<String> String::Split(const vector<Char>& delimiter, size_t count, StringSplitOption option, StringCaseSensitivity sens) const
+    {
+        String str("[");
+        UErrorCode status = U_ZERO_ERROR;
+
+        for_each(std::begin(delimiter), std::end(delimiter), [&str](Char ch) {
+            str += ch;
+        });
+
+        str += "]";
+
+        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
+
+        if (status != U_ZERO_ERROR) {
+            throw format_error("Could not create RegexMatcher");
+        }
+
+        UnicodeString* dest = new UnicodeString[count];
+        int32_t c = m.split(*mString, dest, count, status);
+
+        if (status != U_ZERO_ERROR) {
+            delete dest;
+            throw format_error("Could not split string with given pattern");
+        }
+
+        vector<String> result(count);
+
+        for (UnicodeString* it = dest; it < dest + count; it++) {
+            result.push_back(String(it));
+        }
+
+        if (option == StringSplitOption::RemoveEmptyEntries) {
+            vector<String> tmp;
+
+            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
+                if (!str.IsEmpty()) {
+                    tmp.push_back(str);
+                }
+            });
+
+            result = tmp;
+        }
+
+        return result;
+    }
+
+    vector<String> String::Split(const vector<String>& delimiter, StringSplitOption option, StringCaseSensitivity sens) const
+    {
+        String str("(");
+        UErrorCode status = U_ZERO_ERROR;
+
+        for_each(std::begin(delimiter), std::end(delimiter), [&str](String s) {
+            if (s.IsEmpty()) {
+                str += s;
+            } else {
+                str += "|" + s;
             }
         });
 
+        str += ")";
+
+        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
+
+        if (status != U_ZERO_ERROR) {
+            throw format_error("Could not create RegexMatcher");
+        }
+
+        UnicodeString* dest = new UnicodeString[m.groupCount() + 1];
+        int32_t count = m.split(*mString, dest, m.groupCount() + 1, status);
+
+        if (status != U_ZERO_ERROR) {
+            delete dest;
+            throw format_error("Could not split string with given pattern");
+        }
+
+        vector<String> result(count);
+
+        for (UnicodeString* it = dest; it < dest + count; it++) {
+            result.push_back(String(it));
+        }
+
+        if (option == StringSplitOption::RemoveEmptyEntries) {
+            vector<String> tmp;
+
+            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
+                if (!str.IsEmpty()) {
+                    tmp.push_back(str);
+                }
+            });
+
+            result = tmp;
+        }
+
         return result;
     }
 
-    vector<String> String::Split(const vector<Char>& delimiter, size_t count, StringSplitOption option) const
+    vector<String> String::Split(const vector<String>& delimiter, size_t count, StringSplitOption option, StringCaseSensitivity sens) const
     {
-        vector<String> result;
-        int lastIndex;
+        String str("(");
+        UErrorCode status = U_ZERO_ERROR;
 
-        for (Char ch : delimiter) {
-            if (result.size() == count) {
-                break;
-            }
-
-            lastIndex = this->IndexOf(ch);
-            int index = this->IndexOf(ch, lastIndex + 1);
-
-            if (lastIndex != -1) {
-                if (index != -1) {
-                    if (lastIndex + 1 == index - lastIndex - 1 && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->IndexOf(lastIndex + 1, index - lastIndex - 1));
-                    }
-                } else {
-                    if (lastIndex + 1 == this->Length() && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->Substring(lastIndex + 1));
-                    }
-                }
-            }
-        };
-
-        return result;
-    }
-
-    vector<String> String::Split(const vector<String>& delimiter, StringSplitOption option) const
-    {
-        vector<String> result;
-        int lastIndex;
-
-        for_each(std::begin(delimiter), std::end(delimiter), [&](String str) {
-            lastIndex = this->IndexOf(str);
-            int index = this->IndexOf(str, lastIndex + 1);
-
-            if (lastIndex != -1) {
-                if (index != -1) {
-                    if (lastIndex + 1 == index - lastIndex - 1 && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->IndexOf(lastIndex + 1, index - lastIndex - 1));
-                    }
-                } else {
-                    if (lastIndex + 1 == this->Length() && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->Substring(lastIndex + 1));
-                    }
-                }
+        for_each(std::begin(delimiter), std::end(delimiter), [&str](String s) {
+            if (s.IsEmpty()) {
+                str += s;
+            } else {
+                str += "|" + s;
             }
         });
 
-        return result;
-    }
+        str += ")";
 
-    vector<String> String::Split(const vector<String>& delimiter, size_t count, StringSplitOption option) const
-    {
-        vector<String> result;
-        int lastIndex;
+        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
 
-        for (String str : delimiter) {
-            if (result.size() == count) {
-                break;
-            }
+        if (status != U_ZERO_ERROR) {
+            throw format_error("Could not create RegexMatcher");
+        }
 
-            lastIndex = this->IndexOf(str);
-            int index = this->IndexOf(str, lastIndex + 1);
+        UnicodeString* dest = new UnicodeString[count];
+        int32_t c = m.split(*mString, dest, count, status);
 
-            if (lastIndex != -1) {
-                if (index != -1) {
-                    if (lastIndex + 1 == index - lastIndex - 1 && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->IndexOf(lastIndex + 1, index - lastIndex - 1));
-                    }
-                } else {
-                    if (lastIndex + 1 == this->Length() && option == StringSplitOption::None) {
-                        result.push_back("");
-                    } else {
-                        result.push_back(this->Substring(lastIndex + 1));
-                    }
+        if (status != U_ZERO_ERROR) {
+            delete dest;
+            throw format_error("Could not split string with given pattern");
+        }
+
+        vector<String> result(count);
+
+        for (UnicodeString* it = dest; it < dest + count; it++) {
+            result.push_back(String(it));
+        }
+
+        if (option == StringSplitOption::RemoveEmptyEntries) {
+            vector<String> tmp;
+
+            for_each(std::begin(result), std::end(result), [&result, &tmp](String str) {
+                if (!str.IsEmpty()) {
+                    tmp.push_back(str);
                 }
-            }
-        };
+            });
+
+            result = tmp;
+        }
 
         return result;
     }

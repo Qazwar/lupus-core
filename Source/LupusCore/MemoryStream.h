@@ -27,9 +27,9 @@ namespace Lupus {
 
         virtual void Close() NOEXCEPT override;
         virtual int64_t Length() const NOEXCEPT override;
-        virtual void Length(int64_t) throw(std::out_of_range) override;
+        virtual void Length(int64_t) NOEXCEPT override;
         virtual int64_t Position() const NOEXCEPT override;
-        virtual void Position(int64_t) throw(std::out_of_range) override;
+        virtual void Position(int64_t) NOEXCEPT override;
         virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override;
         virtual int ReadByte() NOEXCEPT override;
         virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(not_supported, std::out_of_range) override;
