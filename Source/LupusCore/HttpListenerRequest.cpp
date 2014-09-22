@@ -18,6 +18,8 @@ namespace Lupus {
         HttpListenerRequest::HttpListenerRequest(const vector<uint8_t>& buffer, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
             mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
+            unordered_map<String, String>::const_iterator citum;
+
             for (auto it = begin(buffer); it != end(buffer); it++) {
                 char ch = static_cast<char>(*it);
                 
@@ -44,17 +46,17 @@ namespace Lupus {
             int index = lines[0].IndexOf(" ") + 1;
             mUrl = make_shared<Uri>((mSecure ? "https://" : "http://") + mHeaders["Host"] + lines[0].Substring(index, lines[0].LastIndexOf(" ") - index));
             String query = mUrl->Query();
-            String cookie = mHeaders.find("Cookie") != end(mHeaders) ? mHeaders["Cookie"] : "";
-            String language = mHeaders.find("Accept-Language") != end(mHeaders) ? mHeaders["Accept-Language"] : "";
-            String charset = mHeaders.find("Accept-Charset") != end(mHeaders) ? mHeaders["Accept-Charset"] : "";
-            String accepttypes = mHeaders.find("Accept") != end(mHeaders) ? mHeaders["Accept"] : "";
+            String cookie = (citum = mHeaders.find("Cookie")) != end(mHeaders) ? citum->second : "";
+            String language = (citum = mHeaders.find("Accept-Language")) != end(mHeaders) ? citum->second : "";
+            String charset = (citum = mHeaders.find("Accept-Charset")) != end(mHeaders) ? citum->second : "";
+            String accepttypes = (citum = mHeaders.find("Accept")) != end(mHeaders) ? citum->second : "";
 
-            mContentType = mHeaders.find("Content-Type") != end(mHeaders) ? mHeaders["Content-Type"] : "";
-            mUserAgent = mHeaders.find("User-Agent") != end(mHeaders) ? mHeaders["User-Agent"] : "";
+            mContentType = (citum = mHeaders.find("Content-Type")) != end(mHeaders) ? citum->second : "";
+            mUserAgent = (citum = mHeaders.find("User-Agent")) != end(mHeaders) ? citum->second : "";
 
             mAcceptedTypes = accepttypes.IsEmpty() ? vector<String>() : accepttypes.Split({ ";" })[0].Split({ "," }, StringSplitOption::RemoveEmptyEntries);
             mLanguages = language.IsEmpty() ? vector<String>() : language.Split({ ";" })[0].Split({ "," }, StringSplitOption::RemoveEmptyEntries);
-            auto queries = query.IsEmpty() ? vector<String>() : query.Split({ "?" }, StringSplitOption::RemoveEmptyEntries)[0].Split({ "&" }, StringSplitOption::RemoveEmptyEntries);
+            auto queries = query.IsEmpty() ? vector<String>() : query.Split({ "&" }, StringSplitOption::RemoveEmptyEntries);
 
             for (auto str : queries) {
                 auto nameValuePair = str.Split({ "=" });

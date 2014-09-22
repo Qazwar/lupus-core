@@ -26,13 +26,16 @@ const String testRequest1 = "GET /tutorials/other/top-20-mysql-best-practices/ H
 "Pragma: no-cache\r\n"
 "Cache-Control: no-cache\r\n\r\n";
 
-int main(int argc, char** argv)
+int wmain(int argc, wchar_t** argv)
 {
-    auto request = shared_ptr<HttpListenerRequest>(new HttpListenerRequest(Encoding::ASCII()->GetBytes(testRequest1), nullptr, nullptr));
+    auto request = make_shared<HttpListenerRequest>(Encoding::ASCII()->GetBytes(testRequest1), nullptr, nullptr);
 
     wprintf(request->RawHeader().Data());
-    wprintf((L"HTTP/" + request->ProtocolVersion()->ToString() + L'\n').Data());
-    wprintf((request->Url()->ToString() + L'\n').Data());
+    wprintf(request->HttpMethod().Data());
+    wprintf(L" ");
+    wprintf(request->Url()->FullPath().Data());
+    wprintf(L" ");
+    wprintf((L"HTTP/" + request->ProtocolVersion()->ToString() + L"\r\n").Data());
     getchar();
 
     return EXIT_SUCCESS;

@@ -116,15 +116,11 @@ namespace Lupus {
 
         for_each(begin(mPathHead), end(mPathHead), [&path](const String& segment) {
             if (!segment.IsEmpty()) {
-                if (path.IsEmpty()) {
-                    path += segment;
-                } else {
-                    path += '/' + segment;
-                }
+                path += L'/' + segment;
             }
         });
 
-        return path;
+        return (path + L'/');
     }
 
     String Uri::ToString() const
