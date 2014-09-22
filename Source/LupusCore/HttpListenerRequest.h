@@ -79,21 +79,21 @@ namespace Lupus {
 
         private:
 
-            std::shared_ptr<Lupus::Stream> mStream; //
-            std::shared_ptr<Sockets::IPEndPoint> mLocalEP; //
-            std::shared_ptr<Sockets::IPEndPoint> mRemoteEP; //
-            std::shared_ptr<Uri> mUrl; //
-            std::shared_ptr<Version> mVersion; //
+            std::shared_ptr<Lupus::Stream> mStream;
+            std::shared_ptr<Sockets::IPEndPoint> mLocalEP;
+            std::shared_ptr<Sockets::IPEndPoint> mRemoteEP;
+            std::shared_ptr<Uri> mUrl;
+            std::shared_ptr<Version> mVersion;
             std::shared_ptr<Text::Encoding> mEncoding;
-            std::unordered_map<String, String> mCookies; //
-            std::unordered_map<String, String> mHeaders; //
-            std::unordered_map<String, String> mQuery; //
-            std::vector<String> mAcceptedTypes; //
-            std::vector<String> mLanguages; //
-            String mContentType; //
-            String mMethod; //
-            String mUserAgent; //
-            String mRawHeader; //
+            std::unordered_map<String, String> mCookies;
+            std::unordered_map<String, String> mHeaders;
+            std::unordered_map<String, String> mQuery;
+            std::vector<String> mAcceptedTypes;
+            std::vector<String> mLanguages;
+            String mContentType;
+            String mMethod;
+            String mUserAgent;
+            String mRawHeader;
             bool mAuthenticated = false;
             bool mSecure = false;
         };

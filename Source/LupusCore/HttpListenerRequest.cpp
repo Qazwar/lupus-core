@@ -74,7 +74,10 @@ namespace Lupus {
                 auto encodings = charset.Split({ ";" }, StringSplitOption::RemoveEmptyEntries)[0].Split({ "," }, StringSplitOption::RemoveEmptyEntries);
 
                 for (auto enc : encodings) {
-                    if (enc.Compare("utf-8", StringCaseSensitivity::CaseInsensitive) == 0) {
+                    if (enc.Compare("utf-16", StringCaseSensitivity::CaseInsensitive) == 0) {
+                        mEncoding = Encoding::UTF16();
+                        break;
+                    } else if (enc.Compare("utf-8", StringCaseSensitivity::CaseInsensitive) == 0) {
                         mEncoding = Encoding::UTF8();
                         break;
                     } else if (!mEncoding) {
@@ -100,7 +103,7 @@ namespace Lupus {
         
         int64_t HttpListenerRequest::ContentLength() const
         {
-            return mRawHeader.Length() + mStream->Length();
+            return mStream->Length();
         }
         
         String HttpListenerRequest::ContentType() const

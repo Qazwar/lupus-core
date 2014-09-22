@@ -101,7 +101,7 @@ namespace Lupus {
     {
         if (offset > buffer.size() || size > buffer.size() - offset) {
             throw out_of_range("offset and size does not match buffer size");
-        } else if (mIterator >= end(mBuffer)) {
+        } else if (mIterator >= end(mBuffer) || mIterator < begin(mBuffer)) {
             return 0;
         } else if ((int64_t)size > (int64_t)mBuffer.size() - Position()) {
             size = (size_t)((int64_t)mBuffer.size() - Position());
@@ -114,7 +114,7 @@ namespace Lupus {
 
     int MemoryStream::ReadByte()
     {
-        if (end(mBuffer) <= mIterator) {
+        if (end(mBuffer) <= mIterator || begin(mBuffer) > mIterator) {
             return -1;
         }
 
@@ -125,14 +125,16 @@ namespace Lupus {
     {
         if (!mWritable) {
             throw not_supported();
+        } else if (mIterator > end(mBuffer) || mIterator < begin(mBuffer)) {
+            return 0;
         } else if (offset > buffer.size() || size > buffer.size() - offset) {
             throw out_of_range("offset and size does not match buffer size");
         } else if (size > (size_t)mBuffer.capacity()) {
-            mBuffer.reserve(mBuffer.capacity() + (size > 1024 ? size : 1024));
+            mBuffer.reserve(mBuffer.capacity() + (size > 1024 ? (size / 1024 + 1) * 1024 : 1024));
         }
 
-        mBuffer.insert(mBuffer.end(), begin(buffer) + offset, begin(buffer) + offset + size);
-        mIterator = end(mBuffer);
+        mBuffer.insert(mIterator, begin(buffer) + offset, begin(buffer) + offset + size);
+        mIterator += size;
         return (int)size;
     }
 
@@ -140,24 +142,27 @@ namespace Lupus {
     {
         if (!mWritable) {
             throw not_supported();
+        } else if (mIterator == end(mBuffer)) {
+            mBuffer.push_back(byte);
+            mIterator++;
+        } else if (mIterator < end(mBuffer) && mIterator >= begin(mBuffer)) {
+            *mIterator = byte;
         }
-
-        mBuffer.push_back(byte);
     }
 
     int64_t MemoryStream::Seek(int64_t offset, SeekOrigin origin)
     {
         switch (origin) {
             case SeekOrigin::Begin:
-                advance((mIterator = begin(mBuffer)), (int)offset);
+                advance((mIterator = begin(mBuffer)), offset);
                 break;
 
             case SeekOrigin::Current:
-                mIterator += (int)offset;
+                mIterator += offset;
                 break;
 
             case SeekOrigin::End:
-                advance((mIterator = end(mBuffer)), (int)offset);
+                advance((mIterator = end(mBuffer)), offset);
                 break;
         }
 
