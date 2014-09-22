@@ -7,6 +7,7 @@
 #include "Stream.h"
 #include "NetUtility.h"
 #include "Integer.h"
+#include "MemoryStream.h"
 
 using namespace std;
 using namespace Lupus::Text;
@@ -14,10 +15,21 @@ using namespace Lupus::Net::Sockets;
 
 namespace Lupus {
     namespace Net {
-        HttpListenerRequest::HttpListenerRequest(String header, shared_ptr<Lupus::InputStream> body, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
-            mRawHeader(header), mStream(body), mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
+        HttpListenerRequest::HttpListenerRequest(const vector<uint8_t>& buffer, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
+            mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
-            vector<String> lines = header.Split({ "\r\n" }, StringSplitOption::RemoveEmptyEntries);
+            for (auto it = begin(buffer); it != end(buffer); it++) {
+                char ch = static_cast<char>(*it);
+                
+                if (ch == '\r' && static_cast<char>(*(it + 1)) == '\n' && static_cast<char>(*(it + 2)) == '\r' && static_cast<char>(*(it + 3)) == '\n') {
+                    it += 4;
+                    mRawHeader = Encoding::ASCII()->GetString(vector<uint8_t>(begin(buffer), it));
+                    mStream = make_shared<MemoryStream>(buffer, distance(begin(buffer), it), distance(it, end(buffer)), false, true);
+                    break;
+                }
+            }
+
+            vector<String> lines = mRawHeader.Split({ "\r\n" }, StringSplitOption::RemoveEmptyEntries);
             vector<String> fields(begin(lines) + 1, end(lines));
             String version = lines[0].Substring(lines[0].LastIndexOf("/") + 1);
             
@@ -144,6 +156,11 @@ namespace Lupus {
                 return mHeaders.at("Connection").Contains("keep-alive");
             }
         }
+
+        String HttpListenerRequest::LocalAddress() const
+        {
+            return mLocalEP->Address()->ToString() + (mLocalEP->Port() != 80 && mLocalEP->Port() != 443 ? ":" + Integer::ToString(mLocalEP->Port()) : "");
+        }
         
         shared_ptr<Sockets::IPEndPoint> HttpListenerRequest::LocalEndPoint() const
         {
@@ -164,6 +181,11 @@ namespace Lupus {
         {
             return mRawHeader;
         }
+
+        String HttpListenerRequest::RemoteAddress() const
+        {
+            return mRemoteEP->Address()->ToString() + (mRemoteEP->Port() != 80 && mRemoteEP->Port() != 443 ? ":" + Integer::ToString(mRemoteEP->Port()) : "");
+        }
         
         shared_ptr<Sockets::IPEndPoint> HttpListenerRequest::RemoteEndPoint() const
         {
@@ -178,16 +200,6 @@ namespace Lupus {
         String HttpListenerRequest::UserAgent() const
         {
             return mUserAgent;
-        }
-        
-        String HttpListenerRequest::UserLocalAddress() const
-        {
-            return mLocalEP->Address()->ToString() + (mLocalEP->Port() != 80 && mLocalEP->Port() != 443 ? ":" + Integer::ToString(mLocalEP->Port()) : "");
-        }
-        
-        String HttpListenerRequest::UserRemoteAddress() const
-        {
-            return mRemoteEP->Address()->ToString() + (mRemoteEP->Port() != 80 && mRemoteEP->Port() != 443 ? ":" + Integer::ToString(mRemoteEP->Port()) : "");
         }
         
         const vector<String>& HttpListenerRequest::UserLanguages() const

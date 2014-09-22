@@ -7,96 +7,43 @@ namespace Lupus {
     namespace Text {
         shared_ptr<Encoding> Encoding::ASCII()
         {
-            return make_shared<Encoding>(EncodingType::ASCII);
+            return shared_ptr<Encoding>(new Encoding("US-ASCII"));
         }
         
         shared_ptr<Encoding> Encoding::Default()
         {
-            return make_shared<Encoding>();
+            return shared_ptr<Encoding>(new Encoding(""));
         }
 
         shared_ptr<Encoding> Encoding::UTF32()
         {
-            return make_shared<Encoding>(EncodingType::UTF32);
+            return shared_ptr<Encoding>(new Encoding("UTF-32"));
         }
 
         shared_ptr<Encoding> Encoding::UTF16()
         {
-            return make_shared<Encoding>(EncodingType::UTF16);
+            return shared_ptr<Encoding>(new Encoding("UTF-16"));
         }
 
         shared_ptr<Encoding> Encoding::UTF8()
         {
-            return make_shared<Encoding>(EncodingType::UTF8);
+            return shared_ptr<Encoding>(new Encoding("UTF-8"));
         }
 
         shared_ptr<Encoding> Encoding::UTF7()
         {
-            return make_shared<Encoding>(EncodingType::UTF7);
+            return shared_ptr<Encoding>(new Encoding("UTF-7"));
         }
 
-        Encoding::Encoding(EncodingType type) :
-            mType(type)
+        Encoding::Encoding(String str)
         {
             UErrorCode error = U_ZERO_ERROR;
-
-            switch (type) {
-                case EncodingType::Default:
-                    mConverter = ucnv_openU(NULL, &error);
-                    break;
-
-                case EncodingType::UTF7:
-                    mConverter = ucnv_openU(String("UTF-7").Data(), &error);
-                    break;
-
-                case EncodingType::UTF8:
-                    mConverter = ucnv_openU(String("UTF-8").Data(), &error);
-                    break;
-
-                case EncodingType::UTF16:
-                    mConverter = ucnv_openU(String("UTF-16").Data(), &error);
-                    break;
-
-                case EncodingType::UTF16LE:
-                    mConverter = ucnv_openU(String("UTF-16LE").Data(), &error);
-                    break;
-
-                case EncodingType::UTF16BE:
-                    mConverter = ucnv_openU(String("UTF-16BE").Data(), &error);
-                    break;
-
-                case EncodingType::UTF32:
-                    mConverter = ucnv_openU(String("UTF-32").Data(), &error);
-                    break;
-
-                case EncodingType::UTF32LE:
-                    mConverter = ucnv_openU(String("UTF-32LE").Data(), &error);
-                    break;
-
-                case EncodingType::UTF32BE:
-                    mConverter = ucnv_openU(String("UTF-32BE").Data(), &error);
-                    break;
-
-                case EncodingType::ASCII:
-                    mConverter = ucnv_openU(String("US-ASCII").Data(), &error);
-                    break;
+            
+            if (str.IsEmpty()) {
+                mConverter = ucnv_openU(NULL, &error);
+            } else {
+                mConverter = ucnv_openU(str.Data(), &error);
             }
-
-            if (error != U_ZERO_ERROR) {
-                if (mConverter) {
-                    ucnv_close(mConverter);
-                    mConverter = nullptr;
-                }
-
-                throw runtime_error("Could not create converter.");
-            }
-        }
-
-        Encoding::Encoding(String str) :
-            mType(EncodingType::Other)
-        {
-            UErrorCode error = U_ZERO_ERROR;
-            mConverter = ucnv_openU(str.Data(), &error);
 
             if (error != U_ZERO_ERROR) {
                 if (mConverter) {
@@ -118,7 +65,7 @@ namespace Lupus {
 
         shared_ptr<Encoding> Encoding::Clone() const
         {
-            return make_shared<Encoding>(mType);
+            return GetEncoding(Name());
         }
 
         String Encoding::GetString(const vector<uint8_t>& buffer) const
@@ -217,11 +164,6 @@ namespace Lupus {
             vector<uint8_t> result((uint8_t*)dest, (uint8_t*)dest + outLength);
             delete dest;
             return result;
-        }
-
-        EncodingType Encoding::Type() const
-        {
-            return mType;
         }
 
         String Encoding::Name() const

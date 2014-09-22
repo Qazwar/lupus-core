@@ -2,9 +2,9 @@
 
 #include "String.h"
 #include "IClonable.h"
-#include "EncodingEnum.h"
 #include <vector>
 #include <boost/noncopyable.hpp>
+#include <unicode/ucnv.h>
 
 namespace Lupus {
     namespace Text {
@@ -12,7 +12,6 @@ namespace Lupus {
         {
         public:
 
-            Encoding(EncodingType = EncodingType::Default) throw(std::runtime_error);
             virtual ~Encoding();
 
             virtual std::shared_ptr<Encoding> Clone() const NOEXCEPT override;
@@ -25,7 +24,6 @@ namespace Lupus {
             virtual std::vector<uint8_t> GetBytes(
                 const String& str,
                 size_t offset, size_t count) const throw(format_error, std::runtime_error);
-            virtual EncodingType Type() const NOEXCEPT;
             virtual String Name() const NOEXCEPT;
 
             static std::shared_ptr<Encoding> ASCII() NOEXCEPT;
@@ -43,7 +41,6 @@ namespace Lupus {
             Encoding(String str) throw(std::runtime_error);
 
             UConverter* mConverter = nullptr;
-            EncodingType mType = EncodingType::Default;
         };
     }
 }

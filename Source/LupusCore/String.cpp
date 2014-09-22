@@ -555,6 +555,7 @@ namespace Lupus {
 
         vector<UnicodeString> dest(1024);
         int32_t count = m.split(*mString, &dest[0], 1024, status) / 2 + 1;
+        int32_t n = 0;
 
         if (status != U_ZERO_ERROR) {
             throw format_error("Could not split string with given pattern");
@@ -577,7 +578,7 @@ namespace Lupus {
                     result.push_back(tmp);
                 }
 
-                if (result.size() == count) {
+                if (result.size() == count || ++n == count) {
                     break;
                 }
             }
@@ -659,6 +660,7 @@ namespace Lupus {
 
         vector<UnicodeString> dest(1024);
         int32_t count = m.split(*mString, &dest[0], 1024, status) / 2 + 1;
+        int32_t n = 0;
 
         if (status != U_ZERO_ERROR) {
             throw format_error("Could not split string with given pattern");
@@ -681,7 +683,7 @@ namespace Lupus {
                     result.push_back(tmp);
                 }
 
-                if (result.size() == count) {
+                if (result.size() == count || ++n == count) {
                     break;
                 }
             }

@@ -24,12 +24,16 @@ const String testRequest1 = "GET /tutorials/other/top-20-mysql-best-practices/ H
 "Connection: keep-alive\r\n"
 "Cookie: PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120\r\n"
 "Pragma: no-cache\r\n"
-"Cache-Control: no-cache\r\n";
+"Cache-Control: no-cache\r\n\r\n";
 
 int main(int argc, char** argv)
 {
-    auto request = shared_ptr<HttpListenerRequest>(new HttpListenerRequest(testRequest1, nullptr, nullptr, nullptr));
-    auto headers = request->Headers();
+    auto ascii = Encoding::ASCII();
+    auto request = shared_ptr<HttpListenerRequest>(new HttpListenerRequest(ascii->GetBytes(testRequest1), nullptr, nullptr));
+
+    wprintf(request->RawHeader().Data());
+    wprintf(request->ProtocolVersion()->ToString().Data());
+    getchar();
 
     return EXIT_SUCCESS;
 }

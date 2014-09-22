@@ -431,8 +431,5 @@
     <ClInclude Include="String.h">
       <Filter>Lupus\.h</Filter>
     </ClInclude>
-    <ClInclude Include="EncodingEnum.h">
-      <Filter>Lupus\Text\.h</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

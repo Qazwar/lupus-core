@@ -69,7 +69,6 @@
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="Encoding.h" />
-    <ClInclude Include="EncodingEnum.h" />
     <ClInclude Include="HttpListener.h" />
     <ClInclude Include="HttpListenerContext.h" />
     <ClInclude Include="HttpListenerRequest.h" />

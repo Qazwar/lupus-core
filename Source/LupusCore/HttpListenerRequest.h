@@ -42,8 +42,7 @@ namespace Lupus {
 
             HttpListenerRequest() = delete;
             HttpListenerRequest(
-                String header,
-                std::shared_ptr<Lupus::InputStream> body,
+                const std::vector<uint8_t>& buffer,
                 std::shared_ptr<Sockets::IPEndPoint> localEP,
                 std::shared_ptr<Sockets::IPEndPoint> remoteEP,
                 bool authenticated = false,
@@ -63,15 +62,15 @@ namespace Lupus {
             bool IsLocal() const NOEXCEPT;
             bool IsSecureConnection() const NOEXCEPT;
             bool KeepAlive() const NOEXCEPT;
+            String LocalAddress() const NOEXCEPT;
             std::shared_ptr<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
             std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
             const std::unordered_map<String, String>& QueryString() const NOEXCEPT;
             String RawHeader() const NOEXCEPT;
+            String RemoteAddress() const NOEXCEPT;
             std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
             std::shared_ptr<Uri> Url() const NOEXCEPT;
             String UserAgent() const NOEXCEPT;
-            String UserLocalAddress() const NOEXCEPT;
-            String UserRemoteAddress() const NOEXCEPT;
             const std::vector<String>& UserLanguages() const NOEXCEPT;
 
             Task<std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
@@ -80,7 +79,7 @@ namespace Lupus {
 
         private:
 
-            std::shared_ptr<Lupus::InputStream> mStream; //
+            std::shared_ptr<Lupus::Stream> mStream; //
             std::shared_ptr<Sockets::IPEndPoint> mLocalEP; //
             std::shared_ptr<Sockets::IPEndPoint> mRemoteEP; //
             std::shared_ptr<Uri> mUrl; //

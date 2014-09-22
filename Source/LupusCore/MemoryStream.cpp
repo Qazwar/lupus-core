@@ -20,8 +20,8 @@ namespace Lupus {
     MemoryStream::MemoryStream(const vector<uint8_t>& buffer, bool canWrite)
     {
         mBuffer = buffer;
-        mIterator = begin(mBuffer);
         mWritable = canWrite;
+        mIterator = begin(mBuffer);
     }
 
     MemoryStream::MemoryStream(const vector<uint8_t>& buffer, size_t offset, size_t size)
@@ -40,7 +40,7 @@ namespace Lupus {
             throw out_of_range("offset and size does not match buffer size");
         }
 
-        mBuffer = buffer;
+        mWritable = canWrite;
         mBuffer = vector<uint8_t>(begin(buffer) + offset, begin(buffer) + offset + size);
         mIterator = begin(mBuffer);
     }
@@ -51,8 +51,8 @@ namespace Lupus {
             throw out_of_range("offset and size does not match buffer size");
         }
 
-        mBuffer = buffer;
         mVisible = visible;
+        mWritable = canWrite;
         mBuffer = vector<uint8_t>(begin(buffer) + offset, begin(buffer) + offset + size);
         mIterator = begin(mBuffer);
     }
