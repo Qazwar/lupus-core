@@ -233,7 +233,8 @@
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe ./LupusCore.ini</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
@@ -252,7 +253,8 @@
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe ./LupusCore.ini</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -271,7 +273,8 @@
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe ./LupusCore.ini</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -293,7 +296,8 @@
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe ./LupusCore.ini</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -315,7 +319,8 @@
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe ./LupusCore.ini</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -337,7 +342,8 @@
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\Bin\Debug\AutoIncrementVersion.exe ./LupusCore.ini</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -73,8 +73,14 @@ namespace Lupus {
             String UserAgent() const NOEXCEPT;
             const std::vector<String>& UserLanguages() const NOEXCEPT;
 
+            /**
+             * \warning Not implemented.
+             */
             Task<std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
 
+            /**
+             * \warning Not implemented.
+             */
             std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> GetClientCertificate() const NOEXCEPT;
 
         private:

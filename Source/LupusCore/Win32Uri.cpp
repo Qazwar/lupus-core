@@ -120,19 +120,23 @@ namespace Lupus {
             }
         });
 
-        return (path + L'/');
+        if (mPathTail.empty() || mPathTail[0].IsEmpty()) {
+            path += L'/';
+        }
+
+        return path;
     }
 
     String Uri::ToString() const
     {
         String uri;
 
-        uri += mScheme.IsEmpty() ? "" : mScheme + "://";
-        uri += mUserInfo.IsEmpty() ? "" : mUserInfo + L'@';
-        uri += mHostText.IsEmpty() ? "" : mHostText + L'/';
-        uri += mPathHead.empty() ? "" : FullPath();
-        uri += mQuery.IsEmpty() ? "" : L'?' + mQuery;
-        uri += mFragment.IsEmpty() ? "" : L'#' + mFragment;
+        uri += mScheme.IsEmpty() ? L"" : mScheme + L"://";
+        uri += mUserInfo.IsEmpty() ? L"" : mUserInfo + L'@';
+        uri += mHostText.IsEmpty() ? L"" : mHostText;
+        uri += mPathHead.empty() ? L"" : FullPath();
+        uri += mQuery.IsEmpty() ? L"" : L'?' + mQuery;
+        uri += mFragment.IsEmpty() ? L"" : L'#' + mFragment;
 
         return uri;
     }

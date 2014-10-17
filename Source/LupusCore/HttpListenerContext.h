@@ -7,8 +7,8 @@ namespace Lupus {
     namespace Net {
         struct HttpListenerContext
         {
-            const std::shared_ptr<class HttpRequest> Request;
-            const std::shared_ptr<class HttpResponse> Response;
+            const std::shared_ptr<class HttpListenerRequest> Request;
+            const std::shared_ptr<class HttpListenerResponse> Response;
         };
     }
 }

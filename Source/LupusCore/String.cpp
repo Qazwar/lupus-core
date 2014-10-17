@@ -538,6 +538,7 @@ namespace Lupus {
 
     vector<String> String::Split(const vector<Char>& delimiter, StringSplitOption option, StringCaseSensitivity sens) const
     {
+        // TODO: RegeEx auf 'state machine' abändern.
         String str("[");
         UErrorCode status = U_ZERO_ERROR;
 
@@ -589,6 +590,7 @@ namespace Lupus {
 
     vector<String> String::Split(const vector<Char>& delimiter, size_t count, StringSplitOption option, StringCaseSensitivity sens) const
     {
+        // TODO: RegeEx auf 'state machine' abändern.
         String str("[");
         UErrorCode status = U_ZERO_ERROR;
 
@@ -639,6 +641,7 @@ namespace Lupus {
 
     vector<String> String::Split(const vector<String>& delimiter, StringSplitOption option, StringCaseSensitivity sens) const
     {
+        // TODO: RegeEx auf 'state machine' abändern.
         String str("(");
         UErrorCode status = U_ZERO_ERROR;
 
@@ -694,6 +697,7 @@ namespace Lupus {
 
     vector<String> String::Split(const vector<String>& delimiter, size_t count, StringSplitOption option, StringCaseSensitivity sens) const
     {
+        // TODO: RegeEx auf 'state machine' abändern.
         String str("(");
         UErrorCode status = U_ZERO_ERROR;
 

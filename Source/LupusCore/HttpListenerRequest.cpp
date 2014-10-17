@@ -8,16 +8,19 @@
 #include "NetUtility.h"
 #include "Integer.h"
 #include "MemoryStream.h"
+#include "X509Certificate.h"
 
 using namespace std;
 using namespace Lupus::Text;
 using namespace Lupus::Net::Sockets;
+using namespace Lupus::Security::Cryptography::X509Certificates;
 
 namespace Lupus {
     namespace Net {
         HttpListenerRequest::HttpListenerRequest(const vector<uint8_t>& buffer, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
             mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
+            // TODO: Performance check.
             unordered_map<String, String>::const_iterator citum;
 
             for (auto it = begin(buffer); it != end(buffer); it++) {
@@ -76,10 +79,7 @@ namespace Lupus {
                 auto encodings = charset.Split({ ";" }, StringSplitOption::RemoveEmptyEntries)[0].Split({ "," }, StringSplitOption::RemoveEmptyEntries);
 
                 for (auto enc : encodings) {
-                    if (enc.Compare("utf-16", StringCaseSensitivity::CaseInsensitive) == 0) {
-                        mEncoding = Encoding::UTF16();
-                        break;
-                    } else if (enc.Compare("utf-8", StringCaseSensitivity::CaseInsensitive) == 0) {
+                    if (enc.Compare("utf-8", StringCaseSensitivity::CaseInsensitive) == 0) {
                         mEncoding = Encoding::UTF8();
                         break;
                     } else if (!mEncoding) {
@@ -210,6 +210,18 @@ namespace Lupus {
         const vector<String>& HttpListenerRequest::UserLanguages() const
         {
             return mLanguages;
+        }
+
+        Task<shared_ptr<X509Certificate>> HttpListenerRequest::GetClientCertificateAsync() const
+        {
+            return Task<shared_ptr<X509Certificate>>([this]() {
+                return this->GetClientCertificate();
+            });
+        }
+
+        shared_ptr<X509Certificate> HttpListenerRequest::GetClientCertificate() const
+        {
+            return nullptr;
         }
     }
 }
