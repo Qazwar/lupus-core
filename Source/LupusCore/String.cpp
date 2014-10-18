@@ -128,10 +128,13 @@ namespace Lupus {
     String::~String()
     {
         if (mString && ReleaseRef() == 0) {
+            if (mCount) {
+                delete mCount;
+                mCount = nullptr;
+            }
+
             delete mString;
-            delete mCount;
             mString = nullptr;
-            mCount = nullptr;
         }
     }
 
@@ -951,17 +954,29 @@ namespace Lupus {
 
     size_t String::AddRef()
     {
-        return (++(*mCount));
+        if (mCount) {
+            return (++(*mCount));
+        } else {
+            return 0;
+        }
     }
 
     size_t String::ReleaseRef()
     {
-        return (--(*mCount));
+        if (mCount) {
+            return (--(*mCount));
+        } else {
+            return 0;
+        }
     }
 
     size_t String::RefCount() const
     {
-        return *mCount;
+        if (mCount) {
+            return *mCount;
+        } else {
+            return 0;
+        }
     }
 
     size_t String::ComputeCapacity(size_t length)

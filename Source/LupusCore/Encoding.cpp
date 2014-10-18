@@ -100,16 +100,17 @@ namespace Lupus {
                         throw format_error("A character sequence was incomplete.");
 
                     case U_ILLEGAL_CHAR_FOUND:
-                        throw format_error("A character was found which is disallowed int the source encoding.");
+                        throw format_error("A character was found which is disallowed in the source encoding.");
 
                     case U_INVALID_TABLE_FORMAT:
                         throw format_error("An error occured trying to read the backing data for the converter.");
 
                     case U_BUFFER_OVERFLOW_ERROR:
                         throw format_error("More output characters were produced than fit in the target buffer.");
-                }
 
-                throw runtime_error("Could not convert buffer to string.");
+                    default:
+                        throw runtime_error("Could not convert buffer to string.");
+                }
             }
 
             String result(dest);
@@ -149,16 +150,17 @@ namespace Lupus {
                         throw format_error("A character sequence was incomplete.");
 
                     case U_ILLEGAL_CHAR_FOUND:
-                        throw format_error("A character was found which is disallowed int the source encoding.");
+                        throw format_error("A character was found which is disallowed in the source encoding.");
 
                     case U_INVALID_TABLE_FORMAT:
                         throw format_error("An error occured trying to read the backing data for the converter.");
 
                     case U_BUFFER_OVERFLOW_ERROR:
                         throw format_error("More output characters were produced than fit in the target buffer.");
-                }
 
-                throw runtime_error("Could not convert string to buffer.");
+                    default:
+                        throw runtime_error("Could not convert buffer to string.");
+                }
             }
 
             vector<uint8_t> result((uint8_t*)dest, (uint8_t*)dest + outLength);
