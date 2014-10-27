@@ -56,7 +56,7 @@ namespace Lupus {
                 static AsymmetricAlgorithmFactory& GetInstance() NOEXCEPT;
 
                 /*!
-                 * Unterst�tze Algorithmen sind:
+                 * Unterstütze Algorithmen sind:
                  * - rsaes-oaep-sha
                  * - rsaes-pkcs
                  *

@@ -67,7 +67,7 @@ namespace Lupus {
                 static SymmetricAlgorithmFactory& GetInstance() NOEXCEPT;
 
                 /*!
-                 * Unterst�tze Algorithmen sind:
+                 * Unterstütze Algorithmen sind:
                  * - aes
                  * - 3des
                  * - tripledes
