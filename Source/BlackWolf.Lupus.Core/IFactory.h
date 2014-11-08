@@ -19,11 +19,10 @@
 #include <memory>
 
 namespace Lupus {
-    template <typename T>
-    class IClonable
+    template <typename T, typename... Args>
+    class IFactory
     {
     public:
-        virtual ~IClonable() = default;
-        virtual std::shared_ptr<T> Clone() const = 0;
+        virtual std::shared_ptr<T> Create(const Args&... args) const = 0;
     };
 }

@@ -32,16 +32,17 @@ namespace Lupus {
         Version(int32_t major, int32_t minor) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build, int32_t revision) NOEXCEPT;
+        virtual ~Version() = default;
 
-        int32_t Major() const NOEXCEPT;
-        int32_t Minor() const NOEXCEPT;
-        int32_t Build() const NOEXCEPT;
-        int32_t Revision() const NOEXCEPT;
-        int16_t MajorRevision() const NOEXCEPT;
-        int16_t MinorRevision() const NOEXCEPT;
+        virtual int32_t Major() const NOEXCEPT;
+        virtual int32_t Minor() const NOEXCEPT;
+        virtual int32_t Build() const NOEXCEPT;
+        virtual int32_t Revision() const NOEXCEPT;
+        virtual int16_t MajorRevision() const NOEXCEPT;
+        virtual int16_t MinorRevision() const NOEXCEPT;
 
-        std::shared_ptr<Version> Clone() const NOEXCEPT override;
-        String ToString() const NOEXCEPT;
+        virtual std::shared_ptr<Version> Clone() const NOEXCEPT override;
+        virtual String ToString() const NOEXCEPT;
 
         bool operator==(std::shared_ptr<Version>) const;
         bool operator!=(std::shared_ptr<Version>) const;
