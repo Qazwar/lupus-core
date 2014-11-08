@@ -81,7 +81,7 @@ namespace Lupus {
 
             shared_ptr<HashAlgorithm> HashAlgorithmFactory::Create(const String& hash) const
             {
-                auto it = mPrototypes.find(hash);
+                auto it = mPrototypes.find(hash.ToLower());
 
                 if (it != end(mPrototypes)) {
                     return it->second->Clone();

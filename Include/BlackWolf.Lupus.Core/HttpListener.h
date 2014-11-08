@@ -29,15 +29,15 @@ namespace Lupus {
         public:
 
             HttpListener();
-            ~HttpListener();
+            virtual ~HttpListener();
 
-            bool IsListening() const;
+            virtual bool IsListening() const;
 
-            void Abort();
-            void Close();
-            HttpListenerContext GetContext();
-            void Start();
-            void Stop();
+            virtual void Abort();
+            virtual void Close();
+            virtual HttpListenerContext GetContext();
+            virtual void Start();
+            virtual void Stop();
 
         private:
         };

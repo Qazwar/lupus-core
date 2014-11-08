@@ -122,8 +122,10 @@ namespace Lupus {
 
     int MemoryStream::Read(vector<uint8_t>& buffer, size_t offset, size_t size)
     {
-        if (offset > buffer.size() || size > buffer.size() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > buffer.size()) {
+            throw out_of_range("offset");
+        } else if (size > buffer.size() - offset) {
+            throw out_of_range("size");
         } else if (mIterator >= end(mBuffer) || mIterator < begin(mBuffer)) {
             return 0;
         } else if ((int64_t)size > (int64_t)mBuffer.size() - Position()) {
@@ -148,11 +150,13 @@ namespace Lupus {
     {
         if (!mWritable) {
             throw not_supported();
+        } else if (offset > buffer.size()) {
+            throw out_of_range("offset");
+        } else if (size > buffer.size() - offset) {
+            throw out_of_range("size");
         } else if (mIterator > end(mBuffer) || mIterator < begin(mBuffer)) {
             return 0;
-        } else if (offset > buffer.size() || size > buffer.size() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
-        } else if (size > (size_t)mBuffer.capacity()) {
+        } else if (size >(size_t)mBuffer.capacity()) {
             mBuffer.reserve(mBuffer.capacity() + (size > 1024 ? (size / 1024 + 1) * 1024 : 1024));
         }
 

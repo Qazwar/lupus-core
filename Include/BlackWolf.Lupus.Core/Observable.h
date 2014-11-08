@@ -41,9 +41,9 @@ namespace Lupus {
             
         virtual ~IObserver() = default;
 
-        virtual void OnUpdate(const T& value) NOEXCEPT = 0;
-        virtual void OnError(std::exception& error) NOEXCEPT = 0;
-        virtual void OnComplete() NOEXCEPT = 0;
+        virtual void OnUpdate(const T& value) = 0;
+        virtual void OnError(std::exception& error) = 0;
+        virtual void OnComplete() = 0;
     };
 
     template <typename T>
@@ -53,7 +53,7 @@ namespace Lupus {
 
         virtual ~Observable() = default;
 
-        virtual void Attach(std::shared_ptr<IObserver<T>> observer) final
+        virtual void Attach(std::shared_ptr<IObserver<T>> observer) NOEXCEPT final
         {
             mObservers.push_back(observer);
         }

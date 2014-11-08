@@ -60,8 +60,10 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) override
                 {
-                    if (offset > buffer.size() || size > buffer.size() - offset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (offset > buffer.size()) {
+                        throw std::out_of_range("offset");
+                    } else if (size > buffer.size() - offset) {
+                        throw std::out_of_range("size");
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
@@ -75,8 +77,10 @@ namespace Lupus {
                 {
                     size_t length = mEncryptor.CiphertextLength(size);
 
-                    if (offset > buffer.size() || size > buffer.size() - offset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (offset > buffer.size()) {
+                        throw std::out_of_range("offset");
+                    } else if (size > buffer.size() - offset) {
+                        throw std::out_of_range("size");
                     } else if (length > output.size() - outputOffset) {
                         throw std::out_of_range("transformed bytes exceeding output vector");
                     }
@@ -89,8 +93,10 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> Decrypt(std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) override
                 {
-                    if (offset > buffer.size() || size > buffer.size() - offset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (offset > buffer.size()) {
+                        throw std::out_of_range("offset");
+                    } else if (size > buffer.size() - offset) {
+                        throw std::out_of_range("size");
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
@@ -104,8 +110,10 @@ namespace Lupus {
                 {
                     size_t length = mDecryptor.MaxPlaintextLength(size);
 
-                    if (offset > buffer.size() || size > buffer.size() - offset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (offset > buffer.size()) {
+                        throw std::out_of_range("offset");
+                    } else if (size > buffer.size() - offset) {
+                        throw std::out_of_range("size");
                     } else if (length > output.size() - outputOffset) {
                         throw std::out_of_range("transformed bytes exceeding output vector");
                     }

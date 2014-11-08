@@ -19,6 +19,7 @@
 
 #include "String.h"
 #include "IClonable.h"
+#include "IFactory.h"
 
 #include <vector>
 #include <memory>
@@ -66,7 +67,7 @@ namespace Lupus {
             };
 
 
-            class LUPUSCORE_API AsymmetricAlgorithmFactory : public boost::noncopyable
+            class LUPUSCORE_API AsymmetricAlgorithmFactory : public IFactory<AsymmetricAlgorithm, String>, public boost::noncopyable
             {
             public:
 
@@ -81,7 +82,7 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<AsymmetricAlgorithm> Create(const String& algorithm) const NOEXCEPT;
+                virtual std::shared_ptr<AsymmetricAlgorithm> Create(const String& algorithm) const NOEXCEPT override;
 
             private:
 

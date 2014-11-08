@@ -37,20 +37,20 @@ namespace Lupus {
         Uri(std::shared_ptr<Uri> baseUri, const String& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
         Uri(std::shared_ptr<Uri> baseUri, std::shared_ptr<Uri> relativeUri) throw(std::runtime_error, std::bad_alloc, format_error);
 
-        const String& Scheme() const NOEXCEPT;
-        const String& UserInfo() const NOEXCEPT;
-        const String& HostText() const NOEXCEPT;
-        const String& HostData() const NOEXCEPT;
-        const String& PortText() const NOEXCEPT;
-        const std::vector<String>& PathHead() const NOEXCEPT;
-        const std::vector<String>& PathTail() const NOEXCEPT;
-        const String& Query() const NOEXCEPT;
-        const String& Fragment() const NOEXCEPT;
-        const String& OriginalString() const NOEXCEPT;
-        bool IsAbsolutePath() const NOEXCEPT;
+        virtual const String& Scheme() const NOEXCEPT;
+        virtual const String& UserInfo() const NOEXCEPT;
+        virtual const String& HostText() const NOEXCEPT;
+        virtual const String& HostData() const NOEXCEPT;
+        virtual const String& PortText() const NOEXCEPT;
+        virtual const std::vector<String>& PathHead() const NOEXCEPT;
+        virtual const std::vector<String>& PathTail() const NOEXCEPT;
+        virtual const String& Query() const NOEXCEPT;
+        virtual const String& Fragment() const NOEXCEPT;
+        virtual const String& OriginalString() const NOEXCEPT;
+        virtual bool IsAbsolutePath() const NOEXCEPT;
 
-        String FullPath() const NOEXCEPT;
-        String ToString() const NOEXCEPT;
+        virtual String FullPath() const NOEXCEPT;
+        virtual String ToString() const NOEXCEPT;
 
         static String Encode(const String&);
         static String Decode(const String&);

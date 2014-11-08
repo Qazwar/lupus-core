@@ -34,22 +34,22 @@ namespace Lupus {
             }
         }
 
-        boost::any& DataRow::operator[](unsigned i)
+        boost::any& DataRow::operator[](unsigned index)
         {
-            if (i >= mRefItems.size()) {
-                throw std::out_of_range("i exceeds size of items");
+            if (index >= mRefItems.size()) {
+                throw std::out_of_range("index");
             }
 
-            return *mRefItems[i];
+            return *mRefItems[index];
         }
 
-        const boost::any& DataRow::operator[](unsigned i) const
+        const boost::any& DataRow::operator[](unsigned index) const
         {
-            if (i >= mRefItems.size()) {
-                throw std::out_of_range("i exceeds size of items");
+            if (index >= mRefItems.size()) {
+                throw std::out_of_range("index");
             }
 
-            return *mRefItems[i];
+            return *mRefItems[index];
         }
 
         boost::any& DataRow::operator[](const String& str)

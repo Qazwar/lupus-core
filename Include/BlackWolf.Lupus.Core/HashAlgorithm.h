@@ -19,6 +19,7 @@
 
 #include "String.h"
 #include "IClonable.h"
+#include "IFactory.h"
 #include "ICryptoTransform.h"
 
 #include <vector>
@@ -60,7 +61,7 @@ namespace Lupus {
                     size_t outputOffset) throw(std::out_of_range) override;
             };
 
-            class LUPUSCORE_API HashAlgorithmFactory : public boost::noncopyable
+            class LUPUSCORE_API HashAlgorithmFactory : public IFactory<HashAlgorithm, String>, public boost::noncopyable
             {
             public:
                 
@@ -89,7 +90,7 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                std::shared_ptr<HashAlgorithm> Create(const String& algorithm) const NOEXCEPT;
+                virtual std::shared_ptr<HashAlgorithm> Create(const String& algorithm) const NOEXCEPT override;
 
             private:
 

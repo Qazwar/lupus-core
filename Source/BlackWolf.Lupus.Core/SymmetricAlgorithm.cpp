@@ -60,7 +60,7 @@ namespace Lupus {
 
             shared_ptr<SymmetricAlgorithm> SymmetricAlgorithmFactory::Create(const String& algorithm) const
             {
-                auto it = mPrototypes.find(algorithm);
+                auto it = mPrototypes.find(algorithm.ToLower());
 
                 if (it != end(mPrototypes)) {
                     return it->second->Clone();

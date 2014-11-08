@@ -80,8 +80,8 @@ namespace Lupus {
         virtual String Clone() const NOEXCEPT;
         virtual const Char* Data() const NOEXCEPT;
         virtual const Char* Data(size_t startIndex) const throw(std::out_of_range);
-        bool IsEmpty() const NOEXCEPT;
-        size_t Length() const NOEXCEPT;
+        virtual bool IsEmpty() const NOEXCEPT;
+        virtual size_t Length() const NOEXCEPT;
 
         virtual String Append(Char ch) const NOEXCEPT;
         virtual String Append(String str) const NOEXCEPT;

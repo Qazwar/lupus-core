@@ -72,6 +72,7 @@
     <ClInclude Include="HttpListenerContext.h" />
     <ClInclude Include="HttpListenerRequest.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="IFactory.h" />
     <ClInclude Include="Internal\CryptoBlockCipher.h" />
     <ClInclude Include="Internal\CryptoHash.h" />
     <ClInclude Include="Internal\CryptoRSA.h" />

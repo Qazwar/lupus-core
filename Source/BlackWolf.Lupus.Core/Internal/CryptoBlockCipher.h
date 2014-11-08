@@ -44,8 +44,10 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override
                 {
-                    if (offset > buffer.size() || size > buffer.size() - offset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (offset > buffer.size()) {
+                        throw std::out_of_range("offset");
+                    } else if (size > buffer.size() - offset) {
+                        throw std::out_of_range("size");
                     }
 
                     std::vector<uint8_t> output(size);
@@ -57,10 +59,12 @@ namespace Lupus {
 
                 virtual size_t TransformBlock(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount, std::vector<uint8_t>& output, size_t outputOffset) throw(std::out_of_range) override
                 {
-                    if (inputOffset > input.size() || inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (inputOffset > input.size()) {
+                        throw std::out_of_range("inputOffset");
+                    } else if (inputCount > input.size() - inputOffset) {
+                        throw std::out_of_range("inputCount");
                     } else if (inputCount > output.size() - outputOffset) {
-                        throw std::out_of_range("transformed bytes exceeding output vector");
+                        throw std::out_of_range("inputCount");
                     }
 
                     CryptoPP::StreamTransformationFilter filter(mAlgorithm, new CryptoPP::ArraySink(output.data() + outputOffset, inputCount));

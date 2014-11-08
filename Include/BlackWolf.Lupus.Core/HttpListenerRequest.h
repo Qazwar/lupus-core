@@ -66,39 +66,39 @@ namespace Lupus {
                 bool secure = false);
             virtual ~HttpListenerRequest() = default;
 
-            const std::vector<String>& AcceptTypes() const NOEXCEPT;
-            std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
-            int64_t ContentLength() const NOEXCEPT;
-            String ContentType() const NOEXCEPT;
-            const std::unordered_map<String, String>& Cookies() const NOEXCEPT;
-            bool HasEntityBody() const NOEXCEPT;
-            const std::unordered_map<String, String>& Headers() const NOEXCEPT;
-            String HttpMethod() const NOEXCEPT;
-            std::shared_ptr<Stream> InputStream() const NOEXCEPT;
-            bool IsAuthenticated() const NOEXCEPT;
-            bool IsLocal() const NOEXCEPT;
-            bool IsSecureConnection() const NOEXCEPT;
-            bool KeepAlive() const NOEXCEPT;
-            String LocalAddress() const NOEXCEPT;
-            std::shared_ptr<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
-            std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
-            const std::unordered_map<String, String>& QueryString() const NOEXCEPT;
-            String RawHeader() const NOEXCEPT;
-            String RemoteAddress() const NOEXCEPT;
-            std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
-            std::shared_ptr<Uri> Url() const NOEXCEPT;
-            String UserAgent() const NOEXCEPT;
-            const std::vector<String>& UserLanguages() const NOEXCEPT;
+            virtual const std::vector<String>& AcceptTypes() const NOEXCEPT;
+            virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
+            virtual int64_t ContentLength() const NOEXCEPT;
+            virtual String ContentType() const NOEXCEPT;
+            virtual const std::unordered_map<String, String>& Cookies() const NOEXCEPT;
+            virtual bool HasEntityBody() const NOEXCEPT;
+            virtual const std::unordered_map<String, String>& Headers() const NOEXCEPT;
+            virtual String HttpMethod() const NOEXCEPT;
+            virtual std::shared_ptr<Stream> InputStream() const NOEXCEPT;
+            virtual bool IsAuthenticated() const NOEXCEPT;
+            virtual bool IsLocal() const NOEXCEPT;
+            virtual bool IsSecureConnection() const NOEXCEPT;
+            virtual bool KeepAlive() const NOEXCEPT;
+            virtual String LocalAddress() const NOEXCEPT;
+            virtual std::shared_ptr<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
+            virtual std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
+            virtual const std::unordered_map<String, String>& QueryString() const NOEXCEPT;
+            virtual String RawHeader() const NOEXCEPT;
+            virtual String RemoteAddress() const NOEXCEPT;
+            virtual std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
+            virtual std::shared_ptr<Uri> Url() const NOEXCEPT;
+            virtual String UserAgent() const NOEXCEPT;
+            virtual const std::vector<String>& UserLanguages() const NOEXCEPT;
 
             /**
              * \warning Not implemented.
              */
-            Task<std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
+            virtual Task<std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
 
             /**
              * \warning Not implemented.
              */
-            std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> GetClientCertificate() const NOEXCEPT;
+            virtual std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> GetClientCertificate() const NOEXCEPT;
 
         private:
 

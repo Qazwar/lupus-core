@@ -123,8 +123,10 @@ namespace Lupus {
 
             int Socket::SocketState::ReceiveFrom(Socket* socket, std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint)
             {
-                if (offset > buffer.size() || size > buffer.size() - offset) {
-                    throw std::out_of_range("offset and size does not match buffer size");
+                if (offset > buffer.size()) {
+                    throw std::out_of_range("offset");
+                } else if (size > buffer.size() - offset) {
+                    throw std::out_of_range("size");
                 }
 
                 int result = 0;
@@ -144,8 +146,10 @@ namespace Lupus {
 
             int Socket::SocketState::SendTo(Socket* socket, const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint)
             {
-                if (offset > buffer.size() || size > buffer.size() - offset) {
-                    throw std::out_of_range("offset and size does not match buffer size");
+                if (offset > buffer.size()) {
+                    throw std::out_of_range("offset");
+                } else if (size > buffer.size() - offset) {
+                    throw std::out_of_range("size");
                 }
 
                 std::vector<uint8_t> address = remoteEndPoint->Serialize();
@@ -292,8 +296,10 @@ namespace Lupus {
 
             int Socket::SocketConnected::Receive(Socket* socket, std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode)
             {
-                if (offset > buffer.size() || size > buffer.size() - offset) {
-                    throw std::out_of_range("offset and size does not match buffer size");
+                if (offset > buffer.size()) {
+                    throw std::out_of_range("offset");
+                } else if (size > buffer.size() - offset) {
+                    throw std::out_of_range("size");
                 }
 
                 int result = recv(socket->Handle(), (char*)buffer.data() + offset, (int)size, (int)socketFlags);
@@ -307,8 +313,10 @@ namespace Lupus {
 
             int Socket::SocketConnected::Send(Socket* socket, const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode)
             {
-                if (offset > buffer.size() || size > buffer.size() - offset) {
-                    throw std::out_of_range("offset and size does not match buffer size");
+                if (offset > buffer.size()) {
+                    throw std::out_of_range("offset");
+                } else if (size > buffer.size() - offset) {
+                    throw std::out_of_range("size");
                 }
 
                 int result = send(socket->Handle(), (const char*)buffer.data() + offset, (int)size, (int)socketFlags);

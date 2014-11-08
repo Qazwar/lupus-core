@@ -68,8 +68,10 @@ namespace Lupus {
                 {
                     static const int digestsize = T::DIGESTSIZE;
 
-                    if (inputOffset > input.size() || inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (inputOffset > input.size()) {
+                        throw std::out_of_range("inputOffset");
+                    } else if (inputCount > input.size() - inputOffset) {
+                        throw std::out_of_range("inputCount");
                     }
 
                     uint8_t digest[digestsize];
@@ -121,8 +123,10 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
                 {
-                    if (inputOffset > input.size() || inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (inputOffset > input.size()) {
+                        throw std::out_of_range("inputOffset");
+                    } else if (inputCount > input.size() - inputOffset) {
+                        throw std::out_of_range("inputCount");
                     }
 
                     std::vector<uint8_t> digest(mAlgorithm.DigestSize());
@@ -174,8 +178,10 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
                 {
-                    if (inputOffset > input.size() || inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (inputOffset > input.size()) {
+                        throw std::out_of_range("inputOffset");
+                    } else if (inputCount > input.size() - inputOffset) {
+                        throw std::out_of_range("inputCount");
                     }
 
                     std::vector<uint8_t> digest(mAlgorithm.DigestSize());
@@ -227,8 +233,10 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
                 {
-                    if (inputOffset > input.size() || inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (inputOffset > input.size()) {
+                        throw std::out_of_range("inputOffset");
+                    } else if (inputCount > input.size() - inputOffset) {
+                        throw std::out_of_range("inputCount");
                     }
 
                     std::vector<uint8_t> digest(mAlgorithm.DigestSize());
@@ -280,8 +288,10 @@ namespace Lupus {
 
                 virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
                 {
-                    if (inputOffset > input.size() || inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("offset and size does not match buffer size");
+                    if (inputOffset > input.size()) {
+                        throw std::out_of_range("inputOffset");
+                    } else if (inputCount > input.size() - inputOffset) {
+                        throw std::out_of_range("inputCount");
                     }
 
                     std::vector<uint8_t> digest(mAlgorithm.DigestSize());

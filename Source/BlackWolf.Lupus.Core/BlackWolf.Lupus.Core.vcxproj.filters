@@ -416,5 +416,8 @@
     <ClInclude Include="Internal\PgTransaction.h">
       <Filter>Code\Data\Postgres\.h</Filter>
     </ClInclude>
+    <ClInclude Include="IFactory.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
