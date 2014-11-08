@@ -87,9 +87,19 @@ namespace Lupus {
     {
     }
 
+    const String& Uri::UserInfo() const
+    {
+        return mUserInfo;
+    }
+
     const String& Uri::HostText() const
     {
         return mHostText;
+    }
+
+    const String& Uri::HostData() const
+    {
+        return mHostData;
     }
 
     const String& Uri::PortText() const
@@ -110,6 +120,11 @@ namespace Lupus {
     const String& Uri::Query() const
     {
         return mQuery;
+    }
+
+    const String& Uri::Fragment() const
+    {
+        return mFragment;
     }
 
     const String& Uri::Scheme() const
