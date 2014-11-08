@@ -33,7 +33,7 @@
 #if _MSC_VER <= 1800
 namespace std {
     template<class... _ArgTypes>
-    class LUPUSCORE_API packaged_task<void(_ArgTypes...)>
+    class packaged_task<void(_ArgTypes...)>
     {
         promise<void> _my_promise;
         function<void(_ArgTypes...)> _my_func;
