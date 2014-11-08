@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{959c0efa-3aef-4685-a525-f49cc4770ee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code">
+      <UniqueIdentifier>{eb650730-b7fd-42ea-89a8-52394ca5d87f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Text">
+      <UniqueIdentifier>{a74c820b-d9d3-4545-8dff-4fedcc5e57a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Text\.cpp">
+      <UniqueIdentifier>{07821799-8eea-4687-a23f-5f7db547a98e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Text\.h">
+      <UniqueIdentifier>{4693a64f-8cd0-4244-9705-8e3f2e5f0b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\System">
+      <UniqueIdentifier>{c33a55f2-cc8c-4c38-bfc4-b23f4b31f229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\System\.h">
+      <UniqueIdentifier>{fe88f7cb-33b1-4939-a37b-3924e15ce124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\System\.cpp">
+      <UniqueIdentifier>{85aaa0b8-7250-4bfc-a659-2519c6e0eecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security">
+      <UniqueIdentifier>{5dc42b90-c576-4930-987f-d91892086ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\.cpp">
+      <UniqueIdentifier>{e4ef45d4-2cff-4cf3-bdf4-9cf5028aee0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\.h">
+      <UniqueIdentifier>{b1572421-7d26-4f9a-8f55-4b66d672eace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Cryptography">
+      <UniqueIdentifier>{830cdce9-0c3e-4a3e-bf03-1ecaf8c3c7f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Cryptography\.h">
+      <UniqueIdentifier>{4f6c1d6a-96f5-4655-aead-f1d5c022a3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Cryptography\.cpp">
+      <UniqueIdentifier>{1cbf569f-844e-48fc-bcd5-5d2d0c224f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Cryptography\X509Certificates">
+      <UniqueIdentifier>{3d4c5011-207b-451b-9d60-c9b39580f5d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Cryptography\X509Certificates\.cpp">
+      <UniqueIdentifier>{3753af5d-b058-41c8-8ab1-5136436cd5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Cryptography\X509Certificates\.h">
+      <UniqueIdentifier>{ada1df3d-ff02-4db2-b611-cbc2640ad1f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Athentication">
+      <UniqueIdentifier>{d0daa45e-e5b1-4096-93b4-bb6f382b449a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Security\Athentication\.h">
+      <UniqueIdentifier>{e14b23aa-5abc-464f-aaf4-a85ecd07e701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net">
+      <UniqueIdentifier>{b2a99a64-55ea-4dc1-85c9-ea2c47cc715f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\Sockets">
+      <UniqueIdentifier>{50f44233-935b-43d6-9540-afe097aed79a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\Sockets\.h">
+      <UniqueIdentifier>{be62751a-7256-4ef8-8409-a9822ada1115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\Sockets\.cpp">
+      <UniqueIdentifier>{1f173b8e-0880-4539-a1aa-1c99a3055237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\Security">
+      <UniqueIdentifier>{7617eebf-de24-4014-be67-483902364316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\Security\.cpp">
+      <UniqueIdentifier>{fcbd49ca-32fe-4060-9b58-2342541d23ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\Security\.h">
+      <UniqueIdentifier>{534a666f-7048-468e-a98a-9875d1d24f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\.cpp">
+      <UniqueIdentifier>{1143999c-0b62-4849-a723-4e3ac1bdf978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Net\.h">
+      <UniqueIdentifier>{928c131d-1194-4da4-8969-25c6e5dc47bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Math">
+      <UniqueIdentifier>{850aaf51-6418-46d5-b31d-0ef5e9d28e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Math\.cpp">
+      <UniqueIdentifier>{bb5da345-b7a1-446f-b1d7-f719693b6a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Math\.h">
+      <UniqueIdentifier>{1c122002-63be-43ed-aa6f-bd7bd582de68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\IO">
+      <UniqueIdentifier>{b6f88957-1651-4100-bb61-1ff89f132c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\IO\.cpp">
+      <UniqueIdentifier>{830e13d0-a5ab-4c4b-b3a6-c6c205995ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\IO\.h">
+      <UniqueIdentifier>{d1510af0-0d43-494b-98a3-13a08fca8e21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Data">
+      <UniqueIdentifier>{0aeb258f-79a9-4558-a82f-8e49a5a2e93c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Data\Postgres">
+      <UniqueIdentifier>{a24a7abd-0ecd-439a-bbfe-c92412a46cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Data\Postgres\.h">
+      <UniqueIdentifier>{80e63aae-8f02-494b-8348-49e5d7a487fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Data\Postgres\.cpp">
+      <UniqueIdentifier>{ed6659af-90fc-4e40-8a67-c1d2d672d2e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Data\.h">
+      <UniqueIdentifier>{58127197-5503-42a3-851a-cb36429df06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Data\.cpp">
+      <UniqueIdentifier>{471e4aab-c1d5-42a1-b23f-7dea6dc57f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\.h">
+      <UniqueIdentifier>{9596ab73-ae54-415e-8d14-5026ab477ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\.cpp">
+      <UniqueIdentifier>{949f8896-c408-4a1c-b846-04788a31c2a8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DataColumn.cpp">
+      <Filter>Code\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DataRow.cpp">
+      <Filter>Code\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTable.cpp">
+      <Filter>Code\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Parameter.cpp">
+      <Filter>Code\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="IPAddress.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="IPEndPoint.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="NetUtility.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkStream.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketState.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpClient.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpListener.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpClient.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Library.cpp">
+      <Filter>Code\System\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UnixLibrary.cpp">
+      <Filter>Code\System\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Float.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Integer.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryStream.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthenticatedStream.cpp">
+      <Filter>Code\Net\Security\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>Code\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Code\Data\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HashAlgorithm.cpp">
+      <Filter>Code\Security\Cryptography\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SymmetricAlgorithm.cpp">
+      <Filter>Code\Security\Cryptography\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="AsymmetricAlgorithm.cpp">
+      <Filter>Code\Security\Cryptography\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Observable.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Version.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpListenerRequest.cpp">
+      <Filter>Code\Net\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Uri.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Encoding.cpp">
+      <Filter>Code\Text\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgCommand.cpp">
+      <Filter>Code\Data\Postgres\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgConnection.cpp">
+      <Filter>Code\Data\Postgres\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgDataReader.cpp">
+      <Filter>Code\Data\Postgres\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgTransaction.cpp">
+      <Filter>Code\Data\Postgres\.cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataColumn.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DataRow.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTable.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DataType.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataReader.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IsolationLevel.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="ITransaction.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Parameter.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IPAddress.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IPEndPoint.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="NetDefinitions.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="NetUtility.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkStream.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketEnum.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketInformation.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpClient.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpListener.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="UdpClient.h">
+      <Filter>Code\Net\Sockets\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Library.h">
+      <Filter>Code\System\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Integer.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Float.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthenticatedStream.h">
+      <Filter>Code\Net\Security\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryStream.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SslStream.h">
+      <Filter>Code\Net\Security\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Code\Data\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="X509Certificate.h">
+      <Filter>Code\Security\Cryptography\X509Certificates\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SecurityAuthEnum.h">
+      <Filter>Code\Security\Athentication\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="NetSecurityEnum.h">
+      <Filter>Code\Net\Security\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HashAlgorithm.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="ICryptoTransform.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IClonable.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AsymmetricAlgorithm.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SymmetricAlgorithm.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyAgreementAlgorithm.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Observable.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Code\Math\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Code\Math\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Code\Math\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Uri.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListenerRequest.h">
+      <Filter>Code\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListenerContext.h">
+      <Filter>Code\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListener.h">
+      <Filter>Code\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Encoding.h">
+      <Filter>Code\Text\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\CryptoBlockCipher.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\CryptoHash.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\CryptoRSA.h">
+      <Filter>Code\Security\Cryptography\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgCommand.h">
+      <Filter>Code\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgConnection.h">
+      <Filter>Code\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgDataReader.h">
+      <Filter>Code\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgOid.h">
+      <Filter>Code\Data\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgTransaction.h">
+      <Filter>Code\Data\Postgres\.h</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

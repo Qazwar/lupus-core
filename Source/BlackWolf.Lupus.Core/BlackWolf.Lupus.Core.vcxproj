@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Profile|Win32">
+      <Configuration>Profile</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Profile|x64">
+      <Configuration>Profile</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AsymmetricAlgorithm.cpp" />
+    <ClCompile Include="AuthenticatedStream.cpp" />
+    <ClCompile Include="Encoding.cpp" />
+    <ClCompile Include="HttpListenerRequest.cpp" />
+    <ClCompile Include="Observable.cpp" />
+    <ClCompile Include="PgCommand.cpp" />
+    <ClCompile Include="PgConnection.cpp" />
+    <ClCompile Include="PgDataReader.cpp" />
+    <ClCompile Include="PgTransaction.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="SymmetricAlgorithm.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Connection.cpp" />
+    <ClCompile Include="DataColumn.cpp" />
+    <ClCompile Include="DataRow.cpp" />
+    <ClCompile Include="DataTable.cpp" />
+    <ClCompile Include="Float.cpp" />
+    <ClCompile Include="HashAlgorithm.cpp" />
+    <ClCompile Include="Integer.cpp" />
+    <ClCompile Include="IPAddress.cpp" />
+    <ClCompile Include="IPEndPoint.cpp" />
+    <ClCompile Include="MemoryStream.cpp" />
+    <ClCompile Include="NetUtility.cpp" />
+    <ClCompile Include="NetworkStream.cpp" />
+    <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="Socket.cpp" />
+    <ClCompile Include="SocketState.cpp" />
+    <ClCompile Include="Stream.cpp" />
+    <ClCompile Include="TcpClient.cpp" />
+    <ClCompile Include="TcpListener.cpp" />
+    <ClCompile Include="UdpClient.cpp" />
+    <ClCompile Include="UnixLibrary.cpp" />
+    <ClCompile Include="Win32Uri.cpp" />
+    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Version.cpp" />
+    <ClCompile Include="Win32Library.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AsymmetricAlgorithm.h" />
+    <ClInclude Include="AuthenticatedStream.h" />
+    <ClInclude Include="Encoding.h" />
+    <ClInclude Include="HttpListener.h" />
+    <ClInclude Include="HttpListenerContext.h" />
+    <ClInclude Include="HttpListenerRequest.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="Internal\CryptoBlockCipher.h" />
+    <ClInclude Include="Internal\CryptoHash.h" />
+    <ClInclude Include="Internal\CryptoRSA.h" />
+    <ClInclude Include="Internal\PgCommand.h" />
+    <ClInclude Include="Internal\PgConnection.h" />
+    <ClInclude Include="Internal\PgDataReader.h" />
+    <ClInclude Include="Internal\PgOid.h" />
+    <ClInclude Include="Internal\PgTransaction.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="KeyAgreementAlgorithm.h" />
+    <ClInclude Include="Observable.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Size.h" />
+    <ClInclude Include="SymmetricAlgorithm.h" />
+    <ClInclude Include="DataColumn.h" />
+    <ClInclude Include="DataRow.h" />
+    <ClInclude Include="DataTable.h" />
+    <ClInclude Include="DataType.h" />
+    <ClInclude Include="Float.h" />
+    <ClInclude Include="HashAlgorithm.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="Connection.h" />
+    <ClInclude Include="ICryptoTransform.h" />
+    <ClInclude Include="IDataReader.h" />
+    <ClInclude Include="Integer.h" />
+    <ClInclude Include="IPAddress.h" />
+    <ClInclude Include="IPEndPoint.h" />
+    <ClInclude Include="IsolationLevel.h" />
+    <ClInclude Include="ITransaction.h" />
+    <ClInclude Include="Library.h" />
+    <ClInclude Include="MemoryStream.h" />
+    <ClInclude Include="NetDefinitions.h" />
+    <ClInclude Include="NetSecurityEnum.h" />
+    <ClInclude Include="IClonable.h" />
+    <ClInclude Include="SecurityAuthEnum.h" />
+    <ClInclude Include="NetUtility.h" />
+    <ClInclude Include="NetworkStream.h" />
+    <ClInclude Include="Parameter.h" />
+    <ClInclude Include="Socket.h" />
+    <ClInclude Include="SocketEnum.h" />
+    <ClInclude Include="SocketInformation.h" />
+    <ClInclude Include="SslStream.h" />
+    <ClInclude Include="Stream.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="TcpClient.h" />
+    <ClInclude Include="TcpListener.h" />
+    <ClInclude Include="UdpClient.h" />
+    <ClInclude Include="Uri.h" />
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="Version.h" />
+    <ClInclude Include="X509Certificate.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{40A04166-C40C-422E-93B4-B52CD76A296C}</ProjectGuid>
+    <RootNamespace>StreamWolfCore</RootNamespace>
+    <ProjectName>BlackWolf.Lupus.Core</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
+    </PreBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>LUPUSCORE_EXPORT;CRYPTOPP_ENABLE_NAMESPACE_WEAK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
