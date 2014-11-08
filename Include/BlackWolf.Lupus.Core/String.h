@@ -1,4 +1,21 @@
-﻿#pragma once
+/**
+ * Copyright (C) 2014 David Wolf <d.wolf@live.at>
+ *
+ * This file is part of Lupus.
+ * Lupus is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Lupus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ */
+#pragma once
 
 #include "Utility.h"
 #include "IClonable.h"
@@ -18,6 +35,9 @@ namespace icu_53 {
 namespace Lupus {
     typedef UChar Char;
     typedef UChar32 Char32;
+
+    LUPUSCORE_API Char ToChar(char);
+    LUPUSCORE_API Char ToChar(wchar_t);
 
     enum class StringSplitOption {
         None,
@@ -100,10 +120,10 @@ namespace Lupus {
         virtual String Replace(String oldStr, String newStr) const throw(std::out_of_range);
         virtual String Reverse() const NOEXCEPT;
         virtual String Reverse(size_t startIndex, size_t count) const throw(std::out_of_range);
-        virtual std::vector<String> Split(const std::vector<Char>& delimiter, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
-        virtual std::vector<String> Split(const std::vector<Char>& delimiter, size_t count, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
-        virtual std::vector<String> Split(const std::vector<String>& delimiter, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
-        virtual std::vector<String> Split(const std::vector<String>& delimiter, size_t count, StringSplitOption = StringSplitOption::None, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(format_error);
+        virtual std::vector<String> Split(const std::vector<Char>& delimiter, StringSplitOption = StringSplitOption::None) const throw(format_error);
+        virtual std::vector<String> Split(const std::vector<Char>& delimiter, size_t count, StringSplitOption = StringSplitOption::None) const throw(format_error);
+        virtual std::vector<String> Split(const String& delimiter, StringSplitOption = StringSplitOption::None) const throw(format_error);
+        virtual std::vector<String> Split(const String& delimiter, size_t count, StringSplitOption = StringSplitOption::None) const throw(format_error);
         virtual bool StartsWith(String str) const NOEXCEPT;
         virtual bool StartsWith(String str, size_t offset, size_t size) const throw(std::out_of_range);
         virtual String Substring(size_t startIndex) const throw(std::out_of_range);

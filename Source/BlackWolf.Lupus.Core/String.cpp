@@ -16,6 +16,7 @@
  * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "String.h"
+#include "Encoding.h"
 #include <unicode/ustring.h>
 #include <unicode/unistr.h>
 #include <unicode/regex.h>
@@ -157,7 +158,7 @@ namespace Lupus {
 
     Char& String::operator[](size_t index)
     {
-        if (index > mString->length()) {
+        if (index > (size_t)mString->length()) {
             throw out_of_range("index exceeds size of string");
         }
 
@@ -166,7 +167,7 @@ namespace Lupus {
 
     const Char& String::operator[](size_t index) const
     {
-        if (index > mString->length()) {
+        if (index > (size_t)mString->length()) {
             throw out_of_range("index exceeds size of internal buffer");
         }
 
@@ -185,7 +186,7 @@ namespace Lupus {
 
     const Char* String::Data(size_t startIndex) const
     {
-        if (startIndex > mString->length()) {
+        if (startIndex > (size_t)mString->length()) {
             throw out_of_range("startIndex exceeds size of internal buffer");
         }
 
@@ -253,7 +254,7 @@ namespace Lupus {
 
     int String::Compare(size_t offset, size_t size, String cmpStr, size_t cmpOffset, size_t cmpSize, StringCaseSensitivity sens) const
     {
-        if (offset > mString->length() || size > mString->length() - offset) {
+        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
             throw out_of_range("offset and size does not match buffer size");
         } else if (cmpOffset > cmpStr.Length() || cmpSize > cmpStr.Length() - cmpOffset) {
             throw out_of_range("cmpOffset and cmpSize does not match cmpBuffer size");
@@ -274,7 +275,7 @@ namespace Lupus {
 
     void String::CopyTo(size_t srcIndex, std::vector<Char>& dst, size_t dstIndex, size_t dstSize) const
     {
-        if (srcIndex > mString->length()) {
+        if (srcIndex > (size_t)mString->length()) {
             throw out_of_range("srcIndex exceeds size of internal buffer");
         } else if (dstIndex > dst.size() || dstSize > dst.size() - dstIndex) {
             throw out_of_range("dstIndex of dstSize exceed given buffer");
@@ -309,7 +310,7 @@ namespace Lupus {
 
     int String::IndexOf(Char ch, size_t offset) const
     {
-        if (offset > mString->length()) {
+        if (offset > (size_t)mString->length()) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -318,7 +319,7 @@ namespace Lupus {
 
     int String::IndexOf(String str, size_t offset) const
     {
-        if (offset > mString->length()) {
+        if (offset > (size_t)mString->length()) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -327,7 +328,7 @@ namespace Lupus {
 
     int String::IndexOf(Char ch, size_t offset, size_t size) const
     {
-        if (offset > mString->length() || size > mString->length() - offset) {
+        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -336,7 +337,7 @@ namespace Lupus {
 
     int String::IndexOf(String str, size_t offset, size_t size) const
     {
-        if (offset > mString->length() || size > mString->length() - offset) {
+        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -384,7 +385,7 @@ namespace Lupus {
 
     String String::Insert(size_t startIndex, Char ch) const
     {
-        if (startIndex > mString->length()) {
+        if (startIndex > (size_t)mString->length()) {
             throw out_of_range("startIndex exceeds size of internal buffer");
         }
 
@@ -395,7 +396,7 @@ namespace Lupus {
 
     String String::Insert(size_t startIndex, String str) const
     {
-        if (startIndex > mString->length()) {
+        if (startIndex > (size_t)mString->length()) {
             throw out_of_range("startIndex exceeds size of internal buffer");
         }
 
@@ -406,7 +407,7 @@ namespace Lupus {
 
     String String::Insert(size_t startIndex, String str, size_t offset, size_t size) const
     {
-        if (startIndex > mString->length()) {
+        if (startIndex > (size_t)mString->length()) {
             throw out_of_range("startIndex exceeds size of internal buffer");
         } else if (offset > str.Length() || size > str.Length() - size) {
             throw out_of_range("offset or size exceeds size of internal buffer");
@@ -429,7 +430,7 @@ namespace Lupus {
 
     int String::LastIndexOf(Char ch, size_t offset) const
     {
-        if (offset > mString->length()) {
+        if (offset > (size_t)mString->length()) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -438,7 +439,7 @@ namespace Lupus {
 
     int String::LastIndexOf(String str, size_t offset) const
     {
-        if (offset > mString->length()) {
+        if (offset > (size_t)mString->length()) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -447,7 +448,7 @@ namespace Lupus {
 
     int String::LastIndexOf(Char ch, size_t offset, size_t size) const
     {
-        if (offset > mString->length() || size > mString->length() - offset) {
+        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -456,7 +457,7 @@ namespace Lupus {
 
     int String::LastIndexOf(String str, size_t offset, size_t size) const
     {
-        if (offset > mString->length() || size > mString->length() - offset) {
+        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
             throw out_of_range("offset and size does not match buffer size");
         }
 
@@ -504,7 +505,7 @@ namespace Lupus {
 
     String String::Remove(size_t startIndex) const
     {
-        if (startIndex > mString->length()) {
+        if (startIndex > (size_t)mString->length()) {
             throw out_of_range("startIndex exceeds size of internal buffer");
         }
 
@@ -515,7 +516,7 @@ namespace Lupus {
 
     String String::Remove(size_t startIndex, size_t count) const
     {
-        if (startIndex > mString->length() || count > mString->length() - startIndex) {
+        if (startIndex > (size_t)mString->length() || count > (size_t)mString->length() - startIndex) {
             throw out_of_range("startIndex or count exceeds size of internal buffer");
         }
 
@@ -547,7 +548,7 @@ namespace Lupus {
 
     String String::Reverse(size_t startIndex, size_t count) const
     {
-        if (startIndex > mString->length() || count > mString->length() - startIndex) {
+        if (startIndex > (size_t)mString->length() || count > (size_t)mString->length() - startIndex) {
             throw out_of_range("startIndex or count exceeds size of internal buffer");
         }
 
@@ -556,50 +557,56 @@ namespace Lupus {
         return String(result);
     }
 
-    vector<String> String::Split(const vector<Char>& delimiter, StringSplitOption option, StringCaseSensitivity sens) const
+    vector<String> String::Split(const vector<Char>& delimiter, StringSplitOption option) const
     {
-        // TODO: RegeEx auf 'state machine' abändern.
-        String str("[");
-        UErrorCode status = U_ZERO_ERROR;
-
-        for_each(std::begin(delimiter), std::end(delimiter), [&str](Char ch) {
-            str += ch;
-        });
-
-        str += "]";
-
-        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not create RegexMatcher");
-        }
-
-        vector<UnicodeString> dest(1024);
-        int32_t count = m.split(*mString, &dest[0], 1024, status) / 2 + 1;
-        int32_t n = 0;
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not split string with given pattern");
-        }
-
         vector<String> result;
+        int32_t previousIndex = 0;
 
-        for (auto& it : dest) {
-            bool add = true;
-            String tmp(it.getTerminatedBuffer());
+        for (int32_t i = 0; i < mString->length(); i++) {
+            for (auto ch : delimiter) {
+                if (mString->operator[](i) == ch) {
+                    String str;
 
-            for (Char cmp : delimiter) {
-                if (!(add = !(tmp == String(cmp)))) {
-                    break;
+                    if (option == StringSplitOption::RemoveEmptyEntries && i == previousIndex) {
+                        continue;
+                    } else if (i != previousIndex) {
+                        str = this->Substring(previousIndex, i);
+                    }
+
+                    result.push_back(str);
+                    previousIndex = i + 1;
                 }
             }
+        }
 
-            if (add) {
-                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
-                    result.push_back(tmp);
+        return result;
+    }
+
+    vector<String> String::Split(const vector<Char>& delimiter, size_t count, StringSplitOption option) const
+    {
+        vector<String> result;
+        int32_t previousIndex = 0;
+
+        for (int32_t i = 0; i < mString->length(); i++) {
+            for (auto ch : delimiter) {
+                if (mString->operator[](i) == ch) {
+                    String str;
+
+                    if (option == StringSplitOption::RemoveEmptyEntries && i == previousIndex) {
+                        continue;
+                    } else if (i != previousIndex) {
+                        str = this->Substring(previousIndex, i);
+                    }
+
+                    result.push_back(str);
+                    previousIndex = i + 1;
+
+                    if (result.size() == count) {
+                        break;
+                    }
                 }
 
-                if (result.size() == count || ++n == count) {
+                if (result.size() == count) {
                     break;
                 }
             }
@@ -608,162 +615,59 @@ namespace Lupus {
         return result;
     }
 
-    vector<String> String::Split(const vector<Char>& delimiter, size_t count, StringSplitOption option, StringCaseSensitivity sens) const
+    vector<String> String::Split(const String& str, StringSplitOption option) const
     {
-        // TODO: RegeEx auf 'state machine' abändern.
-        String str("[");
-        UErrorCode status = U_ZERO_ERROR;
-
-        for_each(std::begin(delimiter), std::end(delimiter), [&str](Char ch) {
-            str += ch;
-        });
-
-        str += "]";
-
-        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not create RegexMatcher");
-        }
-
-        vector<UnicodeString> dest(count * 2);
-        int32_t c = m.split(*mString, &dest[0], count * 2, status) / 2 + 1;
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not split string with given pattern");
-        }
-
         vector<String> result;
+        int32_t previousIndex = 0;
+        int32_t savedIndex = -1;
 
-        for (auto& it : dest) {
-            bool add = true;
-            String tmp(it.getTerminatedBuffer());
+        for (int32_t index = mString->indexOf(str.Data(), str.Length(), 0); index != -1; savedIndex = index, index = mString->indexOf(str.Data(), str.Length(), index + 1)) {
+            String tmp;
 
-            for (Char cmp : delimiter) {
-                if (!(add = !(tmp == String(cmp)))) {
-                    break;
-                }
+            if (option == StringSplitOption::RemoveEmptyEntries && index == previousIndex) {
+                continue;
+            } else if (index != previousIndex) {
+                tmp = Substring(previousIndex, index - previousIndex);
             }
 
-            if (add) {
-                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
-                    result.push_back(tmp);
-                }
+            result.push_back(tmp);
+            previousIndex = index + str.Length();
+        }
 
-                if (result.size() == c) {
-                    break;
-                }
-            }
+        if (savedIndex != previousIndex && (size_t)previousIndex < Length() - 1) {
+            result.push_back(Substring(previousIndex));
         }
 
         return result;
     }
 
-    vector<String> String::Split(const vector<String>& delimiter, StringSplitOption option, StringCaseSensitivity sens) const
+    vector<String> String::Split(const String& str, size_t count, StringSplitOption option) const
     {
-        // TODO: RegeEx auf 'state machine' abändern.
-        String str("(");
-        UErrorCode status = U_ZERO_ERROR;
-
-        for_each(std::begin(delimiter), std::end(delimiter), [&str](String s) {
-            if (str.Length() == 1) {
-                str += s;
-            } else {
-                str += "|" + s;
-            }
-        });
-
-        str += ")";
-
-        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not create RegexMatcher");
-        }
-
-        vector<UnicodeString> dest(1024);
-        int32_t count = m.split(*mString, &dest[0], 1024, status) / 2 + 1;
-        int32_t n = 0;
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not split string with given pattern");
-        }
-
         vector<String> result;
+        int32_t previousIndex = 0;
+        int32_t savedIndex = -1;
 
-        for (auto& it : dest) {
-            bool add = true;
-            String tmp(it.getTerminatedBuffer());
+        for (int32_t index = mString->indexOf(str.Data(), str.Length(), 0); index != -1; savedIndex = index, index = mString->indexOf(str.Data(), str.Length(), index + 1)) {
+            String tmp;
 
-            for (String cmp : delimiter) {
-                if (!(add = !(tmp == cmp))) {
-                    break;
-                }
+            if (option == StringSplitOption::RemoveEmptyEntries && index == previousIndex) {
+                continue;
+            } else if (index != previousIndex) {
+                tmp = Substring(previousIndex, index - previousIndex);
             }
 
-            if (add) {
-                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
-                    result.push_back(tmp);
-                }
+            result.push_back(tmp);
+            previousIndex = index + str.Length();
 
-                if (result.size() == count || ++n == count) {
-                    break;
-                }
+            if (result.size() == count) {
+                break;
             }
         }
 
-        return result;
-    }
 
-    vector<String> String::Split(const vector<String>& delimiter, size_t count, StringSplitOption option, StringCaseSensitivity sens) const
-    {
-        // TODO: RegeEx auf 'state machine' abändern.
-        String str("(");
-        UErrorCode status = U_ZERO_ERROR;
-
-        for_each(std::begin(delimiter), std::end(delimiter), [&str](String s) {
-            if (str.Length() == 1) {
-                str += s;
-            } else {
-                str += "|" + s;
-            }
-        });
-
-        str += ")";
-
-        RegexMatcher m(*str.mString, sens == StringCaseSensitivity::CaseInsensitive ? UREGEX_CASE_INSENSITIVE : 0, status);
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not create RegexMatcher");
-        }
-
-        vector<UnicodeString> dest(count * 2);
-        int32_t c = m.split(*mString, &dest[0], count * 2, status) / 2 + 1;
-
-        if (status != U_ZERO_ERROR) {
-            throw format_error("Could not split string with given pattern");
-        }
-
-        vector<String> result;
-
-        for (auto& it : dest) {
-            bool add = true;
-            String tmp(it.getTerminatedBuffer());
-
-            for (String cmp : delimiter) {
-                if (!(add = !(tmp == cmp))) {
-                    break;
-                }
-            }
-
-            if (add) {
-                if (!tmp.IsEmpty() || option == StringSplitOption::None) {
-                    result.push_back(tmp);
-                }
-
-                if (result.size() == c) {
-                    break;
-                }
+        if (result.size() < count) {
+            if (savedIndex != previousIndex && (size_t)previousIndex < Length() - 1) {
+                result.push_back(Substring(previousIndex));
             }
         }
 
@@ -777,7 +681,7 @@ namespace Lupus {
 
     bool String::StartsWith(String str, size_t offset, size_t size) const
     {
-        if (offset > mString->length() || size > mString->length() - offset) {
+        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
             throw out_of_range("offset or size exceeds size of internal buffer");
         }
 
@@ -786,7 +690,7 @@ namespace Lupus {
 
     String String::Substring(size_t startIndex) const
     {
-        if (startIndex > mString->length()) {
+        if (startIndex > (size_t)mString->length()) {
             throw out_of_range("startIndex exceeds size of internal buffer");
         }
 
@@ -795,7 +699,7 @@ namespace Lupus {
 
     String String::Substring(size_t startIndex, size_t count) const
     {
-        if (startIndex > mString->length() || count > mString->length() - startIndex) {
+        if (startIndex > (size_t)mString->length() || count > (size_t)mString->length() - startIndex) {
             throw out_of_range("startIndex or count exceeds size of internal buffer");
         }
 
@@ -999,6 +903,20 @@ namespace Lupus {
     size_t String::ComputeCapacity(size_t length)
     {
         return ((length / Capacity) + 1) * Capacity;
+    }
+
+    Char ToChar(char ch)
+    {
+        return String(std::string(1, ch))[0];
+    }
+
+    Char ToChar(wchar_t wc)
+    {
+#ifdef _UNICODE
+        return wc;
+#else
+        return Text::Encoding::UTF8()->GetString(std::vector<uint8_t>((uint8_t*)&wc, ((uint8_t*)&wc) + sizeof(wchar_t)))[0];
+#endif
     }
 }
 
