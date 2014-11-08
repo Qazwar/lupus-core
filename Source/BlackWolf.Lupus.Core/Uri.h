@@ -36,6 +36,7 @@ namespace Lupus {
         Uri(const String& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
         Uri(std::shared_ptr<Uri> baseUri, const String& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
         Uri(std::shared_ptr<Uri> baseUri, std::shared_ptr<Uri> relativeUri) throw(std::runtime_error, std::bad_alloc, format_error);
+        virtual ~Uri() = default;
 
         virtual const String& Scheme() const NOEXCEPT;
         virtual const String& UserInfo() const NOEXCEPT;
