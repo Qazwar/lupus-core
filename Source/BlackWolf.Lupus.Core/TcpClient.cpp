@@ -38,7 +38,7 @@ namespace Lupus {
             TcpClient::TcpClient(shared_ptr<IPEndPoint> localEP)
             {
                 if (!localEP) {
-                    throw null_pointer();
+                    throw null_pointer("localEP");
                 }
 
                 mClient = make_shared<Socket>(localEP->Family(), SocketType::Stream, ProtocolType::TCP);
@@ -55,7 +55,7 @@ namespace Lupus {
             size_t TcpClient::Available() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 return mClient->Available();
@@ -69,7 +69,7 @@ namespace Lupus {
             void TcpClient::Client(shared_ptr<Socket> client)
             {
                 if (!client) {
-                    throw null_pointer();
+                    throw null_pointer("client");
                 }
 
                 mClient = client;
@@ -87,7 +87,7 @@ namespace Lupus {
             bool TcpClient::ExclusiveAddressUse() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 int result, length = 4;
@@ -102,7 +102,7 @@ namespace Lupus {
             void TcpClient::ExclusiveAddressUse(bool value)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 int val = value ? 1 : 0;
@@ -115,7 +115,7 @@ namespace Lupus {
             bool TcpClient::NoDelay() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 return mClient->NoDelay();
@@ -124,7 +124,7 @@ namespace Lupus {
             void TcpClient::NoDelay(bool b)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->NoDelay(b);
@@ -133,7 +133,7 @@ namespace Lupus {
             int TcpClient::SendBuffer() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 return mClient->SendBuffer();
@@ -142,7 +142,7 @@ namespace Lupus {
             void TcpClient::SendBuffer(int i)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->SendBuffer(i);
@@ -151,7 +151,7 @@ namespace Lupus {
             int TcpClient::ReceiveBuffer() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 return mClient->ReceiveBuffer();
@@ -160,7 +160,7 @@ namespace Lupus {
             void TcpClient::ReceiveBuffer(int i)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->ReceiveBuffer(i);
@@ -169,7 +169,7 @@ namespace Lupus {
             int TcpClient::SendTimeout() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 return mClient->SendTimeout();
@@ -178,7 +178,7 @@ namespace Lupus {
             void TcpClient::SendTimeout(int i)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->SendTimeout(i);
@@ -187,7 +187,7 @@ namespace Lupus {
             int TcpClient::ReceiveTimeout() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 return mClient->ReceiveTimeout();
@@ -196,7 +196,7 @@ namespace Lupus {
             void TcpClient::ReceiveTimeout(int i)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->ReceiveTimeout(i);
@@ -233,7 +233,7 @@ namespace Lupus {
             void TcpClient::Connect(shared_ptr<IPEndPoint> remoteEndPoint)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->Connect(remoteEndPoint);
@@ -242,7 +242,7 @@ namespace Lupus {
             void TcpClient::Connect(shared_ptr<IPAddress> address, uint16_t port)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->Connect(address, port);
@@ -251,7 +251,7 @@ namespace Lupus {
             void TcpClient::Connect(const vector<shared_ptr<IPEndPoint>>& endPoints)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->Connect(endPoints);
@@ -260,7 +260,7 @@ namespace Lupus {
             void TcpClient::Connect(const String& host, uint16_t port)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->Connect(host, port);
@@ -269,7 +269,7 @@ namespace Lupus {
             void TcpClient::Close()
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("TcpClient is in an invalid state");
                 }
 
                 mClient->Close();

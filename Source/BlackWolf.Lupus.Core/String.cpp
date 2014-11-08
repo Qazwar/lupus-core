@@ -67,8 +67,10 @@ namespace Lupus {
     {
         size_t len = u_strlen(str);
 
-        if (offset > len || size > len - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > len) {
+            throw out_of_range("offset");
+        } else if (size > len - offset) {
+            throw out_of_range("size");
         }
 
         mString = new UnicodeString(str + offset, size);
@@ -89,8 +91,10 @@ namespace Lupus {
 
     String::String(const string& str, size_t offset, size_t size)
     {
-        if (offset > str.length() || size > str.length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > str.length()) {
+            throw out_of_range("offset");
+        } else if (size > str.length() - offset) {
+            throw out_of_range("size");
         }
 
         mString = new UnicodeString(UnicodeString::fromUTF8(StringPiece(str.c_str() + offset, size)));
@@ -112,8 +116,10 @@ namespace Lupus {
 
     String::String(const String& str, size_t offset, size_t size)
     {
-        if (offset > str.Length() || size > str.Length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > str.Length()) {
+            throw out_of_range("offset");
+        } else if (size > str.Length() - offset) {
+            throw out_of_range("size");
         }
 
         mString = new UnicodeString(*str.mString, offset, size);
@@ -159,7 +165,7 @@ namespace Lupus {
     Char& String::operator[](size_t index)
     {
         if (index > (size_t)mString->length()) {
-            throw out_of_range("index exceeds size of string");
+            throw out_of_range("index");
         }
 
         return *(const_cast<Char*>(mString->getTerminatedBuffer() + index));
@@ -168,7 +174,7 @@ namespace Lupus {
     const Char& String::operator[](size_t index) const
     {
         if (index > (size_t)mString->length()) {
-            throw out_of_range("index exceeds size of internal buffer");
+            throw out_of_range("index");
         }
 
         return *(mString->getTerminatedBuffer() + index);
@@ -187,7 +193,7 @@ namespace Lupus {
     const Char* String::Data(size_t startIndex) const
     {
         if (startIndex > (size_t)mString->length()) {
-            throw out_of_range("startIndex exceeds size of internal buffer");
+            throw out_of_range("startIndex");
         }
 
         return mString->getTerminatedBuffer() + startIndex;
@@ -219,8 +225,10 @@ namespace Lupus {
 
     String String::Append(String str, size_t offset, size_t size) const
     {
-        if (offset > str.Length() || size > str.Length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > str.Length()) {
+            throw out_of_range("offset");
+        } else if (size > str.Length() - offset) {
+            throw out_of_range("size");
         }
 
         auto result = new UnicodeString(*mString);
@@ -240,8 +248,10 @@ namespace Lupus {
 
     int String::Compare(String str, size_t offset, size_t size, StringCaseSensitivity sens) const
     {
-        if (offset > str.Length() || size > str.Length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > str.Length()) {
+            throw out_of_range("offset");
+        } else if (size > str.Length() - offset) {
+            throw out_of_range("size");
         }
 
         switch (sens) {
@@ -254,10 +264,14 @@ namespace Lupus {
 
     int String::Compare(size_t offset, size_t size, String cmpStr, size_t cmpOffset, size_t cmpSize, StringCaseSensitivity sens) const
     {
-        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
-        } else if (cmpOffset > cmpStr.Length() || cmpSize > cmpStr.Length() - cmpOffset) {
-            throw out_of_range("cmpOffset and cmpSize does not match cmpBuffer size");
+        if (offset > (size_t)mString->length()) {
+            throw out_of_range("offset");
+        } else if (size > (size_t)mString->length() - offset) {
+            throw out_of_range("size");
+        } else if (cmpOffset > cmpStr.Length()) {
+            throw out_of_range("cmpOffset");
+        } else if (cmpSize > cmpStr.Length() - cmpOffset) {
+            throw out_of_range("cmpSize");
         }
 
         switch (sens) {
@@ -276,9 +290,11 @@ namespace Lupus {
     void String::CopyTo(size_t srcIndex, std::vector<Char>& dst, size_t dstIndex, size_t dstSize) const
     {
         if (srcIndex > (size_t)mString->length()) {
-            throw out_of_range("srcIndex exceeds size of internal buffer");
-        } else if (dstIndex > dst.size() || dstSize > dst.size() - dstIndex) {
-            throw out_of_range("dstIndex of dstSize exceed given buffer");
+            throw out_of_range("srcIndex");
+        } else if (dstIndex > dst.size()) {
+            throw out_of_range("dstIndex");
+        } else if (dstSize > dst.size() - dstIndex) {
+            throw out_of_range("dstSize");
         }
 
         mString->extract((int32_t)srcIndex, (int32_t)dstSize, &dst[0], (int32_t)dstIndex);
@@ -291,8 +307,10 @@ namespace Lupus {
 
     bool String::EndsWith(String str, size_t offset, size_t size) const
     {
-        if (offset > str.Length() || size > str.Length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > str.Length()) {
+            throw out_of_range("offset");
+        } else if (size > str.Length() - offset) {
+            throw out_of_range("size");
         }
 
         return mString->endsWith(*str.mString, offset, size) == TRUE;
@@ -311,7 +329,7 @@ namespace Lupus {
     int String::IndexOf(Char ch, size_t offset) const
     {
         if (offset > (size_t)mString->length()) {
-            throw out_of_range("offset and size does not match buffer size");
+            throw out_of_range("offset");
         }
 
         return mString->indexOf(ch, offset);
@@ -320,7 +338,7 @@ namespace Lupus {
     int String::IndexOf(String str, size_t offset) const
     {
         if (offset > (size_t)mString->length()) {
-            throw out_of_range("offset and size does not match buffer size");
+            throw out_of_range("offset");
         }
 
         return mString->indexOf(*str.mString, offset);
@@ -328,8 +346,10 @@ namespace Lupus {
 
     int String::IndexOf(Char ch, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > (size_t)mString->length()) {
+            throw out_of_range("offset");
+        } else if (size > (size_t)mString->length() - offset) {
+            throw out_of_range("size");
         }
 
         return mString->indexOf(ch, offset, size);
@@ -337,8 +357,10 @@ namespace Lupus {
 
     int String::IndexOf(String str, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > (size_t)mString->length()) {
+            throw out_of_range("offset");
+        } else if (size > (size_t)mString->length() - offset) {
+            throw out_of_range("size");
         }
 
         return mString->indexOf(*str.mString, offset, size);
@@ -386,7 +408,7 @@ namespace Lupus {
     String String::Insert(size_t startIndex, Char ch) const
     {
         if (startIndex > (size_t)mString->length()) {
-            throw out_of_range("startIndex exceeds size of internal buffer");
+            throw out_of_range("startIndex");
         }
 
         auto result = new UnicodeString(*mString);
@@ -397,7 +419,7 @@ namespace Lupus {
     String String::Insert(size_t startIndex, String str) const
     {
         if (startIndex > (size_t)mString->length()) {
-            throw out_of_range("startIndex exceeds size of internal buffer");
+            throw out_of_range("startIndex");
         }
 
         auto result = new UnicodeString(*mString);
@@ -408,9 +430,11 @@ namespace Lupus {
     String String::Insert(size_t startIndex, String str, size_t offset, size_t size) const
     {
         if (startIndex > (size_t)mString->length()) {
-            throw out_of_range("startIndex exceeds size of internal buffer");
-        } else if (offset > str.Length() || size > str.Length() - size) {
-            throw out_of_range("offset or size exceeds size of internal buffer");
+            throw out_of_range("startIndex");
+        } else if (offset > (size_t)mString->length()) {
+            throw out_of_range("offset");
+        } else if (size > (size_t)mString->length() - offset) {
+            throw out_of_range("size");
         }
 
         auto result = new UnicodeString(*mString);
@@ -431,7 +455,7 @@ namespace Lupus {
     int String::LastIndexOf(Char ch, size_t offset) const
     {
         if (offset > (size_t)mString->length()) {
-            throw out_of_range("offset and size does not match buffer size");
+            throw out_of_range("offset");
         }
 
         return mString->lastIndexOf(ch, offset);
@@ -440,7 +464,7 @@ namespace Lupus {
     int String::LastIndexOf(String str, size_t offset) const
     {
         if (offset > (size_t)mString->length()) {
-            throw out_of_range("offset and size does not match buffer size");
+            throw out_of_range("offset");
         }
 
         return mString->lastIndexOf(*str.mString, offset);
@@ -448,8 +472,10 @@ namespace Lupus {
 
     int String::LastIndexOf(Char ch, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > (size_t)mString->length()) {
+            throw out_of_range("offset");
+        } else if (size > (size_t)mString->length() - offset) {
+            throw out_of_range("size");
         }
 
         return mString->lastIndexOf(ch, offset, size);
@@ -457,8 +483,10 @@ namespace Lupus {
 
     int String::LastIndexOf(String str, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
-            throw out_of_range("offset and size does not match buffer size");
+        if (offset > (size_t)mString->length()) {
+            throw out_of_range("offset");
+        } else if (size > (size_t)mString->length() - offset) {
+            throw out_of_range("size");
         }
 
         return mString->lastIndexOf(*str.mString, offset, size);
@@ -506,7 +534,7 @@ namespace Lupus {
     String String::Remove(size_t startIndex) const
     {
         if (startIndex > (size_t)mString->length()) {
-            throw out_of_range("startIndex exceeds size of internal buffer");
+            throw out_of_range("startIndex");
         }
 
         auto result = new UnicodeString(*mString);
@@ -516,8 +544,10 @@ namespace Lupus {
 
     String String::Remove(size_t startIndex, size_t count) const
     {
-        if (startIndex > (size_t)mString->length() || count > (size_t)mString->length() - startIndex) {
-            throw out_of_range("startIndex or count exceeds size of internal buffer");
+        if (startIndex > (size_t)mString->length()) {
+            throw out_of_range("startIndex");
+        } else if (count > (size_t)mString->length() - startIndex) {
+            throw out_of_range("count");
         }
 
         auto result = new UnicodeString(*mString);
@@ -548,8 +578,10 @@ namespace Lupus {
 
     String String::Reverse(size_t startIndex, size_t count) const
     {
-        if (startIndex > (size_t)mString->length() || count > (size_t)mString->length() - startIndex) {
-            throw out_of_range("startIndex or count exceeds size of internal buffer");
+        if (startIndex > (size_t)mString->length()) {
+            throw out_of_range("startIndex");
+        } else if (count > (size_t)mString->length() - startIndex) {
+            throw out_of_range("count");
         }
 
         auto result = new UnicodeString(*mString);
@@ -681,8 +713,10 @@ namespace Lupus {
 
     bool String::StartsWith(String str, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length() || size > (size_t)mString->length() - offset) {
-            throw out_of_range("offset or size exceeds size of internal buffer");
+        if (offset > (size_t)mString->length()) {
+            throw out_of_range("offset");
+        } else if (size > (size_t)mString->length() - offset) {
+            throw out_of_range("size");
         }
 
         return mString->startsWith(*str.mString, offset, size) == TRUE;
@@ -691,7 +725,7 @@ namespace Lupus {
     String String::Substring(size_t startIndex) const
     {
         if (startIndex > (size_t)mString->length()) {
-            throw out_of_range("startIndex exceeds size of internal buffer");
+            throw out_of_range("startIndex");
         }
 
         return String(new UnicodeString(mString->getTerminatedBuffer() + startIndex));
@@ -699,8 +733,10 @@ namespace Lupus {
 
     String String::Substring(size_t startIndex, size_t count) const
     {
-        if (startIndex > (size_t)mString->length() || count > (size_t)mString->length() - startIndex) {
-            throw out_of_range("startIndex or count exceeds size of internal buffer");
+        if (startIndex > (size_t)mString->length()) {
+            throw out_of_range("startIndex");
+        } else if (count > (size_t)mString->length() - startIndex) {
+            throw out_of_range("count");
         }
 
         return String(new UnicodeString(mString->getTerminatedBuffer() + startIndex, count));

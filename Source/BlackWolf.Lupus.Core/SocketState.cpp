@@ -218,7 +218,7 @@ namespace Lupus {
             void Socket::SocketBound::Connect(Socket* socket, std::shared_ptr<IPEndPoint> remoteEndPoint)
             {
                 if (!remoteEndPoint) {
-                    throw null_pointer("remoteEndPoint points to NULL");
+                    throw null_pointer("remoteEndPoint");
                 }
 
                 AddrStorage storage;
@@ -277,7 +277,7 @@ namespace Lupus {
             void Socket::SocketConnected::Connect(Socket* socket, std::shared_ptr<IPEndPoint> remoteEndPoint)
             {
                 if (!remoteEndPoint) {
-                    throw null_pointer("remoteEndPoint points to NULL");
+                    throw null_pointer("remoteEndPoint");
                 }
 
                 AddrStorage storage;

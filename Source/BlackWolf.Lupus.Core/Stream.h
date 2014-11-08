@@ -75,7 +75,7 @@ namespace Lupus {
     public:
 
         InputStream() = delete;
-        InputStream(std::shared_ptr<Stream> innerStream) throw(std::invalid_argument);
+        InputStream(std::shared_ptr<Stream> innerStream) throw(std::invalid_argument, null_pointer);
         virtual ~InputStream() = default;
 
         virtual bool CanRead() const NOEXCEPT override;
@@ -106,7 +106,7 @@ namespace Lupus {
     public:
 
         OutputStream() = delete;
-        OutputStream(std::shared_ptr<Stream> innerStream) throw(std::invalid_argument);
+        OutputStream(std::shared_ptr<Stream> innerStream) throw(std::invalid_argument, null_pointer);
         virtual ~OutputStream() = default;
 
         virtual bool CanRead() const NOEXCEPT override;

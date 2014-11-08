@@ -92,8 +92,10 @@ namespace Lupus {
 
         String Encoding::GetString(const vector<uint8_t>& buffer, size_t offset, size_t size) const
         {
-            if (offset > buffer.size() || size > buffer.size() - offset) {
-                throw out_of_range("offset and size does not match buffer size");
+            if (offset > buffer.size()) {
+                throw out_of_range("offset");
+            } else if (size > buffer.size() - offset) {
+                throw out_of_range("size");
             }
 
             UErrorCode error = U_ZERO_ERROR;
@@ -142,8 +144,10 @@ namespace Lupus {
 
         vector<uint8_t> Encoding::GetBytes(const String& str, size_t offset, size_t size) const
         {
-            if (offset > str.Length() || size > str.Length() - offset) {
-                throw out_of_range("offset and size does not match string length");
+            if (offset > str.Length()) {
+                throw out_of_range("offset");
+            } else if (size > str.Length() - offset) {
+                throw out_of_range("size");
             }
             
             UErrorCode error = U_ZERO_ERROR;

@@ -73,7 +73,7 @@ namespace Lupus {
         boost::any& DataRow::operator[](shared_ptr<DataColumn> column)
         {
             if (!column) {
-                throw null_pointer();
+                throw null_pointer("column");
             } else if (mItems.find(column->Name()) == end(mItems)) {
                 throw std::invalid_argument("Key does not exist");
             }
@@ -84,7 +84,7 @@ namespace Lupus {
         const boost::any& DataRow::operator[](shared_ptr<DataColumn> column) const
         {
             if (!column) {
-                throw null_pointer();
+                throw null_pointer("column");
             } else if (mItems.find(column->Name()) == end(mItems)) {
                 throw std::invalid_argument("Key does not exist");
             }

@@ -53,7 +53,7 @@ namespace Lupus {
     void Stream::CopyTo(shared_ptr<Stream> destination)
     {
         if (!destination) {
-            throw null_pointer();
+            throw null_pointer("destination");
         }
 
         int64_t pos = Position();
@@ -96,8 +96,10 @@ namespace Lupus {
 
     InputStream::InputStream(shared_ptr<Stream> innerStream)
     {
-        if (!innerStream->CanRead()) {
-            throw invalid_argument("innerStream is not readable.");
+        if (!innerStream) {
+            throw null_pointer("innerStream");
+        } else if (!innerStream->CanRead()) {
+            throw invalid_argument("innerStream");
         }
 
         mInnerStream = innerStream;
@@ -180,8 +182,10 @@ namespace Lupus {
 
     OutputStream::OutputStream(shared_ptr<Stream> innerStream)
     {
-        if (!innerStream->CanWrite()) {
-            throw invalid_argument("innerStream is not readable.");
+        if (!innerStream) {
+            throw null_pointer("innerStream");
+        } else if (!innerStream->CanWrite()) {
+            throw invalid_argument("innerStream");
         }
 
         mInnerStream = innerStream;

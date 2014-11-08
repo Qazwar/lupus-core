@@ -30,7 +30,7 @@ namespace Lupus {
             IPEndPoint::IPEndPoint(std::shared_ptr<IPAddress> address, uint16_t port)
             {
                 if (!address) {
-                    throw null_pointer("Can't set an address that points to NULL");
+                    throw null_pointer("address");
                 }
 
                 AddrIn* addr;
@@ -80,7 +80,7 @@ namespace Lupus {
             void IPEndPoint::Address(std::shared_ptr<IPAddress> address)
             {
                 if (!address) {
-                    throw null_pointer("Cannot set an address that points to NULL");
+                    throw null_pointer("address");
                 }
 
                 uint16_t port = Port();

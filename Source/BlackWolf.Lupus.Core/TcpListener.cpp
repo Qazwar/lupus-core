@@ -31,7 +31,7 @@ namespace Lupus {
             TcpListener::TcpListener(shared_ptr<IPEndPoint> localEP)
             {
                 if (!localEP) {
-                    throw null_pointer();
+                    throw null_pointer("localEP");
                 }
 
                 mServer = make_shared<Socket>(localEP->Family(), SocketType::Stream, ProtocolType::TCP);
@@ -41,7 +41,7 @@ namespace Lupus {
             TcpListener::TcpListener(shared_ptr<IPAddress> localaddr, uint16_t port)
             {
                 if (!localaddr) {
-                    throw null_pointer();
+                    throw null_pointer("localaddr");
                 }
 
                 auto ep = make_shared<IPEndPoint>(localaddr, port);

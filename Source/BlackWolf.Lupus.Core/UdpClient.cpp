@@ -61,7 +61,7 @@ namespace Lupus {
             size_t UdpClient::Available() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 return mClient->Available();
@@ -74,8 +74,8 @@ namespace Lupus {
 
             void UdpClient::Client(shared_ptr<Socket> client)
             {
-                if (!mClient) {
-                    throw null_pointer();
+                if (!client) {
+                    throw null_pointer("client");
                 }
 
                 mClient = client;
@@ -84,7 +84,7 @@ namespace Lupus {
             bool UdpClient::ExclusiveAddressUse() const
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 int result, length = 4;
@@ -99,7 +99,7 @@ namespace Lupus {
             void UdpClient::ExclusiveAddressUse(bool value)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 int val = value ? 1 : 0;
@@ -140,7 +140,7 @@ namespace Lupus {
             void UdpClient::Connect(shared_ptr<IPEndPoint> remoteEndPoint)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 mClient->Connect(remoteEndPoint);
@@ -149,7 +149,7 @@ namespace Lupus {
             void UdpClient::Connect(shared_ptr<IPAddress> address, uint16_t port)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 mClient->Connect(address, port);
@@ -158,7 +158,7 @@ namespace Lupus {
             void UdpClient::Connect(const String& host, uint16_t port)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 mClient->Connect(host, port);
@@ -167,7 +167,7 @@ namespace Lupus {
             void UdpClient::Close()
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 mClient->Close();
@@ -176,7 +176,7 @@ namespace Lupus {
             vector<uint8_t> UdpClient::Receive(shared_ptr<IPEndPoint>& ep)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 vector<uint8_t> vec(Available());
@@ -187,7 +187,7 @@ namespace Lupus {
             int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 }
 
                 return mClient->Send(buffer, 0, bytes);
@@ -196,7 +196,7 @@ namespace Lupus {
             int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, shared_ptr<IPEndPoint> ep)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 } else if (mClient->IsConnected()) {
                     throw socket_error("client is already connected");
                 }
@@ -207,7 +207,7 @@ namespace Lupus {
             int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, const String& hostname, uint16_t port)
             {
                 if (!mClient) {
-                    throw null_pointer();
+                    throw null_pointer("UdpClient is in an invalid state");
                 } else if (mClient->IsConnected()) {
                     throw socket_error("client is already connected");
                 }

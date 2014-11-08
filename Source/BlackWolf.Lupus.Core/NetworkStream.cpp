@@ -28,7 +28,7 @@ namespace Lupus {
             NetworkStream::NetworkStream(shared_ptr<Sockets::Socket> socket)
             {
                 if (!socket) {
-                    throw null_pointer();
+                    throw null_pointer("socket");
                 }
 
                 mSocket = socket;
