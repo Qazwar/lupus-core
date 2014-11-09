@@ -22,10 +22,10 @@
 
 namespace Lupus {
     namespace Net {
-        struct HttpListenerContext
+        struct HttpContext
         {
-            const std::shared_ptr<class HttpListenerRequest> Request;
-            const std::shared_ptr<class HttpListenerResponse> Response;
+            const std::shared_ptr<class HttpRequest> Request;
+            const std::shared_ptr<class HttpResponse> Response;
         };
     }
 }

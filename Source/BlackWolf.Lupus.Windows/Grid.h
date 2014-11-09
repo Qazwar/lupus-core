@@ -17,29 +17,16 @@
  */
 #pragma once
 
-#include "Utility.h"
-#include "HttpContext.h"
-#include <memory>
-#include <boost/noncopyable.hpp>
+#include "UIElement.h"
 
 namespace Lupus {
-    namespace Net {
-        class LUPUSCORE_API HttpListener : public boost::noncopyable
+    namespace Windows {
+        // TODO: Implement Grid.
+
+        class LUPUSWINDOWS_API Grid : public UIElement
         {
         public:
-
-            HttpListener();
-            virtual ~HttpListener();
-
-            virtual bool IsListening() const;
-
-            virtual void Abort();
-            virtual void Close();
-            virtual HttpContext GetContext();
-            virtual void Start();
-            virtual void Stop();
-
-        private:
+            virtual ~Grid() = default;
         };
     }
 }

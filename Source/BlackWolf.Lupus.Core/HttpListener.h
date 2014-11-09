@@ -18,7 +18,7 @@
 #pragma once
 
 #include "Utility.h"
-#include "HttpListenerContext.h"
+#include "HttpContext.h"
 #include <memory>
 #include <boost/noncopyable.hpp>
 
@@ -35,7 +35,7 @@ namespace Lupus {
 
             virtual void Abort();
             virtual void Close();
-            virtual HttpListenerContext GetContext();
+            virtual HttpContext GetContext();
             virtual void Start();
             virtual void Stop();
 

@@ -17,7 +17,7 @@
  */
 #pragma once
 
-#include "Utility.h"
+#include "Grid.h"
 #include <BlackWolf.Lupus.Core/Utility.h>
 #include <BlackWolf.Lupus.Core/Event.h>
 #include <BlackWolf.Lupus.Core/Observable.h>
@@ -36,8 +36,6 @@
 
 namespace Lupus {
     namespace Windows {
-        class UIElement;
-
         enum class WindowFlags {
             LupusCreateNoFlag(None),
             LupusCreateFlag(Fullscreen, 0),
@@ -93,7 +91,7 @@ namespace Lupus {
             
             virtual void Bordered(bool) const final;
             virtual int DisplayIndex() const final;
-            virtual std::shared_ptr<UIElement> Grid() const final;
+            virtual std::shared_ptr<Grid> Grid() const final;
             virtual void Hide() final;
             virtual void Maximize() final;
             virtual void Minimize() final;
@@ -147,7 +145,7 @@ namespace Lupus {
             void Initialize();
 
             void* mHandle = nullptr;
-            std::shared_ptr<UIElement> mGrid;
+            std::shared_ptr<Windows::Grid> mGrid;
             std::shared_ptr<ObservableObject> mViewModel;
             static std::unordered_map<uint32_t, Window*> smMappedWindows;
         };

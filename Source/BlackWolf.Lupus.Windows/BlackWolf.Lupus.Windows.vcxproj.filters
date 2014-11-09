@@ -19,6 +19,9 @@
     <ClCompile Include="Window.cpp">
       <Filter>Code\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -28,6 +31,9 @@
       <Filter>Code\.h</Filter>
     </ClInclude>
     <ClInclude Include="Utility.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
       <Filter>Code\.h</Filter>
     </ClInclude>
   </ItemGroup>

@@ -53,18 +53,18 @@ namespace Lupus {
             class IPEndPoint;
         }
 
-        class LUPUSCORE_API HttpListenerRequest : public boost::noncopyable
+        class LUPUSCORE_API HttpRequest : public boost::noncopyable
         {
         public:
 
-            HttpListenerRequest() = delete;
-            HttpListenerRequest(
+            HttpRequest() = delete;
+            HttpRequest(
                 const std::vector<uint8_t>& buffer,
                 std::shared_ptr<Sockets::IPEndPoint> localEP,
                 std::shared_ptr<Sockets::IPEndPoint> remoteEP,
                 bool authenticated = false,
                 bool secure = false);
-            virtual ~HttpListenerRequest() = default;
+            virtual ~HttpRequest() = default;
 
             virtual const std::vector<String>& AcceptTypes() const NOEXCEPT;
             virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;

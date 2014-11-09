@@ -30,7 +30,7 @@
     <ClCompile Include="AsymmetricAlgorithm.cpp" />
     <ClCompile Include="AuthenticatedStream.cpp" />
     <ClCompile Include="Encoding.cpp" />
-    <ClCompile Include="HttpListenerRequest.cpp" />
+    <ClCompile Include="HttpRequest.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="PgCommand.cpp" />
     <ClCompile Include="PgConnection.cpp" />
@@ -69,9 +69,10 @@
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="Encoding.h" />
     <ClInclude Include="HttpListener.h" />
-    <ClInclude Include="HttpListenerContext.h" />
-    <ClInclude Include="HttpListenerRequest.h" />
+    <ClInclude Include="HttpContext.h" />
+    <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="IComposite.h" />
     <ClInclude Include="IFactory.h" />
     <ClInclude Include="Internal\CryptoBlockCipher.h" />
     <ClInclude Include="Internal\CryptoHash.h" />

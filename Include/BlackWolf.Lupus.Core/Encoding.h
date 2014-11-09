@@ -29,6 +29,7 @@ namespace Lupus {
         {
         public:
 
+            Encoding(String str) throw(std::runtime_error);
             virtual ~Encoding();
 
             virtual std::shared_ptr<Encoding> Clone() const NOEXCEPT override;
@@ -36,11 +37,11 @@ namespace Lupus {
             virtual String GetString(const std::vector<uint8_t>& buffer) const throw(format_error, std::runtime_error);
             virtual String GetString(
                 const std::vector<uint8_t>& buffer,
-                size_t offset, size_t count) const throw(format_error, std::runtime_error);
+                size_t offset, size_t count) const throw(format_error, std::runtime_error, std::out_of_range);
             virtual std::vector<uint8_t> GetBytes(const String& str) const throw(format_error, std::runtime_error);
             virtual std::vector<uint8_t> GetBytes(
                 const String& str,
-                size_t offset, size_t count) const throw(format_error, std::runtime_error);
+                size_t offset, size_t count) const throw(format_error, std::runtime_error, std::out_of_range);
             virtual String Name() const NOEXCEPT;
 
             static std::shared_ptr<Encoding> ASCII() NOEXCEPT;
@@ -54,8 +55,6 @@ namespace Lupus {
             static std::vector<String> GetEncodings() NOEXCEPT;
 
         private:
-
-            Encoding(String str) throw(std::runtime_error);
 
             UConverter* mConverter = nullptr;
         };

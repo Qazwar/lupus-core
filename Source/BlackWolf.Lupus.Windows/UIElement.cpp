@@ -15,31 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
+#include "UIElement.h"
 
-#include "Utility.h"
-#include "HttpContext.h"
-#include <memory>
-#include <boost/noncopyable.hpp>
+using namespace std;
 
 namespace Lupus {
-    namespace Net {
-        class LUPUSCORE_API HttpListener : public boost::noncopyable
+    namespace Windows {
+        void UIElementComposite::Add(const shared_ptr<UIElement>& element)
         {
-        public:
+            mChildren.insert(element);
+        }
 
-            HttpListener();
-            virtual ~HttpListener();
+        void UIElementComposite::Clear()
+        {
+            mChildren.clear();
+        }
 
-            virtual bool IsListening() const;
+        void UIElementComposite::Remove(const shared_ptr<UIElement>& element)
+        {
+            mChildren.erase(element);
+        }
 
-            virtual void Abort();
-            virtual void Close();
-            virtual HttpContext GetContext();
-            virtual void Start();
-            virtual void Stop();
-
-        private:
-        };
+        const std::unordered_set<std::shared_ptr<UIElement>>& UIElementComposite::Children() const
+        {
+            return mChildren;
+        }
     }
 }

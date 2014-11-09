@@ -187,7 +187,7 @@ namespace Lupus {
             return SDL_GetWindowDisplayIndex(force_cast<SDL_Window*>(mHandle));
         }
 
-        shared_ptr<UIElement> Window::Grid() const
+        shared_ptr<Grid> Window::Grid() const
         {
             return mGrid;
         }
@@ -367,7 +367,7 @@ namespace Lupus {
             };
 
             smMappedWindows[SDL_GetWindowID(window)] = this;
-            mGrid = make_shared<UIElement>(); // TODO: Grid anstatt UIElement erstellen.
+            mGrid = make_shared<Windows::Grid>();
         }
 
         const int Window::PositionUndefined = SDL_WINDOWPOS_UNDEFINED;
