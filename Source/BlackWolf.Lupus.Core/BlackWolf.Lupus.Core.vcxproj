@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="AsymmetricAlgorithm.cpp" />
     <ClCompile Include="AuthenticatedStream.cpp" />
+    <ClCompile Include="Cookie.cpp" />
     <ClCompile Include="Encoding.cpp" />
     <ClCompile Include="HttpRequest.cpp" />
     <ClCompile Include="HttpResponse.cpp" />
@@ -59,15 +60,14 @@
     <ClCompile Include="TcpClient.cpp" />
     <ClCompile Include="TcpListener.cpp" />
     <ClCompile Include="UdpClient.cpp" />
-    <ClCompile Include="UnixLibrary.cpp" />
     <ClCompile Include="Win32Uri.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Version.cpp" />
-    <ClCompile Include="Win32Library.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
+    <ClInclude Include="Cookie.h" />
     <ClInclude Include="Encoding.h" />
     <ClInclude Include="HttpListener.h" />
     <ClInclude Include="HttpContext.h" />
@@ -106,7 +106,6 @@
     <ClInclude Include="IPEndPoint.h" />
     <ClInclude Include="IsolationLevel.h" />
     <ClInclude Include="ITransaction.h" />
-    <ClInclude Include="Library.h" />
     <ClInclude Include="MemoryStream.h" />
     <ClInclude Include="NetDefinitions.h" />
     <ClInclude Include="NetSecurityEnum.h" />
@@ -196,28 +195,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
-    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName).$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName).$(PlatformName).$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\Bin\$(PlatformName).$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\Temp\$(ProjectName).$(PlatformName).$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName).$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName).$(PlatformName).$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
-    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName).$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName).$(PlatformName).$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName).$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName).$(PlatformName).$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\Bin\$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(PlatformName).$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\Temp\$(ProjectName).$(PlatformName).$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -236,6 +235,7 @@
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -257,6 +257,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -278,6 +279,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </PreBuildEvent>
     <Bscmake>
@@ -302,6 +304,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -326,6 +329,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -350,6 +354,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>

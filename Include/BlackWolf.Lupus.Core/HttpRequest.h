@@ -70,9 +70,9 @@ namespace Lupus {
             virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
             virtual int64_t ContentLength() const NOEXCEPT;
             virtual String ContentType() const NOEXCEPT;
-            virtual const std::unordered_map<String, String>& Cookies() const NOEXCEPT;
+            virtual const NameValueCollection& Cookies() const NOEXCEPT;
             virtual bool HasEntityBody() const NOEXCEPT;
-            virtual const std::unordered_map<String, String>& Headers() const NOEXCEPT;
+            virtual const NameValueCollection& Headers() const NOEXCEPT;
             virtual String HttpMethod() const NOEXCEPT;
             virtual std::shared_ptr<Stream> InputStream() const NOEXCEPT;
             virtual bool IsAuthenticated() const NOEXCEPT;
@@ -82,13 +82,15 @@ namespace Lupus {
             virtual String LocalAddress() const NOEXCEPT;
             virtual std::shared_ptr<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
             virtual std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
-            virtual const std::unordered_map<String, String>& QueryString() const NOEXCEPT;
+            virtual const NameValueCollection& QueryString() const NOEXCEPT;
             virtual String RawHeader() const NOEXCEPT;
             virtual String RemoteAddress() const NOEXCEPT;
             virtual std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
             virtual std::shared_ptr<Uri> Url() const NOEXCEPT;
             virtual String UserAgent() const NOEXCEPT;
             virtual const std::vector<String>& UserLanguages() const NOEXCEPT;
+
+            virtual String ToString() const NOEXCEPT;
 
             /**
              * \warning Not implemented.

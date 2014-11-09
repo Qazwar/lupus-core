@@ -16,15 +16,6 @@
     <Filter Include="Code\Text\.h">
       <UniqueIdentifier>{4693a64f-8cd0-4244-9705-8e3f2e5f0b44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\System">
-      <UniqueIdentifier>{c33a55f2-cc8c-4c38-bfc4-b23f4b31f229}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\System\.h">
-      <UniqueIdentifier>{fe88f7cb-33b1-4939-a37b-3924e15ce124}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\System\.cpp">
-      <UniqueIdentifier>{85aaa0b8-7250-4bfc-a659-2519c6e0eecb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Code\Security">
       <UniqueIdentifier>{5dc42b90-c576-4930-987f-d91892086ba7}</UniqueIdentifier>
     </Filter>
@@ -168,12 +159,6 @@
     <ClCompile Include="UdpClient.cpp">
       <Filter>Code\Net\Sockets\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Win32Library.cpp">
-      <Filter>Code\System\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="UnixLibrary.cpp">
-      <Filter>Code\System\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Float.cpp">
       <Filter>Code\.cpp</Filter>
     </ClCompile>
@@ -240,6 +225,9 @@
     <ClCompile Include="HttpResponse.cpp">
       <Filter>Code\Net\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Cookie.cpp">
+      <Filter>Code\Net\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataColumn.h">
@@ -298,9 +286,6 @@
     </ClInclude>
     <ClInclude Include="UdpClient.h">
       <Filter>Code\Net\Sockets\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Library.h">
-      <Filter>Code\System\.h</Filter>
     </ClInclude>
     <ClInclude Include="Stream.h">
       <Filter>Code\.h</Filter>
@@ -426,6 +411,9 @@
       <Filter>Code\.h</Filter>
     </ClInclude>
     <ClInclude Include="HttpResponse.h">
+      <Filter>Code\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Cookie.h">
       <Filter>Code\Net\.h</Filter>
     </ClInclude>
   </ItemGroup>

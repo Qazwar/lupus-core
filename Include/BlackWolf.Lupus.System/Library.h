@@ -17,14 +17,14 @@
  */
 #pragma once
 
+#include "Utility.h"
 #include <functional>
 #include <boost/noncopyable.hpp>
-
-#include "Utility.h"
+#include <BlackWolf.Lupus.Core/String.h>
 
 namespace Lupus {
     namespace System {
-        class LUPUSCORE_API Library : public boost::noncopyable
+        class LUPUSSYSTEM_API Library : public boost::noncopyable
         {
         public:
 

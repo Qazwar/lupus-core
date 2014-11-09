@@ -27,13 +27,14 @@
 #include "Socket.h"
 #include "Integer.h"
 #include "MemoryStream.h"
+#include "Cookie.h"
 
 using namespace std;
 using namespace Lupus::Net::Sockets;
 
 namespace Lupus {
     namespace Net {
-        // TODO: Implement getter and setters.
+        // TODO: Response fertigstellen.
 
         HttpResponse::HttpResponse(shared_ptr<TcpClient> client) :
             mClient(client)
@@ -41,6 +42,113 @@ namespace Lupus {
             if (!client) {
                 throw null_pointer("client");
             }
+
+            mStream = make_shared<Lupus::OutputStream>(make_shared<MemoryStream>());
+        }
+        
+        std::shared_ptr<Text::Encoding> HttpResponse::ContentEncoding() const 
+        {
+            return mEncoding;
+        }
+        
+        void HttpResponse::ContentEncoding(std::shared_ptr<Text::Encoding> encoding) 
+        {
+            mEncoding = encoding;
+        }
+        
+        size_t HttpResponse::ContentLength() const 
+        {
+            return mContentLength;
+        }
+        
+        void HttpResponse::ContentLength(size_t length)
+        {
+            mContentLength = length;
+        }
+        
+        String HttpResponse::ContentType() const 
+        {
+            return mContentType;
+        }
+        
+        void HttpResponse::ContentType(String type) 
+        {
+            mContentType = type;
+        }
+        
+        const NameCollection<std::shared_ptr<Cookie>>& HttpResponse::Cookies() const
+        {
+            return mCookies;
+        }
+        
+        void HttpResponse::Cookies(const NameCollection<std::shared_ptr<Cookie>>& cookies)
+        {
+            mCookies = cookies;
+        }
+        
+        const NameValueCollection& HttpResponse::Headers() const 
+        {
+            return mHeaders;
+        }
+        
+        void HttpResponse::Headers(const NameValueCollection& headers) 
+        {
+            mHeaders = headers;
+        }
+        
+        bool HttpResponse::KeepAlive() const 
+        {
+            return mKeepAlive;
+        }
+        
+        void HttpResponse::KeepAlive(bool b) 
+        {
+            mKeepAlive = b;
+        }
+        
+        std::shared_ptr<Stream> HttpResponse::OutputStream() const 
+        {
+            return mStream;
+        }
+        
+        std::shared_ptr<Version> HttpResponse::ProtocolVersion() const 
+        {
+            return mVersion;
+        }
+        
+        void HttpResponse::ProtocolVersion(std::shared_ptr<Version> version) 
+        {
+            mVersion = version;
+        }
+        
+        String HttpResponse::RedirectionLocation() const 
+        {
+            return mRedirection;
+        }
+        
+        void HttpResponse::RedirectionLocation(String redirection) 
+        {
+            mRedirection = redirection;
+        }
+        
+        uint16_t HttpResponse::StatusCode() const 
+        {
+            return mStatus;
+        }
+        
+        void HttpResponse::StatusCode(uint16_t status) 
+        {
+            mStatus = status;
+        }
+        
+        String HttpResponse::StatusDescription() const 
+        {
+            return mStatusDescription;
+        }
+        
+        void HttpResponse::StatusDescription(String description) 
+        {
+            mStatusDescription = description;
         }
 
         void HttpResponse::Abort()

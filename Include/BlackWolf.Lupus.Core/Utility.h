@@ -134,4 +134,6 @@ namespace Lupus {
 
     template <typename Value>
     using NameCollection = std::unordered_map < class String, Value > ;
+    template <typename Value>
+    using NamePair = std::pair < class String, Value > ;
 }
