@@ -15,43 +15,36 @@
  * You should have received a copy of the GNU General Public License
  * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "Library.h"
-
-using namespace std;
-
 #ifndef _MSC_VER
+#include "Library.h"
 #include <dlfcn.h>
 #include <cstdio>
 
 namespace Lupus {
     namespace System {
-        Library::~Library()
+        Library::Library(String path)
         {
-            Unload();
+            if (!(mHandle = force_cast<uintptr_t>(dlopen(path.ToUTF8().c_str(), RTLD_NOW)))) {
+                // TODO: Information eintragen sobald String::Format implementiert ist.
+                throw io_error();
+            }
         }
 
-        void* Library::GetFunctionHandle(const String& name)
+        Library::~Library()
+        {
+            if (mHandle) {
+                dlclose(force_cast<void*>(mHandle));
+                mHandle = 0;
+            }
+        }
+
+        void* Library::GetFunctionHandle(String name)
         {
             if (!mHandle) {
                 return nullptr;
             }
 
             return dlsym(force_cast<void*>(mHandle), name.ToUTF8().c_str());
-        }
-
-        void Library::Load(const String& path)
-        {
-            if (!(mHandle = force_cast<uintptr_t>(dlopen(path.ToUTF8().c_str(), RTLD_NOW)))) {
-                throw io_error();
-            }
-        }
-
-        void Library::Unload()
-        {
-            if (mHandle) {
-                dlclose(force_cast<void*>(mHandle));
-                mHandle = 0;
-            }
         }
     }
 }

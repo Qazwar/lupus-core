@@ -27,22 +27,19 @@ namespace Lupus {
         class LUPUSSYSTEM_API Library : public boost::noncopyable
         {
         public:
-
+            Library(String path) throw(io_error);
             virtual ~Library();
+            virtual void* GetFunctionHandle(String functionName) NOEXCEPT;
 
-            virtual void* GetFunctionHandle(const String&) NOEXCEPT;
-            virtual void Load(const String&) throw(io_error);
-            virtual void Unload() NOEXCEPT;
+            template <typename ReturnType, typename... Args>
+            std::function<ReturnType(Args...)> GetFunction(String functionName) NOEXCEPT
+            {
+                return std::function<ReturnType(Args...)>((ReturnType(*)(Args...))(GetFunctionHandle(functionName)));
+            }
 
         private:
 
             uintptr_t mHandle = 0;
         };
-
-        template <typename ReturnType, typename... Args>
-        std::function<ReturnType(Args...)> CastFunctionHandle(void* handle)
-        {
-            return std::function<ReturnType(Args...)>((ReturnType(*)(Args...))(handle));
-        }
     }
 }
