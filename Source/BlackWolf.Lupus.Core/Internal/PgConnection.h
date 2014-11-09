@@ -19,7 +19,7 @@
 
 // TODO: Factory für Datenbanken einbauen.
 
-#include "Connection.h"
+#include "../Connection.h"
 
 struct pg_conn;
 

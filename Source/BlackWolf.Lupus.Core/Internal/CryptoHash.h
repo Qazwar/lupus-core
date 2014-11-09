@@ -17,8 +17,8 @@
  */
 #pragma once
 
-#include "HashAlgorithm.h"
-#include "Stream.h"
+#include "../HashAlgorithm.h"
+#include "../Stream.h"
 #include <cryptopp/sha3.h>
 
 #ifdef _MSC_VER

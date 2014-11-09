@@ -17,7 +17,7 @@
  */
 #pragma once
 
-#include "Command.h"
+#include "../Command.h"
 
 struct pg_conn;
 struct pg_result;

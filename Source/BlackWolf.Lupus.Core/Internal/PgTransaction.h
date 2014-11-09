@@ -17,8 +17,8 @@
  */
 #pragma once
 
-#include "IsolationLevel.h"
-#include "ITransaction.h"
+#include "../IsolationLevel.h"
+#include "../ITransaction.h"
 
 struct pg_conn;
 

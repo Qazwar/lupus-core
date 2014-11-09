@@ -17,8 +17,8 @@
  */
 #pragma once
 
-#include "IDataReader.h"
-#include "String.h"
+#include "../IDataReader.h"
+#include "../String.h"
 
 struct pg_result;
 

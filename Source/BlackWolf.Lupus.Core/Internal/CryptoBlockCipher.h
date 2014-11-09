@@ -17,8 +17,8 @@
  */
 #pragma once
 
-#include "ICryptoTransform.h"
-#include "SymmetricAlgorithm.h"
+#include "../ICryptoTransform.h"
+#include "../SymmetricAlgorithm.h"
 #include <cryptopp/modes.h>
 #include <cryptopp/filters.h>
 

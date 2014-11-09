@@ -17,7 +17,7 @@
  */
 #pragma once
 
-#include "AsymmetricAlgorithm.h"
+#include "../AsymmetricAlgorithm.h"
 #include <cryptopp/osrng.h>
 #include <cryptopp/rsa.h>
 
