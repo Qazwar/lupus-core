@@ -17,10 +17,12 @@
  */
 #pragma once
 
+#include <cstdlib>
+#include <cstdint>
 #include <cwchar>
 #include <string>
 #include <memory>
-#include <cstdint>
+#include <unordered_map>
 #include <algorithm>
 #include <exception>
 
@@ -105,7 +107,7 @@ namespace Lupus {
     LupusDefineError(authentication_error);
     LupusDefineError(format_error);
 
-    LUPUSCORE_API class String RandomString(unsigned length);
+    LUPUSCORE_API class String RandomString(uint32_t length);
 
     template <typename Dest, typename Src>
     Dest force_cast(const Src& src)
@@ -126,4 +128,10 @@ namespace Lupus {
     }
 
     LUPUSCORE_API std::shared_ptr<class Version> GetVersion();
+
+    typedef std::unordered_map<class String, class String> NameValueCollection;
+    typedef std::pair<class String, class String> NameValuePair;
+
+    template <typename Value>
+    using NameCollection = std::unordered_map < class String, Value > ;
 }

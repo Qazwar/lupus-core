@@ -119,7 +119,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\;$(SolutionDir)..\Lib\3rdParty\x86\Debug;$(DXSDK_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;SDL2_static.lib;BlackWolf.Lupus.Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
@@ -139,7 +139,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\;$(SolutionDir)..\Lib\3rdParty\x86\Debug;$(DXSDK_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;SDL2_static.lib;BlackWolf.Lupus.Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
@@ -158,7 +158,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\;$(SolutionDir)..\Lib\3rdParty\x64\Debug;$(DXSDK_DIR)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;SDL2_static.lib;BlackWolf.Lupus.Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
@@ -178,7 +178,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\;$(SolutionDir)..\Lib\3rdParty\x64\Debug;$(DXSDK_DIR)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;SDL2_static.lib;BlackWolf.Lupus.Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
@@ -201,7 +201,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\;$(SolutionDir)..\Lib\3rdParty\x86\Release;$(DXSDK_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;SDL2_static.lib;BlackWolf.Lupus.Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
@@ -224,7 +224,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\;$(SolutionDir)..\Lib\3rdParty\x64\Release;$(DXSDK_DIR)\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;SDL2_static.lib;BlackWolf.Lupus.Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows

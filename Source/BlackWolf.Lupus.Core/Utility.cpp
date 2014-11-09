@@ -25,7 +25,7 @@
 using namespace std;
 
 namespace Lupus {
-    String RandomString(unsigned N)
+    String RandomString(uint32_t N)
     {
         const String alphanum("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         const size_t size = alphanum.Length();
@@ -47,11 +47,7 @@ namespace Lupus {
 
     shared_ptr<Version> GetVersion()
     {
-        static const int32_t sMajor = 0;
-        static const int32_t sMinor = 1;
-        static const int32_t sBuild = 0;
-        static const int32_t sRevision = 165;
-        static const shared_ptr<Version> sVersion = make_shared<Version>(sMajor, sMinor, sBuild, sRevision);
+        static const shared_ptr<Version> sVersion = make_shared<Version>(0, 1);
         return sVersion;
     }
 }

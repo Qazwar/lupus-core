@@ -108,9 +108,9 @@ namespace Lupus {
             std::shared_ptr<Uri> mUrl;
             std::shared_ptr<Version> mVersion;
             std::shared_ptr<Text::Encoding> mEncoding;
-            std::unordered_map<String, String> mCookies;
-            std::unordered_map<String, String> mHeaders;
-            std::unordered_map<String, String> mQuery;
+            NameValueCollection mCookies;
+            NameValueCollection mHeaders;
+            NameValueCollection mQuery;
             std::vector<String> mAcceptedTypes;
             std::vector<String> mLanguages;
             String mContentType;

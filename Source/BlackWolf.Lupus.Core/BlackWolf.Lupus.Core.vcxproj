@@ -229,7 +229,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
@@ -250,7 +250,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <Profile>true</Profile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
@@ -271,7 +271,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
@@ -295,7 +295,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <Profile>true</Profile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
@@ -319,7 +319,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
@@ -343,7 +343,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName)$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core

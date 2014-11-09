@@ -1,11 +1,13 @@
 ## Specific ignores
 Bin/*
+Lib/*
 Temp/*
 Assets/*
 Source/*/[Bb]in/*
 Source/*/[Oo]bj/*
 
 ## Specific un-ignores
+!Lib/3rdParty/
 !Temp/delete.me
 !Assets/delete.me
 

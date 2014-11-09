@@ -50,7 +50,7 @@ namespace Lupus {
                 }
             }
 
-            vector<String> lines = mRawHeader.Split({ "\r\n" }, StringSplitOption::RemoveEmptyEntries);
+            vector<String> lines = mRawHeader.Split("\r\n", StringSplitOption::RemoveEmptyEntries);
             vector<String> fields(begin(lines) + 1, end(lines));
             String version = lines[0].Substring(lines[0].LastIndexOf("/") + 1);
             
@@ -58,7 +58,7 @@ namespace Lupus {
             mVersion = Version::Parse(version);
 
             for (String str : fields) {
-                vector<String> field = str.Split({ ": " });
+                vector<String> field = str.Split(": ");
                 mHeaders[field[0]] = field[1];
             }
 
@@ -73,26 +73,26 @@ namespace Lupus {
             mContentType = (citum = mHeaders.find("Content-Type")) != end(mHeaders) ? citum->second : "";
             mUserAgent = (citum = mHeaders.find("User-Agent")) != end(mHeaders) ? citum->second : "";
 
-            mAcceptedTypes = accepttypes.IsEmpty() ? vector<String>() : accepttypes.Split({ ";" })[0].Split({ "," }, StringSplitOption::RemoveEmptyEntries);
-            mLanguages = language.IsEmpty() ? vector<String>() : language.Split({ ";" })[0].Split({ "," }, StringSplitOption::RemoveEmptyEntries);
-            auto queries = query.IsEmpty() ? vector<String>() : query.Split({ "&" }, StringSplitOption::RemoveEmptyEntries);
+            mAcceptedTypes = accepttypes.IsEmpty() ? vector<String>() : accepttypes.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
+            mLanguages = language.IsEmpty() ? vector<String>() : language.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
+            auto queries = query.IsEmpty() ? vector<String>() : query.Split("&", StringSplitOption::RemoveEmptyEntries);
 
             for (auto str : queries) {
-                auto nameValuePair = str.Split({ "=" });
+                auto nameValuePair = str.Split("=");
                 mQuery[nameValuePair[0]] = nameValuePair[1];
             }
 
-            auto cookies = cookie.Split({ ";" }, StringSplitOption::RemoveEmptyEntries);
+            auto cookies = cookie.Split(";", StringSplitOption::RemoveEmptyEntries);
 
             for (auto str : cookies) {
-                auto nameValuePair = str.Split({ "=" });
+                auto nameValuePair = str.Split("=");
                 mCookies[nameValuePair[0]] = nameValuePair[1];
             }
 
             if (charset.IsEmpty()) {
                 mEncoding = Encoding::UTF8();
             } else {
-                auto encodings = charset.Split({ ";" }, StringSplitOption::RemoveEmptyEntries)[0].Split({ "," }, StringSplitOption::RemoveEmptyEntries);
+                auto encodings = charset.Split(";", StringSplitOption::RemoveEmptyEntries)[0].Split(",", StringSplitOption::RemoveEmptyEntries);
 
                 for (auto enc : encodings) {
                     if (enc.Compare("utf-8", StringCaseSensitivity::CaseInsensitive) == 0) {
