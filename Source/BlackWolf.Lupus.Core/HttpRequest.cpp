@@ -129,7 +129,7 @@ namespace Lupus {
             return mContentType;
         }
         
-        const unordered_map<String, String>& HttpRequest::Cookies() const
+        const NameValueCollection& HttpRequest::Cookies() const
         {
             return mCookies;
         }
@@ -139,7 +139,7 @@ namespace Lupus {
             return mStream->Length() != 0;
         }
         
-        const unordered_map<String, String>& HttpRequest::Headers() const
+        const NameValueCollection& HttpRequest::Headers() const
         {
             return mHeaders;
         }
@@ -193,7 +193,7 @@ namespace Lupus {
             return mVersion;
         }
         
-        const unordered_map<String, String>& HttpRequest::QueryString() const
+        const NameValueCollection& HttpRequest::QueryString() const
         {
             return mQuery;
         }
@@ -226,6 +226,11 @@ namespace Lupus {
         const vector<String>& HttpRequest::UserLanguages() const
         {
             return mLanguages;
+        }
+
+        String HttpRequest::ToString() const
+        {
+            return mRawHeader;
         }
 
         Task<shared_ptr<X509Certificate>> HttpRequest::GetClientCertificateAsync() const

@@ -237,6 +237,9 @@
     <ClCompile Include="HttpRequest.cpp">
       <Filter>Code\Net\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="HttpResponse.cpp">
+      <Filter>Code\Net\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataColumn.h">
@@ -421,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="IComposite.h">
       <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpResponse.h">
+      <Filter>Code\Net\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

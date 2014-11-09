@@ -31,6 +31,7 @@
     <ClCompile Include="AuthenticatedStream.cpp" />
     <ClCompile Include="Encoding.cpp" />
     <ClCompile Include="HttpRequest.cpp" />
+    <ClCompile Include="HttpResponse.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="PgCommand.cpp" />
     <ClCompile Include="PgConnection.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="HttpContext.h" />
     <ClInclude Include="HttpRequest.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="HttpResponse.h" />
     <ClInclude Include="IComposite.h" />
     <ClInclude Include="IFactory.h" />
     <ClInclude Include="Internal\CryptoBlockCipher.h" />
