@@ -66,34 +66,34 @@ namespace Lupus {
         return (sscanf(str.ToUTF8().c_str(), ("%Lf"), &result) == 1);
 	}
 
-    float Float::ParseFloat(const String& String)
+    float Float::ParseFloat(const String& str)
     {
         float result = 0;
 
-        if (!TryParse(String, result)) {
-            throw std::invalid_argument("Could not parse given string to float");
+        if (!TryParse(str, result)) {
+            throw std::invalid_argument("str");
         }
 
         return result;
     }
     
-    double Float::ParseDouble(const String& String)
+    double Float::ParseDouble(const String& str)
     {
         double result = 0;
 
-        if (!TryParse(String, result)) {
-            throw std::invalid_argument("Could not parse given string to float");
+        if (!TryParse(str, result)) {
+            throw std::invalid_argument("str");
         }
 
         return result;
     }
     
-    long double Float::ParseLongDouble(const String& String)
+    long double Float::ParseLongDouble(const String& str)
     {
         long double result = 0;
 
-        if (!TryParse(String, result)) {
-            throw std::invalid_argument("Could not parse given String to float");
+        if (!TryParse(str, result)) {
+            throw std::invalid_argument("str");
         }
 
         return result;

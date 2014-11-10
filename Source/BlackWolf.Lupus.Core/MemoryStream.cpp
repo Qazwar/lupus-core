@@ -98,6 +98,7 @@ namespace Lupus {
     void MemoryStream::Close()
     {
         mBuffer.clear();
+        mIterator = begin(mBuffer);
     }
 
     int64_t MemoryStream::Length() const

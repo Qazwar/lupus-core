@@ -31,8 +31,10 @@
     <ClCompile Include="AuthenticatedStream.cpp" />
     <ClCompile Include="Cookie.cpp" />
     <ClCompile Include="Encoding.cpp" />
-    <ClCompile Include="HttpRequest.cpp" />
-    <ClCompile Include="HttpResponse.cpp" />
+    <ClCompile Include="HttpClient.cpp" />
+    <ClCompile Include="HttpListener.cpp" />
+    <ClCompile Include="HttpListenerRequest.cpp" />
+    <ClCompile Include="HttpListenerResponse.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="PgCommand.cpp" />
     <ClCompile Include="PgConnection.cpp" />
@@ -69,11 +71,12 @@
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="Cookie.h" />
     <ClInclude Include="Encoding.h" />
+    <ClInclude Include="HttpClient.h" />
     <ClInclude Include="HttpListener.h" />
     <ClInclude Include="HttpContext.h" />
-    <ClInclude Include="HttpRequest.h" />
+    <ClInclude Include="HttpListenerRequest.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="HttpResponse.h" />
+    <ClInclude Include="HttpListenerResponse.h" />
     <ClInclude Include="IComposite.h" />
     <ClInclude Include="IFactory.h" />
     <ClInclude Include="Internal\CryptoBlockCipher.h" />

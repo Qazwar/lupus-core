@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
@@ -21,9 +21,9 @@
 #include <boost/noncopyable.hpp>
 
 namespace Lupus {
-    namespace Net {
-        // TODO: Fertig implementieren.
+    class Version;
 
+    namespace Net {
         class LUPUSCORE_API Cookie : boost::noncopyable
         {
         public:
@@ -32,9 +32,39 @@ namespace Lupus {
             Cookie(String name, String value, String path);
             Cookie(String name, String value, String path, String domain);
             virtual ~Cookie() = default;
+
+            virtual String Name() const NOEXCEPT;
+            virtual void Name(String) NOEXCEPT;
+            virtual String Value() const NOEXCEPT;
+            virtual void Value(String) NOEXCEPT;
+            virtual String Path() const NOEXCEPT;
+            virtual void Path(String) NOEXCEPT;
+            virtual String Domain() const NOEXCEPT;
+            virtual void Domain(String) NOEXCEPT;
+            virtual bool Expired() const NOEXCEPT;
+            virtual void Expired(bool) NOEXCEPT;
+            virtual bool HttpOnly() const NOEXCEPT;
+            virtual void HttpOnly(bool) NOEXCEPT;
+            virtual bool Secure() const NOEXCEPT;
+            virtual void Secure(bool) NOEXCEPT;
+            virtual TimePoint Expires() const NOEXCEPT;
+            virtual void Expires(const TimePoint&) NOEXCEPT;
+
+            virtual String ToString() const NOEXCEPT;
+
+        private:
+
+            String mName = "";
+            String mValue = "";
+            String mPath = "";
+            String mDomain = "";
+            bool mExpired = false;
+            bool mHttpOnly = false;
+            bool mSecure = false;
+            TimePoint mExpires = TimePoint::min();
         };
 
         typedef NameCollection<std::shared_ptr<Cookie>> CookieCollection;
-        typedef NamePair<std::shared_ptr<Cookie>> NameCookiePair;
+        typedef NamePair<std::shared_ptr<Cookie>> CookiePair;
     }
 }

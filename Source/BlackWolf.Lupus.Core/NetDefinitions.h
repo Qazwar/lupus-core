@@ -24,6 +24,14 @@
 #include <WinSock2.h> // Header muss vor <Windows.h> inkludiert werden
 #include <WS2tcpip.h> // Header muss vor <Windows.h> inkludiert werden
 
+#ifdef max
+#undef max
+#endif
+
+#ifdef min
+#undef min
+#endif
+
 #define inet_pton InetPton
 #define inet_ntop InetNtop
 #define poll WSAPoll

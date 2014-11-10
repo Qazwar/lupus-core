@@ -22,10 +22,9 @@
 
 namespace Lupus {
     namespace Net {
-        struct HttpContext
-        {
-            const std::shared_ptr<class HttpRequest> Request;
-            const std::shared_ptr<class HttpResponse> Response;
+        extern "C" struct LUPUSCORE_API HttpContext {
+            const std::shared_ptr<class HttpListenerRequest> Request = nullptr;
+            const std::shared_ptr<class HttpListenerResponse> Response = nullptr;
         };
     }
 }

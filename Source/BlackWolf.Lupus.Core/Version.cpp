@@ -101,10 +101,10 @@ namespace Lupus {
     {
         String result;
 
-        result += mMajor > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mMajor) : "";
-        result += mMinor > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mMinor) : "";
-        result += mBuild > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mBuild) : "";
-        result += mRevision > 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mRevision) : "";
+        result += mMajor >= 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mMajor) : "";
+        result += mMinor >= 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mMinor) : "";
+        result += mBuild >= 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mBuild) : "";
+        result += mRevision >= 0 ? (result.IsEmpty() ? "" : ".") + Integer::ToString(mRevision) : "";
 
         return result;
     }

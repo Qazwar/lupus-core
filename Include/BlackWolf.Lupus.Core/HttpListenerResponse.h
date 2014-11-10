@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
@@ -42,12 +42,12 @@ namespace Lupus {
 
         class Cookie;
 
-        class LUPUSCORE_API HttpResponse : public boost::noncopyable
+        class LUPUSCORE_API HttpListenerResponse : public boost::noncopyable
         {
         public:
-            HttpResponse() = delete;
-            HttpResponse(std::shared_ptr<Sockets::TcpClient>);
-            virtual ~HttpResponse() = default;
+            HttpListenerResponse() = delete;
+            HttpListenerResponse(std::shared_ptr<Sockets::TcpClient>);
+            virtual ~HttpListenerResponse() = default;
 
             virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
             virtual void ContentEncoding(std::shared_ptr<Text::Encoding>) NOEXCEPT;
@@ -66,20 +66,25 @@ namespace Lupus {
             virtual void ProtocolVersion(std::shared_ptr<Version>) NOEXCEPT;
             virtual String RedirectionLocation() const NOEXCEPT;
             virtual void RedirectionLocation(String) NOEXCEPT;
-            virtual uint16_t StatusCode() const NOEXCEPT;
-            virtual void StatusCode(uint16_t) NOEXCEPT;
+            virtual int32_t StatusCode() const NOEXCEPT;
+            virtual void StatusCode(int32_t) NOEXCEPT;
             virtual String StatusDescription() const NOEXCEPT;
             virtual void StatusDescription(String) NOEXCEPT;
 
-            virtual void Abort();
-            virtual void AddHeader(String name, String value);
-            virtual void AppendCookie(std::shared_ptr<Cookie>);
-            virtual void AppendHeader(String name, String value);
-            virtual void Close();
-            virtual void Close(const std::vector<uint8_t>& responseEntity, bool willBlock);
-            virtual void Redirect(String url);
-            virtual void SetCookie(std::shared_ptr<Cookie>);
+            virtual void Abort() throw(socket_error, invalid_operation);
+            virtual void AddHeader(String name, String value) NOEXCEPT;
+            virtual void AppendCookie(std::shared_ptr<Cookie>) NOEXCEPT;
+            virtual void AppendHeader(String name, String value) NOEXCEPT;
+            virtual void Close() throw(socket_error, invalid_operation);
+            virtual void Close(const std::vector<uint8_t>& responseEntity, bool willBlock) throw(socket_error, invalid_operation);
+            virtual void Redirect(String url) NOEXCEPT;
+            virtual void SetCookie(std::shared_ptr<Cookie>) throw(std::invalid_argument);
             virtual String ToString() const NOEXCEPT;
+        protected:
+
+            static bool ValidStatusCode(int32_t code);
+            static String StatusToString(int32_t code);
+
         private:
 
             std::shared_ptr<Sockets::TcpClient> mClient;
@@ -89,12 +94,10 @@ namespace Lupus {
             std::shared_ptr<Text::Encoding> mEncoding;
             NameCollection<std::shared_ptr<Cookie>> mCookies;
             NameValueCollection mHeaders;
-            String mContentType;
             String mRedirection;
             String mStatusDescription;
             size_t mContentLength;
-            uint16_t mStatus;
-            bool mKeepAlive;
+            int32_t mStatus;
         };
     }
 }

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "HttpRequest.h"
+#include "HttpListenerRequest.h"
 #include "Encoding.h"
 #include "Version.h"
 #include "Uri.h"
@@ -26,6 +26,7 @@
 #include "Integer.h"
 #include "MemoryStream.h"
 #include "X509Certificate.h"
+#include "Cookie.h"
 
 using namespace std;
 using namespace Lupus::Text;
@@ -34,7 +35,7 @@ using namespace Lupus::Security::Cryptography::X509Certificates;
 
 namespace Lupus {
     namespace Net {
-        HttpRequest::HttpRequest(const vector<uint8_t>& buffer, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
+        HttpListenerRequest::HttpListenerRequest(const vector<uint8_t>& buffer, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
             mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
             unordered_map<String, String>::const_iterator citum;
@@ -86,7 +87,7 @@ namespace Lupus {
 
             for (auto str : cookies) {
                 auto nameValuePair = str.Split("=");
-                mCookies[nameValuePair[0]] = nameValuePair[1];
+                mCookies[nameValuePair[0]] = make_shared<Cookie>(nameValuePair[0], nameValuePair[1]);
             }
 
             if (charset.IsEmpty()) {
@@ -109,67 +110,67 @@ namespace Lupus {
             }
         }
 
-        const vector<String>& HttpRequest::AcceptTypes() const
+        const vector<String>& HttpListenerRequest::AcceptTypes() const
         {
             return mAcceptedTypes;
         }
         
-        shared_ptr<Text::Encoding> HttpRequest::ContentEncoding() const
+        shared_ptr<Text::Encoding> HttpListenerRequest::ContentEncoding() const
         {
             return mEncoding;
         }
         
-        int64_t HttpRequest::ContentLength() const
+        int64_t HttpListenerRequest::ContentLength() const
         {
             return mStream->Length();
         }
         
-        String HttpRequest::ContentType() const
+        String HttpListenerRequest::ContentType() const
         {
             return mContentType;
         }
         
-        const NameValueCollection& HttpRequest::Cookies() const
+        const CookieCollection& HttpListenerRequest::Cookies() const
         {
             return mCookies;
         }
         
-        bool HttpRequest::HasEntityBody() const
+        bool HttpListenerRequest::HasEntityBody() const
         {
             return mStream->Length() != 0;
         }
         
-        const NameValueCollection& HttpRequest::Headers() const
+        const NameValueCollection& HttpListenerRequest::Headers() const
         {
             return mHeaders;
         }
         
-        String HttpRequest::HttpMethod() const
+        String HttpListenerRequest::HttpMethod() const
         {
             return mMethod;
         }
         
-        shared_ptr<Stream> HttpRequest::InputStream() const
+        shared_ptr<Stream> HttpListenerRequest::InputStream() const
         {
             return mStream;
         }
         
-        bool HttpRequest::IsAuthenticated() const
+        bool HttpListenerRequest::IsAuthenticated() const
         {
             return mAuthenticated;
         }
         
-        bool HttpRequest::IsLocal() const
+        bool HttpListenerRequest::IsLocal() const
         {
             return IPAddress::IsLoopback(mRemoteEP->Address());
         }
         
-        bool HttpRequest::IsSecureConnection() const
+        bool HttpListenerRequest::IsSecureConnection() const
         {
             return mSecure;
         }
         
-        bool HttpRequest::KeepAlive() const
+        bool HttpListenerRequest::KeepAlive() const
         {
             if (mHeaders.find("Connection") == end(mHeaders)) {
                 return false;
@@ -178,69 +179,69 @@ namespace Lupus {
             }
         }
 
-        String HttpRequest::LocalAddress() const
+        String HttpListenerRequest::LocalAddress() const
         {
             return mLocalEP->Address()->ToString() + (mLocalEP->Port() != 80 && mLocalEP->Port() != 443 ? ":" + Integer::ToString(mLocalEP->Port()) : "");
         }
         
-        shared_ptr<Sockets::IPEndPoint> HttpRequest::LocalEndPoint() const
+        shared_ptr<Sockets::IPEndPoint> HttpListenerRequest::LocalEndPoint() const
         {
             return mLocalEP;
         }
         
-        shared_ptr<Version> HttpRequest::ProtocolVersion() const
+        shared_ptr<Version> HttpListenerRequest::ProtocolVersion() const
         {
             return mVersion;
         }
         
-        const NameValueCollection& HttpRequest::QueryString() const
+        const NameValueCollection& HttpListenerRequest::QueryString() const
         {
             return mQuery;
         }
         
-        String HttpRequest::RawHeader() const
+        String HttpListenerRequest::RawHeader() const
         {
             return mRawHeader;
         }
 
-        String HttpRequest::RemoteAddress() const
+        String HttpListenerRequest::RemoteAddress() const
         {
             return mRemoteEP->Address()->ToString() + (mRemoteEP->Port() != 80 && mRemoteEP->Port() != 443 ? ":" + Integer::ToString(mRemoteEP->Port()) : "");
         }
         
-        shared_ptr<Sockets::IPEndPoint> HttpRequest::RemoteEndPoint() const
+        shared_ptr<Sockets::IPEndPoint> HttpListenerRequest::RemoteEndPoint() const
         {
             return mRemoteEP;
         }
         
-        shared_ptr<Uri> HttpRequest::Url() const
+        shared_ptr<Uri> HttpListenerRequest::Url() const
         {
             return mUrl;
         }
         
-        String HttpRequest::UserAgent() const
+        String HttpListenerRequest::UserAgent() const
         {
             return mUserAgent;
         }
         
-        const vector<String>& HttpRequest::UserLanguages() const
+        const vector<String>& HttpListenerRequest::UserLanguages() const
         {
             return mLanguages;
         }
 
-        String HttpRequest::ToString() const
+        String HttpListenerRequest::ToString() const
         {
             return mRawHeader;
         }
 
-        Task<shared_ptr<X509Certificate>> HttpRequest::GetClientCertificateAsync() const
+        Task<shared_ptr<X509Certificate>> HttpListenerRequest::GetClientCertificateAsync() const
         {
             return Task<shared_ptr<X509Certificate>>([this]() {
                 return this->GetClientCertificate();
             });
         }
 
-        shared_ptr<X509Certificate> HttpRequest::GetClientCertificate() const
+        shared_ptr<X509Certificate> HttpListenerRequest::GetClientCertificate() const
         {
             return nullptr;
         }

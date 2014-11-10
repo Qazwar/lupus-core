@@ -17,29 +17,44 @@
  */
 #pragma once
 
-#include "Utility.h"
+#include "Task.h"
 #include "HttpContext.h"
+#include "String.h"
 #include <memory>
 #include <boost/noncopyable.hpp>
 
 namespace Lupus {
     namespace Net {
+        namespace Sockets {
+            class IPEndPoint;
+            class TcpListener;
+            class IPAddress;
+        }
+
         class LUPUSCORE_API HttpListener : public boost::noncopyable
         {
         public:
 
-            HttpListener();
+            HttpListener() = delete;
+            HttpListener(std::shared_ptr<Sockets::TcpListener> listener);
+            HttpListener(std::shared_ptr<Sockets::IPEndPoint> localEP);
+            HttpListener(std::shared_ptr<Sockets::IPAddress> localaddr, uint16_t port);
             virtual ~HttpListener();
 
             virtual bool IsListening() const;
 
             virtual void Abort();
             virtual void Close();
-            virtual HttpContext GetContext();
             virtual void Start();
             virtual void Stop();
 
+            virtual HttpContext GetContext();
+            virtual Task<HttpContext> GetContextAsync();
+
         private:
+
+            bool mListening = false;
+            std::shared_ptr<Sockets::TcpListener> mListener;
         };
     }
 }

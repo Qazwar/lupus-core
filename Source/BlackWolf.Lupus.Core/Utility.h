@@ -25,6 +25,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <exception>
+#include <chrono>
 
 #ifdef NOEXCEPT
 #undef NOEXCEPT
@@ -106,6 +107,7 @@ namespace Lupus {
     LupusDefineError(unauthorized_access);
     LupusDefineError(authentication_error);
     LupusDefineError(format_error);
+    LupusDefineError(invalid_operation);
 
     LUPUSCORE_API class String RandomString(uint32_t length);
 
@@ -136,4 +138,13 @@ namespace Lupus {
     using NameCollection = std::unordered_map < class String, Value > ;
     template <typename Value>
     using NamePair = std::pair < class String, Value > ;
+
+    typedef std::chrono::high_resolution_clock Clock;
+    typedef std::chrono::time_point<Clock> TimePoint;
+    typedef std::chrono::nanoseconds Nanoseconds;
+    typedef std::chrono::microseconds Microseconds;
+    typedef std::chrono::milliseconds Milliseconds;
+    typedef std::chrono::seconds Seconds;
+    typedef std::chrono::minutes Minutes;
+    typedef std::chrono::hours Hours;
 }

@@ -59,9 +59,9 @@ namespace Lupus {
 		//! \sa Integer::ToString(int, IntegerBase)
         static String ToString(unsigned long long value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, int8_t& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, int8_t& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, short& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, short& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		/**
 		 * Versucht eine Zeichenkette zu ihrer entsprechenden Ganzzahl zu 
 		 * konvertieren.
@@ -70,34 +70,34 @@ namespace Lupus {
 		 * \param[out] result Variable in der das Ergebnis gespeichert wird.
 		 * \param[in] base Basis der Ganzzahl (8, 10, 16)
 		 * \returns TRUE wenn die Konvertierung erfolgreich war. 
-					FALSE im Fehlerfall.
+         *          FALSE im Fehlerfall.
 		 */
-        static bool TryParse(const String& String, int& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, int& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, long long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, long long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, uint8_t& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, uint8_t& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, unsigned short& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, unsigned short& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, unsigned int& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, unsigned int& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, unsigned long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, unsigned long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& String, unsigned long long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, unsigned long long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 
-        static int8_t ParseByte(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static short ParseShort(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static int ParseInt(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static long ParseLong(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static long long ParseLongLong(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static int8_t ParseByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static short ParseShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static int ParseInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static long ParseLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static long long ParseLongLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
 
-        static uint8_t ParseUByte(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned short ParseUShort(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned int ParseUInt(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned long ParseULong(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned long long ParseULongLong(const String& String, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static uint8_t ParseUByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static unsigned short ParseUShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static unsigned int ParseUInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static unsigned long ParseULong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static unsigned long long ParseULongLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
 	};
 }

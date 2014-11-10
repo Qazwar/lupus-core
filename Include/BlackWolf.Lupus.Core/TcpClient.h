@@ -49,34 +49,46 @@ namespace Lupus {
                 TcpClient(const String& hostname, uint16_t port) throw(socket_error, std::runtime_error);
                 virtual ~TcpClient() = default;
 
-                virtual size_t Available() const throw(null_pointer);
+                virtual size_t Available() const throw(invalid_operation);
                 virtual std::shared_ptr<Socket> Client() const NOEXCEPT;
-                virtual void Client(std::shared_ptr<Socket>) throw(null_pointer);
+                virtual void Client(std::shared_ptr<Socket>) NOEXCEPT;
                 virtual bool IsConnected() const NOEXCEPT;
                 virtual bool ExclusiveAddressUse() const throw(socket_error);
                 virtual void ExclusiveAddressUse(bool) throw(socket_error);
-                virtual bool NoDelay() const throw(socket_error, null_pointer);
-                virtual void NoDelay(bool) throw(socket_error, null_pointer);
-                virtual int SendBuffer() const throw(socket_error, null_pointer);
-                virtual void SendBuffer(int) throw(socket_error, null_pointer);
-                virtual int ReceiveBuffer() const throw(socket_error, null_pointer);
-                virtual void ReceiveBuffer(int) throw(socket_error, null_pointer);
-                virtual int SendTimeout() const throw(null_pointer);
-                virtual void SendTimeout(int) throw(socket_error, null_pointer);
-                virtual int ReceiveTimeout() const throw(null_pointer);
-                virtual void ReceiveTimeout(int) throw(socket_error, null_pointer);
+                virtual bool NoDelay() const throw(socket_error, invalid_operation);
+                virtual void NoDelay(bool) throw(socket_error, invalid_operation);
+                virtual int SendBuffer() const throw(socket_error, invalid_operation);
+                virtual void SendBuffer(int) throw(socket_error, invalid_operation);
+                virtual int ReceiveBuffer() const throw(socket_error, invalid_operation);
+                virtual void ReceiveBuffer(int) throw(socket_error, invalid_operation);
+                /*!
+                 * Wert in Millisekunden.
+                 */
+                virtual int SendTimeout() const throw(invalid_operation);
+                /*!
+                 * Wert in Millisekunden.
+                 */
+                virtual void SendTimeout(int) throw(socket_error, invalid_operation);
+                /*!
+                 * Wert in Millisekunden.
+                 */
+                virtual int ReceiveTimeout() const throw(invalid_operation);
+                /*!
+                 * Wert in Millisekunden.
+                 */
+                virtual void ReceiveTimeout(int) throw(socket_error, invalid_operation);
 
                 virtual Task<void> ConnectAsync(std::shared_ptr<IPEndPoint> remoteEndPoint) NOEXCEPT;
                 virtual Task<void> ConnectAsync(std::shared_ptr<IPAddress> address, uint16_t port) NOEXCEPT;
                 virtual Task<void> ConnectAsync(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) NOEXCEPT;
                 virtual Task<void> ConnectAsync(const String& host, uint16_t port) throw(std::invalid_argument);
 
-                virtual void Connect(std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, null_pointer);
-                virtual void Connect(std::shared_ptr<IPAddress> address, uint16_t port) throw(socket_error, null_pointer);
-                virtual void Connect(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) throw(null_pointer);
-                virtual void Connect(const String& host, uint16_t port) throw(socket_error, std::invalid_argument, null_pointer);
-                virtual void Close() throw(socket_error, null_pointer);
-                virtual std::shared_ptr<NetworkStream> GetStream() const throw(null_pointer);
+                virtual void Connect(std::shared_ptr<IPEndPoint> remoteEndPoint) throw(socket_error, invalid_operation);
+                virtual void Connect(std::shared_ptr<IPAddress> address, uint16_t port) throw(socket_error, invalid_operation);
+                virtual void Connect(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints) throw(invalid_operation);
+                virtual void Connect(const String& host, uint16_t port) throw(socket_error, std::invalid_argument, invalid_operation);
+                virtual void Close() throw(socket_error, invalid_operation);
+                virtual std::shared_ptr<NetworkStream> GetStream() const throw(invalid_operation);
 
             private:
 

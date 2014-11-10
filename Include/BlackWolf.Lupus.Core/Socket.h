@@ -493,21 +493,25 @@ namespace Lupus {
 
                 /*!
                  * Retouniert den Timeout für das blocken von Schreibbefehlen.
+                 * Wert in Millisekunden.
                  */
                 virtual int SendTimeout() const NOEXCEPT;
 
                 /*!
                  * Setzt den Timeout für das blocken von Schreibbefehlen.
+                 * Wert in Millisekunden.
                  */
                 virtual void SendTimeout(int) throw(socket_error);
 
                 /*!
                  * Retouniert den Timeout für das blocken von Lesebefehlen.
+                 * Wert in Millisekunden.
                  */
                 virtual int ReceiveTimeout() const NOEXCEPT;
 
                 /*!
                  * Setzt den Timeout für das blocken von Lesebefehlen.
+                 * Wert in Millisekunden.
                  */
                 virtual void ReceiveTimeout(int) throw(socket_error);
 

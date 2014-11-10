@@ -219,13 +219,19 @@
     <ClCompile Include="PgTransaction.cpp">
       <Filter>Code\Data\Postgres\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="HttpRequest.cpp">
-      <Filter>Code\Net\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpResponse.cpp">
-      <Filter>Code\Net\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Cookie.cpp">
+      <Filter>Code\Net\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpClient.cpp">
+      <Filter>Code\Net\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpListenerRequest.cpp">
+      <Filter>Code\Net\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpListenerResponse.cpp">
+      <Filter>Code\Net\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpListener.cpp">
       <Filter>Code\Net\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -404,16 +410,19 @@
     <ClInclude Include="HttpContext.h">
       <Filter>Code\Net\.h</Filter>
     </ClInclude>
-    <ClInclude Include="HttpRequest.h">
-      <Filter>Code\Net\.h</Filter>
-    </ClInclude>
     <ClInclude Include="IComposite.h">
       <Filter>Code\.h</Filter>
     </ClInclude>
-    <ClInclude Include="HttpResponse.h">
+    <ClInclude Include="Cookie.h">
       <Filter>Code\Net\.h</Filter>
     </ClInclude>
-    <ClInclude Include="Cookie.h">
+    <ClInclude Include="HttpClient.h">
+      <Filter>Code\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListenerRequest.h">
+      <Filter>Code\Net\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpListenerResponse.h">
       <Filter>Code\Net\.h</Filter>
     </ClInclude>
   </ItemGroup>

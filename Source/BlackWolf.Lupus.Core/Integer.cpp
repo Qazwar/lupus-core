@@ -352,7 +352,7 @@ namespace Lupus {
         int8_t result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -363,7 +363,7 @@ namespace Lupus {
         short result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -374,7 +374,7 @@ namespace Lupus {
         int result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -385,7 +385,7 @@ namespace Lupus {
         long result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -396,7 +396,7 @@ namespace Lupus {
         long long result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -407,7 +407,7 @@ namespace Lupus {
         uint8_t result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -418,7 +418,7 @@ namespace Lupus {
         unsigned short result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -429,7 +429,7 @@ namespace Lupus {
         unsigned int result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -440,7 +440,7 @@ namespace Lupus {
         unsigned long result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;
@@ -451,7 +451,7 @@ namespace Lupus {
         unsigned long long result = 0;
 
         if (!TryParse(str, result, base)) {
-            throw std::invalid_argument("Could not parse String to integer");
+            throw std::invalid_argument("str");
         }
 
         return result;

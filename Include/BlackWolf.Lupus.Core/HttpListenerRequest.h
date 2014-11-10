@@ -53,24 +53,26 @@ namespace Lupus {
             class IPEndPoint;
         }
 
-        class LUPUSCORE_API HttpRequest : public boost::noncopyable
+        class Cookie;
+
+        class LUPUSCORE_API HttpListenerRequest : public boost::noncopyable
         {
         public:
 
-            HttpRequest() = delete;
-            HttpRequest(
+            HttpListenerRequest() = delete;
+            HttpListenerRequest(
                 const std::vector<uint8_t>& buffer,
                 std::shared_ptr<Sockets::IPEndPoint> localEP,
                 std::shared_ptr<Sockets::IPEndPoint> remoteEP,
                 bool authenticated = false,
                 bool secure = false);
-            virtual ~HttpRequest() = default;
+            virtual ~HttpListenerRequest() = default;
 
             virtual const std::vector<String>& AcceptTypes() const NOEXCEPT;
             virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
             virtual int64_t ContentLength() const NOEXCEPT;
             virtual String ContentType() const NOEXCEPT;
-            virtual const NameValueCollection& Cookies() const NOEXCEPT;
+            virtual const NameCollection<std::shared_ptr<Cookie>>& Cookies() const NOEXCEPT;
             virtual bool HasEntityBody() const NOEXCEPT;
             virtual const NameValueCollection& Headers() const NOEXCEPT;
             virtual String HttpMethod() const NOEXCEPT;
@@ -110,7 +112,7 @@ namespace Lupus {
             std::shared_ptr<Uri> mUrl;
             std::shared_ptr<Version> mVersion;
             std::shared_ptr<Text::Encoding> mEncoding;
-            NameValueCollection mCookies;
+            NameCollection<std::shared_ptr<Cookie>> mCookies;
             NameValueCollection mHeaders;
             NameValueCollection mQuery;
             std::vector<String> mAcceptedTypes;

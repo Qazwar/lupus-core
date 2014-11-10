@@ -44,11 +44,11 @@ namespace Lupus {
 		 * \returns TRUE wenn die Konvertierung erfolgreich war. FALSE im
 		 *			Fehlerfall.
 		 */
-        static bool TryParse(const String& String, float& result) NOEXCEPT;
+        static bool TryParse(const String& string, float& result) NOEXCEPT;
 		/// \sa Float::TryParse(const String&, float&)
-		static bool TryParse(const String& String, double& result) NOEXCEPT;
+		static bool TryParse(const String& string, double& result) NOEXCEPT;
 		/// \sa Float::TryParse(const String&, float&)
-        static bool TryParse(const String& String, long double& result) NOEXCEPT;
+        static bool TryParse(const String& string, long double& result) NOEXCEPT;
 
         static float ParseFloat(const String&) throw(std::invalid_argument);
         static double ParseDouble(const String&) throw(std::invalid_argument);
