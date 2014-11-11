@@ -38,7 +38,7 @@ namespace Lupus {
         HttpListenerRequest::HttpListenerRequest(const vector<uint8_t>& buffer, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
             mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
-            unordered_map<String, String>::const_iterator citum;
+            NameValueCollection::const_iterator citum;
 
             for (auto it = begin(buffer); it != end(buffer); it++) {
                 char ch = static_cast<char>(*it);

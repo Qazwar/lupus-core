@@ -23,6 +23,8 @@
 #include "IPEndPoint.h"
 #include "IPAddress.h"
 #include "Socket.h"
+#include "TcpClient.h"
+#include "NetworkStream.h"
 
 using namespace std;
 using namespace Lupus::Net::Sockets;
@@ -88,15 +90,20 @@ namespace Lupus {
         HttpContext HttpListener::GetContext()
         {
             if (mListening) {
-                // TODO: Accept und auslesen
+                auto client = mListener->AcceptTcpClient();
+                vector<uint8_t> buffer(client->Available());
+                HttpContext context;
+
+                client->GetStream()->Read(buffer, 0, buffer.size());
+                context.Response = make_shared<HttpListenerResponse>(client);
+                context.Request = make_shared<HttpListenerRequest>(buffer, client->Client()->LocalEndPoint(), client->Client()->RemoteEndPoint());
             }
 
-            return{ nullptr, nullptr };
+            return HttpContext();
         }
 
         Task<HttpContext> HttpListener::GetContextAsync()
         {
-            // TODO: C2512 ausbessern.
             return Task<HttpContext>([this]() {
                 return this->GetContext();
             });

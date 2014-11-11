@@ -26,6 +26,8 @@
 #include <algorithm>
 #include <exception>
 #include <chrono>
+#include <boost/any.hpp>
+#include <boost/noncopyable.hpp>
 
 #ifdef NOEXCEPT
 #undef NOEXCEPT
@@ -99,7 +101,6 @@
 
 namespace Lupus {
     LupusDefineError(null_pointer);
-    LupusDefineError(sql_error);
     LupusDefineError(socket_error);
     LupusDefineError(http_error);
     LupusDefineError(io_error);
@@ -134,10 +135,18 @@ namespace Lupus {
     typedef std::unordered_map<class String, class String> NameValueCollection;
     typedef std::pair<class String, class String> NameValuePair;
 
-    template <typename Value>
-    using NameCollection = std::unordered_map < class String, Value > ;
-    template <typename Value>
-    using NamePair = std::pair < class String, Value > ;
+    template <typename TValue>
+    using NameCollection = std::unordered_map < class String, TValue > ;
+    template <typename TValue>
+    using NamePair = std::pair < class String, TValue > ;
+
+    template <typename TKey, typename TValue>
+    using Collection = std::unordered_map < TKey, TValue > ;
+    template <typename TKey, typename TValue>
+    using Pair = std::pair < TKey, TValue > ;
+
+    typedef boost::any Any;
+    typedef boost::noncopyable NonCopyable;
 
     typedef std::chrono::high_resolution_clock Clock;
     typedef std::chrono::time_point<Clock> TimePoint;

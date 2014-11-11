@@ -94,24 +94,6 @@
     <Filter Include="Code\IO\.h">
       <UniqueIdentifier>{d1510af0-0d43-494b-98a3-13a08fca8e21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\Data">
-      <UniqueIdentifier>{0aeb258f-79a9-4558-a82f-8e49a5a2e93c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Data\Postgres">
-      <UniqueIdentifier>{a24a7abd-0ecd-439a-bbfe-c92412a46cc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Data\Postgres\.h">
-      <UniqueIdentifier>{80e63aae-8f02-494b-8348-49e5d7a487fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Data\Postgres\.cpp">
-      <UniqueIdentifier>{ed6659af-90fc-4e40-8a67-c1d2d672d2e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Data\.h">
-      <UniqueIdentifier>{58127197-5503-42a3-851a-cb36429df06e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\Data\.cpp">
-      <UniqueIdentifier>{471e4aab-c1d5-42a1-b23f-7dea6dc57f8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Code\.h">
       <UniqueIdentifier>{9596ab73-ae54-415e-8d14-5026ab477ea4}</UniqueIdentifier>
     </Filter>
@@ -120,18 +102,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataColumn.cpp">
-      <Filter>Code\Data\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="DataRow.cpp">
-      <Filter>Code\Data\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTable.cpp">
-      <Filter>Code\Data\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Parameter.cpp">
-      <Filter>Code\Data\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="IPAddress.cpp">
       <Filter>Code\Net\Sockets\.cpp</Filter>
     </ClCompile>
@@ -177,12 +147,6 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Code\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Connection.cpp">
-      <Filter>Code\Data\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Code\Data\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="HashAlgorithm.cpp">
       <Filter>Code\Security\Cryptography\.cpp</Filter>
     </ClCompile>
@@ -207,18 +171,6 @@
     <ClCompile Include="Encoding.cpp">
       <Filter>Code\Text\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="PgCommand.cpp">
-      <Filter>Code\Data\Postgres\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="PgConnection.cpp">
-      <Filter>Code\Data\Postgres\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="PgDataReader.cpp">
-      <Filter>Code\Data\Postgres\.cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="PgTransaction.cpp">
-      <Filter>Code\Data\Postgres\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Cookie.cpp">
       <Filter>Code\Net\.cpp</Filter>
     </ClCompile>
@@ -236,30 +188,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataColumn.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="DataRow.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTable.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="DataType.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="IDataReader.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="IsolationLevel.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="ITransaction.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Parameter.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
     <ClInclude Include="IPAddress.h">
       <Filter>Code\Net\Sockets\.h</Filter>
     </ClInclude>
@@ -313,12 +241,6 @@
     </ClInclude>
     <ClInclude Include="SslStream.h">
       <Filter>Code\Net\Security\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Connection.h">
-      <Filter>Code\Data\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Code\Data\.h</Filter>
     </ClInclude>
     <ClInclude Include="X509Certificate.h">
       <Filter>Code\Security\Cryptography\X509Certificates\.h</Filter>
@@ -388,21 +310,6 @@
     </ClInclude>
     <ClInclude Include="Internal\CryptoRSA.h">
       <Filter>Code\Security\Cryptography\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Internal\PgCommand.h">
-      <Filter>Code\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Internal\PgConnection.h">
-      <Filter>Code\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Internal\PgDataReader.h">
-      <Filter>Code\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Internal\PgOid.h">
-      <Filter>Code\Data\Postgres\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="Internal\PgTransaction.h">
-      <Filter>Code\Data\Postgres\.h</Filter>
     </ClInclude>
     <ClInclude Include="IFactory.h">
       <Filter>Code\.h</Filter>

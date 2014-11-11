@@ -23,7 +23,6 @@
 #include <vector>
 #include <memory>
 #include <cstdint>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -36,7 +35,7 @@ namespace Lupus {
             class IPAddress;
 
             //! Repräsentiert einen Endpunkt mit dem Kommuniziert werden kann.
-            class LUPUSCORE_API IPEndPoint : public boost::noncopyable
+            class LUPUSCORE_API IPEndPoint : public NonCopyable
             {
             public:
 

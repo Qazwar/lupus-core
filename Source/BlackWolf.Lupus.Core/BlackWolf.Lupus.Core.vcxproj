@@ -36,17 +36,8 @@
     <ClCompile Include="HttpListenerRequest.cpp" />
     <ClCompile Include="HttpListenerResponse.cpp" />
     <ClCompile Include="Observable.cpp" />
-    <ClCompile Include="PgCommand.cpp" />
-    <ClCompile Include="PgConnection.cpp" />
-    <ClCompile Include="PgDataReader.cpp" />
-    <ClCompile Include="PgTransaction.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="SymmetricAlgorithm.cpp" />
-    <ClCompile Include="Command.cpp" />
-    <ClCompile Include="Connection.cpp" />
-    <ClCompile Include="DataColumn.cpp" />
-    <ClCompile Include="DataRow.cpp" />
-    <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="Float.cpp" />
     <ClCompile Include="HashAlgorithm.cpp" />
     <ClCompile Include="Integer.cpp" />
@@ -55,7 +46,6 @@
     <ClCompile Include="MemoryStream.cpp" />
     <ClCompile Include="NetUtility.cpp" />
     <ClCompile Include="NetworkStream.cpp" />
-    <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="SocketState.cpp" />
     <ClCompile Include="Stream.cpp" />
@@ -82,11 +72,6 @@
     <ClInclude Include="Internal\CryptoBlockCipher.h" />
     <ClInclude Include="Internal\CryptoHash.h" />
     <ClInclude Include="Internal\CryptoRSA.h" />
-    <ClInclude Include="Internal\PgCommand.h" />
-    <ClInclude Include="Internal\PgConnection.h" />
-    <ClInclude Include="Internal\PgDataReader.h" />
-    <ClInclude Include="Internal\PgOid.h" />
-    <ClInclude Include="Internal\PgTransaction.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
     <ClInclude Include="Observable.h" />
@@ -94,21 +79,12 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="SymmetricAlgorithm.h" />
-    <ClInclude Include="DataColumn.h" />
-    <ClInclude Include="DataRow.h" />
-    <ClInclude Include="DataTable.h" />
-    <ClInclude Include="DataType.h" />
     <ClInclude Include="Float.h" />
     <ClInclude Include="HashAlgorithm.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="Connection.h" />
     <ClInclude Include="ICryptoTransform.h" />
-    <ClInclude Include="IDataReader.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="IPAddress.h" />
     <ClInclude Include="IPEndPoint.h" />
-    <ClInclude Include="IsolationLevel.h" />
-    <ClInclude Include="ITransaction.h" />
     <ClInclude Include="MemoryStream.h" />
     <ClInclude Include="NetDefinitions.h" />
     <ClInclude Include="NetSecurityEnum.h" />
@@ -116,7 +92,6 @@
     <ClInclude Include="SecurityAuthEnum.h" />
     <ClInclude Include="NetUtility.h" />
     <ClInclude Include="NetworkStream.h" />
-    <ClInclude Include="Parameter.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="SocketEnum.h" />
     <ClInclude Include="SocketInformation.h" />
@@ -233,7 +208,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
@@ -255,7 +230,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Profile>true</Profile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
@@ -277,7 +252,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
@@ -302,7 +277,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Profile>true</Profile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
@@ -327,7 +302,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x86\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
@@ -352,7 +327,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\3rdParty\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;libpq.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;version.lib;Ws2_32.lib;cryptlib.lib;SDL2_static.lib;uriparser.lib;icudt.lib;icuuc.lib;icuin.lib;icule.lib;iculx.lib;icuio.lib;icutu.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>

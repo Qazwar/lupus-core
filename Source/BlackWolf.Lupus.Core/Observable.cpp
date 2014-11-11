@@ -27,17 +27,17 @@ namespace Lupus {
 
     bool ObservableObject::HasProperty(const String& propertyName) const
     {
-        return (find_if(begin(mProperties), end(mProperties), [&](const pair<String, boost::any>& it) {
+        return (find_if(begin(mProperties), end(mProperties), [&](const pair<String, Any>& it) {
             return (it.first == propertyName);
         }) != end(mProperties));
     }
 
-    boost::any& ObservableObject::operator[](const String& propertyName)
+    Any& ObservableObject::operator[](const String& propertyName)
     {
         return mProperties.at(propertyName);
     }
 
-    const boost::any& ObservableObject::operator[](const String& propertyName) const
+    const Any& ObservableObject::operator[](const String& propertyName) const
     {
         return mProperties.at(propertyName);
     }

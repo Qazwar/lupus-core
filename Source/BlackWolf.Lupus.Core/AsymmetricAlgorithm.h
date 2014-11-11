@@ -23,8 +23,6 @@
 
 #include <vector>
 #include <memory>
-#include <unordered_map>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -41,7 +39,7 @@ namespace Lupus {
                 SecurityCheck
             };
             
-            class LUPUSCORE_API AsymmetricAlgorithm : public IClonable<AsymmetricAlgorithm>, public boost::noncopyable
+            class LUPUSCORE_API AsymmetricAlgorithm : public IClonable<AsymmetricAlgorithm>, public NonCopyable
             {
             public:
 
@@ -67,7 +65,7 @@ namespace Lupus {
             };
 
 
-            class LUPUSCORE_API AsymmetricAlgorithmFactory : public IFactory<AsymmetricAlgorithm, String>, public boost::noncopyable
+            class LUPUSCORE_API AsymmetricAlgorithmFactory : public IFactory<AsymmetricAlgorithm, String>, public NonCopyable
             {
             public:
 
@@ -89,7 +87,7 @@ namespace Lupus {
                 AsymmetricAlgorithmFactory();
                 virtual ~AsymmetricAlgorithmFactory() = default;
 
-                std::unordered_map<String, std::shared_ptr<AsymmetricAlgorithm>> mPrototypes;
+                NameCollection<std::shared_ptr<AsymmetricAlgorithm>> mPrototypes;
             };
         }
     }

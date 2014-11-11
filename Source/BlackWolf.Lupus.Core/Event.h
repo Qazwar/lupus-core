@@ -22,7 +22,6 @@
 #include <functional>
 
 #include "Utility.h"
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -31,7 +30,7 @@
 
 namespace Lupus {
     template <typename Sender, typename... Args>
-    class Event : public boost::noncopyable
+    class Event : public NonCopyable
     {
         friend Sender;
 
@@ -73,7 +72,7 @@ namespace Lupus {
     };
 
     template <typename... Args>
-    class Event < void, Args... > : public boost::noncopyable
+    class Event < void, Args... > : public NonCopyable
     {
     public:
 

@@ -21,7 +21,6 @@
 #include <vector>
 #include <memory>
 #include <utility>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -29,7 +28,7 @@
 #endif
 
 namespace Lupus {
-    class LUPUSCORE_API Uri : boost::noncopyable
+    class LUPUSCORE_API Uri : NonCopyable
     {
     public:
 

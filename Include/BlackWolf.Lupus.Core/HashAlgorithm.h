@@ -24,8 +24,6 @@
 
 #include <vector>
 #include <memory>
-#include <unordered_map>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -61,7 +59,7 @@ namespace Lupus {
                     size_t outputOffset) throw(std::out_of_range) override;
             };
 
-            class LUPUSCORE_API HashAlgorithmFactory : public IFactory<HashAlgorithm, String>, public boost::noncopyable
+            class LUPUSCORE_API HashAlgorithmFactory : public IFactory<HashAlgorithm, String>, public NonCopyable
             {
             public:
                 
@@ -97,7 +95,7 @@ namespace Lupus {
                 HashAlgorithmFactory();
                 virtual ~HashAlgorithmFactory() = default;
 
-                std::unordered_map<String, std::shared_ptr<HashAlgorithm>> mPrototypes;
+                NameCollection<std::shared_ptr<HashAlgorithm>> mPrototypes;
             };
         }
     }

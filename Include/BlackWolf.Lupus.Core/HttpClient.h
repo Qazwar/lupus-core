@@ -18,8 +18,6 @@
 #pragma once
 
 #include "Utility.h"
-#include <chrono>
-#include <boost/noncopyable.hpp>
 
 namespace Lupus {
     class Uri;
@@ -30,7 +28,7 @@ namespace Lupus {
         }
 
         // TODO: HttpClient fertigstellen.
-        class LUPUSCORE_API HttpClient : boost::noncopyable
+        class LUPUSCORE_API HttpClient : NonCopyable
         {
         public:
 

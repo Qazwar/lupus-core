@@ -19,7 +19,6 @@
 
 #include "Utility.h"
 #include "IClonable.h"
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -30,7 +29,7 @@ namespace Lupus {
     namespace Security {
         namespace Cryptography {
             // TODO: Schnittstelle ausbauen und Klasse implementieren.
-            class LUPUSCORE_API KeyExchangeAlgorithm : public IClonable<KeyExchangeAlgorithm>, public boost::noncopyable
+            class LUPUSCORE_API KeyExchangeAlgorithm : public IClonable<KeyExchangeAlgorithm>, public NonCopyable
             {
             public:
 

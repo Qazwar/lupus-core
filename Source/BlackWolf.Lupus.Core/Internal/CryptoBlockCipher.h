@@ -31,7 +31,7 @@ namespace Lupus {
     namespace Security {
         namespace Cryptography {
             template <typename T>
-            class CryptoTransformAlgorithm : public ICryptoTransform, public boost::noncopyable
+            class CryptoTransformAlgorithm : public ICryptoTransform, public NonCopyable
             {
             public:
 

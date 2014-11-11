@@ -22,6 +22,7 @@
 #include <cwchar>
 #include <algorithm>
 #include <uriparser/Uri.h>
+#include <unicode/uchar.h>
 
 using namespace std;
 
@@ -211,7 +212,7 @@ namespace Lupus {
     bool Uri::CheckSchemeName(const String& value)
     {
         for (Char ch : value) {
-            if (!u_isalnum(ch) || ch != L'.' || ch != L'+' || ch != L'-') {
+            if (!u_isalnum((UChar)ch) || ch != L'.' || ch != L'+' || ch != L'-') {
                 return false;
             }
         }

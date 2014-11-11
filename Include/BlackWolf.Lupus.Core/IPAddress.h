@@ -18,11 +18,9 @@
 #pragma once
 
 #include "SocketEnum.h"
-
 #include <vector>
 #include <memory>
 #include <cstdint>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -35,7 +33,7 @@ namespace Lupus {
             class IPEndPoint;
 
             //! Repräsentiert einen IP-Adresse
-            class LUPUSCORE_API IPAddress : public boost::noncopyable
+            class LUPUSCORE_API IPAddress : public NonCopyable
             {
             public:
 

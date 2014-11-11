@@ -17,6 +17,7 @@
  */
 #include "String.h"
 #include "Encoding.h"
+#include <unicode/uchar.h>
 #include <unicode/ustring.h>
 #include <unicode/unistr.h>
 #include <unicode/regex.h>
@@ -122,7 +123,7 @@ namespace Lupus {
             throw out_of_range("size");
         }
 
-        mString = new UnicodeString(*str.mString, offset, size);
+        mString = new UnicodeString(*((UnicodeString*)str.mString), offset, size);
         mCount = new size_t(1);
 #ifdef _DEBUG
         mDebugString = ToUTF8();
@@ -140,7 +141,7 @@ namespace Lupus {
 #endif
     }
 
-    String::String(UnicodeString* string)
+    String::String(void* string)
     {
         mString = string;
         mCount = new size_t(1);
@@ -164,62 +165,62 @@ namespace Lupus {
 
     Char& String::operator[](size_t index)
     {
-        if (index > (size_t)mString->length()) {
+        if (index > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("index");
         }
 
-        return *(const_cast<Char*>(mString->getTerminatedBuffer() + index));
+        return *(const_cast<Char*>(((UnicodeString*)mString)->getTerminatedBuffer() + index));
     }
 
     const Char& String::operator[](size_t index) const
     {
-        if (index > (size_t)mString->length()) {
+        if (index > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("index");
         }
 
-        return *(mString->getTerminatedBuffer() + index);
+        return *(((UnicodeString*)mString)->getTerminatedBuffer() + index);
     }
 
     String String::Clone() const
     {
-        return String(new UnicodeString(*mString));
+        return String(new UnicodeString(*((UnicodeString*)mString)));
     }
 
     const Char* String::Data() const
     {
-        return mString->getTerminatedBuffer();
+        return ((UnicodeString*)mString)->getTerminatedBuffer();
     }
 
     const Char* String::Data(size_t startIndex) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
         }
 
-        return mString->getTerminatedBuffer() + startIndex;
+        return ((UnicodeString*)mString)->getTerminatedBuffer() + startIndex;
     }
 
     bool String::IsEmpty() const
     {
-        return mString->isEmpty() == TRUE;
+        return ((UnicodeString*)mString)->isEmpty() == TRUE;
     }
 
     size_t String::Length() const
     {
-        return mString->length();
+        return ((UnicodeString*)mString)->length();
     }
 
     String String::Append(Char ch) const
     {
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->append(ch);
         return String(result);
     }
 
     String String::Append(String str) const
     {
-        auto result = new UnicodeString(*mString);
-        result->append(*str.mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
+        result->append(*((UnicodeString*)str.mString));
         return String(result);
     }
 
@@ -231,8 +232,8 @@ namespace Lupus {
             throw out_of_range("size");
         }
 
-        auto result = new UnicodeString(*mString);
-        result->append(*str.mString, offset, size);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
+        result->append(*((UnicodeString*)str.mString), offset, size);
         return String(result);
     }
 
@@ -240,9 +241,9 @@ namespace Lupus {
     {
         switch (sens) {
             case StringCaseSensitivity::CaseSensitive:
-                return mString->compare(*str.mString);
+                return ((UnicodeString*)mString)->compare(*((UnicodeString*)str.mString));
             case StringCaseSensitivity::CaseInsensitive:
-                return mString->caseCompare(*str.mString, 0);
+                return ((UnicodeString*)mString)->caseCompare(*((UnicodeString*)str.mString), 0);
         }
     }
 
@@ -256,17 +257,17 @@ namespace Lupus {
 
         switch (sens) {
             case StringCaseSensitivity::CaseSensitive:
-                return mString->compare(0, mString->length(), *str.mString, offset, size);
+                return ((UnicodeString*)mString)->compare(0, ((UnicodeString*)mString)->length(), *((UnicodeString*)str.mString), offset, size);
             case StringCaseSensitivity::CaseInsensitive:
-                return mString->caseCompare(0, mString->length(), *str.mString, offset, size, 0);
+                return ((UnicodeString*)mString)->caseCompare(0, ((UnicodeString*)mString)->length(), *((UnicodeString*)str.mString), offset, size, 0);
         }
     }
 
     int String::Compare(size_t offset, size_t size, String cmpStr, size_t cmpOffset, size_t cmpSize, StringCaseSensitivity sens) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
-        } else if (size > (size_t)mString->length() - offset) {
+        } else if (size > (size_t)((UnicodeString*)mString)->length() - offset) {
             throw out_of_range("size");
         } else if (cmpOffset > cmpStr.Length()) {
             throw out_of_range("cmpOffset");
@@ -276,20 +277,20 @@ namespace Lupus {
 
         switch (sens) {
             case StringCaseSensitivity::CaseSensitive:
-                return mString->compare(offset, size, *cmpStr.mString, offset, size);
+                return ((UnicodeString*)mString)->compare(offset, size, *((UnicodeString*)cmpStr.mString), offset, size);
             case StringCaseSensitivity::CaseInsensitive:
-                return mString->caseCompare(offset, size, *cmpStr.mString, offset, size, 0);
+                return ((UnicodeString*)mString)->caseCompare(offset, size, *((UnicodeString*)cmpStr.mString), offset, size, 0);
         }
     }
 
     bool String::Contains(String str) const
     {
-        return mString->indexOf(*str.mString) != -1;
+        return ((UnicodeString*)mString)->indexOf(*((UnicodeString*)str.mString)) != -1;
     }
 
     void String::CopyTo(size_t srcIndex, std::vector<Char>& dst, size_t dstIndex, size_t dstSize) const
     {
-        if (srcIndex > (size_t)mString->length()) {
+        if (srcIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("srcIndex");
         } else if (dstIndex > dst.size()) {
             throw out_of_range("dstIndex");
@@ -297,12 +298,12 @@ namespace Lupus {
             throw out_of_range("dstSize");
         }
 
-        mString->extract((int32_t)srcIndex, (int32_t)dstSize, &dst[0], (int32_t)dstIndex);
+        ((UnicodeString*)mString)->extract((int32_t)srcIndex, (int32_t)dstSize, &dst[0], (int32_t)dstIndex);
     }
 
     bool String::EndsWith(String str) const
     {
-        return mString->endsWith(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->endsWith(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     bool String::EndsWith(String str, size_t offset, size_t size) const
@@ -313,57 +314,57 @@ namespace Lupus {
             throw out_of_range("size");
         }
 
-        return mString->endsWith(*str.mString, offset, size) == TRUE;
+        return ((UnicodeString*)mString)->endsWith(*((UnicodeString*)str.mString), offset, size) == TRUE;
     }
 
     int String::IndexOf(Char ch) const
     {
-        return mString->indexOf(ch);
+        return ((UnicodeString*)mString)->indexOf(ch);
     }
 
     int String::IndexOf(String str) const
     {
-        return mString->indexOf(*str.mString);
+        return ((UnicodeString*)mString)->indexOf(*((UnicodeString*)str.mString));
     }
 
     int String::IndexOf(Char ch, size_t offset) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
         }
 
-        return mString->indexOf(ch, offset);
+        return ((UnicodeString*)mString)->indexOf(ch, offset);
     }
 
     int String::IndexOf(String str, size_t offset) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
         }
 
-        return mString->indexOf(*str.mString, offset);
+        return ((UnicodeString*)mString)->indexOf(*((UnicodeString*)str.mString), offset);
     }
 
     int String::IndexOf(Char ch, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
-        } else if (size > (size_t)mString->length() - offset) {
+        } else if (size > (size_t)((UnicodeString*)mString)->length() - offset) {
             throw out_of_range("size");
         }
 
-        return mString->indexOf(ch, offset, size);
+        return ((UnicodeString*)mString)->indexOf(ch, offset, size);
     }
 
     int String::IndexOf(String str, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
-        } else if (size > (size_t)mString->length() - offset) {
+        } else if (size > (size_t)((UnicodeString*)mString)->length() - offset) {
             throw out_of_range("size");
         }
 
-        return mString->indexOf(*str.mString, offset, size);
+        return ((UnicodeString*)mString)->indexOf(*((UnicodeString*)str.mString), offset, size);
     }
 
     int String::IndexOfAny(const std::vector<Char>& chars) const
@@ -407,89 +408,89 @@ namespace Lupus {
 
     String String::Insert(size_t startIndex, Char ch) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
         }
 
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->insert(startIndex, ch);
         return String(result);
     }
 
     String String::Insert(size_t startIndex, String str) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
         }
 
-        auto result = new UnicodeString(*mString);
-        result->insert(startIndex, *str.mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
+        result->insert(startIndex, *((UnicodeString*)str.mString));
         return String(result);
     }
 
     String String::Insert(size_t startIndex, String str, size_t offset, size_t size) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
-        } else if (offset > (size_t)mString->length()) {
+        } else if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
-        } else if (size > (size_t)mString->length() - offset) {
+        } else if (size > (size_t)((UnicodeString*)mString)->length() - offset) {
             throw out_of_range("size");
         }
 
-        auto result = new UnicodeString(*mString);
-        result->insert(startIndex, *str.mString, offset, size);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
+        result->insert(startIndex, *((UnicodeString*)str.mString), offset, size);
         return String(result);
     }
 
     int String::LastIndexOf(Char ch) const
     {
-        return mString->lastIndexOf(ch);
+        return ((UnicodeString*)mString)->lastIndexOf(ch);
     }
 
     int String::LastIndexOf(String str) const
     {
-        return mString->lastIndexOf(*str.mString);
+        return ((UnicodeString*)mString)->lastIndexOf(*((UnicodeString*)str.mString));
     }
 
     int String::LastIndexOf(Char ch, size_t offset) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
         }
 
-        return mString->lastIndexOf(ch, offset);
+        return ((UnicodeString*)mString)->lastIndexOf(ch, offset);
     }
 
     int String::LastIndexOf(String str, size_t offset) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
         }
 
-        return mString->lastIndexOf(*str.mString, offset);
+        return ((UnicodeString*)mString)->lastIndexOf(*((UnicodeString*)str.mString), offset);
     }
 
     int String::LastIndexOf(Char ch, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
-        } else if (size > (size_t)mString->length() - offset) {
+        } else if (size > (size_t)((UnicodeString*)mString)->length() - offset) {
             throw out_of_range("size");
         }
 
-        return mString->lastIndexOf(ch, offset, size);
+        return ((UnicodeString*)mString)->lastIndexOf(ch, offset, size);
     }
 
     int String::LastIndexOf(String str, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
-        } else if (size > (size_t)mString->length() - offset) {
+        } else if (size > (size_t)((UnicodeString*)mString)->length() - offset) {
             throw out_of_range("size");
         }
 
-        return mString->lastIndexOf(*str.mString, offset, size);
+        return ((UnicodeString*)mString)->lastIndexOf(*((UnicodeString*)str.mString), offset, size);
     }
 
     int String::LastIndexOfAny(const std::vector<Char>& chars) const
@@ -533,58 +534,58 @@ namespace Lupus {
 
     String String::Remove(size_t startIndex) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
         }
 
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->remove(startIndex);
         return String(result);
     }
 
     String String::Remove(size_t startIndex, size_t count) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
-        } else if (count > (size_t)mString->length() - startIndex) {
+        } else if (count > (size_t)((UnicodeString*)mString)->length() - startIndex) {
             throw out_of_range("count");
         }
 
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->remove(startIndex, count);
         return String(result);
     }
 
     String String::Replace(Char oldCh, Char newCh) const
     {
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->findAndReplace(UnicodeString(oldCh), UnicodeString(newCh));
         return String(result);
     }
 
     String String::Replace(String oldStr, String newStr) const
     {
-        auto result = new UnicodeString(*mString);
-        result->findAndReplace(*oldStr.mString, *newStr.mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
+        result->findAndReplace(*((UnicodeString*)oldStr.mString), *((UnicodeString*)newStr.mString));
         return String(result);
     }
 
     String String::Reverse() const
     {
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->reverse();
         return String(result);
     }
 
     String String::Reverse(size_t startIndex, size_t count) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
-        } else if (count > (size_t)mString->length() - startIndex) {
+        } else if (count > (size_t)((UnicodeString*)mString)->length() - startIndex) {
             throw out_of_range("count");
         }
 
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->reverse(startIndex, count);
         return String(result);
     }
@@ -594,9 +595,9 @@ namespace Lupus {
         vector<String> result;
         int32_t previousIndex = 0;
 
-        for (int32_t i = 0; i < mString->length(); i++) {
+        for (int32_t i = 0; i < ((UnicodeString*)mString)->length(); i++) {
             for (auto ch : delimiter) {
-                if (mString->operator[](i) == ch) {
+                if (((UnicodeString*)mString)->operator[](i) == ch) {
                     String str;
 
                     if (option == StringSplitOption::RemoveEmptyEntries && i == previousIndex) {
@@ -619,9 +620,9 @@ namespace Lupus {
         vector<String> result;
         int32_t previousIndex = 0;
 
-        for (int32_t i = 0; i < mString->length(); i++) {
+        for (int32_t i = 0; i < ((UnicodeString*)mString)->length(); i++) {
             for (auto ch : delimiter) {
-                if (mString->operator[](i) == ch) {
+                if (((UnicodeString*)mString)->operator[](i) == ch) {
                     String str;
 
                     if (option == StringSplitOption::RemoveEmptyEntries && i == previousIndex) {
@@ -653,7 +654,7 @@ namespace Lupus {
         int32_t previousIndex = 0;
         int32_t savedIndex = -1;
 
-        for (int32_t index = mString->indexOf(str.Data(), str.Length(), 0); index != -1; savedIndex = index, index = mString->indexOf(str.Data(), str.Length(), index + 1)) {
+        for (int32_t index = ((UnicodeString*)mString)->indexOf(str.Data(), str.Length(), 0); index != -1; savedIndex = index, index = ((UnicodeString*)mString)->indexOf(str.Data(), str.Length(), index + 1)) {
             String tmp;
 
             if (option == StringSplitOption::RemoveEmptyEntries && index == previousIndex) {
@@ -679,7 +680,7 @@ namespace Lupus {
         int32_t previousIndex = 0;
         int32_t savedIndex = -1;
 
-        for (int32_t index = mString->indexOf(str.Data(), str.Length(), 0); index != -1; savedIndex = index, index = mString->indexOf(str.Data(), str.Length(), index + 1)) {
+        for (int32_t index = ((UnicodeString*)mString)->indexOf(str.Data(), str.Length(), 0); index != -1; savedIndex = index, index = ((UnicodeString*)mString)->indexOf(str.Data(), str.Length(), index + 1)) {
             String tmp;
 
             if (option == StringSplitOption::RemoveEmptyEntries && index == previousIndex) {
@@ -708,50 +709,50 @@ namespace Lupus {
 
     bool String::StartsWith(String str) const
     {
-        return mString->startsWith(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->startsWith(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     bool String::StartsWith(String str, size_t offset, size_t size) const
     {
-        if (offset > (size_t)mString->length()) {
+        if (offset > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("offset");
-        } else if (size > (size_t)mString->length() - offset) {
+        } else if (size > (size_t)((UnicodeString*)mString)->length() - offset) {
             throw out_of_range("size");
         }
 
-        return mString->startsWith(*str.mString, offset, size) == TRUE;
+        return ((UnicodeString*)mString)->startsWith(*((UnicodeString*)str.mString), offset, size) == TRUE;
     }
 
     String String::Substring(size_t startIndex) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
         }
 
-        return String(new UnicodeString(mString->getTerminatedBuffer() + startIndex));
+        return String(new UnicodeString(((UnicodeString*)mString)->getTerminatedBuffer() + startIndex));
     }
 
     String String::Substring(size_t startIndex, size_t count) const
     {
-        if (startIndex > (size_t)mString->length()) {
+        if (startIndex > (size_t)((UnicodeString*)mString)->length()) {
             throw out_of_range("startIndex");
-        } else if (count > (size_t)mString->length() - startIndex) {
+        } else if (count > (size_t)((UnicodeString*)mString)->length() - startIndex) {
             throw out_of_range("count");
         }
 
-        return String(new UnicodeString(mString->getTerminatedBuffer() + startIndex, count));
+        return String(new UnicodeString(((UnicodeString*)mString)->getTerminatedBuffer() + startIndex, count));
     }
 
     String String::ToLower() const
     {
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->toLower();
         return String(result);
     }
 
     String String::ToUpper() const
     {
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->toUpper();
         return String(result);
     }
@@ -759,19 +760,19 @@ namespace Lupus {
     string String::ToUTF8() const
     {
         string result;
-        return mString->toUTF8String<string>(result);
+        return ((UnicodeString*)mString)->toUTF8String<string>(result);
     }
 
     u16string String::ToUTF16() const
     {
-        return u16string((const char16_t*)mString->getTerminatedBuffer());
+        return u16string((const char16_t*)((UnicodeString*)mString)->getTerminatedBuffer());
     }
 
     u32string String::ToUTF32() const
     {
         UErrorCode errorCode;
-        Char32* utf32 = new Char32[mString->countChar32()];
-        mString->toUTF32(utf32, mString->countChar32(), errorCode);
+        Char32* utf32 = new Char32[((UnicodeString*)mString)->countChar32()];
+        ((UnicodeString*)mString)->toUTF32(force_cast<UChar32*>(utf32), ((UnicodeString*)mString)->countChar32(), errorCode);
 
         if (errorCode != U_ZERO_ERROR) {
             throw runtime_error("Error while converting to UTF32");
@@ -784,52 +785,52 @@ namespace Lupus {
 
     String String::Trim() const
     {
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->trim();
         return String(result);
     }
 
     bool String::operator==(String str) const
     {
-        return mString->operator==(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->operator==(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     bool String::operator!=(String str) const
     {
-        return mString->operator!=(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->operator!=(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     bool String::operator<(String str) const
     {
-        return mString->operator<(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->operator<(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     bool String::operator>(String str) const
     {
-        return mString->operator>(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->operator>(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     bool String::operator<=(String str) const
     {
-        return mString->operator<=(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->operator<=(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     bool String::operator>=(String str) const
     {
-        return mString->operator>=(*str.mString) == TRUE;
+        return ((UnicodeString*)mString)->operator>=(*((UnicodeString*)str.mString)) == TRUE;
     }
 
     String String::operator+(Char ch) const
     {
-        auto result = new UnicodeString(*mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
         result->append(ch);
         return String(result);
     }
 
     String String::operator+(const String& str) const
     {
-        auto result = new UnicodeString(*mString);
-        result->append(*str.mString);
+        auto result = new UnicodeString(*((UnicodeString*)mString));
+        result->append(*((UnicodeString*)str.mString));
         return String(result);
     }
 
@@ -878,16 +879,16 @@ namespace Lupus {
 
     String& String::operator+=(Char ch)
     {
-        *mString += ch;
+        *((UnicodeString*)mString) += ch;
 #ifdef _DEBUG
         mDebugString = ToUTF8();
 #endif
         return *this;
     }
 
-    String& String::operator+=(const String& string)
+    String& String::operator+=(const String& str)
     {
-        *mString += *string.mString;
+        *((UnicodeString*)mString) += *((UnicodeString*)str.mString);
 #ifdef _DEBUG
         mDebugString = ToUTF8();
 #endif
@@ -901,12 +902,12 @@ namespace Lupus {
 
     String String::FromUTF16(const u16string& str)
     {
-        return String((const Char*)str.data());
+        return String((const UChar*)str.data());
     }
 
     String String::FromUTF32(const u32string& str)
     {
-        return String(new UnicodeString(UnicodeString::fromUTF32((const Char32*)str.data(), str.length())));
+        return String(new UnicodeString(UnicodeString::fromUTF32((const UChar32*)str.data(), str.length())));
     }
 
     size_t String::AddRef()

@@ -22,8 +22,6 @@
 #include <vector>
 #include <memory>
 #include <cstdint>
-#include <unordered_map>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -55,7 +53,7 @@ namespace Lupus {
 
         class Cookie;
 
-        class LUPUSCORE_API HttpListenerRequest : public boost::noncopyable
+        class LUPUSCORE_API HttpListenerRequest : public NonCopyable
         {
         public:
 

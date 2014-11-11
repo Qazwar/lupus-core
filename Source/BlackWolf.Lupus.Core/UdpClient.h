@@ -21,8 +21,6 @@
 #include <vector>
 #include <memory>
 #include <functional>
-#include <boost/noncopyable.hpp>
-
 #include "SocketEnum.h"
 #include "Task.h"
 
@@ -38,7 +36,7 @@ namespace Lupus {
             class IPAddress;
             class IPEndPoint;
 
-            class LUPUSCORE_API UdpClient : public boost::noncopyable
+            class LUPUSCORE_API UdpClient : public NonCopyable
             {
             public:
 

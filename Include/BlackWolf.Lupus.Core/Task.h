@@ -23,7 +23,6 @@
 #include <thread>
 #include <functional>
 #include <type_traits>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -95,7 +94,7 @@ namespace std {
 
 namespace Lupus {
     template <typename R>
-    class Task : public boost::noncopyable
+    class Task : public NonCopyable
     {
     public:
 
@@ -211,7 +210,7 @@ namespace Lupus {
     };
 
     template <>
-    class Task<void> : public boost::noncopyable
+    class Task<void> : public NonCopyable
     {
     public:
 

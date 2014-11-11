@@ -20,11 +20,24 @@
 #include "Utility.h"
 #include <memory>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace Lupus {
     namespace Net {
-        extern "C" struct LUPUSCORE_API HttpContext {
-            const std::shared_ptr<class HttpListenerRequest> Request = nullptr;
-            const std::shared_ptr<class HttpListenerResponse> Response = nullptr;
+        struct LUPUSCORE_API HttpContext {
+            std::shared_ptr<class HttpListenerRequest> Request = nullptr;
+            std::shared_ptr<class HttpListenerResponse> Response = nullptr;
+
+            HttpContext() = default;
+            HttpContext(const HttpContext&) = default;
+            HttpContext& operator=(const HttpContext&) = default;
         };
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

@@ -64,7 +64,7 @@ namespace Lupus {
 
             if (error != U_ZERO_ERROR) {
                 if (mConverter) {
-                    ucnv_close(mConverter);
+                    ucnv_close((UConverter*)mConverter);
                     mConverter = nullptr;
                 }
 
@@ -75,7 +75,7 @@ namespace Lupus {
         Encoding::~Encoding()
         {
             if (mConverter) {
-                ucnv_close(mConverter);
+                ucnv_close((UConverter*)mConverter);
                 mConverter = nullptr;
             }
         }
@@ -103,7 +103,7 @@ namespace Lupus {
             UChar* dest = new UChar[length + 1];
             memset(dest, 0, length + 1);
 
-            int32_t outLength = ucnv_toUChars(mConverter, dest, length, (const char*)buffer.data() + offset, (int32_t)size, &error);
+            int32_t outLength = ucnv_toUChars((UConverter*)mConverter, dest, length, (const char*)buffer.data() + offset, (int32_t)size, &error);
 
             if (error != U_ZERO_ERROR) {
                 delete dest;
@@ -151,11 +151,11 @@ namespace Lupus {
             }
             
             UErrorCode error = U_ZERO_ERROR;
-            int32_t length = UCNV_GET_MAX_BYTES_FOR_STRING(str.Length(), ucnv_getMaxCharSize(mConverter));
+            int32_t length = UCNV_GET_MAX_BYTES_FOR_STRING(str.Length(), ucnv_getMaxCharSize((UConverter*)mConverter));
             char* dest = new char[length];
             memset(dest, 0, length);
 
-            int32_t outLength = ucnv_fromUChars(mConverter, dest, length, str.Data(), (int32_t)str.Length(), &error);
+            int32_t outLength = ucnv_fromUChars((UConverter*)mConverter, dest, length, str.Data(), (int32_t)str.Length(), &error);
 
             if (error != U_ZERO_ERROR) {
                 delete dest;
@@ -192,7 +192,7 @@ namespace Lupus {
         String Encoding::Name() const
         {
             UErrorCode error = U_ZERO_ERROR;
-            const char* result = ucnv_getName(mConverter, &error);
+            const char* result = ucnv_getName((UConverter*)mConverter, &error);
 
             if (error != U_ZERO_ERROR) {
                 return "invalid converter";

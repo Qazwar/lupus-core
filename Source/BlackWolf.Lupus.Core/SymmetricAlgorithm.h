@@ -23,8 +23,6 @@
 
 #include <vector>
 #include <memory>
-#include <unordered_map>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -42,7 +40,7 @@ namespace Lupus {
                 Ctr
             };
 
-            class LUPUSCORE_API SymmetricAlgorithm : public boost::noncopyable, public IClonable<SymmetricAlgorithm>
+            class LUPUSCORE_API SymmetricAlgorithm : public NonCopyable, public IClonable<SymmetricAlgorithm>
             {
             public:
 
@@ -78,7 +76,7 @@ namespace Lupus {
                     const std::vector<uint8_t>& iv) NOEXCEPT = 0;
             };
 
-            class LUPUSCORE_API SymmetricAlgorithmFactory : public IFactory<SymmetricAlgorithm, String>, public boost::noncopyable
+            class LUPUSCORE_API SymmetricAlgorithmFactory : public IFactory<SymmetricAlgorithm, String>, public NonCopyable
             {
             public:
 
@@ -109,7 +107,7 @@ namespace Lupus {
                 SymmetricAlgorithmFactory();
                 virtual ~SymmetricAlgorithmFactory() = default;
 
-                std::unordered_map<String, std::shared_ptr<SymmetricAlgorithm>> mPrototypes;
+                NameCollection<std::shared_ptr<SymmetricAlgorithm>> mPrototypes;
             };
         }
     }

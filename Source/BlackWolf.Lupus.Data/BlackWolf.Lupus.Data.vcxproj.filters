@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Code">
+      <UniqueIdentifier>{e4c28d18-5ec8-4e1e-a5a1-3d913d8dba82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\.cpp">
+      <UniqueIdentifier>{2606815c-55e3-42b5-bd00-a1eab9ba068d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\.h">
+      <UniqueIdentifier>{2498a486-5fa3-4fad-94f8-04efa1dca0aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Postgres">
+      <UniqueIdentifier>{da88be4b-bf97-401a-ab09-e8049e7bd4ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Postgres\.h">
+      <UniqueIdentifier>{b887276e-4852-4fac-bed9-f698023650f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Postgres\.cpp">
+      <UniqueIdentifier>{18e5c086-8099-472e-96c3-7c29a67ae1ac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utility.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DataColumn.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DataRow.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTable.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DataType.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IsolationLevel.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="ITransaction.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgCommand.h">
+      <Filter>Code\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgConnection.h">
+      <Filter>Code\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgDataReader.h">
+      <Filter>Code\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgOid.h">
+      <Filter>Code\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\PgTransaction.h">
+      <Filter>Code\Postgres\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataReader.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Parameter.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Command.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DataColumn.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DataRow.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTable.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgCommand.cpp">
+      <Filter>Code\Postgres\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgConnection.cpp">
+      <Filter>Code\Postgres\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgDataReader.cpp">
+      <Filter>Code\Postgres\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="PgTransaction.cpp">
+      <Filter>Code\Postgres\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Parameter.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

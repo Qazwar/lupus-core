@@ -22,7 +22,6 @@
 #include <vector>
 #include <memory>
 #include <cstdint>
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -36,12 +35,12 @@ namespace Lupus {
             class IPEndPoint;
             class IPAddress;
 
-            extern "C" struct LingerOption {
+            extern "C" struct LUPUSCORE_API LingerOption {
                 bool Enabled;
                 int LingerTime;
             };
 
-            class LUPUSCORE_API Socket : public boost::noncopyable
+            class LUPUSCORE_API Socket : public NonCopyable
             {
             public:
                 /*!
@@ -527,7 +526,7 @@ namespace Lupus {
 
             private:
 
-                class SocketState : public boost::noncopyable
+                class SocketState : public NonCopyable
                 {
                 public:
                     virtual ~SocketState() = default;

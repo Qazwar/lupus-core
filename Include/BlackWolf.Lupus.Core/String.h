@@ -21,20 +21,20 @@
 #include "IClonable.h"
 #include <vector>
 #include <functional>
-#include <unicode/uchar.h>
 
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable: 4251)
 #endif
 
-namespace icu_53 {
-    class UnicodeString;
-}
-
 namespace Lupus {
-    typedef UChar Char;
-    typedef UChar32 Char32;
+#ifdef _UNICODE
+    typedef wchar_t Char;
+    typedef char32_t Char32;
+#else
+    typedef char16_t Char;
+    typedef char32_t Char32;
+#endif
 
     LUPUSCORE_API Char ToChar(char);
     LUPUSCORE_API Char ToChar(wchar_t);
@@ -164,9 +164,9 @@ namespace Lupus {
 
     private:
 
-        explicit String(icu::UnicodeString*);
+        explicit String(void*);
 
-        icu::UnicodeString* mString = nullptr;
+        void* mString = nullptr;
         size_t* mCount = nullptr;
 #ifdef _DEBUG
         std::string mDebugString;

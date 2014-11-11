@@ -20,8 +20,6 @@
 #include <vector>
 #include <memory>
 #include <functional>
-#include <boost/noncopyable.hpp>
-
 #include "String.h"
 #include "Task.h"
 
@@ -38,7 +36,7 @@ namespace Lupus {
             class IPEndPoint;
             class TcpClient;
 
-            class LUPUSCORE_API TcpListener : public boost::noncopyable
+            class LUPUSCORE_API TcpListener : public NonCopyable
             {
             public:
 

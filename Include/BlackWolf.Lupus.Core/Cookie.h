@@ -18,13 +18,17 @@
 #pragma once
 
 #include "String.h"
-#include <boost/noncopyable.hpp>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 
 namespace Lupus {
     class Version;
 
     namespace Net {
-        class LUPUSCORE_API Cookie : boost::noncopyable
+        class LUPUSCORE_API Cookie : NonCopyable
         {
         public:
             Cookie() = default;
@@ -68,3 +72,7 @@ namespace Lupus {
         typedef NamePair<std::shared_ptr<Cookie>> CookiePair;
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

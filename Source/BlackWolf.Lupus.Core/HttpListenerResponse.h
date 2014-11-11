@@ -19,7 +19,6 @@
 
 #include "String.h"
 #include "Task.h"
-#include <boost/noncopyable.hpp>
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -42,7 +41,7 @@ namespace Lupus {
 
         class Cookie;
 
-        class LUPUSCORE_API HttpListenerResponse : public boost::noncopyable
+        class LUPUSCORE_API HttpListenerResponse : public NonCopyable
         {
         public:
             HttpListenerResponse() = delete;
@@ -67,7 +66,7 @@ namespace Lupus {
             virtual String RedirectionLocation() const NOEXCEPT;
             virtual void RedirectionLocation(String) NOEXCEPT;
             virtual int32_t StatusCode() const NOEXCEPT;
-            virtual void StatusCode(int32_t) NOEXCEPT;
+            virtual void StatusCode(int32_t) throw(std::invalid_argument);
             virtual String StatusDescription() const NOEXCEPT;
             virtual void StatusDescription(String) NOEXCEPT;
 

@@ -17,7 +17,6 @@
  */
 #pragma once
 
-#include <boost/noncopyable.hpp>
 #include <vector>
 #include <cstdint>
 #include "Utility.h"
@@ -33,7 +32,7 @@ namespace Lupus {
             namespace X509Certificates {
                 // TODO: Zertifikat implementieren
 
-                class LUPUSCORE_API X509Certificate : public boost::noncopyable
+                class LUPUSCORE_API X509Certificate : public NonCopyable
                 {
                 public:
 

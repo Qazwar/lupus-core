@@ -23,7 +23,6 @@
 #include <cstdint>
 #include <exception>
 #include <functional>
-#include <boost/noncopyable.hpp>
 
 #include "Utility.h"
 #include "Task.h"
@@ -40,7 +39,7 @@ namespace Lupus {
         End
     };
 
-    class LUPUSCORE_API Stream : boost::noncopyable
+    class LUPUSCORE_API Stream : NonCopyable
     {
     public:
 

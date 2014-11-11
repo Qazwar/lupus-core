@@ -20,12 +20,10 @@
 #include "String.h"
 #include "IClonable.h"
 #include <vector>
-#include <boost/noncopyable.hpp>
-#include <unicode/ucnv.h>
 
 namespace Lupus {
     namespace Text {
-        class LUPUSCORE_API Encoding : public boost::noncopyable, public IClonable<Encoding>
+        class LUPUSCORE_API Encoding : public NonCopyable, public IClonable<Encoding>
         {
         public:
 
@@ -56,7 +54,7 @@ namespace Lupus {
 
         private:
 
-            UConverter* mConverter = nullptr;
+            void* mConverter = nullptr;
         };
     }
 }

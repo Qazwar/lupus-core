@@ -22,6 +22,11 @@
 #include <vector>
 #include <cstdint>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
+
 namespace Lupus {
     namespace Net {
         namespace Sockets {
@@ -31,10 +36,14 @@ namespace Lupus {
                 Bound
             };
 
-            extern "C" struct SocketInformation {
+            extern "C" struct LUPUSCORE_API SocketInformation {
                 SocketInformationOption Options;
                 std::vector<uint8_t> ProtocolInformation;
             };
         }
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

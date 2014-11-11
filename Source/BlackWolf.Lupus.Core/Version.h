@@ -20,10 +20,9 @@
 #include "String.h"
 #include "IClonable.h"
 #include <cstdint>
-#include <boost/noncopyable.hpp>
 
 namespace Lupus {
-    class LUPUSCORE_API Version : public boost::noncopyable, public IClonable<Version>
+    class LUPUSCORE_API Version : public NonCopyable, public IClonable<Version>
     {
     public:
 

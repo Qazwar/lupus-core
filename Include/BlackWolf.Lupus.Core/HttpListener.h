@@ -21,7 +21,11 @@
 #include "HttpContext.h"
 #include "String.h"
 #include <memory>
-#include <boost/noncopyable.hpp>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 
 namespace Lupus {
     namespace Net {
@@ -31,7 +35,7 @@ namespace Lupus {
             class IPAddress;
         }
 
-        class LUPUSCORE_API HttpListener : public boost::noncopyable
+        class LUPUSCORE_API HttpListener : public NonCopyable
         {
         public:
 
@@ -39,7 +43,7 @@ namespace Lupus {
             HttpListener(std::shared_ptr<Sockets::TcpListener> listener);
             HttpListener(std::shared_ptr<Sockets::IPEndPoint> localEP);
             HttpListener(std::shared_ptr<Sockets::IPAddress> localaddr, uint16_t port);
-            virtual ~HttpListener();
+            virtual ~HttpListener() = default;
 
             virtual bool IsListening() const;
 
@@ -58,3 +62,7 @@ namespace Lupus {
         };
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
