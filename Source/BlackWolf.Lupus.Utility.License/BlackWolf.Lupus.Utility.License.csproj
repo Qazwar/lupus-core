@@ -7,8 +7,8 @@
     <ProjectGuid>{119267EB-17C5-425D-8C7F-B86A7B804E87}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GPL</RootNamespace>
-    <AssemblyName>GPL</AssemblyName>
+    <RootNamespace>License</RootNamespace>
+    <AssemblyName>License</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
