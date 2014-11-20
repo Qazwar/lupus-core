@@ -54,19 +54,19 @@ namespace Lupus {
                 return (Integer::ToString(Width) + "," + Integer::ToString(Height));
             }
 
-            static Size Parse(const String& str) throw(format_error)
+            static Size Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto width = str.Substring(0, index);
                 auto height = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Size size;
                 if (!Integer::TryParse(width, size.Width) || !Integer::TryParse(height, size.Height)) {
-                    throw format_error();
+                    throw FormatError();
                 }
 
                 return size;
@@ -109,19 +109,19 @@ namespace Lupus {
                 return (Float::ToString(Width) + "," + Float::ToString(Height));
             }
 
-            static Size Parse(const String& str) throw(format_error)
+            static Size Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto width = str.Substring(0, index);
                 auto height = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Size size;
                 if (!Float::TryParse(width, size.Width) || !Float::TryParse(height, size.Height)) {
-                    throw format_error();
+                    throw FormatError();
                 }
 
                 return size;
@@ -164,19 +164,19 @@ namespace Lupus {
                 return (Float::ToString(Width) + "," + Float::ToString(Height));
             }
 
-            static Size Parse(const String& str) throw(format_error)
+            static Size Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto width = str.Substring(0, index);
                 auto height = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Size size;
                 if (!Float::TryParse(width, size.Width) || !Float::TryParse(height, size.Height)) {
-                    throw format_error();
+                    throw FormatError();
                 }
 
                 return size;
@@ -219,19 +219,19 @@ namespace Lupus {
                 return (Float::ToString(Width) + "," + Float::ToString(Height));
             }
 
-            static Size Parse(const String& str) throw(format_error)
+            static Size Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto width = str.Substring(0, index);
                 auto height = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Size size;
                 if (!Float::TryParse(width, size.Width) || !Float::TryParse(height, size.Height)) {
-                    throw format_error();
+                    throw FormatError();
                 }
 
                 return size;

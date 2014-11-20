@@ -22,11 +22,11 @@
  */
 #include "UIElement.h"
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Windows {
-        void UIElementComposite::Add(const shared_ptr<UIElement>& element)
+        void UIElementComposite::Add(const Pointer<UIElement>& element)
         {
             mChildren.insert(element);
         }
@@ -36,12 +36,12 @@ namespace Lupus {
             mChildren.clear();
         }
 
-        void UIElementComposite::Remove(const shared_ptr<UIElement>& element)
+        void UIElementComposite::Remove(const Pointer<UIElement>& element)
         {
             mChildren.erase(element);
         }
 
-        const std::unordered_set<std::shared_ptr<UIElement>>& UIElementComposite::Children() const
+        const std::unordered_set<Pointer<UIElement>>& UIElementComposite::Children() const
         {
             return mChildren;
         }

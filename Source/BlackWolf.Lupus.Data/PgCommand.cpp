@@ -33,7 +33,7 @@
 
 #include <postgres/libpq-fe.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Data {
@@ -62,19 +62,19 @@ namespace Lupus {
                 return mQuery;
             }
 
-            vector<shared_ptr<Parameter>>& PgCommand::Parameters()
+            Vector<Pointer<Parameter>>& PgCommand::Parameters()
             {
                 return mParameters;
             }
 
-            const vector<shared_ptr<Parameter>>& PgCommand::Parameters() const
+            const Vector<Pointer<Parameter>>& PgCommand::Parameters() const
             {
                 return mParameters;
             }
             
-            shared_ptr<Parameter> PgCommand::CreateParameter()
+            Pointer<Parameter> PgCommand::CreateParameter()
             {
-                shared_ptr<Parameter> param = make_shared<Parameter>();
+                Pointer<Parameter> param = MakePointer<Parameter>();
                 mParameters.push_back(param);
                 return param;
             }
@@ -87,14 +87,14 @@ namespace Lupus {
                 return rows;
             }
             
-            shared_ptr<IDataReader> PgCommand::ExecuteReader()
+            Pointer<IDataReader> PgCommand::ExecuteReader()
             {
-                return make_shared<PgDataReader>(GetResult());
+                return MakePointer<PgDataReader>(GetResult());
             }
             
-            vector<NameCollection<Any>> PgCommand::ExecuteScalar()
+            Vector<NameCollection<Any>> PgCommand::ExecuteScalar()
             {
-                vector<NameCollection<Any>> scalar;
+                Vector<NameCollection<Any>> scalar;
                 PGresult* result = GetResult();
                 
                 if (!result) {
@@ -121,9 +121,9 @@ namespace Lupus {
             
             bool PgCommand::Prepare()
             {
-                vector<Oid> paramTypes;
+                Vector<Oid> paramTypes;
 
-                for_each(begin(mParameters), end(mParameters), [&paramTypes](shared_ptr<Parameter>& param) {
+                for_each(begin(mParameters), end(mParameters), [&paramTypes](Pointer<Parameter>& param) {
                     switch (param->DbType()) {
                         case DataType::Boolean: paramTypes.push_back(BOOLOID); break;
                         case DataType::Byte: paramTypes.push_back(BYTEAOID); break;
@@ -174,13 +174,13 @@ namespace Lupus {
                     }
                 }
 
-                vector<const char*> paramValues;
-                vector<int> paramFormats, paramLengths;
+                Vector<const char*> paramValues;
+                Vector<int> paramFormats, paramLengths;
                 paramValues.reserve(mParameters.size());
                 paramFormats.reserve(mParameters.size());
                 paramLengths.reserve(mParameters.size());
 
-                for_each(begin(mParameters), end(mParameters), [&paramValues, &paramLengths, &paramFormats](shared_ptr<Parameter>& param) {
+                for_each(begin(mParameters), end(mParameters), [&paramValues, &paramLengths, &paramFormats](Pointer<Parameter>& param) {
                     String value = boost::any_cast<String>(param->Value());
                     paramLengths.push_back((int)value.Length());
 

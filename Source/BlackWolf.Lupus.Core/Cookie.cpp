@@ -25,7 +25,7 @@
 #include <iomanip>
 #include <sstream>
 
-using namespace std;
+
 using namespace std::chrono;
 
 namespace Lupus {
@@ -130,20 +130,20 @@ namespace Lupus {
             String expires;
 
             if (mExpired) {
-                stringstream ss;
+                std::stringstream ss;
                 time_t time = Clock::to_time_t(Clock::now());
                 tm timetm;
                 memset(&timetm, 0, sizeof(timetm));
                 localtime_s(&timetm, &time);
-                ss << put_time(&timetm, "%a, %Y-%b-%d %T GMT");
+                ss << std::put_time(&timetm, "%a, %Y-%b-%d %T GMT");
                 expires += ss.str();
             } else if (mExpires != TimePoint::min()) {
-                stringstream ss;
+                std::stringstream ss;
                 time_t time = Clock::to_time_t(mExpires);
                 tm timetm;
                 memset(&timetm, 0, sizeof(timetm));
                 localtime_s(&timetm, &time);
-                ss << put_time(&timetm, "%a, %Y-%b-%d %T GMT");
+                ss << std::put_time(&timetm, "%a, %Y-%b-%d %T GMT");
                 expires += ss.str();
             }
 

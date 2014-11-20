@@ -8,7 +8,7 @@
 #include <BlackWolf.Lupus.Core/Encoding.h>
 #include <BlackWolf.Lupus.Core/HttpListenerRequest.h>
 
-using namespace std;
+
 using namespace Lupus;
 using namespace Lupus::Text;
 using namespace Lupus::Net;
@@ -41,7 +41,7 @@ const String testRequest2 = "GET /tutorials/other/top-20-mysql-best-practices/te
 
 int wmain(int argc, wchar_t** argv)
 {
-    auto request = make_shared<HttpListenerRequest>(Encoding::ASCII()->GetBytes(testRequest1), nullptr, nullptr);
+    auto request = MakePointer<HttpListenerRequest>(Encoding::ASCII()->GetBytes(testRequest1), nullptr, nullptr);
 
     wprintf(request->RawHeader().Data());
     wprintf(request->HttpMethod().Data());
@@ -52,7 +52,7 @@ int wmain(int argc, wchar_t** argv)
     wprintf(request->Url()->ToString().Data());
     wprintf(L"\r\n\r\n");
 
-    request = make_shared<HttpListenerRequest>(Encoding::ASCII()->GetBytes(testRequest2), nullptr, nullptr);
+    request = MakePointer<HttpListenerRequest>(Encoding::ASCII()->GetBytes(testRequest2), nullptr, nullptr);
 
     wprintf(request->RawHeader().Data());
     wprintf(request->HttpMethod().Data());

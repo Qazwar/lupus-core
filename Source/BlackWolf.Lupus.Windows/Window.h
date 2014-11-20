@@ -70,14 +70,14 @@ namespace Lupus {
             template <typename T>
             using WindowProperty = ObservableProperty < Window, T > ;
 
-            Window(WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const String& title, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(int x, int y, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(int x, int y, int w, int h, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const Math::Point<int>& position, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const Math::Point<int>& position, const Math::Size<int>& size, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const String& title, const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const String& title, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(int x, int y, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(int x, int y, int w, int h, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const Math::Point<int>& position, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const Math::Point<int>& position, const Math::Size<int>& size, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const String& title, const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
             virtual ~Window();
 
             // Properties
@@ -96,17 +96,17 @@ namespace Lupus {
             
             virtual void Bordered(bool) const final;
             virtual int DisplayIndex() const final;
-            virtual std::shared_ptr<Grid> Grid() const final;
+            virtual Pointer<Grid> Grid() const final;
             virtual void Hide() final;
             virtual void Maximize() final;
             virtual void Minimize() final;
             virtual void Raise() final;
-            virtual void Refresh() throw(std::runtime_error) final;
+            virtual void Refresh() throw(RuntimeError) final;
             virtual void Restore() final;
             virtual void Show() final;
             virtual void ShowDialog() final;
-            virtual std::shared_ptr<ObservableObject> ViewModel() const;
-            virtual void ViewModel(std::shared_ptr<ObservableObject> viewModel);
+            virtual Pointer<ObservableObject> ViewModel() const;
+            virtual void ViewModel(Pointer<ObservableObject> viewModel);
 
             // Events
 
@@ -150,9 +150,9 @@ namespace Lupus {
             void Initialize();
 
             void* mHandle = nullptr;
-            std::shared_ptr<Windows::Grid> mGrid;
-            std::shared_ptr<ObservableObject> mViewModel;
-            static std::unordered_map<uint32_t, Window*> smMappedWindows;
+            Pointer<Windows::Grid> mGrid;
+            Pointer<ObservableObject> mViewModel;
+            static Collection<uint32_t, Window*> smMappedWindows;
         };
     }
 }

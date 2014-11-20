@@ -54,19 +54,19 @@ namespace Lupus {
                 return (Integer::ToString(X) + "," + Integer::ToString(Y));
             }
 
-            static Point Parse(const String& str) throw(format_error)
+            static Point Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto x = str.Substring(0, index);
                 auto y = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Point point;
                 if (!Integer::TryParse(x, point.X) || !Integer::TryParse(y, point.Y)) {
-                    throw format_error("Invalid number");
+                    throw FormatError("Invalid number");
                 }
 
                 return point;
@@ -109,19 +109,19 @@ namespace Lupus {
                 return (Float::ToString(X) + "," + Float::ToString(Y));
             }
 
-            static Point Parse(const String& str) throw(format_error)
+            static Point Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto x = str.Substring(0, index);
                 auto y = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Point point;
                 if (!Float::TryParse(x, point.X) || !Float::TryParse(y, point.Y)) {
-                    throw format_error();
+                    throw FormatError();
                 }
 
                 return point;
@@ -164,19 +164,19 @@ namespace Lupus {
                 return (Float::ToString(X) + "," + Float::ToString(Y));
             }
 
-            static Point Parse(const String& str) throw(format_error)
+            static Point Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto x = str.Substring(0, index);
                 auto y = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Point point;
                 if (!Float::TryParse(x, point.X) || !Float::TryParse(y, point.Y)) {
-                    throw format_error();
+                    throw FormatError();
                 }
 
                 return point;
@@ -219,19 +219,19 @@ namespace Lupus {
                 return (Float::ToString(X) + "," + Float::ToString(Y));
             }
 
-            static Point Parse(const String& str) throw(format_error)
+            static Point Parse(const String& str) throw(FormatError)
             {
                 auto index = str.IndexOf(",");
                 auto x = str.Substring(0, index);
                 auto y = str.Substring(index + 1);
 
                 if (str.IndexOf(",", index + 1) != -1) {
-                    throw format_error("Invalid point string");
+                    throw FormatError("Invalid point string");
                 }
 
                 Point point;
                 if (!Float::TryParse(x, point.X) || !Float::TryParse(y, point.Y)) {
-                    throw format_error();
+                    throw FormatError();
                 }
 
                 return point;

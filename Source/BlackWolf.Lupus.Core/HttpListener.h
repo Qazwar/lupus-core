@@ -45,9 +45,9 @@ namespace Lupus {
         public:
 
             HttpListener() = delete;
-            HttpListener(std::shared_ptr<Sockets::TcpListener> listener);
-            HttpListener(std::shared_ptr<Sockets::IPEndPoint> localEP);
-            HttpListener(std::shared_ptr<Sockets::IPAddress> localaddr, uint16_t port);
+            HttpListener(Pointer<Sockets::TcpListener> listener);
+            HttpListener(Pointer<Sockets::IPEndPoint> localEP);
+            HttpListener(Pointer<Sockets::IPAddress> localaddr, uint16_t port);
             virtual ~HttpListener() = default;
 
             virtual bool IsListening() const;
@@ -63,7 +63,7 @@ namespace Lupus {
         private:
 
             bool mListening = false;
-            std::shared_ptr<Sockets::TcpListener> mListener;
+            Pointer<Sockets::TcpListener> mListener;
         };
     }
 }

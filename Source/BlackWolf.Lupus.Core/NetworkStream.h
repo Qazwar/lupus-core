@@ -38,27 +38,27 @@ namespace Lupus {
             {
             public:
 
-                NetworkStream(std::shared_ptr<Socket> socket) throw(null_pointer);
+                NetworkStream(Pointer<Socket> socket) throw(NullPointer);
                 virtual ~NetworkStream() = default;
 
-                virtual size_t DataAvailable() const throw(socket_error);
-                virtual std::shared_ptr<Socket> Socket() const NOEXCEPT;
+                virtual size_t DataAvailable() const throw(SocketError);
+                virtual Pointer<Socket> Socket() const NOEXCEPT;
 
-                virtual Task<int> ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT override;
-                virtual Task<int> WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size)  NOEXCEPT override;
+                virtual Task<int> ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT override;
+                virtual Task<int> WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size)  NOEXCEPT override;
 
                 virtual bool CanRead() const NOEXCEPT override;
                 virtual bool CanWrite() const NOEXCEPT override;
                 virtual bool CanSeek() const NOEXCEPT override;
                 
-                virtual void Close() throw(socket_error) override;
-                virtual void Close(size_t timeout) throw(socket_error);
+                virtual void Close() throw(SocketError) override;
+                virtual void Close(size_t timeout) throw(SocketError);
                 virtual int64_t Position() const NOEXCEPT override;
-                virtual int64_t Length() const throw(socket_error) override;
-                virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(socket_error, io_error, std::out_of_range) override;
-                virtual int ReadByte() throw(socket_error, io_error) override;
-                virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(socket_error, io_error, std::out_of_range) override;
-                virtual void WriteByte(uint8_t byte) throw(socket_error, io_error) override;
+                virtual int64_t Length() const throw(SocketError) override;
+                virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(SocketError, IOError, OutOfRange) override;
+                virtual int ReadByte() throw(SocketError, IOError) override;
+                virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(SocketError, IOError, OutOfRange) override;
+                virtual void WriteByte(uint8_t byte) throw(SocketError, IOError) override;
 
                 virtual bool Readable() const NOEXCEPT;
                 virtual void Readable(bool) NOEXCEPT;
@@ -67,7 +67,7 @@ namespace Lupus {
 
             private:
 
-                std::shared_ptr<Sockets::Socket> mSocket;
+                Pointer<Sockets::Socket> mSocket;
                 bool mRead = true;
                 bool mWrite = true;
             };

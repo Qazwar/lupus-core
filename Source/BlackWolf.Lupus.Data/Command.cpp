@@ -23,7 +23,7 @@
 #include "Command.h"
 #include <thread>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Data {
@@ -34,16 +34,16 @@ namespace Lupus {
             });
         }
 
-        Task<shared_ptr<IDataReader>> Command::ExecuteReaderAsync()
+        Task<Pointer<IDataReader>> Command::ExecuteReaderAsync()
         {
-            return Task<shared_ptr<IDataReader>>([this]() {
+            return Task<Pointer<IDataReader>>([this]() {
                 return this->ExecuteReader();
             });
         }
 
-        Task<vector<NameCollection<Any>>> Command::ExecuteScalarAsync()
+        Task<Vector<NameCollection<Any>>> Command::ExecuteScalarAsync()
         {
-            return Task<vector<NameCollection<Any>>>([this]() {
+            return Task<Vector<NameCollection<Any>>>([this]() {
                 return this->ExecuteScalar();
             });
         }

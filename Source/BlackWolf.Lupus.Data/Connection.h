@@ -40,15 +40,15 @@ namespace Lupus {
             
             virtual ~Connection() = default;
 
-            virtual Task<std::shared_ptr<ITransaction>> BeginTransactionAsync(IsolationLevel) throw(std::invalid_argument);
-            virtual Task<void> ConnectAsync(const String&) throw(std::invalid_argument);
+            virtual Task<Pointer<ITransaction>> BeginTransactionAsync(IsolationLevel) throw(InvalidArgument);
+            virtual Task<void> ConnectAsync(const String&) throw(InvalidArgument);
 
             virtual String ConnectionString() const NOEXCEPT = 0;
             
-            virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) = 0;
+            virtual Pointer<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) = 0;
             virtual void Connect(const String&) throw(sql_error) = 0;
             virtual void Close() NOEXCEPT = 0;
-            virtual std::shared_ptr<Command> CreateCommand() throw(sql_error) = 0;
+            virtual Pointer<Command> CreateCommand() throw(sql_error) = 0;
             virtual void Open() throw(sql_error) = 0;
         };
     }

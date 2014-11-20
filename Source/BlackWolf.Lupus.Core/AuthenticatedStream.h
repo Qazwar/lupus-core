@@ -38,7 +38,7 @@ namespace Lupus {
 
                 virtual ~AuthenticatedStream() = default;
 
-                virtual std::shared_ptr<Stream> InnerStream() const NOEXCEPT;
+                virtual Pointer<Stream> InnerStream() const NOEXCEPT;
                 virtual bool IsAuthenticated() const = 0;
                 virtual bool IsEncrypted() const = 0;
                 virtual bool IsMutuallyAuthenticated() const = 0;
@@ -48,11 +48,11 @@ namespace Lupus {
 
             protected:
 
-                AuthenticatedStream(std::shared_ptr<Stream> innerStream, bool leaveInnerStreamOpen);
+                AuthenticatedStream(Pointer<Stream> innerStream, bool leaveInnerStreamOpen);
 
             private:
 
-                std::shared_ptr<Stream> mStream = nullptr;
+                Pointer<Stream> mStream = nullptr;
                 bool mLeaveOpen = false;
             };
         }

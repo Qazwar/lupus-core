@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -33,27 +38,27 @@ namespace Lupus {
             {
             public:
 
-                NetworkStream(std::shared_ptr<Socket> socket) throw(null_pointer);
+                NetworkStream(Pointer<Socket> socket) throw(NullPointer);
                 virtual ~NetworkStream() = default;
 
-                virtual size_t DataAvailable() const throw(socket_error);
-                virtual std::shared_ptr<Socket> Socket() const NOEXCEPT;
+                virtual size_t DataAvailable() const throw(SocketError);
+                virtual Pointer<Socket> Socket() const NOEXCEPT;
 
-                virtual Task<int> ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT override;
-                virtual Task<int> WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size)  NOEXCEPT override;
+                virtual Task<int> ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT override;
+                virtual Task<int> WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size)  NOEXCEPT override;
 
                 virtual bool CanRead() const NOEXCEPT override;
                 virtual bool CanWrite() const NOEXCEPT override;
                 virtual bool CanSeek() const NOEXCEPT override;
                 
-                virtual void Close() throw(socket_error) override;
-                virtual void Close(size_t timeout) throw(socket_error);
+                virtual void Close() throw(SocketError) override;
+                virtual void Close(size_t timeout) throw(SocketError);
                 virtual int64_t Position() const NOEXCEPT override;
-                virtual int64_t Length() const throw(socket_error) override;
-                virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(socket_error, io_error, std::out_of_range) override;
-                virtual int ReadByte() throw(socket_error, io_error) override;
-                virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(socket_error, io_error, std::out_of_range) override;
-                virtual void WriteByte(uint8_t byte) throw(socket_error, io_error) override;
+                virtual int64_t Length() const throw(SocketError) override;
+                virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(SocketError, IOError, OutOfRange) override;
+                virtual int ReadByte() throw(SocketError, IOError) override;
+                virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(SocketError, IOError, OutOfRange) override;
+                virtual void WriteByte(uint8_t byte) throw(SocketError, IOError) override;
 
                 virtual bool Readable() const NOEXCEPT;
                 virtual void Readable(bool) NOEXCEPT;
@@ -62,7 +67,7 @@ namespace Lupus {
 
             private:
 
-                std::shared_ptr<Sockets::Socket> mSocket;
+                Pointer<Sockets::Socket> mSocket;
                 bool mRead = true;
                 bool mWrite = true;
             };

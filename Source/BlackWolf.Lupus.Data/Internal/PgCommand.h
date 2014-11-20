@@ -40,13 +40,13 @@ namespace Lupus {
                 virtual void Text(const String&) NOEXCEPT override;
                 virtual String& Text() NOEXCEPT override;
                 virtual const String& Text() const NOEXCEPT override;
-                virtual std::vector<std::shared_ptr<Parameter>>& Parameters() NOEXCEPT override;
-                virtual const std::vector<std::shared_ptr<Parameter>>& Parameters() const NOEXCEPT override;
+                virtual Vector<Pointer<Parameter>>& Parameters() NOEXCEPT override;
+                virtual const Vector<Pointer<Parameter>>& Parameters() const NOEXCEPT override;
 
-                virtual std::shared_ptr<Parameter> CreateParameter() NOEXCEPT override;
+                virtual Pointer<Parameter> CreateParameter() NOEXCEPT override;
                 virtual int ExecuteNonQuery() throw(sql_error) override;
-                virtual std::shared_ptr<IDataReader> ExecuteReader() throw(sql_error) override;
-                virtual std::vector<NameCollection<Any>> ExecuteScalar() throw(sql_error) override;
+                virtual Pointer<IDataReader> ExecuteReader() throw(sql_error) override;
+                virtual Vector<NameCollection<Any>> ExecuteScalar() throw(sql_error) override;
                 virtual bool Prepare() throw(sql_error) override;
 
             private:
@@ -57,7 +57,7 @@ namespace Lupus {
                 bool mPrepared = false;
                 String mName = "";
                 String mQuery = "";
-                std::vector<std::shared_ptr<Parameter>> mParameters;
+                Vector<Pointer<Parameter>> mParameters;
             };
         }
     }

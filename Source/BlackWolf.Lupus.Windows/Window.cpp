@@ -25,7 +25,7 @@
 #include <SDL/SDL_video.h>
 #include <SDL/SDL_render.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Windows {
@@ -40,7 +40,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -57,7 +57,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -75,7 +75,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -93,7 +93,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -111,7 +111,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -129,7 +129,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -147,7 +147,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -165,7 +165,7 @@ namespace Lupus {
                 ConvertFlags(flags));
 
             if (!window || !SDL_CreateRenderer(window, -1, 0)) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
 
             mHandle = window;
@@ -192,7 +192,7 @@ namespace Lupus {
             return SDL_GetWindowDisplayIndex(force_cast<SDL_Window*>(mHandle));
         }
 
-        shared_ptr<Grid> Window::Grid() const
+        Pointer<Grid> Window::Grid() const
         {
             return mGrid;
         }
@@ -223,9 +223,9 @@ namespace Lupus {
             SDL_RenderPresent(renderer);
 
             if (SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0) != 0) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             } else if (SDL_RenderClear(renderer) != 0) {
-                throw runtime_error(SDL_GetError());
+                throw RuntimeError(SDL_GetError());
             }
         }
 
@@ -244,12 +244,12 @@ namespace Lupus {
             // TODO: Fenster anzeigen.
         }
 
-        shared_ptr<ObservableObject> Window::ViewModel() const
+        Pointer<ObservableObject> Window::ViewModel() const
         {
             return mViewModel;
         }
 
-        void Window::ViewModel(shared_ptr<ObservableObject> viewModel)
+        void Window::ViewModel(Pointer<ObservableObject> viewModel)
         {
             mViewModel = viewModel;
         }
@@ -372,11 +372,11 @@ namespace Lupus {
             };
 
             smMappedWindows[SDL_GetWindowID(window)] = this;
-            mGrid = make_shared<Windows::Grid>();
+            mGrid = MakePointer<Windows::Grid>();
         }
 
         const int Window::PositionUndefined = SDL_WINDOWPOS_UNDEFINED;
         const int Window::PositionCentered = SDL_WINDOWPOS_CENTERED;
-        unordered_map<uint32_t, Window*> Window::smMappedWindows;
+        Collection<uint32_t, Window*> Window::smMappedWindows;
     }
 }

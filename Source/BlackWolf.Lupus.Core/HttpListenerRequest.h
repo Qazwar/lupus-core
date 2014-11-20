@@ -64,62 +64,62 @@ namespace Lupus {
 
             HttpListenerRequest() = delete;
             HttpListenerRequest(
-                const std::vector<uint8_t>& buffer,
-                std::shared_ptr<Sockets::IPEndPoint> localEP,
-                std::shared_ptr<Sockets::IPEndPoint> remoteEP,
+                const Vector<uint8_t>& buffer,
+                Pointer<Sockets::IPEndPoint> localEP,
+                Pointer<Sockets::IPEndPoint> remoteEP,
                 bool authenticated = false,
                 bool secure = false);
             virtual ~HttpListenerRequest() = default;
 
-            virtual const std::vector<String>& AcceptTypes() const NOEXCEPT;
-            virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
+            virtual const Vector<String>& AcceptTypes() const NOEXCEPT;
+            virtual Pointer<Text::Encoding> ContentEncoding() const NOEXCEPT;
             virtual int64_t ContentLength() const NOEXCEPT;
             virtual String ContentType() const NOEXCEPT;
-            virtual const NameCollection<std::shared_ptr<Cookie>>& Cookies() const NOEXCEPT;
+            virtual const NameCollection<Pointer<Cookie>>& Cookies() const NOEXCEPT;
             virtual bool HasEntityBody() const NOEXCEPT;
             virtual const NameValueCollection& Headers() const NOEXCEPT;
             virtual String HttpMethod() const NOEXCEPT;
-            virtual std::shared_ptr<Stream> InputStream() const NOEXCEPT;
+            virtual Pointer<Stream> InputStream() const NOEXCEPT;
             virtual bool IsAuthenticated() const NOEXCEPT;
             virtual bool IsLocal() const NOEXCEPT;
             virtual bool IsSecureConnection() const NOEXCEPT;
             virtual bool KeepAlive() const NOEXCEPT;
             virtual String LocalAddress() const NOEXCEPT;
-            virtual std::shared_ptr<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
-            virtual std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
+            virtual Pointer<Sockets::IPEndPoint> LocalEndPoint() const NOEXCEPT;
+            virtual Pointer<Version> ProtocolVersion() const NOEXCEPT;
             virtual const NameValueCollection& QueryString() const NOEXCEPT;
             virtual String RawHeader() const NOEXCEPT;
             virtual String RemoteAddress() const NOEXCEPT;
-            virtual std::shared_ptr<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
-            virtual std::shared_ptr<Uri> Url() const NOEXCEPT;
+            virtual Pointer<Sockets::IPEndPoint> RemoteEndPoint() const NOEXCEPT;
+            virtual Pointer<Uri> Url() const NOEXCEPT;
             virtual String UserAgent() const NOEXCEPT;
-            virtual const std::vector<String>& UserLanguages() const NOEXCEPT;
+            virtual const Vector<String>& UserLanguages() const NOEXCEPT;
 
             virtual String ToString() const NOEXCEPT;
 
             /**
              * \warning Not implemented.
              */
-            virtual Task<std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
+            virtual Task<Pointer<Lupus::Security::Cryptography::X509Certificates::X509Certificate>> GetClientCertificateAsync() const NOEXCEPT;
 
             /**
              * \warning Not implemented.
              */
-            virtual std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> GetClientCertificate() const NOEXCEPT;
+            virtual Pointer<Lupus::Security::Cryptography::X509Certificates::X509Certificate> GetClientCertificate() const NOEXCEPT;
 
         private:
 
-            std::shared_ptr<Lupus::Stream> mStream;
-            std::shared_ptr<Sockets::IPEndPoint> mLocalEP;
-            std::shared_ptr<Sockets::IPEndPoint> mRemoteEP;
-            std::shared_ptr<Uri> mUrl;
-            std::shared_ptr<Version> mVersion;
-            std::shared_ptr<Text::Encoding> mEncoding;
-            NameCollection<std::shared_ptr<Cookie>> mCookies;
+            Pointer<Lupus::Stream> mStream;
+            Pointer<Sockets::IPEndPoint> mLocalEP;
+            Pointer<Sockets::IPEndPoint> mRemoteEP;
+            Pointer<Uri> mUrl;
+            Pointer<Version> mVersion;
+            Pointer<Text::Encoding> mEncoding;
+            NameCollection<Pointer<Cookie>> mCookies;
             NameValueCollection mHeaders;
             NameValueCollection mQuery;
-            std::vector<String> mAcceptedTypes;
-            std::vector<String> mLanguages;
+            Vector<String> mAcceptedTypes;
+            Vector<String> mLanguages;
             String mContentType;
             String mMethod;
             String mUserAgent;

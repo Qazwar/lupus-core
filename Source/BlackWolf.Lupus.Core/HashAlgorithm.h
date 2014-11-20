@@ -49,19 +49,19 @@ namespace Lupus {
                 virtual size_t BlockSize() const NOEXCEPT = 0;
                 virtual size_t HashSize() const NOEXCEPT = 0;
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>&) NOEXCEPT = 0;
-                virtual std::vector<uint8_t> ComputeHash(std::shared_ptr<Stream>) = 0;
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input,
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>&) NOEXCEPT = 0;
+                virtual Vector<uint8_t> ComputeHash(Pointer<Stream>) = 0;
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input,
                     size_t inputOffset,
-                    size_t inputCount) throw(std::out_of_range) = 0;
+                    size_t inputCount) throw(OutOfRange) = 0;
 
-                virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& input, size_t offset, size_t count) throw(std::out_of_range) override;
+                virtual Vector<uint8_t> TransformFinalBlock(const Vector<uint8_t>& input, size_t offset, size_t count) throw(OutOfRange) override;
                 virtual size_t TransformBlock(
-                    const std::vector<uint8_t>& input,
+                    const Vector<uint8_t>& input,
                     size_t inputOffset,
                     size_t inputCount,
-                    std::vector<uint8_t>& output,
-                    size_t outputOffset) throw(std::out_of_range) override;
+                    Vector<uint8_t>& output,
+                    size_t outputOffset) throw(OutOfRange) override;
             };
 
             class LUPUSCORE_API HashAlgorithmFactory : public IFactory<HashAlgorithm, String>, public NonCopyable
@@ -93,14 +93,14 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                virtual std::shared_ptr<HashAlgorithm> Create(const String& algorithm) const NOEXCEPT override;
+                virtual Pointer<HashAlgorithm> Create(const String& algorithm) const NOEXCEPT override;
 
             private:
 
                 HashAlgorithmFactory();
                 virtual ~HashAlgorithmFactory() = default;
 
-                NameCollection<std::shared_ptr<HashAlgorithm>> mPrototypes;
+                NameCollection<Pointer<HashAlgorithm>> mPrototypes;
             };
         }
     }

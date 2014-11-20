@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -65,14 +70,14 @@ namespace Lupus {
             template <typename T>
             using WindowProperty = ObservableProperty < Window, T > ;
 
-            Window(WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const String& title, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(int x, int y, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(int x, int y, int w, int h, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const Math::Point<int>& position, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const Math::Point<int>& position, const Math::Size<int>& size, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
-            Window(const String& title, const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(std::runtime_error);
+            Window(WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const String& title, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(int x, int y, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(int x, int y, int w, int h, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const Math::Point<int>& position, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const Math::Point<int>& position, const Math::Size<int>& size, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
+            Window(const String& title, const Math::Rectangle<int>& rect, WindowFlags flags = WindowFlags::None) throw(RuntimeError);
             virtual ~Window();
 
             // Properties
@@ -91,17 +96,17 @@ namespace Lupus {
             
             virtual void Bordered(bool) const final;
             virtual int DisplayIndex() const final;
-            virtual std::shared_ptr<Grid> Grid() const final;
+            virtual Pointer<Grid> Grid() const final;
             virtual void Hide() final;
             virtual void Maximize() final;
             virtual void Minimize() final;
             virtual void Raise() final;
-            virtual void Refresh() throw(std::runtime_error) final;
+            virtual void Refresh() throw(RuntimeError) final;
             virtual void Restore() final;
             virtual void Show() final;
             virtual void ShowDialog() final;
-            virtual std::shared_ptr<ObservableObject> ViewModel() const;
-            virtual void ViewModel(std::shared_ptr<ObservableObject> viewModel);
+            virtual Pointer<ObservableObject> ViewModel() const;
+            virtual void ViewModel(Pointer<ObservableObject> viewModel);
 
             // Events
 
@@ -145,9 +150,9 @@ namespace Lupus {
             void Initialize();
 
             void* mHandle = nullptr;
-            std::shared_ptr<Windows::Grid> mGrid;
-            std::shared_ptr<ObservableObject> mViewModel;
-            static std::unordered_map<uint32_t, Window*> smMappedWindows;
+            Pointer<Windows::Grid> mGrid;
+            Pointer<ObservableObject> mViewModel;
+            static Collection<uint32_t, Window*> smMappedWindows;
         };
     }
 }

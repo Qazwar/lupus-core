@@ -40,28 +40,28 @@ namespace Lupus {
             HttpClient() = default;
             virtual ~HttpClient() = default;
 
-            virtual std::shared_ptr<Uri> BaseAddress() const NOEXCEPT;
-            virtual void BaseAddress(std::shared_ptr<Uri>) NOEXCEPT;
+            virtual Pointer<Uri> BaseAddress() const NOEXCEPT;
+            virtual void BaseAddress(Pointer<Uri>) NOEXCEPT;
             virtual const NameValueCollection& DefaultRequestHeaders() const NOEXCEPT;
             virtual void DefaultRequestHeaders(const NameValueCollection&) NOEXCEPT;
             virtual size_t MaxResponseContentBufferSize() const NOEXCEPT;
             virtual void MaxResponseContentBufferSize(size_t) NOEXCEPT;
 
             template <typename Rep, typename Period>
-            std::chrono::duration<Rep, Period> Timeout() const throw(socket_error, invalid_operation)
+            std::chrono::duration<Rep, Period> Timeout() const throw(SocketError, InvalidOperation)
             {
                 return std::chrono::duration_cast<std::chrono::duration<Rep, Period>>(std::chrono::milliseconds(mClient->SendTimeout()));
             }
 
             template <typename Rep, typename Period>
-            void Timeout(const std::chrono::duration<Rep, Period>& value) throw(socket_error, invalid_operation)
+            void Timeout(const std::chrono::duration<Rep, Period>& value) throw(SocketError, InvalidOperation)
             {
                 mClient->SendTimeout(static_cast<int>(std::chrono::duration_cast<std::chrono::milliseconds>(value).count()));
             }
 
         private:
 
-            std::shared_ptr<Sockets::TcpClient> mClient;
+            Pointer<Sockets::TcpClient> mClient;
         };
     }
 }

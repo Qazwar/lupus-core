@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -27,7 +32,7 @@ namespace Lupus {
     public:
 
         Version() = default;
-        Version(const String&) throw(format_error);
+        Version(const String&) throw(FormatError);
         Version(int32_t major, int32_t minor) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build, int32_t revision) NOEXCEPT;
@@ -40,18 +45,18 @@ namespace Lupus {
         virtual int16_t MajorRevision() const NOEXCEPT;
         virtual int16_t MinorRevision() const NOEXCEPT;
 
-        virtual std::shared_ptr<Version> Clone() const NOEXCEPT override;
+        virtual Pointer<Version> Clone() const NOEXCEPT override;
         virtual String ToString() const NOEXCEPT;
 
-        bool operator==(std::shared_ptr<Version>) const;
-        bool operator!=(std::shared_ptr<Version>) const;
-        bool operator>=(std::shared_ptr<Version>) const;
-        bool operator>(std::shared_ptr<Version>) const;
-        bool operator<=(std::shared_ptr<Version>) const;
-        bool operator<(std::shared_ptr<Version>) const;
+        bool operator==(Pointer<Version>) const;
+        bool operator!=(Pointer<Version>) const;
+        bool operator>=(Pointer<Version>) const;
+        bool operator>(Pointer<Version>) const;
+        bool operator<=(Pointer<Version>) const;
+        bool operator<(Pointer<Version>) const;
 
-        static std::shared_ptr<Version> Parse(const String& value) throw(format_error);
-        static bool TryParse(const String& value, std::shared_ptr<Version>& result) NOEXCEPT;
+        static Pointer<Version> Parse(const String& value) throw(FormatError);
+        static bool TryParse(const String& value, Pointer<Version>& result) NOEXCEPT;
 
     private:
 

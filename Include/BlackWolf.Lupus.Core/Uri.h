@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -32,9 +37,9 @@ namespace Lupus {
     {
     public:
 
-        Uri(const String& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
-        Uri(std::shared_ptr<Uri> baseUri, const String& uriString) throw(std::runtime_error, std::bad_alloc, format_error);
-        Uri(std::shared_ptr<Uri> baseUri, std::shared_ptr<Uri> relativeUri) throw(std::runtime_error, std::bad_alloc, format_error);
+        Uri(const String& uriString) throw(RuntimeError, BadAlloc, FormatError);
+        Uri(Pointer<Uri> baseUri, const String& uriString) throw(RuntimeError, BadAlloc, FormatError);
+        Uri(Pointer<Uri> baseUri, Pointer<Uri> relativeUri) throw(RuntimeError, BadAlloc, FormatError);
         virtual ~Uri() = default;
 
         virtual const String& Scheme() const NOEXCEPT;
@@ -42,8 +47,8 @@ namespace Lupus {
         virtual const String& HostText() const NOEXCEPT;
         virtual const String& HostData() const NOEXCEPT;
         virtual const String& PortText() const NOEXCEPT;
-        virtual const std::vector<String>& PathHead() const NOEXCEPT;
-        virtual const std::vector<String>& PathTail() const NOEXCEPT;
+        virtual const Vector<String>& PathHead() const NOEXCEPT;
+        virtual const Vector<String>& PathTail() const NOEXCEPT;
         virtual const String& Query() const NOEXCEPT;
         virtual const String& Fragment() const NOEXCEPT;
         virtual const String& OriginalString() const NOEXCEPT;
@@ -63,8 +68,8 @@ namespace Lupus {
         String mHostText;
         String mHostData;
         String mPortText;
-        std::vector<String> mPathHead;
-        std::vector<String> mPathTail;
+        Vector<String> mPathHead;
+        Vector<String> mPathTail;
         String mQuery;
         String mFragment;
         String mOriginalString;

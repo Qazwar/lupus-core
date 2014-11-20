@@ -45,13 +45,13 @@ namespace Lupus {
         public:
             virtual ~UIElementComposite() = default;
 
-            virtual void Add(const std::shared_ptr<UIElement>& component) NOEXCEPT override;
+            virtual void Add(const Pointer<UIElement>& component) NOEXCEPT override;
             virtual void Clear() NOEXCEPT override;
-            virtual void Remove(const std::shared_ptr<UIElement>& component) NOEXCEPT override;
-            virtual const std::unordered_set<std::shared_ptr<UIElement>>& Children() const NOEXCEPT override;
+            virtual void Remove(const Pointer<UIElement>& component) NOEXCEPT override;
+            virtual const std::unordered_set<Pointer<UIElement>>& Children() const NOEXCEPT override;
 
         private:
-            std::unordered_set<std::shared_ptr<UIElement>> mChildren;
+            std::unordered_set<Pointer<UIElement>> mChildren;
         };
     }
 }

@@ -23,38 +23,38 @@
 #include "Encoding.h"
 #include <unicode/ucnv.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Text {
-        shared_ptr<Encoding> Encoding::ASCII()
+        Pointer<Encoding> Encoding::ASCII()
         {
-            return shared_ptr<Encoding>(new Encoding("US-ASCII"));
+            return Pointer<Encoding>(new Encoding("US-ASCII"));
         }
         
-        shared_ptr<Encoding> Encoding::Default()
+        Pointer<Encoding> Encoding::Default()
         {
-            return shared_ptr<Encoding>(new Encoding(""));
+            return Pointer<Encoding>(new Encoding(""));
         }
 
-        shared_ptr<Encoding> Encoding::UTF32()
+        Pointer<Encoding> Encoding::UTF32()
         {
-            return shared_ptr<Encoding>(new Encoding("UTF-32"));
+            return Pointer<Encoding>(new Encoding("UTF-32"));
         }
 
-        shared_ptr<Encoding> Encoding::UTF16()
+        Pointer<Encoding> Encoding::UTF16()
         {
-            return shared_ptr<Encoding>(new Encoding("UTF-16"));
+            return Pointer<Encoding>(new Encoding("UTF-16"));
         }
 
-        shared_ptr<Encoding> Encoding::UTF8()
+        Pointer<Encoding> Encoding::UTF8()
         {
-            return shared_ptr<Encoding>(new Encoding("UTF-8"));
+            return Pointer<Encoding>(new Encoding("UTF-8"));
         }
 
-        shared_ptr<Encoding> Encoding::UTF7()
+        Pointer<Encoding> Encoding::UTF7()
         {
-            return shared_ptr<Encoding>(new Encoding("UTF-7"));
+            return Pointer<Encoding>(new Encoding("UTF-7"));
         }
 
         Encoding::Encoding(String str)
@@ -73,7 +73,7 @@ namespace Lupus {
                     mConverter = nullptr;
                 }
 
-                throw runtime_error("Could not create converter.");
+                throw RuntimeError("Could not create converter.");
             }
         }
 
@@ -85,22 +85,22 @@ namespace Lupus {
             }
         }
 
-        shared_ptr<Encoding> Encoding::Clone() const
+        Pointer<Encoding> Encoding::Clone() const
         {
             return GetEncoding(Name());
         }
 
-        String Encoding::GetString(const vector<uint8_t>& buffer) const
+        String Encoding::GetString(const Vector<uint8_t>& buffer) const
         {
             return GetString(buffer, 0, buffer.size());
         }
 
-        String Encoding::GetString(const vector<uint8_t>& buffer, size_t offset, size_t size) const
+        String Encoding::GetString(const Vector<uint8_t>& buffer, size_t offset, size_t size) const
         {
             if (offset > buffer.size()) {
-                throw out_of_range("offset");
+                throw OutOfRange("offset");
             } else if (size > buffer.size() - offset) {
-                throw out_of_range("size");
+                throw OutOfRange("size");
             }
 
             UErrorCode error = U_ZERO_ERROR;
@@ -115,25 +115,25 @@ namespace Lupus {
 
                 switch (error) {
                     case U_INDEX_OUTOFBOUNDS_ERROR:
-                        throw format_error("Source data does not produce an Unicode character.");
+                        throw FormatError("Source data does not produce an Unicode character.");
 
                     case U_INVALID_CHAR_FOUND:
-                        throw format_error("No mapping was found from source to target encoding.");
+                        throw FormatError("No mapping was found from source to target encoding.");
 
                     case U_TRUNCATED_CHAR_FOUND:
-                        throw format_error("A character sequence was incomplete.");
+                        throw FormatError("A character sequence was incomplete.");
 
                     case U_ILLEGAL_CHAR_FOUND:
-                        throw format_error("A character was found which is disallowed in the source encoding.");
+                        throw FormatError("A character was found which is disallowed in the source encoding.");
 
                     case U_INVALID_TABLE_FORMAT:
-                        throw format_error("An error occured trying to read the backing data for the converter.");
+                        throw FormatError("An error occured trying to read the backing data for the converter.");
 
                     case U_BUFFER_OVERFLOW_ERROR:
-                        throw format_error("More output characters were produced than fit in the target buffer.");
+                        throw FormatError("More output characters were produced than fit in the target buffer.");
 
                     default:
-                        throw runtime_error("Could not convert buffer to string.");
+                        throw RuntimeError("Could not convert buffer to string.");
                 }
             }
 
@@ -142,17 +142,17 @@ namespace Lupus {
             return result;
         }
 
-        vector<uint8_t> Encoding::GetBytes(const String& str) const
+        Vector<uint8_t> Encoding::GetBytes(const String& str) const
         {
             return GetBytes(str, 0, str.Length());
         }
 
-        vector<uint8_t> Encoding::GetBytes(const String& str, size_t offset, size_t size) const
+        Vector<uint8_t> Encoding::GetBytes(const String& str, size_t offset, size_t size) const
         {
             if (offset > str.Length()) {
-                throw out_of_range("offset");
+                throw OutOfRange("offset");
             } else if (size > str.Length() - offset) {
-                throw out_of_range("size");
+                throw OutOfRange("size");
             }
             
             UErrorCode error = U_ZERO_ERROR;
@@ -167,29 +167,29 @@ namespace Lupus {
 
                 switch (error) {
                     case U_INDEX_OUTOFBOUNDS_ERROR:
-                        throw format_error("Source data does not produce an Unicode character.");
+                        throw FormatError("Source data does not produce an Unicode character.");
 
                     case U_INVALID_CHAR_FOUND:
-                        throw format_error("No mapping was found from source to target encoding.");
+                        throw FormatError("No mapping was found from source to target encoding.");
 
                     case U_TRUNCATED_CHAR_FOUND:
-                        throw format_error("A character sequence was incomplete.");
+                        throw FormatError("A character sequence was incomplete.");
 
                     case U_ILLEGAL_CHAR_FOUND:
-                        throw format_error("A character was found which is disallowed in the source encoding.");
+                        throw FormatError("A character was found which is disallowed in the source encoding.");
 
                     case U_INVALID_TABLE_FORMAT:
-                        throw format_error("An error occured trying to read the backing data for the converter.");
+                        throw FormatError("An error occured trying to read the backing data for the converter.");
 
                     case U_BUFFER_OVERFLOW_ERROR:
-                        throw format_error("More output characters were produced than fit in the target buffer.");
+                        throw FormatError("More output characters were produced than fit in the target buffer.");
 
                     default:
-                        throw runtime_error("Could not convert buffer to string.");
+                        throw RuntimeError("Could not convert buffer to string.");
                 }
             }
 
-            vector<uint8_t> result((uint8_t*)dest, (uint8_t*)dest + outLength);
+            Vector<uint8_t> result((uint8_t*)dest, (uint8_t*)dest + outLength);
             delete dest;
             return result;
         }
@@ -206,18 +206,18 @@ namespace Lupus {
             }
         }
 
-        shared_ptr<Encoding> Encoding::GetEncoding(String encoding)
+        Pointer<Encoding> Encoding::GetEncoding(String encoding)
         {
             try {
-                return shared_ptr<Encoding>(new Encoding(encoding));
-            } catch (runtime_error&) {
+                return Pointer<Encoding>(new Encoding(encoding));
+            } catch (RuntimeError&) {
                 return nullptr;
             }
         }
 
-        vector<String> Encoding::GetEncodings()
+        Vector<String> Encoding::GetEncodings()
         {
-            vector<String> result;
+            Vector<String> result;
             int32_t count = ucnv_countAvailable();
 
             for (int32_t i = 0; i < count; i++) {

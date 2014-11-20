@@ -22,8 +22,6 @@
  */
 #include "Observable.h"
 
-using namespace std;
-
 namespace Lupus {
     void ObservableObject::Remove(const String& propertyName)
     {
@@ -32,7 +30,7 @@ namespace Lupus {
 
     bool ObservableObject::HasProperty(const String& propertyName) const
     {
-        return (find_if(begin(mProperties), end(mProperties), [&](const pair<String, Any>& it) {
+        return (std::find_if(begin(mProperties), end(mProperties), [&](const Pair<String, Any>& it) {
             return (it.first == propertyName);
         }) != end(mProperties));
     }

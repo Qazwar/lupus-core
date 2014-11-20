@@ -22,7 +22,7 @@
  */
 #include "DataColumn.h"
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Data {

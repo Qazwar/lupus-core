@@ -38,15 +38,15 @@ namespace Lupus {
         virtual const Container& Children() const = 0;
     };
 
-    template <typename Component, typename Container = std::unordered_set<std::shared_ptr<Component>>>
+    template <typename Component, typename Container = std::unordered_set<Pointer<Component>>>
     class ICompositeReference : public Component
     {
     public:
         virtual ~ICompositeReference() = default;
 
-        virtual void Add(const std::shared_ptr<Component>& component) = 0;
+        virtual void Add(const Pointer<Component>& component) = 0;
         virtual void Clear() = 0;
-        virtual void Remove(const std::shared_ptr<Component>& component) = 0;
+        virtual void Remove(const Pointer<Component>& component) = 0;
         virtual const Container& Children() const = 0;
     };
 }

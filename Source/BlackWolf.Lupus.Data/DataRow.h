@@ -42,14 +42,14 @@ namespace Lupus {
             explicit DataRow(NameCollection<Any>&);
             virtual ~DataRow() = default;
 
-            virtual Any& operator[](unsigned) throw(std::out_of_range);
-            virtual const Any& operator[](unsigned) const throw(std::out_of_range);
+            virtual Any& operator[](unsigned) throw(OutOfRange);
+            virtual const Any& operator[](unsigned) const throw(OutOfRange);
 
-            virtual Any& operator[](const String&) throw(std::invalid_argument);
-            virtual const Any& operator[](const String&) const throw(std::invalid_argument);
+            virtual Any& operator[](const String&) throw(InvalidArgument);
+            virtual const Any& operator[](const String&) const throw(InvalidArgument);
 
-            virtual Any& operator[](std::shared_ptr<DataColumn>) throw(std::invalid_argument, null_pointer);
-            virtual const Any& operator[](std::shared_ptr<DataColumn>) const throw(std::invalid_argument, null_pointer);
+            virtual Any& operator[](Pointer<DataColumn>) throw(InvalidArgument, NullPointer);
+            virtual const Any& operator[](Pointer<DataColumn>) const throw(InvalidArgument, NullPointer);
 
             virtual size_t Count() const NOEXCEPT;
             virtual bool IsEmpty() const NOEXCEPT;
@@ -58,7 +58,7 @@ namespace Lupus {
         private:
 
             NameCollection<Any> mItems;
-            std::vector<Any*> mRefItems;
+            Vector<Any*> mRefItems;
         };
     }
 }

@@ -45,28 +45,28 @@ namespace Lupus {
             {
             public:
 
-                TcpListener(std::shared_ptr<IPEndPoint> localEP) throw(socket_error, null_pointer);
-                TcpListener(std::shared_ptr<IPAddress> localaddr, uint16_t port) throw(socket_error, null_pointer);
+                TcpListener(Pointer<IPEndPoint> localEP) throw(SocketError, NullPointer);
+                TcpListener(Pointer<IPAddress> localaddr, uint16_t port) throw(SocketError, NullPointer);
                 virtual ~TcpListener() = default;
 
-                virtual bool IsActive() const throw(socket_error);
-                virtual bool ExclusiveAddressUse() const throw(socket_error);
-                virtual void ExclusiveAddressUse(bool) throw(socket_error);
-                virtual std::shared_ptr<IPEndPoint> LocalEndPoint() const NOEXCEPT;
-                virtual std::shared_ptr<Socket> Server() const NOEXCEPT;
+                virtual bool IsActive() const throw(SocketError);
+                virtual bool ExclusiveAddressUse() const throw(SocketError);
+                virtual void ExclusiveAddressUse(bool) throw(SocketError);
+                virtual Pointer<IPEndPoint> LocalEndPoint() const NOEXCEPT;
+                virtual Pointer<Socket> Server() const NOEXCEPT;
 
-                virtual Task<std::shared_ptr<Socket>> AcceptSocketAsync() NOEXCEPT;
-                virtual Task<std::shared_ptr<TcpClient>> AcceptTcpClientAsync() NOEXCEPT;
+                virtual Task<Pointer<Socket>> AcceptSocketAsync() NOEXCEPT;
+                virtual Task<Pointer<TcpClient>> AcceptTcpClientAsync() NOEXCEPT;
 
-                virtual std::shared_ptr<Socket> AcceptSocket() throw(socket_error);
-                virtual std::shared_ptr<TcpClient> AcceptTcpClient() throw(socket_error);
-                virtual void Start() throw(socket_error);
-                virtual void Start(int backlog) throw(socket_error);
-                virtual void Stop() throw(socket_error);
+                virtual Pointer<Socket> AcceptSocket() throw(SocketError);
+                virtual Pointer<TcpClient> AcceptTcpClient() throw(SocketError);
+                virtual void Start() throw(SocketError);
+                virtual void Start(int backlog) throw(SocketError);
+                virtual void Stop() throw(SocketError);
 
             private:
 
-                std::shared_ptr<Socket> mServer = nullptr;
+                Pointer<Socket> mServer = nullptr;
             };
         }
     }

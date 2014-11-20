@@ -27,7 +27,10 @@
 #include <cryptopp/osrng.h>
 #include <unicode/uchar.h>
 
-using namespace std;
+#ifdef _MSC_VER
+#include <Windows.h>
+#else
+#endif
 
 namespace Lupus {
     String RandomString(uint32_t N)
@@ -50,9 +53,30 @@ namespace Lupus {
         return str;
     }
 
-    shared_ptr<Version> GetVersion()
+    Pointer<Version> GetVersion()
     {
-        static const shared_ptr<Version> sVersion = make_shared<Version>(0, 1);
+        static const Pointer<Version> sVersion = MakePointer<Version>(0, 1);
         return sVersion;
     }
+
+#ifdef _MSC_VER
+    std::string GetLastSystemError()
+    {
+        CHAR buffer[1024];
+        DWORD dw = GetLastError();
+        memset(buffer, 0, 1024);
+
+        FormatMessageA(
+            FORMAT_MESSAGE_FROM_SYSTEM |
+            FORMAT_MESSAGE_IGNORE_INSERTS,
+            NULL,
+            dw,
+            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+            buffer,
+            1023, NULL);
+
+        return buffer;
+    }
+#else
+#endif
 }

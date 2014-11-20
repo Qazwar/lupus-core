@@ -37,24 +37,24 @@
 #include <cryptopp/salsa.h>
 #include <cryptopp/modes.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
             SymmetricAlgorithmFactory::SymmetricAlgorithmFactory()
             {
-                mPrototypes["aes"] = make_shared<CryptoBlockCipher<CryptoPP::AES>>();
-                mPrototypes["3des"] = make_shared<CryptoBlockCipher<CryptoPP::DES_EDE3>>();
-                mPrototypes["tripledes"] = make_shared<CryptoBlockCipher<CryptoPP::DES_EDE3>>();
-                mPrototypes["serpent"] = make_shared<CryptoBlockCipher<CryptoPP::Serpent>>();
-                mPrototypes["rc5"] = make_shared<CryptoBlockCipher<CryptoPP::RC5>>();
-                mPrototypes["rc6"] = make_shared<CryptoBlockCipher<CryptoPP::RC6>>();
-                mPrototypes["twofish"] = make_shared<CryptoBlockCipher<CryptoPP::Twofish>>();
-                mPrototypes["blowfish"] = make_shared<CryptoBlockCipher<CryptoPP::Blowfish>>();
-                mPrototypes["idea"] = make_shared<CryptoBlockCipher<CryptoPP::IDEA>>();
-                mPrototypes["camellia"] = make_shared<CryptoBlockCipher<CryptoPP::Camellia>>();
-                mPrototypes["seed"] = make_shared<CryptoBlockCipher<CryptoPP::SEED>>();
+                mPrototypes["aes"] = MakePointer<CryptoBlockCipher<CryptoPP::AES>>();
+                mPrototypes["3des"] = MakePointer<CryptoBlockCipher<CryptoPP::DES_EDE3>>();
+                mPrototypes["tripledes"] = MakePointer<CryptoBlockCipher<CryptoPP::DES_EDE3>>();
+                mPrototypes["serpent"] = MakePointer<CryptoBlockCipher<CryptoPP::Serpent>>();
+                mPrototypes["rc5"] = MakePointer<CryptoBlockCipher<CryptoPP::RC5>>();
+                mPrototypes["rc6"] = MakePointer<CryptoBlockCipher<CryptoPP::RC6>>();
+                mPrototypes["twofish"] = MakePointer<CryptoBlockCipher<CryptoPP::Twofish>>();
+                mPrototypes["blowfish"] = MakePointer<CryptoBlockCipher<CryptoPP::Blowfish>>();
+                mPrototypes["idea"] = MakePointer<CryptoBlockCipher<CryptoPP::IDEA>>();
+                mPrototypes["camellia"] = MakePointer<CryptoBlockCipher<CryptoPP::Camellia>>();
+                mPrototypes["seed"] = MakePointer<CryptoBlockCipher<CryptoPP::SEED>>();
             }
 
             SymmetricAlgorithmFactory& SymmetricAlgorithmFactory::GetInstance()
@@ -63,7 +63,7 @@ namespace Lupus {
                 return instance;
             }
 
-            shared_ptr<SymmetricAlgorithm> SymmetricAlgorithmFactory::Create(const String& algorithm) const
+            Pointer<SymmetricAlgorithm> SymmetricAlgorithmFactory::Create(const String& algorithm) const
             {
                 auto it = mPrototypes.find(algorithm.ToLower());
 

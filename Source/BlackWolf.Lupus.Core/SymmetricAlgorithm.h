@@ -59,26 +59,26 @@ namespace Lupus {
                 virtual size_t IvLength() const NOEXCEPT = 0;
                 virtual CipherMode Mode() const NOEXCEPT = 0;
                 virtual void Mode(CipherMode) NOEXCEPT = 0;
-                virtual const std::vector<uint8_t>& Key() const NOEXCEPT = 0;
-                virtual void Key(const std::vector<uint8_t>&) NOEXCEPT = 0;
-                virtual const std::vector<uint8_t>& Iv() const NOEXCEPT = 0;
-                virtual void Iv(const std::vector<uint8_t>&) NOEXCEPT = 0;
+                virtual const Vector<uint8_t>& Key() const NOEXCEPT = 0;
+                virtual void Key(const Vector<uint8_t>&) NOEXCEPT = 0;
+                virtual const Vector<uint8_t>& Iv() const NOEXCEPT = 0;
+                virtual void Iv(const Vector<uint8_t>&) NOEXCEPT = 0;
 
-                virtual std::shared_ptr<class ICryptoTransform> CreateDecryptor() NOEXCEPT = 0;
-                virtual std::shared_ptr<class ICryptoTransform> CreateDecryptor(CipherMode) NOEXCEPT = 0;
-                virtual std::shared_ptr<class ICryptoTransform> CreateDecryptor(CipherMode, const std::vector<uint8_t>&) NOEXCEPT = 0;
-                virtual std::shared_ptr<class ICryptoTransform> CreateDecryptor(
+                virtual Pointer<class ICryptoTransform> CreateDecryptor() NOEXCEPT = 0;
+                virtual Pointer<class ICryptoTransform> CreateDecryptor(CipherMode) NOEXCEPT = 0;
+                virtual Pointer<class ICryptoTransform> CreateDecryptor(CipherMode, const Vector<uint8_t>&) NOEXCEPT = 0;
+                virtual Pointer<class ICryptoTransform> CreateDecryptor(
                     CipherMode mode,
-                    const std::vector<uint8_t>& key,
-                    const std::vector<uint8_t>& iv) NOEXCEPT = 0;
+                    const Vector<uint8_t>& key,
+                    const Vector<uint8_t>& iv) NOEXCEPT = 0;
 
-                virtual std::shared_ptr<class ICryptoTransform> CreateEncryptor() NOEXCEPT = 0;
-                virtual std::shared_ptr<class ICryptoTransform> CreateEncryptor(CipherMode) NOEXCEPT = 0;
-                virtual std::shared_ptr<class ICryptoTransform> CreateEncryptor(CipherMode, const std::vector<uint8_t>&) NOEXCEPT = 0;
-                virtual std::shared_ptr<class ICryptoTransform> CreateEncryptor(
+                virtual Pointer<class ICryptoTransform> CreateEncryptor() NOEXCEPT = 0;
+                virtual Pointer<class ICryptoTransform> CreateEncryptor(CipherMode) NOEXCEPT = 0;
+                virtual Pointer<class ICryptoTransform> CreateEncryptor(CipherMode, const Vector<uint8_t>&) NOEXCEPT = 0;
+                virtual Pointer<class ICryptoTransform> CreateEncryptor(
                     CipherMode mode,
-                    const std::vector<uint8_t>& key,
-                    const std::vector<uint8_t>& iv) NOEXCEPT = 0;
+                    const Vector<uint8_t>& key,
+                    const Vector<uint8_t>& iv) NOEXCEPT = 0;
             };
 
             class LUPUSCORE_API SymmetricAlgorithmFactory : public IFactory<SymmetricAlgorithm, String>, public NonCopyable
@@ -105,14 +105,14 @@ namespace Lupus {
                  *
                  * \returns Zeiger auf den geklonten Algorithmus.
                  */
-                virtual std::shared_ptr<SymmetricAlgorithm> Create(const String& algorithm) const NOEXCEPT override;
+                virtual Pointer<SymmetricAlgorithm> Create(const String& algorithm) const NOEXCEPT override;
 
             private:
 
                 SymmetricAlgorithmFactory();
                 virtual ~SymmetricAlgorithmFactory() = default;
 
-                NameCollection<std::shared_ptr<SymmetricAlgorithm>> mPrototypes;
+                NameCollection<Pointer<SymmetricAlgorithm>> mPrototypes;
             };
         }
     }

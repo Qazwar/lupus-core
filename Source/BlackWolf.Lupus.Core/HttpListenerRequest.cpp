@@ -33,14 +33,14 @@
 #include "X509Certificate.h"
 #include "Cookie.h"
 
-using namespace std;
+
 using namespace Lupus::Text;
 using namespace Lupus::Net::Sockets;
 using namespace Lupus::Security::Cryptography::X509Certificates;
 
 namespace Lupus {
     namespace Net {
-        HttpListenerRequest::HttpListenerRequest(const vector<uint8_t>& buffer, shared_ptr<IPEndPoint> local, shared_ptr<IPEndPoint> remote, bool auth, bool sec) :
+        HttpListenerRequest::HttpListenerRequest(const Vector<uint8_t>& buffer, Pointer<IPEndPoint> local, Pointer<IPEndPoint> remote, bool auth, bool sec) :
             mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
             NameValueCollection::const_iterator citum;
@@ -50,26 +50,26 @@ namespace Lupus {
                 
                 if (ch == '\r' && static_cast<char>(*(it + 1)) == '\n' && static_cast<char>(*(it + 2)) == '\r' && static_cast<char>(*(it + 3)) == '\n') {
                     it += 4;
-                    mRawHeader = Encoding::ASCII()->GetString(vector<uint8_t>(begin(buffer), it));
-                    mStream = make_shared<MemoryStream>(buffer, distance(begin(buffer), it), distance(it, end(buffer)), false, true);
+                    mRawHeader = Encoding::ASCII()->GetString(Vector<uint8_t>(begin(buffer), it));
+                    mStream = MakePointer<MemoryStream>(buffer, distance(begin(buffer), it), distance(it, end(buffer)), false, true);
                     break;
                 }
             }
 
-            vector<String> lines = mRawHeader.Split("\r\n", StringSplitOption::RemoveEmptyEntries);
-            vector<String> fields(begin(lines) + 1, end(lines));
+            Vector<String> lines = mRawHeader.Split("\r\n", StringSplitOption::RemoveEmptyEntries);
+            Vector<String> fields(begin(lines) + 1, end(lines));
             String version = lines[0].Substring(lines[0].LastIndexOf("/") + 1);
             
             mMethod = lines[0].Substring(0, lines[0].IndexOf(" "));
             mVersion = Version::Parse(version);
 
             for (String str : fields) {
-                vector<String> field = str.Split(": ");
+                Vector<String> field = str.Split(": ");
                 mHeaders[field[0]] = field[1];
             }
 
             int index = lines[0].IndexOf(" ") + 1;
-            mUrl = make_shared<Uri>((mSecure ? "https://" : "http://") + mHeaders["Host"] + lines[0].Substring(index, lines[0].LastIndexOf(" ") - index));
+            mUrl = MakePointer<Uri>((mSecure ? "https://" : "http://") + mHeaders["Host"] + lines[0].Substring(index, lines[0].LastIndexOf(" ") - index));
             String query = mUrl->Query();
             String cookie = (citum = mHeaders.find("Cookie")) != end(mHeaders) ? citum->second : "";
             String language = (citum = mHeaders.find("Accept-Language")) != end(mHeaders) ? citum->second : "";
@@ -79,9 +79,9 @@ namespace Lupus {
             mContentType = (citum = mHeaders.find("Content-Type")) != end(mHeaders) ? citum->second : "";
             mUserAgent = (citum = mHeaders.find("User-Agent")) != end(mHeaders) ? citum->second : "";
 
-            mAcceptedTypes = accepttypes.IsEmpty() ? vector<String>() : accepttypes.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
-            mLanguages = language.IsEmpty() ? vector<String>() : language.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
-            auto queries = query.IsEmpty() ? vector<String>() : query.Split("&", StringSplitOption::RemoveEmptyEntries);
+            mAcceptedTypes = accepttypes.IsEmpty() ? Vector<String>() : accepttypes.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
+            mLanguages = language.IsEmpty() ? Vector<String>() : language.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
+            auto queries = query.IsEmpty() ? Vector<String>() : query.Split("&", StringSplitOption::RemoveEmptyEntries);
 
             for (auto str : queries) {
                 auto nameValuePair = str.Split("=");
@@ -92,7 +92,7 @@ namespace Lupus {
 
             for (auto str : cookies) {
                 auto nameValuePair = str.Split("=");
-                mCookies[nameValuePair[0]] = make_shared<Cookie>(nameValuePair[0], nameValuePair[1]);
+                mCookies[nameValuePair[0]] = MakePointer<Cookie>(nameValuePair[0], nameValuePair[1]);
             }
 
             if (charset.IsEmpty()) {
@@ -115,12 +115,12 @@ namespace Lupus {
             }
         }
 
-        const vector<String>& HttpListenerRequest::AcceptTypes() const
+        const Vector<String>& HttpListenerRequest::AcceptTypes() const
         {
             return mAcceptedTypes;
         }
         
-        shared_ptr<Text::Encoding> HttpListenerRequest::ContentEncoding() const
+        Pointer<Text::Encoding> HttpListenerRequest::ContentEncoding() const
         {
             return mEncoding;
         }
@@ -155,7 +155,7 @@ namespace Lupus {
             return mMethod;
         }
         
-        shared_ptr<Stream> HttpListenerRequest::InputStream() const
+        Pointer<Stream> HttpListenerRequest::InputStream() const
         {
             return mStream;
         }
@@ -189,12 +189,12 @@ namespace Lupus {
             return mLocalEP->Address()->ToString() + (mLocalEP->Port() != 80 && mLocalEP->Port() != 443 ? ":" + Integer::ToString(mLocalEP->Port()) : "");
         }
         
-        shared_ptr<Sockets::IPEndPoint> HttpListenerRequest::LocalEndPoint() const
+        Pointer<Sockets::IPEndPoint> HttpListenerRequest::LocalEndPoint() const
         {
             return mLocalEP;
         }
         
-        shared_ptr<Version> HttpListenerRequest::ProtocolVersion() const
+        Pointer<Version> HttpListenerRequest::ProtocolVersion() const
         {
             return mVersion;
         }
@@ -214,12 +214,12 @@ namespace Lupus {
             return mRemoteEP->Address()->ToString() + (mRemoteEP->Port() != 80 && mRemoteEP->Port() != 443 ? ":" + Integer::ToString(mRemoteEP->Port()) : "");
         }
         
-        shared_ptr<Sockets::IPEndPoint> HttpListenerRequest::RemoteEndPoint() const
+        Pointer<Sockets::IPEndPoint> HttpListenerRequest::RemoteEndPoint() const
         {
             return mRemoteEP;
         }
         
-        shared_ptr<Uri> HttpListenerRequest::Url() const
+        Pointer<Uri> HttpListenerRequest::Url() const
         {
             return mUrl;
         }
@@ -229,7 +229,7 @@ namespace Lupus {
             return mUserAgent;
         }
         
-        const vector<String>& HttpListenerRequest::UserLanguages() const
+        const Vector<String>& HttpListenerRequest::UserLanguages() const
         {
             return mLanguages;
         }
@@ -239,14 +239,14 @@ namespace Lupus {
             return mRawHeader;
         }
 
-        Task<shared_ptr<X509Certificate>> HttpListenerRequest::GetClientCertificateAsync() const
+        Task<Pointer<X509Certificate>> HttpListenerRequest::GetClientCertificateAsync() const
         {
-            return Task<shared_ptr<X509Certificate>>([this]() {
+            return Task<Pointer<X509Certificate>>([this]() {
                 return this->GetClientCertificate();
             });
         }
 
-        shared_ptr<X509Certificate> HttpListenerRequest::GetClientCertificate() const
+        Pointer<X509Certificate> HttpListenerRequest::GetClientCertificate() const
         {
             return nullptr;
         }

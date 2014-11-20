@@ -186,6 +186,9 @@
     <ClCompile Include="HttpListener.cpp">
       <Filter>Code\Net\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="NetDefinitions.cpp">
+      <Filter>Code\Net\Sockets\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IPAddress.h">

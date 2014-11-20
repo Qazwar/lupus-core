@@ -24,18 +24,18 @@
 #include "Integer.h"
 #include <vector>
 
-using namespace std;
+
 
 namespace Lupus {
     Version::Version(const String& version)
     {
-        vector<int> numbers(4, -1);
+        Vector<int> numbers(4, -1);
         
         for (int n = version.IndexOf("."), o = 0, i = 0; n != -1 && i < 4; o = n, n = version.IndexOf(".", n), i++) {
             int num = -1;
 
             if (!Integer::TryParse(version.Substring(o, n), num)) {
-                throw format_error("Invalid version number");
+                throw FormatError("Invalid version number");
             }
 
             numbers[i] = num;
@@ -97,9 +97,9 @@ namespace Lupus {
         }
     }
 
-    shared_ptr<Version> Version::Clone() const
+    Pointer<Version> Version::Clone() const
     {
-        return make_shared<Version>(mMajor, mMinor, mBuild, mRevision);
+        return MakePointer<Version>(mMajor, mMinor, mBuild, mRevision);
     }
 
     String Version::ToString() const
@@ -114,7 +114,7 @@ namespace Lupus {
         return result;
     }
 
-    bool Version::operator==(shared_ptr<Version> version) const
+    bool Version::operator==(Pointer<Version> version) const
     {
         return (
             mMajor == version->Major() &&
@@ -124,7 +124,7 @@ namespace Lupus {
         );
     }
 
-    bool Version::operator!=(shared_ptr<Version> version) const
+    bool Version::operator!=(Pointer<Version> version) const
     {
         return (
             mMajor != version->Major() ||
@@ -134,7 +134,7 @@ namespace Lupus {
         );
     }
 
-    bool Version::operator>=(shared_ptr<Version> version) const
+    bool Version::operator>=(Pointer<Version> version) const
     {
         return (
             mMajor >= version->Major() ||
@@ -144,7 +144,7 @@ namespace Lupus {
         );
     }
 
-    bool Version::operator>(shared_ptr<Version> version) const
+    bool Version::operator>(Pointer<Version> version) const
     {
         return (
             mMajor > version->Major() ||
@@ -154,7 +154,7 @@ namespace Lupus {
         );
     }
 
-    bool Version::operator<=(shared_ptr<Version> version) const
+    bool Version::operator<=(Pointer<Version> version) const
     {
         return (
             mMajor <= version->Major() ||
@@ -164,7 +164,7 @@ namespace Lupus {
         );
     }
 
-    bool Version::operator<(shared_ptr<Version> version) const
+    bool Version::operator<(Pointer<Version> version) const
     {
         return (
             mMajor < version->Major() ||
@@ -174,34 +174,34 @@ namespace Lupus {
         );
     }
 
-    shared_ptr<Version> Version::Parse(const String& value)
+    Pointer<Version> Version::Parse(const String& value)
     {
-        vector<int> numbers(4, -1);
+        Vector<int> numbers(4, -1);
 
         for (int n = value.IndexOf("."), o = 0, i = 0; o != -1 && i < 4; o = n == -1 ? -1 : n + 1, n = value.IndexOf(".", n + 1), i++) {
             int num = -1;
 
             if (n != -1) {
                 if (!Integer::TryParse(value.Substring(o, n), num)) {
-                    throw format_error("Invalid version number");
+                    throw FormatError("Invalid version number");
                 }
             } else {
                 if (!Integer::TryParse(value.Substring(o), num)) {
-                    throw format_error("Invalid version number");
+                    throw FormatError("Invalid version number");
                 }
             }
 
             numbers[i] = num;
         }
 
-        return make_shared<Version>(numbers[0], numbers[1], numbers[2], numbers[3]);
+        return MakePointer<Version>(numbers[0], numbers[1], numbers[2], numbers[3]);
     }
 
-    bool Version::TryParse(const String& value, shared_ptr<Version>& result)
+    bool Version::TryParse(const String& value, Pointer<Version>& result)
     {
         try {
             result = Version::Parse(value);
-        } catch (format_error&) {
+        } catch (FormatError&) {
             return false;
         }
 

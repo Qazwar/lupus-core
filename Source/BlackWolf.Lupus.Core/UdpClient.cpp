@@ -29,59 +29,59 @@
 
 #include <thread>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Net {
         namespace Sockets {
             UdpClient::UdpClient(AddressFamily family)
             {
-                mClient = make_shared<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
+                mClient = MakePointer<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
             }
 
             UdpClient::UdpClient(uint16_t port)
             {
-                mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
-                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback(), port));
+                mClient = MakePointer<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
+                mClient->Bind(MakePointer<IPEndPoint>(IPAddress::Loopback(), port));
             }
 
-            UdpClient::UdpClient(shared_ptr<IPEndPoint> ep)
+            UdpClient::UdpClient(Pointer<IPEndPoint> ep)
             {
                 if (!ep) {
-                    throw null_pointer("ep");
+                    throw NullPointer("ep");
                 }
 
-                mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
+                mClient = MakePointer<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
                 mClient->Bind(ep);
             }
 
             UdpClient::UdpClient(uint16_t port, AddressFamily family)
             {
-                mClient = make_shared<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
-                mClient->Bind(make_shared<IPEndPoint>(IPAddress::Loopback(), port));
+                mClient = MakePointer<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
+                mClient->Bind(MakePointer<IPEndPoint>(IPAddress::Loopback(), port));
             }
 
             UdpClient::UdpClient(const String& hostname, uint16_t port)
             {
-                mClient = make_shared<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
+                mClient = MakePointer<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
                 mClient->Connect(GetAddressInformation(hostname, Integer::ToString(port), AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP));
             }
 
             size_t UdpClient::Available() const
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 return mClient->Available();
             }
 
-            shared_ptr<Socket> UdpClient::Client() const
+            Pointer<Socket> UdpClient::Client() const
             {
                 return mClient;
             }
 
-            void UdpClient::Client(shared_ptr<Socket> client)
+            void UdpClient::Client(Pointer<Socket> client)
             {
                 mClient = client;
             }
@@ -89,13 +89,13 @@ namespace Lupus {
             bool UdpClient::ExclusiveAddressUse() const
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 int result, length = 4;
 
                 if (getsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&result, (int*)&length) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return (result != 0);
@@ -104,57 +104,57 @@ namespace Lupus {
             void UdpClient::ExclusiveAddressUse(bool value)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 int val = value ? 1 : 0;
 
                 if (setsockopt(mClient->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&val, 4) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
             }
 
-            Task<std::vector<uint8_t>> UdpClient::ReceiveAsync(shared_ptr<IPEndPoint>& ep)
+            Task<Vector<uint8_t>> UdpClient::ReceiveAsync(Pointer<IPEndPoint>& ep)
             {
-                return Task<vector<uint8_t>>([this, &ep]() {
+                return Task<Vector<uint8_t>>([this, &ep]() {
                     return this->Receive(ep);
                 });
             }
 
-            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size)
+            Task<int> UdpClient::SendAsync(const Vector<uint8_t>& buffer, size_t size)
             {
                 return Task<int>([this, &buffer, size]() {
                     return this->Send(buffer, size);
                 });
             }
 
-            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, shared_ptr<IPEndPoint> ep)
+            Task<int> UdpClient::SendAsync(const Vector<uint8_t>& buffer, size_t size, Pointer<IPEndPoint> ep)
             {
                 return Task<int>([this, &buffer, size, ep]() {
                     return this->Send(buffer, size, ep);
                 });
             }
 
-            Task<int> UdpClient::SendAsync(const vector<uint8_t>& buffer, size_t size, const String& hostname, uint16_t port)
+            Task<int> UdpClient::SendAsync(const Vector<uint8_t>& buffer, size_t size, const String& hostname, uint16_t port)
             {
                 return Task<int>([this, &buffer, size, &hostname, port]() {
                     return this->Send(buffer, size, hostname, port);
                 });
             }
 
-            void UdpClient::Connect(shared_ptr<IPEndPoint> remoteEndPoint)
+            void UdpClient::Connect(Pointer<IPEndPoint> remoteEndPoint)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 mClient->Connect(remoteEndPoint);
             }
 
-            void UdpClient::Connect(shared_ptr<IPAddress> address, uint16_t port)
+            void UdpClient::Connect(Pointer<IPAddress> address, uint16_t port)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 mClient->Connect(address, port);
@@ -163,7 +163,7 @@ namespace Lupus {
             void UdpClient::Connect(const String& host, uint16_t port)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 mClient->Connect(host, port);
@@ -172,52 +172,52 @@ namespace Lupus {
             void UdpClient::Close()
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 mClient->Close();
             }
 
-            vector<uint8_t> UdpClient::Receive(shared_ptr<IPEndPoint>& ep)
+            Vector<uint8_t> UdpClient::Receive(Pointer<IPEndPoint>& ep)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
-                vector<uint8_t> vec(Available());
+                Vector<uint8_t> vec(Available());
                 mClient->ReceiveFrom(vec, ep);
                 return vec;
             }
 
-            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes)
+            int UdpClient::Send(const Vector<uint8_t>& buffer, size_t bytes)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
                 return mClient->Send(buffer, 0, bytes);
             }
 
-            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, shared_ptr<IPEndPoint> ep)
+            int UdpClient::Send(const Vector<uint8_t>& buffer, size_t bytes, Pointer<IPEndPoint> ep)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 } else if (mClient->IsConnected()) {
-                    throw socket_error("client is already connected");
+                    throw SocketError("client is already connected");
                 }
 
                 return mClient->SendTo(buffer, 0, bytes, ep);
             }
 
-            int UdpClient::Send(const vector<uint8_t>& buffer, size_t bytes, const String& hostname, uint16_t port)
+            int UdpClient::Send(const Vector<uint8_t>& buffer, size_t bytes, const String& hostname, uint16_t port)
             {
                 if (!mClient) {
-                    throw invalid_operation("UdpClient is in an invalid state");
+                    throw InvalidOperation("UdpClient is in an invalid state");
                 } else if (mClient->IsConnected()) {
-                    throw socket_error("client is already connected");
+                    throw SocketError("client is already connected");
                 }
 
-                return mClient->SendTo(buffer, 0, bytes, make_shared<IPEndPoint>(IPAddress::Parse(hostname), port));
+                return mClient->SendTo(buffer, 0, bytes, MakePointer<IPEndPoint>(IPAddress::Parse(hostname), port));
             }
         }
     }

@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -27,30 +32,30 @@ namespace Lupus {
         {
         public:
 
-            Encoding(String str) throw(std::runtime_error);
+            Encoding(String str) throw(RuntimeError);
             virtual ~Encoding();
 
-            virtual std::shared_ptr<Encoding> Clone() const NOEXCEPT override;
+            virtual Pointer<Encoding> Clone() const NOEXCEPT override;
 
-            virtual String GetString(const std::vector<uint8_t>& buffer) const throw(format_error, std::runtime_error);
+            virtual String GetString(const Vector<uint8_t>& buffer) const throw(FormatError, RuntimeError);
             virtual String GetString(
-                const std::vector<uint8_t>& buffer,
-                size_t offset, size_t count) const throw(format_error, std::runtime_error, std::out_of_range);
-            virtual std::vector<uint8_t> GetBytes(const String& str) const throw(format_error, std::runtime_error);
-            virtual std::vector<uint8_t> GetBytes(
+                const Vector<uint8_t>& buffer,
+                size_t offset, size_t count) const throw(FormatError, RuntimeError, OutOfRange);
+            virtual Vector<uint8_t> GetBytes(const String& str) const throw(FormatError, RuntimeError);
+            virtual Vector<uint8_t> GetBytes(
                 const String& str,
-                size_t offset, size_t count) const throw(format_error, std::runtime_error, std::out_of_range);
+                size_t offset, size_t count) const throw(FormatError, RuntimeError, OutOfRange);
             virtual String Name() const NOEXCEPT;
 
-            static std::shared_ptr<Encoding> ASCII() NOEXCEPT;
-            static std::shared_ptr<Encoding> Default() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF32() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF16() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF8() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF7() NOEXCEPT;
+            static Pointer<Encoding> ASCII() NOEXCEPT;
+            static Pointer<Encoding> Default() NOEXCEPT;
+            static Pointer<Encoding> UTF32() NOEXCEPT;
+            static Pointer<Encoding> UTF16() NOEXCEPT;
+            static Pointer<Encoding> UTF8() NOEXCEPT;
+            static Pointer<Encoding> UTF7() NOEXCEPT;
 
-            static std::shared_ptr<Encoding> GetEncoding(String encoding) NOEXCEPT;
-            static std::vector<String> GetEncodings() NOEXCEPT;
+            static Pointer<Encoding> GetEncoding(String encoding) NOEXCEPT;
+            static Vector<String> GetEncodings() NOEXCEPT;
 
         private:
 

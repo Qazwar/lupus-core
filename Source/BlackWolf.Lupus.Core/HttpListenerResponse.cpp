@@ -36,28 +36,28 @@
 #include "NetworkStream.h"
 #include "Integer.h"
 
-using namespace std;
+
 using namespace Lupus::Text;
 using namespace Lupus::Net::Sockets;
 
 namespace Lupus {
     namespace Net {
-        HttpListenerResponse::HttpListenerResponse(shared_ptr<TcpClient> client) :
+        HttpListenerResponse::HttpListenerResponse(Pointer<TcpClient> client) :
             mClient(client)
         {
             if (!client) {
-                throw null_pointer("client");
+                throw NullPointer("client");
             }
 
-            mStream = make_shared<MemoryStream>();
+            mStream = MakePointer<MemoryStream>();
         }
         
-        std::shared_ptr<Text::Encoding> HttpListenerResponse::ContentEncoding() const 
+        Pointer<Text::Encoding> HttpListenerResponse::ContentEncoding() const 
         {
             return mEncoding;
         }
         
-        void HttpListenerResponse::ContentEncoding(std::shared_ptr<Text::Encoding> encoding) 
+        void HttpListenerResponse::ContentEncoding(Pointer<Text::Encoding> encoding) 
         {
             mEncoding = encoding;
         }
@@ -88,12 +88,12 @@ namespace Lupus {
             mHeaders["Content-Type"] = type;
         }
         
-        const NameCollection<std::shared_ptr<Cookie>>& HttpListenerResponse::Cookies() const
+        const NameCollection<Pointer<Cookie>>& HttpListenerResponse::Cookies() const
         {
             return mCookies;
         }
         
-        void HttpListenerResponse::Cookies(const NameCollection<std::shared_ptr<Cookie>>& cookies)
+        void HttpListenerResponse::Cookies(const NameCollection<Pointer<Cookie>>& cookies)
         {
             mCookies = cookies;
         }
@@ -128,17 +128,17 @@ namespace Lupus {
             }
         }
         
-        std::shared_ptr<Stream> HttpListenerResponse::OutputStream() const 
+        Pointer<Stream> HttpListenerResponse::OutputStream() const 
         {
-            return make_shared<Lupus::OutputStream>(mStream);
+            return MakePointer<Lupus::OutputStream>(mStream);
         }
         
-        std::shared_ptr<Version> HttpListenerResponse::ProtocolVersion() const 
+        Pointer<Version> HttpListenerResponse::ProtocolVersion() const 
         {
             return mVersion;
         }
         
-        void HttpListenerResponse::ProtocolVersion(std::shared_ptr<Version> version) 
+        void HttpListenerResponse::ProtocolVersion(Pointer<Version> version) 
         {
             mVersion = version;
         }
@@ -161,7 +161,7 @@ namespace Lupus {
         void HttpListenerResponse::StatusCode(int32_t status)
         {
             if (!ValidStatusCode(status)) {
-                throw invalid_argument("status");
+                throw InvalidArgument("status");
             }
 
             mStatus = status;
@@ -188,7 +188,7 @@ namespace Lupus {
             mHeaders[name] = value;
         }
 
-        void HttpListenerResponse::AppendCookie(shared_ptr<Cookie> cookie)
+        void HttpListenerResponse::AppendCookie(Pointer<Cookie> cookie)
         {
             mCookies[cookie->Name()] = cookie;
         }
@@ -206,13 +206,13 @@ namespace Lupus {
 
         void HttpListenerResponse::Close()
         {
-            vector<uint8_t> body((size_t)mStream->Length());
+            Vector<uint8_t> body((size_t)mStream->Length());
             mStream->Seek(0, SeekOrigin::Begin);
             mStream->Read(body, 0, body.size());
             Close(body, true);
         }
 
-        void HttpListenerResponse::Close(const std::vector<uint8_t>& responseEntity, bool willBlock)
+        void HttpListenerResponse::Close(const Vector<uint8_t>& responseEntity, bool willBlock)
         {
             auto buffer = Encoding::ASCII()->GetBytes(ToString());
             auto stream = mClient->GetStream();
@@ -230,10 +230,10 @@ namespace Lupus {
             }
         }
 
-        void HttpListenerResponse::SetCookie(shared_ptr<Cookie> cookie)
+        void HttpListenerResponse::SetCookie(Pointer<Cookie> cookie)
         {
             if (mCookies.find(cookie->Name()) != end(mCookies)) {
-                throw invalid_argument("cookie");
+                throw InvalidArgument("cookie");
             } else {
                 mCookies[cookie->Name()] = cookie;
             }

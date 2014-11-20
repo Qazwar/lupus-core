@@ -93,16 +93,16 @@ namespace Lupus {
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
         static bool TryParse(const String& string, unsigned long long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 
-        static int8_t ParseByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static short ParseShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static int ParseInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static long ParseLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static long long ParseLongLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static int8_t ParseByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static short ParseShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static int ParseInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static long ParseLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static long long ParseLongLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
 
-        static uint8_t ParseUByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned short ParseUShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned int ParseUInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned long ParseULong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
-        static unsigned long long ParseULongLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(std::invalid_argument);
+        static uint8_t ParseUByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static unsigned short ParseUShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static unsigned int ParseUInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static unsigned long ParseULong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static unsigned long long ParseULongLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
 	};
 }

@@ -25,11 +25,11 @@
 #include "DataRow.h"
 #include "IDataReader.h"
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Data {
-        void DataTable::Load(shared_ptr<IDataReader> reader)
+        void DataTable::Load(Pointer<IDataReader> reader)
         {
             if (reader->Depth() == 0) {
                 return;
@@ -38,7 +38,7 @@ namespace Lupus {
             const int fieldCount = reader->FieldCount();
 
             for (int i = 0; i < fieldCount; i++) {
-                mColumns.push_back(make_shared<DataColumn>(
+                mColumns.push_back(MakePointer<DataColumn>(
                     reader->ColumnName(i), reader->Type(i), i
                 ));
             }
@@ -50,11 +50,11 @@ namespace Lupus {
                     row[reader->ColumnName(i)] = reader->Value(i);
                 }
 
-                mRows.push_back(make_shared<DataRow>(row));
+                mRows.push_back(MakePointer<DataRow>(row));
             } while (reader->NextResult());
         }
 
-        vector<shared_ptr<DataRow>> DataTable::Rows() const
+        Vector<Pointer<DataRow>> DataTable::Rows() const
         {
             return mRows;
         }
@@ -64,7 +64,7 @@ namespace Lupus {
             return mRows.size();
         }
         
-        vector<shared_ptr<DataColumn>> DataTable::Columns() const
+        Vector<Pointer<DataColumn>> DataTable::Columns() const
         {
             return mColumns;
         }
@@ -74,15 +74,15 @@ namespace Lupus {
             return mColumns.size();
         }
         
-        vector<shared_ptr<DataRow>> DataTable::Fetch(unsigned row, unsigned count) const
+        Vector<Pointer<DataRow>> DataTable::Fetch(unsigned row, unsigned count) const
         {
             if (row + count > mRows.size()) {
-                return vector<shared_ptr<DataRow>>();
+                return Vector<Pointer<DataRow>>();
             }
 
             auto it = begin(mRows) + row;
 
-            return vector<shared_ptr<DataRow>>(it, it + count);
+            return Vector<Pointer<DataRow>>(it, it + count);
         }
     }
 }

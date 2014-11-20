@@ -24,41 +24,41 @@
 
 #include <thread>
 
-using namespace std;
+
 
 namespace Lupus {
-    Task<void> Stream::CopyToAsync(shared_ptr<Stream> destination)
+    Task<void> Stream::CopyToAsync(Pointer<Stream> destination)
     {
         return Task<void>([this, destination]() {
             this->CopyTo(destination);
         });
     }
 
-    Task<void> Stream::FlushAsync() throw(std::invalid_argument)
+    Task<void> Stream::FlushAsync() throw(InvalidArgument)
     {
         return Task<void>([this]() {
             this->Flush();
         });
     }
 
-    Task<int> Stream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size)
+    Task<int> Stream::ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size)
     {
         return Task<int>([this, &buffer, offset, size]() {
             return this->Read(buffer, offset, size);
         });
     }
 
-    Task<int> Stream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size)
+    Task<int> Stream::WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size)
     {
         return Task<int>([this, &buffer, offset, size]() {
             return this->Write(buffer, offset, size);
         });
     }
 
-    void Stream::CopyTo(shared_ptr<Stream> destination)
+    void Stream::CopyTo(Pointer<Stream> destination)
     {
         if (!destination) {
-            throw null_pointer("destination");
+            throw NullPointer("destination");
         }
 
         int64_t pos = Position();
@@ -74,37 +74,37 @@ namespace Lupus {
             destination->Length(destination->Length() + size - dsize);
         }
 
-        vector<uint8_t> buffer((size_t)size);
+        Vector<uint8_t> buffer((size_t)size);
         Read(buffer, 0, (size_t)size);
         destination->Write(buffer, 0, (size_t)size);
     }
 
     void Stream::Flush()
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
     void Stream::Length(int64_t length)
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
     void Stream::Position(int64_t)
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
     int64_t Stream::Seek(int64_t offset, SeekOrigin origin)
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
-    InputStream::InputStream(shared_ptr<Stream> innerStream)
+    InputStream::InputStream(Pointer<Stream> innerStream)
     {
         if (!innerStream) {
-            throw null_pointer("innerStream");
+            throw NullPointer("innerStream");
         } else if (!innerStream->CanRead()) {
-            throw invalid_argument("innerStream");
+            throw InvalidArgument("innerStream");
         }
 
         mInnerStream = innerStream;
@@ -130,7 +130,7 @@ namespace Lupus {
         mInnerStream->Close();
     }
 
-    void InputStream::CopyTo(std::shared_ptr<Stream> destination)
+    void InputStream::CopyTo(Pointer<Stream> destination)
     {
         mInnerStream->CopyTo(destination);
     }
@@ -147,7 +147,7 @@ namespace Lupus {
 
     void InputStream::Length(int64_t)
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
     int64_t InputStream::Position() const
@@ -160,7 +160,7 @@ namespace Lupus {
         mInnerStream->Position(pos);
     }
 
-    int InputStream::Read(std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    int InputStream::Read(Vector<uint8_t>& buffer, size_t offset, size_t size)
     {
         return mInnerStream->Read(buffer, offset, size);
     }
@@ -170,14 +170,14 @@ namespace Lupus {
         return mInnerStream->ReadByte();
     }
 
-    int InputStream::Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    int InputStream::Write(const Vector<uint8_t>& buffer, size_t offset, size_t size)
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
     void InputStream::WriteByte(uint8_t byte)
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
     int64_t InputStream::Seek(int64_t offset, SeekOrigin origin)
@@ -185,12 +185,12 @@ namespace Lupus {
         return mInnerStream->Seek(offset, origin);
     }
 
-    OutputStream::OutputStream(shared_ptr<Stream> innerStream)
+    OutputStream::OutputStream(Pointer<Stream> innerStream)
     {
         if (!innerStream) {
-            throw null_pointer("innerStream");
+            throw NullPointer("innerStream");
         } else if (!innerStream->CanWrite()) {
-            throw invalid_argument("innerStream");
+            throw InvalidArgument("innerStream");
         }
 
         mInnerStream = innerStream;
@@ -216,7 +216,7 @@ namespace Lupus {
         mInnerStream->Close();
     }
 
-    void OutputStream::CopyTo(std::shared_ptr<Stream> destination)
+    void OutputStream::CopyTo(Pointer<Stream> destination)
     {
         mInnerStream->CopyTo(destination);
     }
@@ -246,17 +246,17 @@ namespace Lupus {
         mInnerStream->Position(pos);
     }
 
-    int OutputStream::Read(std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    int OutputStream::Read(Vector<uint8_t>& buffer, size_t offset, size_t size)
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
     int OutputStream::ReadByte()
     {
-        throw not_supported();
+        throw NotSupported();
     }
 
-    int OutputStream::Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
+    int OutputStream::Write(const Vector<uint8_t>& buffer, size_t offset, size_t size)
     {
         return mInnerStream->Write(buffer, offset, size);
     }

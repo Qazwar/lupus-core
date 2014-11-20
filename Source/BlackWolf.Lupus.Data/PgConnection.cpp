@@ -27,7 +27,7 @@
 #include <thread>
 #include <postgres/libpq-fe.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Data {
@@ -47,9 +47,9 @@ namespace Lupus {
                 return mConnString;
             }
 
-            shared_ptr<ITransaction> PgConnection::BeginTransaction(IsolationLevel level)
+            Pointer<ITransaction> PgConnection::BeginTransaction(IsolationLevel level)
             {
-                return make_shared<PgTransaction>(mPgConn, level);
+                return MakePointer<PgTransaction>(mPgConn, level);
             }
             
             void PgConnection::Connect(const String& pgConnectionString)
@@ -69,9 +69,9 @@ namespace Lupus {
                 }
             }
             
-            shared_ptr<Command> PgConnection::CreateCommand()
+            Pointer<Command> PgConnection::CreateCommand()
             {
-                return make_shared<PgCommand>(mPgConn);
+                return MakePointer<PgCommand>(mPgConn);
             }
             
             void PgConnection::Open()

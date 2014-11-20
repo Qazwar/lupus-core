@@ -29,8 +29,11 @@
 #include <memory>
 #include <unordered_map>
 #include <algorithm>
-#include <exception>
+#include <Exception>
 #include <chrono>
+#include <vector>
+#include <list>
+#include <deque>
 #include <boost/any.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -71,7 +74,7 @@
 #endif
 
 #define LupusDefineError(cls) \
-    class cls : public virtual std::exception \
+    class cls : public virtual Exception \
     { \
         std::string mMessage; \
     public: \
@@ -105,15 +108,62 @@
 #define LupusCreateNoFlag(name) name = 0
 
 namespace Lupus {
-    LupusDefineError(null_pointer);
-    LupusDefineError(socket_error);
-    LupusDefineError(http_error);
-    LupusDefineError(io_error);
-    LupusDefineError(not_supported);
-    LupusDefineError(unauthorized_access);
-    LupusDefineError(authentication_error);
-    LupusDefineError(format_error);
-    LupusDefineError(invalid_operation);
+    typedef std::exception Exception;
+    typedef std::out_of_range OutOfRange;
+    typedef std::runtime_error RuntimeError;
+    typedef std::system_error SystemError;
+    typedef std::invalid_argument InvalidArgument;
+    typedef std::bad_alloc BadAlloc;
+    LupusDefineError(NullPointer);
+    LupusDefineError(SocketError);
+    LupusDefineError(HttpError);
+    LupusDefineError(IOError);
+    LupusDefineError(NotSupported);
+    LupusDefineError(UnauthorizedAccess);
+    LupusDefineError(AuthenticationError);
+    LupusDefineError(FormatError);
+    LupusDefineError(InvalidOperation);
+
+    typedef class String string;
+
+    typedef std::unordered_map<class String, class String> NameValueCollection;
+    typedef std::pair<class String, class String> NameValuePair;
+
+    template <typename TValue>
+    using NameCollection = std::unordered_map < class String, TValue >;
+    template <typename TValue>
+    using NamePair = std::pair < class String, TValue >;
+
+    template <typename TKey, typename TValue>
+    using Collection = std::unordered_map < TKey, TValue >;
+    template <typename TKey, typename TValue>
+    using Pair = std::pair < TKey, TValue >;
+
+    template <typename T>
+    using Vector = std::vector < T >;
+    template <typename T>
+    using List = std::list < T >;
+    template <typename T>
+    using Deque = std::deque < T >;
+
+    template <typename T>
+    using Pointer = std::shared_ptr < T >;
+    template <typename T>
+    using Reference = std::weak_ptr < T >;
+    template <typename T>
+    using Unique = std::unique_ptr < T >;
+
+    typedef boost::any Any;
+    typedef boost::noncopyable NonCopyable;
+
+    typedef std::chrono::high_resolution_clock Clock;
+    typedef std::chrono::time_point<Clock> TimePoint;
+    typedef std::chrono::nanoseconds Nanoseconds;
+    typedef std::chrono::microseconds Microseconds;
+    typedef std::chrono::milliseconds Milliseconds;
+    typedef std::chrono::seconds Seconds;
+    typedef std::chrono::minutes Minutes;
+    typedef std::chrono::hours Hours;
 
     LUPUSCORE_API class String RandomString(uint32_t length);
 
@@ -135,30 +185,19 @@ namespace Lupus {
         return ((flags & flag) == flag);
     }
 
-    LUPUSCORE_API std::shared_ptr<class Version> GetVersion();
+    template <typename T, typename... Args>
+    Pointer<T> MakePointer(Args&&... args)
+    {
+        return std::make_shared<T>(std::forward<Args>(args)...);
+    }
 
-    typedef std::unordered_map<class String, class String> NameValueCollection;
-    typedef std::pair<class String, class String> NameValuePair;
+    template <typename T, typename... Args>
+    Unique<T> MakeUnique(Args&&... args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
 
-    template <typename TValue>
-    using NameCollection = std::unordered_map < class String, TValue > ;
-    template <typename TValue>
-    using NamePair = std::pair < class String, TValue > ;
+    LUPUSCORE_API Pointer<class Version> GetVersion();
 
-    template <typename TKey, typename TValue>
-    using Collection = std::unordered_map < TKey, TValue > ;
-    template <typename TKey, typename TValue>
-    using Pair = std::pair < TKey, TValue > ;
-
-    typedef boost::any Any;
-    typedef boost::noncopyable NonCopyable;
-
-    typedef std::chrono::high_resolution_clock Clock;
-    typedef std::chrono::time_point<Clock> TimePoint;
-    typedef std::chrono::nanoseconds Nanoseconds;
-    typedef std::chrono::microseconds Microseconds;
-    typedef std::chrono::milliseconds Milliseconds;
-    typedef std::chrono::seconds Seconds;
-    typedef std::chrono::minutes Minutes;
-    typedef std::chrono::hours Hours;
+    LUPUSCORE_API std::string GetLastSystemError();
 }

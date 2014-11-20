@@ -76,7 +76,7 @@ namespace Lupus {
         float result = 0;
 
         if (!TryParse(str, result)) {
-            throw std::invalid_argument("str");
+            throw InvalidArgument("str");
         }
 
         return result;
@@ -87,7 +87,7 @@ namespace Lupus {
         double result = 0;
 
         if (!TryParse(str, result)) {
-            throw std::invalid_argument("str");
+            throw InvalidArgument("str");
         }
 
         return result;
@@ -98,7 +98,7 @@ namespace Lupus {
         long double result = 0;
 
         if (!TryParse(str, result)) {
-            throw std::invalid_argument("str");
+            throw InvalidArgument("str");
         }
 
         return result;

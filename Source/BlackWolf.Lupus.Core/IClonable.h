@@ -29,6 +29,6 @@ namespace Lupus {
     {
     public:
         virtual ~IClonable() = default;
-        virtual std::shared_ptr<T> Clone() const = 0;
+        virtual Pointer<T> Clone() const = 0;
     };
 }

@@ -24,7 +24,7 @@
 #include "Internal/PgOid.h"
 #include <postgres/libpq-fe.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Data {

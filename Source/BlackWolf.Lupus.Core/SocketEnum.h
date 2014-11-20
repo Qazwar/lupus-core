@@ -101,7 +101,7 @@ namespace Lupus {
 
             LupusFlagEnumeration(SocketFlags);
 
-            enum SocketError {
+            enum class SocketErrorCode {
 #ifdef _MSC_VER
                 NotInitialized = WSANOTINITIALISED,
                 NetworkDown = WSAENETDOWN,

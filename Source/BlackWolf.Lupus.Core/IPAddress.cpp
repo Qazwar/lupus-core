@@ -33,12 +33,12 @@ namespace Lupus {
                 mAddress.insert(std::end(mAddress), (uint8_t*)&ipv4, (uint8_t*)&ipv4 + 4);
             }
 
-            IPAddress::IPAddress(const std::vector<uint8_t>& ipv6) :
+            IPAddress::IPAddress(const Vector<uint8_t>& ipv6) :
                 IPAddress(ipv6, 0)
             {
             }
 
-            IPAddress::IPAddress(const std::vector<uint8_t>& ipv6, uint32_t scopeid) :
+            IPAddress::IPAddress(const Vector<uint8_t>& ipv6, uint32_t scopeid) :
                 mFamily(AddressFamily::InterNetworkV6)
             {
                 if (ipv6.size() != 16) {
@@ -50,11 +50,11 @@ namespace Lupus {
             }
 
             IPAddress::IPAddress(std::initializer_list<uint8_t> ilist) :
-                IPAddress(std::vector<uint8_t>(ilist))
+                IPAddress(Vector<uint8_t>(ilist))
             {
             }
 
-            std::vector<uint8_t> IPAddress::Bytes() const
+            Vector<uint8_t> IPAddress::Bytes() const
             {
                 return mAddress;
             }
@@ -119,10 +119,10 @@ namespace Lupus {
                 return str;
             }
 
-            bool IPAddress::IsLoopback(std::shared_ptr<IPAddress> address)
+            bool IPAddress::IsLoopback(Pointer<IPAddress> address)
             {
-                std::vector<uint8_t> addressBytes = address->Bytes();
-                std::vector<uint8_t> comparer;
+                Vector<uint8_t> addressBytes = address->Bytes();
+                Vector<uint8_t> comparer;
 
                 switch (address->Family()) {
                     case AddressFamily::InterNetwork:
@@ -151,7 +151,7 @@ namespace Lupus {
                 return true;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::Parse(const String& ipString)
+            Pointer<IPAddress> IPAddress::Parse(const String& ipString)
             {
                 IPAddress* address = new IPAddress(0);
                 AddrIn addr;
@@ -174,7 +174,7 @@ namespace Lupus {
                         address->mAddress.push_back(*(begin + i));
                     }
                 } else {
-                    throw std::invalid_argument("Not a valid IP address presentation");
+                    throw InvalidArgument("Not a valid IP address presentation");
                 }
 #else
                 if (inet_pton(AF_INET, ipString.ToUTF8().c_str(), &(addr.sin_addr)) == 1) {
@@ -189,66 +189,66 @@ namespace Lupus {
                         address->mAddress.push_back(*(begin + i));
                     }
                 } else {
-                    throw std::invalid_argument("Not a valid IP address presentation");
+                    throw InvalidArgument("Not a valid IP address presentation");
                 }
 #endif
 
-                return std::shared_ptr<IPAddress>(address);
+                return Pointer<IPAddress>(address);
             }
 
-            bool IPAddress::TryParse(const String& ipString, std::shared_ptr<IPAddress>& address)
+            bool IPAddress::TryParse(const String& ipString, Pointer<IPAddress>& address)
             {
                 try {
                     address = IPAddress::Parse(ipString);
-                } catch (std::invalid_argument&) {
+                } catch (InvalidArgument&) {
                     return false;
                 }
 
                 return true;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::Any()
+            Pointer<IPAddress> IPAddress::Any()
             {
                 return sAny;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::Broadcast()
+            Pointer<IPAddress> IPAddress::Broadcast()
             {
                 return sBroadcast;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::IPv6Any()
+            Pointer<IPAddress> IPAddress::IPv6Any()
             {
                 return sIPv6Any;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::IPv6Loopback()
+            Pointer<IPAddress> IPAddress::IPv6Loopback()
             {
                 return sIPv6Loopback;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::IPv6None()
+            Pointer<IPAddress> IPAddress::IPv6None()
             {
                 return sIPv6None;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::Loopback()
+            Pointer<IPAddress> IPAddress::Loopback()
             {
                 return sLoopback;
             }
 
-            std::shared_ptr<IPAddress> IPAddress::None()
+            Pointer<IPAddress> IPAddress::None()
             {
                 return sNone;
             }
 
-            const std::shared_ptr<IPAddress> IPAddress::sAny(new IPAddress(0));
-            const std::shared_ptr<IPAddress> IPAddress::sBroadcast(new IPAddress(0xFFFFFFFF));
-            const std::shared_ptr<IPAddress> IPAddress::sIPv6Any(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
-            const std::shared_ptr<IPAddress> IPAddress::sIPv6Loopback(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01 })));
-            const std::shared_ptr<IPAddress> IPAddress::sIPv6None(new IPAddress(std::vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
-            const std::shared_ptr<IPAddress> IPAddress::sLoopback(new IPAddress(0x7F000001));
-            const std::shared_ptr<IPAddress> IPAddress::sNone(new IPAddress(0));
+            const Pointer<IPAddress> IPAddress::sAny(new IPAddress(0));
+            const Pointer<IPAddress> IPAddress::sBroadcast(new IPAddress(0xFFFFFFFF));
+            const Pointer<IPAddress> IPAddress::sIPv6Any(new IPAddress(Vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
+            const Pointer<IPAddress> IPAddress::sIPv6Loopback(new IPAddress(Vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01 })));
+            const Pointer<IPAddress> IPAddress::sIPv6None(new IPAddress(Vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
+            const Pointer<IPAddress> IPAddress::sLoopback(new IPAddress(0x7F000001));
+            const Pointer<IPAddress> IPAddress::sNone(new IPAddress(0));
         }
     }
 }

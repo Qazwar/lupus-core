@@ -42,10 +42,10 @@ namespace Lupus {
 
                 virtual String ConnectionString() const NOEXCEPT override;
 
-                virtual std::shared_ptr<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) override;
+                virtual Pointer<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) override;
                 virtual void Connect(const String&) throw(sql_error) override;
                 virtual void Close() NOEXCEPT override;
-                virtual std::shared_ptr<Command> CreateCommand() throw(sql_error) override;
+                virtual Pointer<Command> CreateCommand() throw(sql_error) override;
                 virtual void Open() throw(sql_error) override;
 
             private:

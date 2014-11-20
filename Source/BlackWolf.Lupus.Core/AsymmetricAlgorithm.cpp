@@ -25,23 +25,23 @@
 #include <cryptopp/rsa.h>
 #include <cryptopp/files.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
-            vector<uint8_t> AsymmetricAlgorithm::LoadFromFile(const String& path)
+            Vector<uint8_t> AsymmetricAlgorithm::LoadFromFile(const String& path)
             {
                 CryptoPP::ByteQueue bt;
                 CryptoPP::FileSource file(path.ToUTF8().c_str(), true /*pumpAll*/);
 
                 file.TransferTo(bt);
-                vector<uint8_t> buffer(bt.MaxRetrievable());
+                Vector<uint8_t> buffer(bt.MaxRetrievable());
                 bt.Get(buffer.data(), buffer.size());
                 return buffer;
             }
 
-            void AsymmetricAlgorithm::SaveToFile(const String& path, const vector<uint8_t>& key)
+            void AsymmetricAlgorithm::SaveToFile(const String& path, const Vector<uint8_t>& key)
             {
                 CryptoPP::ByteQueue bt;
                 CryptoPP::FileSink file(path.ToUTF8().c_str());
@@ -53,8 +53,8 @@ namespace Lupus {
             AsymmetricAlgorithmFactory::AsymmetricAlgorithmFactory()
             {
                 using namespace CryptoPP;
-                mPrototypes["rsaes-oaep-sha"] = make_shared<CryptoRSA<RSAES<OAEP<SHA>>>>();
-                mPrototypes["rsaes-pkcs"] = make_shared<CryptoRSA<RSAES<PKCS1v15>>>();
+                mPrototypes["rsaes-oaep-sha"] = MakePointer<CryptoRSA<RSAES<OAEP<SHA>>>>();
+                mPrototypes["rsaes-pkcs"] = MakePointer<CryptoRSA<RSAES<PKCS1v15>>>();
             }
 
             AsymmetricAlgorithmFactory& AsymmetricAlgorithmFactory::GetInstance()
@@ -63,7 +63,7 @@ namespace Lupus {
                 return instance;
             }
 
-            shared_ptr<AsymmetricAlgorithm> AsymmetricAlgorithmFactory::Create(const String& algorithm) const
+            Pointer<AsymmetricAlgorithm> AsymmetricAlgorithmFactory::Create(const String& algorithm) const
             {
                 auto it = mPrototypes.find(algorithm.ToLower());
 

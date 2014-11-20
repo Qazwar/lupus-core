@@ -50,39 +50,39 @@ namespace Lupus {
         {
         public:
             HttpListenerResponse() = delete;
-            HttpListenerResponse(std::shared_ptr<Sockets::TcpClient>);
+            HttpListenerResponse(Pointer<Sockets::TcpClient>);
             virtual ~HttpListenerResponse() = default;
 
-            virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
-            virtual void ContentEncoding(std::shared_ptr<Text::Encoding>) NOEXCEPT;
+            virtual Pointer<Text::Encoding> ContentEncoding() const NOEXCEPT;
+            virtual void ContentEncoding(Pointer<Text::Encoding>) NOEXCEPT;
             virtual size_t ContentLength() const NOEXCEPT;
             virtual void ContentLength(size_t) NOEXCEPT;
             virtual String ContentType() const NOEXCEPT;
             virtual void ContentType(String) NOEXCEPT;
-            virtual const NameCollection<std::shared_ptr<Cookie>>& Cookies() const NOEXCEPT;
-            virtual void Cookies(const NameCollection<std::shared_ptr<Cookie>>&) NOEXCEPT;
+            virtual const NameCollection<Pointer<Cookie>>& Cookies() const NOEXCEPT;
+            virtual void Cookies(const NameCollection<Pointer<Cookie>>&) NOEXCEPT;
             virtual const NameValueCollection& Headers() const NOEXCEPT;
             virtual void Headers(const NameValueCollection&) NOEXCEPT;
             virtual bool KeepAlive() const NOEXCEPT;
             virtual void KeepAlive(bool) NOEXCEPT;
-            virtual std::shared_ptr<Stream> OutputStream() const NOEXCEPT;
-            virtual std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
-            virtual void ProtocolVersion(std::shared_ptr<Version>) NOEXCEPT;
+            virtual Pointer<Stream> OutputStream() const NOEXCEPT;
+            virtual Pointer<Version> ProtocolVersion() const NOEXCEPT;
+            virtual void ProtocolVersion(Pointer<Version>) NOEXCEPT;
             virtual String RedirectionLocation() const NOEXCEPT;
             virtual void RedirectionLocation(String) NOEXCEPT;
             virtual int32_t StatusCode() const NOEXCEPT;
-            virtual void StatusCode(int32_t) throw(std::invalid_argument);
+            virtual void StatusCode(int32_t) throw(InvalidArgument);
             virtual String StatusDescription() const NOEXCEPT;
             virtual void StatusDescription(String) NOEXCEPT;
 
-            virtual void Abort() throw(socket_error, invalid_operation);
+            virtual void Abort() throw(SocketError, InvalidOperation);
             virtual void AddHeader(String name, String value) NOEXCEPT;
-            virtual void AppendCookie(std::shared_ptr<Cookie>) NOEXCEPT;
+            virtual void AppendCookie(Pointer<Cookie>) NOEXCEPT;
             virtual void AppendHeader(String name, String value) NOEXCEPT;
-            virtual void Close() throw(socket_error, invalid_operation);
-            virtual void Close(const std::vector<uint8_t>& responseEntity, bool willBlock) throw(socket_error, invalid_operation);
+            virtual void Close() throw(SocketError, InvalidOperation);
+            virtual void Close(const Vector<uint8_t>& responseEntity, bool willBlock) throw(SocketError, InvalidOperation);
             virtual void Redirect(String url) NOEXCEPT;
-            virtual void SetCookie(std::shared_ptr<Cookie>) throw(std::invalid_argument);
+            virtual void SetCookie(Pointer<Cookie>) throw(InvalidArgument);
             virtual String ToString() const NOEXCEPT;
         protected:
 
@@ -91,12 +91,12 @@ namespace Lupus {
 
         private:
 
-            std::shared_ptr<Sockets::TcpClient> mClient;
-            std::shared_ptr<Stream> mStream;
-            std::shared_ptr<Uri> mUrl;
-            std::shared_ptr<Version> mVersion;
-            std::shared_ptr<Text::Encoding> mEncoding;
-            NameCollection<std::shared_ptr<Cookie>> mCookies;
+            Pointer<Sockets::TcpClient> mClient;
+            Pointer<Stream> mStream;
+            Pointer<Uri> mUrl;
+            Pointer<Version> mVersion;
+            Pointer<Text::Encoding> mEncoding;
+            NameCollection<Pointer<Cookie>> mCookies;
             NameValueCollection mHeaders;
             String mRedirection;
             String mStatusDescription;

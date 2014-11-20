@@ -30,7 +30,7 @@ namespace Lupus {
         {
             if (!(mHandle = force_cast<uintptr_t>(LoadLibraryW(path.Data())))) {
                 // TODO: Information eintragen sobald String::Format implementiert ist.
-                throw io_error();
+                throw IOError();
             }
         }
 

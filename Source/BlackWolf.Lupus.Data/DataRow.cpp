@@ -25,7 +25,7 @@
 
 #include <algorithm>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Data {
@@ -42,7 +42,7 @@ namespace Lupus {
         Any& DataRow::operator[](unsigned index)
         {
             if (index >= mRefItems.size()) {
-                throw std::out_of_range("index");
+                throw OutOfRange("index");
             }
 
             return *mRefItems[index];
@@ -51,7 +51,7 @@ namespace Lupus {
         const Any& DataRow::operator[](unsigned index) const
         {
             if (index >= mRefItems.size()) {
-                throw std::out_of_range("index");
+                throw OutOfRange("index");
             }
 
             return *mRefItems[index];
@@ -60,7 +60,7 @@ namespace Lupus {
         Any& DataRow::operator[](const String& str)
         {
             if (mItems.find(str) == end(mItems)) {
-                throw std::invalid_argument("Key does not exist");
+                throw InvalidArgument("Key does not exist");
             }
 
             return mItems.at(str);
@@ -69,29 +69,29 @@ namespace Lupus {
         const Any& DataRow::operator[](const String& str) const
         {
             if (mItems.find(str) == end(mItems)) {
-                throw std::invalid_argument("Key does not exist");
+                throw InvalidArgument("Key does not exist");
             }
 
             return mItems.at(str);
         }
 
-        Any& DataRow::operator[](shared_ptr<DataColumn> column)
+        Any& DataRow::operator[](Pointer<DataColumn> column)
         {
             if (!column) {
-                throw null_pointer("column");
+                throw NullPointer("column");
             } else if (mItems.find(column->Name()) == end(mItems)) {
-                throw std::invalid_argument("Key does not exist");
+                throw InvalidArgument("Key does not exist");
             }
 
             return mItems.at(column->Name());
         }
 
-        const Any& DataRow::operator[](shared_ptr<DataColumn> column) const
+        const Any& DataRow::operator[](Pointer<DataColumn> column) const
         {
             if (!column) {
-                throw null_pointer("column");
+                throw NullPointer("column");
             } else if (mItems.find(column->Name()) == end(mItems)) {
-                throw std::invalid_argument("Key does not exist");
+                throw InvalidArgument("Key does not exist");
             }
 
             return mItems.at(column->Name());

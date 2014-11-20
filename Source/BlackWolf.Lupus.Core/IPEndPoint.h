@@ -63,14 +63,14 @@ namespace Lupus {
                  * \param[in]   address Eine gültige IP-Adresse für diesen Endpunkt.
                  * \param[in]   port    Die Portnummer.
                  */
-                IPEndPoint(std::shared_ptr<IPAddress> address, uint16_t port) throw(null_pointer);
+                IPEndPoint(Pointer<IPAddress> address, uint16_t port) throw(NullPointer);
 
                 /*!
                  * Erstellt einen IP-Endpunkt anhand von serialisierten Daten.
                  *
                  * \param[in]   buffer  Serialisierte Daten.
                  */
-                IPEndPoint(const std::vector<uint8_t>& buffer) throw(std::invalid_argument);
+                IPEndPoint(const Vector<uint8_t>& buffer) throw(InvalidArgument);
                 virtual ~IPEndPoint() = default;
 
                 /*!
@@ -81,13 +81,13 @@ namespace Lupus {
                 /*!
                  * \returns Die IP-Adresse des Endpunkts.
                  */
-                virtual std::shared_ptr<IPAddress> Address() const NOEXCEPT;
+                virtual Pointer<IPAddress> Address() const NOEXCEPT;
                 /*!
                  * Setzt die IP-Adresse des Endpunkts.
                  *
                  * \param[in]   address Eine gültige IP-Adresse.
                  */
-                virtual void Address(std::shared_ptr<IPAddress> address) throw(null_pointer);
+                virtual void Address(Pointer<IPAddress> address) throw(NullPointer);
 
                 /*!
                  * \returns Die Portnummer des Endpunkts.
@@ -108,7 +108,7 @@ namespace Lupus {
                  *
                  * \returns Interne Daten in Form eines uint8_t-Buffers.
                  */
-                virtual std::vector<uint8_t> Serialize() const NOEXCEPT;
+                virtual Vector<uint8_t> Serialize() const NOEXCEPT;
 
             private:
 
@@ -116,10 +116,10 @@ namespace Lupus {
                 IPEndPoint() = delete;
 
                 AddrStorage mAddrStorage;
-                std::shared_ptr<IPAddress> mAddress;
+                Pointer<IPAddress> mAddress;
             };
 
-            typedef std::shared_ptr<IPEndPoint> IPEndPointPtr;
+            typedef Pointer<IPEndPoint> IPEndPointPtr;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Lupus {
     public:
 
         Version() = default;
-        Version(const String&) throw(format_error);
+        Version(const String&) throw(FormatError);
         Version(int32_t major, int32_t minor) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build) NOEXCEPT;
         Version(int32_t major, int32_t minor, int32_t build, int32_t revision) NOEXCEPT;
@@ -45,18 +45,18 @@ namespace Lupus {
         virtual int16_t MajorRevision() const NOEXCEPT;
         virtual int16_t MinorRevision() const NOEXCEPT;
 
-        virtual std::shared_ptr<Version> Clone() const NOEXCEPT override;
+        virtual Pointer<Version> Clone() const NOEXCEPT override;
         virtual String ToString() const NOEXCEPT;
 
-        bool operator==(std::shared_ptr<Version>) const;
-        bool operator!=(std::shared_ptr<Version>) const;
-        bool operator>=(std::shared_ptr<Version>) const;
-        bool operator>(std::shared_ptr<Version>) const;
-        bool operator<=(std::shared_ptr<Version>) const;
-        bool operator<(std::shared_ptr<Version>) const;
+        bool operator==(Pointer<Version>) const;
+        bool operator!=(Pointer<Version>) const;
+        bool operator>=(Pointer<Version>) const;
+        bool operator>(Pointer<Version>) const;
+        bool operator<=(Pointer<Version>) const;
+        bool operator<(Pointer<Version>) const;
 
-        static std::shared_ptr<Version> Parse(const String& value) throw(format_error);
-        static bool TryParse(const String& value, std::shared_ptr<Version>& result) NOEXCEPT;
+        static Pointer<Version> Parse(const String& value) throw(FormatError);
+        static bool TryParse(const String& value, Pointer<Version>& result) NOEXCEPT;
 
     private:
 

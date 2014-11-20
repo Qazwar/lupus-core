@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -39,7 +44,7 @@ namespace Lupus {
         virtual ~IObserver() = default;
 
         virtual void OnUpdate(const T& value) = 0;
-        virtual void OnError(std::exception& error) = 0;
+        virtual void OnError(Exception& error) = 0;
         virtual void OnComplete() = 0;
     };
 
@@ -50,40 +55,40 @@ namespace Lupus {
 
         virtual ~Observable() = default;
 
-        virtual void Attach(std::shared_ptr<IObserver<T>> observer) NOEXCEPT final
+        virtual void Attach(Pointer<IObserver<T>> observer) NOEXCEPT final
         {
             mObservers.push_back(observer);
         }
 
-        virtual void Detach(std::shared_ptr<IObserver<T>> observer) NOEXCEPT final
+        virtual void Detach(Pointer<IObserver<T>> observer) NOEXCEPT final
         {
             std::remove(std::begin(mObservers), std::end(mObservers), observer);
         }
 
         virtual void OnUpdate(const T& value) NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [&](std::shared_ptr<IObserver<T>> observer) {
+            std::for_each(std::begin(mObservers), std::end(mObservers), [&](Pointer<IObserver<T>> observer) {
                 observer->OnUpdate(value);
             });
         }
 
-        virtual void OnError(std::exception& ex) NOEXCEPT final
+        virtual void OnError(Exception& ex) NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [&](std::shared_ptr<IObserver<T>> observer) {
+            std::for_each(std::begin(mObservers), std::end(mObservers), [&](Pointer<IObserver<T>> observer) {
                 observer->OnError(ex);
             });
         }
 
         virtual void OnComplete() NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [](std::shared_ptr<IObserver<T>> observer) {
+            std::for_each(std::begin(mObservers), std::end(mObservers), [](Pointer<IObserver<T>> observer) {
                 observer->OnComplete();
             });
         }
 
     private:
 
-        std::vector<std::shared_ptr<IObserver<T>>> mObservers = std::vector<std::shared_ptr<IObserver<T>>>(32);
+        Vector<Pointer<IObserver<T>>> mObservers = Vector<Pointer<IObserver<T>>>(32);
     };
 
     template <typename Owner, typename T>
@@ -105,7 +110,7 @@ namespace Lupus {
             if (mGetter) {
                 return mGetter();
             } else {
-                throw std::runtime_error("getter is not set");
+                throw RuntimeError("getter is not set");
             }
         }
 
@@ -114,7 +119,7 @@ namespace Lupus {
             if (mSetter) {
                 mSetter(value);
             } else {
-                throw std::runtime_error("setter is not set");
+                throw RuntimeError("setter is not set");
             }
 
             ValueChanged(this, value);
@@ -126,7 +131,7 @@ namespace Lupus {
             if (mGetter) {
                 return mGetter();
             } else {
-                throw std::runtime_error("getter is not set");
+                throw RuntimeError("getter is not set");
             }
         }
 
@@ -135,7 +140,7 @@ namespace Lupus {
             if (mSetter) {
                 mSetter(value);
             } else {
-                throw std::runtime_error("setter is not set");
+                throw RuntimeError("setter is not set");
             }
 
             ValueChanged(this, value);

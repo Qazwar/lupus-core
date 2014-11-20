@@ -42,19 +42,19 @@ namespace Lupus {
             virtual ~Command() = default;
 
             virtual Task<int> ExecuteNonQueryAsync() NOEXCEPT;
-            virtual Task<std::shared_ptr<IDataReader>> ExecuteReaderAsync() NOEXCEPT;
-            virtual Task<std::vector<NameCollection<Any>>> ExecuteScalarAsync() NOEXCEPT;
+            virtual Task<Pointer<IDataReader>> ExecuteReaderAsync() NOEXCEPT;
+            virtual Task<Vector<NameCollection<Any>>> ExecuteScalarAsync() NOEXCEPT;
 
             virtual void Text(const String&) NOEXCEPT = 0;
             virtual String& Text() NOEXCEPT = 0;
             virtual const String& Text() const NOEXCEPT = 0;
-            virtual std::vector<std::shared_ptr<Parameter>>& Parameters() NOEXCEPT = 0;
-            virtual const std::vector<std::shared_ptr<Parameter>>& Parameters() const NOEXCEPT = 0;
+            virtual Vector<Pointer<Parameter>>& Parameters() NOEXCEPT = 0;
+            virtual const Vector<Pointer<Parameter>>& Parameters() const NOEXCEPT = 0;
 
-            virtual std::shared_ptr<Parameter> CreateParameter() NOEXCEPT = 0;
+            virtual Pointer<Parameter> CreateParameter() NOEXCEPT = 0;
             virtual int ExecuteNonQuery() throw(sql_error) = 0;
-            virtual std::shared_ptr<IDataReader> ExecuteReader() throw(sql_error) = 0;
-            virtual std::vector<NameCollection<Any>> ExecuteScalar() throw(sql_error) = 0;
+            virtual Pointer<IDataReader> ExecuteReader() throw(sql_error) = 0;
+            virtual Vector<NameCollection<Any>> ExecuteScalar() throw(sql_error) = 0;
             virtual bool Prepare() throw(sql_error) = 0;
         };
     }

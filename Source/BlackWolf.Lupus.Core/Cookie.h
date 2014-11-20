@@ -73,8 +73,8 @@ namespace Lupus {
             TimePoint mExpires = TimePoint::min();
         };
 
-        typedef NameCollection<std::shared_ptr<Cookie>> CookieCollection;
-        typedef NamePair<std::shared_ptr<Cookie>> CookiePair;
+        typedef NameCollection<Pointer<Cookie>> CookieCollection;
+        typedef NamePair<Pointer<Cookie>> CookiePair;
     }
 }
 

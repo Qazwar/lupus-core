@@ -31,23 +31,23 @@
 #include <cryptopp/whrlpool.h>
 #include <cryptopp/tiger.h>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
-            vector<uint8_t> HashAlgorithm::TransformFinalBlock(const vector<uint8_t>& input, size_t inputOffset, size_t inputCount)
+            Vector<uint8_t> HashAlgorithm::TransformFinalBlock(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount)
             {
                 return std::move(ComputeHash(input, inputOffset, inputCount));
             }
 
-            size_t HashAlgorithm::TransformBlock(const vector<uint8_t>& input, size_t inputOffset, size_t inputCount, vector<uint8_t>& output, size_t outputOffset)
+            size_t HashAlgorithm::TransformBlock(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount, Vector<uint8_t>& output, size_t outputOffset)
             {
-                vector<uint8_t> buffer = ComputeHash(input, inputOffset, inputCount);
+                Vector<uint8_t> buffer = ComputeHash(input, inputOffset, inputCount);
                 auto iterator = begin(output) + outputOffset;
 
                 if (buffer.size() > output.size() - outputOffset) {
-                    throw out_of_range("Transformed bytes exceeding output vector");
+                    throw OutOfRange("Transformed bytes exceeding output vector");
                 }
 
 
@@ -60,22 +60,22 @@ namespace Lupus {
 
             HashAlgorithmFactory::HashAlgorithmFactory()
             {
-                mPrototypes["sha1"] = make_shared<CryptoHash<CryptoPP::SHA1>>();
-                mPrototypes["sha224"] = make_shared<CryptoHash<CryptoPP::SHA224>>();
-                mPrototypes["sha256"] = make_shared<CryptoHash<CryptoPP::SHA256>>();
-                mPrototypes["sha384"] = make_shared<CryptoHash<CryptoPP::SHA384>>();
-                mPrototypes["sha512"] = make_shared<CryptoHash<CryptoPP::SHA512>>();
-                mPrototypes["sha3-224"] = make_shared<CryptoHash<CryptoPP::SHA3_224>>();
-                mPrototypes["sha3-256"] = make_shared<CryptoHash<CryptoPP::SHA3_256>>();
-                mPrototypes["sha3-384"] = make_shared<CryptoHash<CryptoPP::SHA3_384>>();
-                mPrototypes["sha3-512"] = make_shared<CryptoHash<CryptoPP::SHA3_512>>();
-                mPrototypes["tiger"] = make_shared<CryptoHash<CryptoPP::Tiger>>();
-                mPrototypes["whirlpool"] = make_shared<CryptoHash<CryptoPP::Whirlpool>>();
-                mPrototypes["ripemd128"] = make_shared<CryptoHash<CryptoPP::RIPEMD128>>();
-                mPrototypes["ripemd160"] = make_shared<CryptoHash<CryptoPP::RIPEMD160>>();
-                mPrototypes["ripemd256"] = make_shared<CryptoHash<CryptoPP::RIPEMD256>>();
-                mPrototypes["ripemd320"] = make_shared<CryptoHash<CryptoPP::RIPEMD320>>();
-                mPrototypes["md5"] = make_shared<CryptoHash<CryptoPP::Weak::MD5>>();
+                mPrototypes["sha1"] = MakePointer<CryptoHash<CryptoPP::SHA1>>();
+                mPrototypes["sha224"] = MakePointer<CryptoHash<CryptoPP::SHA224>>();
+                mPrototypes["sha256"] = MakePointer<CryptoHash<CryptoPP::SHA256>>();
+                mPrototypes["sha384"] = MakePointer<CryptoHash<CryptoPP::SHA384>>();
+                mPrototypes["sha512"] = MakePointer<CryptoHash<CryptoPP::SHA512>>();
+                mPrototypes["sha3-224"] = MakePointer<CryptoHash<CryptoPP::SHA3_224>>();
+                mPrototypes["sha3-256"] = MakePointer<CryptoHash<CryptoPP::SHA3_256>>();
+                mPrototypes["sha3-384"] = MakePointer<CryptoHash<CryptoPP::SHA3_384>>();
+                mPrototypes["sha3-512"] = MakePointer<CryptoHash<CryptoPP::SHA3_512>>();
+                mPrototypes["tiger"] = MakePointer<CryptoHash<CryptoPP::Tiger>>();
+                mPrototypes["whirlpool"] = MakePointer<CryptoHash<CryptoPP::Whirlpool>>();
+                mPrototypes["ripemd128"] = MakePointer<CryptoHash<CryptoPP::RIPEMD128>>();
+                mPrototypes["ripemd160"] = MakePointer<CryptoHash<CryptoPP::RIPEMD160>>();
+                mPrototypes["ripemd256"] = MakePointer<CryptoHash<CryptoPP::RIPEMD256>>();
+                mPrototypes["ripemd320"] = MakePointer<CryptoHash<CryptoPP::RIPEMD320>>();
+                mPrototypes["md5"] = MakePointer<CryptoHash<CryptoPP::Weak::MD5>>();
             }
 
             HashAlgorithmFactory& HashAlgorithmFactory::GetInstance()
@@ -84,7 +84,7 @@ namespace Lupus {
                 return instance;
             }
 
-            shared_ptr<HashAlgorithm> HashAlgorithmFactory::Create(const String& hash) const
+            Pointer<HashAlgorithm> HashAlgorithmFactory::Create(const String& hash) const
             {
                 auto it = mPrototypes.find(hash.ToLower());
 

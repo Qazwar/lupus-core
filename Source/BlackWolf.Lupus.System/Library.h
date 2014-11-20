@@ -32,7 +32,7 @@ namespace Lupus {
         class LUPUSSYSTEM_API Library : public boost::noncopyable
         {
         public:
-            Library(String path) throw(io_error);
+            Library(String path) throw(IOError);
             virtual ~Library();
             virtual void* GetFunctionHandle(String functionName) NOEXCEPT;
 

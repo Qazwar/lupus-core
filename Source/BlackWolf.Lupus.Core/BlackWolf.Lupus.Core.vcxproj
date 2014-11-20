@@ -35,6 +35,7 @@
     <ClCompile Include="HttpListener.cpp" />
     <ClCompile Include="HttpListenerRequest.cpp" />
     <ClCompile Include="HttpListenerResponse.cpp" />
+    <ClCompile Include="NetDefinitions.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="SymmetricAlgorithm.cpp" />

@@ -29,7 +29,7 @@
 #include <uriparser/Uri.h>
 #include <unicode/uchar.h>
 
-using namespace std;
+
 
 namespace Lupus {
     Uri::Uri(const String& uriString) :
@@ -46,22 +46,22 @@ namespace Lupus {
 
             switch (result) {
                 case URI_ERROR_SYNTAX:
-                    throw format_error(string("Invalid char: '") + String(*state.errorPos).ToUTF8().c_str() + string("'"));
+                    throw FormatError(std::string("Invalid char: '") + String(*state.errorPos).ToUTF8().c_str() + std::string("'"));
                 case URI_ERROR_MALLOC:
-                    throw bad_alloc();
+                    throw BadAlloc();
                 default:
-                    throw runtime_error("Could not parse given URI");
+                    throw RuntimeError("Could not parse given URI");
             }
         } else if ((result = uriNormalizeSyntaxW(&uri)) != URI_SUCCESS) {
             uriFreeUriMembersW(&uri);
 
             switch (result) {
                 case URI_ERROR_SYNTAX:
-                    throw format_error(string("Invalid char: '") + String(*state.errorPos).ToUTF8().c_str() + string("'"));
+                    throw FormatError(std::string("Invalid char: '") + String(*state.errorPos).ToUTF8().c_str() + std::string("'"));
                 case URI_ERROR_MALLOC:
-                    throw bad_alloc();
+                    throw BadAlloc();
                 default:
-                    throw runtime_error("Could not parse given URI");
+                    throw RuntimeError("Could not parse given URI");
             }
         }
 
@@ -83,12 +83,12 @@ namespace Lupus {
         uriFreeUriMembersW(&uri);
     }
 
-    Uri::Uri(shared_ptr<Uri> baseUri, const String& uriString) :
+    Uri::Uri(Pointer<Uri> baseUri, const String& uriString) :
         Uri(baseUri->ToString() + L'/' + uriString)
     {
     }
 
-    Uri::Uri(shared_ptr<Uri> baseUri, shared_ptr<Uri> relativeUri) :
+    Uri::Uri(Pointer<Uri> baseUri, Pointer<Uri> relativeUri) :
         Uri(baseUri->ToString() + L'/' + relativeUri->ToString())
     {
     }
@@ -113,12 +113,12 @@ namespace Lupus {
         return mPortText;
     }
 
-    const vector<String>& Uri::PathHead() const
+    const Vector<String>& Uri::PathHead() const
     {
         return mPathHead;
     }
 
-    const vector<String>& Uri::PathTail() const
+    const Vector<String>& Uri::PathTail() const
     {
         return mPathTail;
     }

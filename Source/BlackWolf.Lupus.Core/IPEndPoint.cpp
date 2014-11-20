@@ -28,14 +28,14 @@ namespace Lupus {
     namespace Net {
         namespace Sockets {
             IPEndPoint::IPEndPoint(uint32_t address, uint16_t port) :
-                IPEndPoint(std::make_shared<IPAddress>(address), port)
+                IPEndPoint(MakePointer<IPAddress>(address), port)
             {
             }
 
-            IPEndPoint::IPEndPoint(std::shared_ptr<IPAddress> address, uint16_t port)
+            IPEndPoint::IPEndPoint(Pointer<IPAddress> address, uint16_t port)
             {
                 if (!address) {
-                    throw null_pointer("address");
+                    throw NullPointer("address");
                 }
 
                 AddrIn* addr;
@@ -62,10 +62,10 @@ namespace Lupus {
                 mAddress = address;
             }
 
-            IPEndPoint::IPEndPoint(const std::vector<uint8_t>& buffer)
+            IPEndPoint::IPEndPoint(const Vector<uint8_t>& buffer)
             {
                 if (buffer.size() != sizeof(AddrStorage)) {
-                    throw std::invalid_argument("buffer contains invalid data");
+                    throw InvalidArgument("buffer contains invalid data");
                 }
 
                 memset(&mAddrStorage, 0, sizeof(AddrStorage));
@@ -77,15 +77,15 @@ namespace Lupus {
                 return mAddress->Family();
             }
 
-            std::shared_ptr<IPAddress> IPEndPoint::Address() const
+            Pointer<IPAddress> IPEndPoint::Address() const
             {
                 return mAddress;
             }
 
-            void IPEndPoint::Address(std::shared_ptr<IPAddress> address)
+            void IPEndPoint::Address(Pointer<IPAddress> address)
             {
                 if (!address) {
-                    throw null_pointer("address");
+                    throw NullPointer("address");
                 }
 
                 uint16_t port = Port();
@@ -137,9 +137,9 @@ namespace Lupus {
                 }
             }
 
-            std::vector<uint8_t> IPEndPoint::Serialize() const
+            Vector<uint8_t> IPEndPoint::Serialize() const
             {
-                return std::vector<uint8_t>((uint8_t*)&mAddrStorage, (uint8_t*)&mAddrStorage + sizeof(AddrStorage));
+                return Vector<uint8_t>((uint8_t*)&mAddrStorage, (uint8_t*)&mAddrStorage + sizeof(AddrStorage));
             }
         }
     }

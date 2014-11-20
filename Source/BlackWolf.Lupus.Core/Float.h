@@ -55,8 +55,8 @@ namespace Lupus {
 		/// \sa Float::TryParse(const String&, float&)
         static bool TryParse(const String& string, long double& result) NOEXCEPT;
 
-        static float ParseFloat(const String&) throw(std::invalid_argument);
-        static double ParseDouble(const String&) throw(std::invalid_argument);
-        static long double ParseLongDouble(const String&) throw(std::invalid_argument);
+        static float ParseFloat(const String&) throw(InvalidArgument);
+        static double ParseDouble(const String&) throw(InvalidArgument);
+        static long double ParseLongDouble(const String&) throw(InvalidArgument);
 	};
 }

@@ -49,7 +49,7 @@ namespace Lupus {
                     mEncryptor = typename T::Encryptor(mDecryptor.AccessPrivateKey());
                 }
 
-                CryptoRSA(const std::vector<uint8_t>& buffer)
+                CryptoRSA(const Vector<uint8_t>& buffer)
                 {
                     CryptoPP::ByteQueue byteQueue;
 
@@ -58,36 +58,36 @@ namespace Lupus {
                     mEncryptor = typename T::Encryptor(mDecryptor.AccessPrivateKey());
                 }
 
-                virtual std::shared_ptr<AsymmetricAlgorithm> Clone() const NOEXCEPT override
+                virtual Pointer<AsymmetricAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::dynamic_pointer_cast<AsymmetricAlgorithm>(std::make_shared<CryptoRSA<T>>(PrivateKey()));
+                    return std::dynamic_pointer_cast<AsymmetricAlgorithm>(MakePointer<CryptoRSA<T>>(PrivateKey()));
                 }
 
-                virtual std::vector<uint8_t> Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) override
+                virtual Vector<uint8_t> Encrypt(const Vector<uint8_t>& buffer, size_t offset, size_t size) const throw(OutOfRange) override
                 {
                     if (offset > buffer.size()) {
-                        throw std::out_of_range("offset");
+                        throw OutOfRange("offset");
                     } else if (size > buffer.size() - offset) {
-                        throw std::out_of_range("size");
+                        throw OutOfRange("size");
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
-                    std::vector<uint8_t> result(mEncryptor.CiphertextLength(size));
+                    Vector<uint8_t> result(mEncryptor.CiphertextLength(size));
 
                     mEncryptor.Encrypt(rng, buffer.data() + offset, size, result.data());
                     return result;
                 }
 
-                virtual size_t Encrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::vector<uint8_t>& output, size_t outputOffset) const throw(std::out_of_range) override
+                virtual size_t Encrypt(const Vector<uint8_t>& buffer, size_t offset, size_t size, Vector<uint8_t>& output, size_t outputOffset) const throw(OutOfRange) override
                 {
                     size_t length = mEncryptor.CiphertextLength(size);
 
                     if (offset > buffer.size()) {
-                        throw std::out_of_range("offset");
+                        throw OutOfRange("offset");
                     } else if (size > buffer.size() - offset) {
-                        throw std::out_of_range("size");
+                        throw OutOfRange("size");
                     } else if (length > output.size() - outputOffset) {
-                        throw std::out_of_range("transformed bytes exceeding output vector");
+                        throw OutOfRange("transformed bytes exceeding output vector");
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
@@ -96,31 +96,31 @@ namespace Lupus {
                     return length;
                 }
 
-                virtual std::vector<uint8_t> Decrypt(std::vector<uint8_t>& buffer, size_t offset, size_t size) const throw(std::out_of_range) override
+                virtual Vector<uint8_t> Decrypt(Vector<uint8_t>& buffer, size_t offset, size_t size) const throw(OutOfRange) override
                 {
                     if (offset > buffer.size()) {
-                        throw std::out_of_range("offset");
+                        throw OutOfRange("offset");
                     } else if (size > buffer.size() - offset) {
-                        throw std::out_of_range("size");
+                        throw OutOfRange("size");
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
-                    std::vector<uint8_t> result(mDecryptor.MaxPlaintextLength(size));
+                    Vector<uint8_t> result(mDecryptor.MaxPlaintextLength(size));
 
                     mDecryptor.Decrypt(rng, buffer.data() + offset, size, result.data());
                     return result;
                 }
 
-                virtual size_t Decrypt(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::vector<uint8_t>& output, size_t outputOffset) const throw(std::out_of_range) override
+                virtual size_t Decrypt(const Vector<uint8_t>& buffer, size_t offset, size_t size, Vector<uint8_t>& output, size_t outputOffset) const throw(OutOfRange) override
                 {
                     size_t length = mDecryptor.MaxPlaintextLength(size);
 
                     if (offset > buffer.size()) {
-                        throw std::out_of_range("offset");
+                        throw OutOfRange("offset");
                     } else if (size > buffer.size() - offset) {
-                        throw std::out_of_range("size");
+                        throw OutOfRange("size");
                     } else if (length > output.size() - outputOffset) {
-                        throw std::out_of_range("transformed bytes exceeding output vector");
+                        throw OutOfRange("transformed bytes exceeding output vector");
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
@@ -129,34 +129,34 @@ namespace Lupus {
                     return length;
                 }
 
-                virtual std::vector<uint8_t> PublicKey() const NOEXCEPT override
+                virtual Vector<uint8_t> PublicKey() const NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
-                    std::vector<uint8_t> buffer;
+                    Vector<uint8_t> buffer;
 
                     mEncryptor.GetPublicKey().Save(byteQueue);
                     byteQueue.Get(buffer.data(), byteQueue.MaxRetrievable());
                     return buffer;
                 }
 
-                virtual void PublicKey(const std::vector<uint8_t>& buffer) NOEXCEPT override
+                virtual void PublicKey(const Vector<uint8_t>& buffer) NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
                     byteQueue.Put(buffer.data(), buffer.size());
                     mEncryptor.AccessPublicKey().Load(byteQueue);
                 }
 
-                virtual std::vector<uint8_t> PrivateKey() const NOEXCEPT override
+                virtual Vector<uint8_t> PrivateKey() const NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
-                    std::vector<uint8_t> buffer;
+                    Vector<uint8_t> buffer;
 
                     mDecryptor.GetPrivateKey().Save(byteQueue);
                     byteQueue.Get(buffer.data(), byteQueue.MaxRetrievable());
                     return buffer;
                 }
 
-                virtual void PrivateKey(const std::vector<uint8_t>& buffer) NOEXCEPT override
+                virtual void PrivateKey(const Vector<uint8_t>& buffer) NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
                     byteQueue.Put(buffer.data(), buffer.size());

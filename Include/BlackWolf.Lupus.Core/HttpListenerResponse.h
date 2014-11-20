@@ -1,19 +1,24 @@
-﻿/**
+/**
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -45,39 +50,39 @@ namespace Lupus {
         {
         public:
             HttpListenerResponse() = delete;
-            HttpListenerResponse(std::shared_ptr<Sockets::TcpClient>);
+            HttpListenerResponse(Pointer<Sockets::TcpClient>);
             virtual ~HttpListenerResponse() = default;
 
-            virtual std::shared_ptr<Text::Encoding> ContentEncoding() const NOEXCEPT;
-            virtual void ContentEncoding(std::shared_ptr<Text::Encoding>) NOEXCEPT;
+            virtual Pointer<Text::Encoding> ContentEncoding() const NOEXCEPT;
+            virtual void ContentEncoding(Pointer<Text::Encoding>) NOEXCEPT;
             virtual size_t ContentLength() const NOEXCEPT;
             virtual void ContentLength(size_t) NOEXCEPT;
             virtual String ContentType() const NOEXCEPT;
             virtual void ContentType(String) NOEXCEPT;
-            virtual const NameCollection<std::shared_ptr<Cookie>>& Cookies() const NOEXCEPT;
-            virtual void Cookies(const NameCollection<std::shared_ptr<Cookie>>&) NOEXCEPT;
+            virtual const NameCollection<Pointer<Cookie>>& Cookies() const NOEXCEPT;
+            virtual void Cookies(const NameCollection<Pointer<Cookie>>&) NOEXCEPT;
             virtual const NameValueCollection& Headers() const NOEXCEPT;
             virtual void Headers(const NameValueCollection&) NOEXCEPT;
             virtual bool KeepAlive() const NOEXCEPT;
             virtual void KeepAlive(bool) NOEXCEPT;
-            virtual std::shared_ptr<Stream> OutputStream() const NOEXCEPT;
-            virtual std::shared_ptr<Version> ProtocolVersion() const NOEXCEPT;
-            virtual void ProtocolVersion(std::shared_ptr<Version>) NOEXCEPT;
+            virtual Pointer<Stream> OutputStream() const NOEXCEPT;
+            virtual Pointer<Version> ProtocolVersion() const NOEXCEPT;
+            virtual void ProtocolVersion(Pointer<Version>) NOEXCEPT;
             virtual String RedirectionLocation() const NOEXCEPT;
             virtual void RedirectionLocation(String) NOEXCEPT;
             virtual int32_t StatusCode() const NOEXCEPT;
-            virtual void StatusCode(int32_t) throw(std::invalid_argument);
+            virtual void StatusCode(int32_t) throw(InvalidArgument);
             virtual String StatusDescription() const NOEXCEPT;
             virtual void StatusDescription(String) NOEXCEPT;
 
-            virtual void Abort() throw(socket_error, invalid_operation);
+            virtual void Abort() throw(SocketError, InvalidOperation);
             virtual void AddHeader(String name, String value) NOEXCEPT;
-            virtual void AppendCookie(std::shared_ptr<Cookie>) NOEXCEPT;
+            virtual void AppendCookie(Pointer<Cookie>) NOEXCEPT;
             virtual void AppendHeader(String name, String value) NOEXCEPT;
-            virtual void Close() throw(socket_error, invalid_operation);
-            virtual void Close(const std::vector<uint8_t>& responseEntity, bool willBlock) throw(socket_error, invalid_operation);
+            virtual void Close() throw(SocketError, InvalidOperation);
+            virtual void Close(const Vector<uint8_t>& responseEntity, bool willBlock) throw(SocketError, InvalidOperation);
             virtual void Redirect(String url) NOEXCEPT;
-            virtual void SetCookie(std::shared_ptr<Cookie>) throw(std::invalid_argument);
+            virtual void SetCookie(Pointer<Cookie>) throw(InvalidArgument);
             virtual String ToString() const NOEXCEPT;
         protected:
 
@@ -86,12 +91,12 @@ namespace Lupus {
 
         private:
 
-            std::shared_ptr<Sockets::TcpClient> mClient;
-            std::shared_ptr<Stream> mStream;
-            std::shared_ptr<Uri> mUrl;
-            std::shared_ptr<Version> mVersion;
-            std::shared_ptr<Text::Encoding> mEncoding;
-            NameCollection<std::shared_ptr<Cookie>> mCookies;
+            Pointer<Sockets::TcpClient> mClient;
+            Pointer<Stream> mStream;
+            Pointer<Uri> mUrl;
+            Pointer<Version> mVersion;
+            Pointer<Text::Encoding> mEncoding;
+            NameCollection<Pointer<Cookie>> mCookies;
             NameValueCollection mHeaders;
             String mRedirection;
             String mStatusDescription;

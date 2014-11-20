@@ -73,7 +73,7 @@ namespace Lupus {
             });
         }
 
-        std::vector<Handle> mCallbacks = std::vector<Handle>(32);
+        Vector<Handle> mCallbacks = Vector<Handle>(32);
     };
 
     template <typename... Args>
@@ -113,7 +113,7 @@ namespace Lupus {
 
     private:
 
-        std::vector<Handle> mCallbacks = std::vector<Handle>(32);
+        Vector<Handle> mCallbacks = Vector<Handle>(32);
     };
 }
 

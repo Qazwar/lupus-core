@@ -31,7 +31,7 @@ namespace Lupus {
         {
             if (!(mHandle = force_cast<uintptr_t>(dlopen(path.ToUTF8().c_str(), RTLD_NOW)))) {
                 // TODO: Information eintragen sobald String::Format implementiert ist.
-                throw io_error();
+                throw IOError();
             }
         }
 

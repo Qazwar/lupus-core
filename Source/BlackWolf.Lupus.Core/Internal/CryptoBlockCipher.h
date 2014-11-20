@@ -47,29 +47,29 @@ namespace Lupus {
                     mAlgorithm = T(key, size, iv);
                 }
 
-                virtual std::vector<uint8_t> TransformFinalBlock(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override
+                virtual Vector<uint8_t> TransformFinalBlock(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override
                 {
                     if (offset > buffer.size()) {
-                        throw std::out_of_range("offset");
+                        throw OutOfRange("offset");
                     } else if (size > buffer.size() - offset) {
-                        throw std::out_of_range("size");
+                        throw OutOfRange("size");
                     }
 
-                    std::vector<uint8_t> output(size);
+                    Vector<uint8_t> output(size);
                     CryptoPP::StreamTransformationFilter filter(mAlgorithm, new CryptoPP::ArraySink(output.data(), size));
                     filter.Put(buffer.data() + offset, size);
                     filter.MessageEnd();
                     return std::move(output);
                 }
 
-                virtual size_t TransformBlock(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount, std::vector<uint8_t>& output, size_t outputOffset) throw(std::out_of_range) override
+                virtual size_t TransformBlock(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount, Vector<uint8_t>& output, size_t outputOffset) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
-                        throw std::out_of_range("inputOffset");
+                        throw OutOfRange("inputOffset");
                     } else if (inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("inputCount");
+                        throw OutOfRange("inputCount");
                     } else if (inputCount > output.size() - outputOffset) {
-                        throw std::out_of_range("inputCount");
+                        throw OutOfRange("inputCount");
                     }
 
                     CryptoPP::StreamTransformationFilter filter(mAlgorithm, new CryptoPP::ArraySink(output.data() + outputOffset, inputCount));
@@ -90,9 +90,9 @@ namespace Lupus {
 
                 virtual ~CryptoBlockCipher() = default;
 
-                virtual std::shared_ptr<SymmetricAlgorithm> Clone() const NOEXCEPT override
+                virtual Pointer<SymmetricAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::dynamic_pointer_cast<SymmetricAlgorithm>(make_shared<CryptoBlockCipher<T>>());
+                    return std::dynamic_pointer_cast<SymmetricAlgorithm>(MakePointer<CryptoBlockCipher<T>>());
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override
@@ -135,125 +135,125 @@ namespace Lupus {
                     mMode = mode;
                 }
 
-                virtual const std::vector<uint8_t>& Key() const NOEXCEPT override
+                virtual const Vector<uint8_t>& Key() const NOEXCEPT override
                 {
                     return mKey;
                 }
 
-                virtual void Key(const std::vector<uint8_t>& key) NOEXCEPT override
+                virtual void Key(const Vector<uint8_t>& key) NOEXCEPT override
                 {
                     mKey = key;
                 }
 
-                virtual const std::vector<uint8_t>& Iv() const NOEXCEPT override
+                virtual const Vector<uint8_t>& Iv() const NOEXCEPT override
                 {
                     return mIv;
                 }
 
-                virtual void Iv(const std::vector<uint8_t>& iv) NOEXCEPT override
+                virtual void Iv(const Vector<uint8_t>& iv) NOEXCEPT override
                 {
                     mIv = iv;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateDecryptor() NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateDecryptor() NOEXCEPT override
                 {
                     switch (mMode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
                     }
 
                     return nullptr;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateDecryptor(CipherMode mode) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateDecryptor(CipherMode mode) NOEXCEPT override
                 {
                     switch (mode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(mKey.data(), mKey.size(), mIv.data());
                     }
 
                     return nullptr;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateDecryptor(CipherMode mode, const std::vector<uint8_t>& key) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateDecryptor(CipherMode mode, const Vector<uint8_t>& key) NOEXCEPT override
                 {
                     switch (mode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
                     }
 
                     return nullptr;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateDecryptor(CipherMode mode, const std::vector<uint8_t>& key, const std::vector<uint8_t>& iv) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateDecryptor(CipherMode mode, const Vector<uint8_t>& key, const Vector<uint8_t>& iv) NOEXCEPT override
                 {
                     switch (mode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
                     }
 
                     return nullptr;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateEncryptor() NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateEncryptor() NOEXCEPT override
                 {
                     switch (mMode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
                     }
 
                     return nullptr;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateEncryptor(CipherMode mode) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateEncryptor(CipherMode mode) NOEXCEPT override
                 {
                     switch (mode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(mKey.data(), mKey.size(), mIv.data());
                     }
 
                     return nullptr;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateEncryptor(CipherMode mode, const std::vector<uint8_t>& key) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateEncryptor(CipherMode mode, const Vector<uint8_t>& key) NOEXCEPT override
                 {
                     switch (mode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
                     }
 
                     return nullptr;
                 }
 
-                virtual std::shared_ptr<ICryptoTransform> CreateEncryptor(CipherMode mode, const std::vector<uint8_t>& key, const std::vector<uint8_t>& iv) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateEncryptor(CipherMode mode, const Vector<uint8_t>& key, const Vector<uint8_t>& iv) NOEXCEPT override
                 {
                     switch (mode) {
-                        case CipherMode::Cbc: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Cfb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Ctr: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Ecb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
-                        case CipherMode::Ofb: return std::make_shared<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Cfb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CFB_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Ctr: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CTR_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Ecb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::ECB_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
+                        case CipherMode::Ofb: return MakePointer<CryptoTransformAlgorithm<CryptoPP::OFB_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
                     }
 
                     return nullptr;
@@ -262,8 +262,8 @@ namespace Lupus {
             private:
 
                 CipherMode mMode = CipherMode::Ctr;
-                std::vector<uint8_t> mKey;
-                std::vector<uint8_t> mIv;
+                Vector<uint8_t> mKey;
+                Vector<uint8_t> mIv;
             };
         }
     }

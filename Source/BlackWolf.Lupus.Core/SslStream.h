@@ -49,8 +49,8 @@ namespace Lupus {
             {
             public:
 
-                SslStream(std::shared_ptr<Stream>);
-                SslStream(std::shared_ptr<Stream>, bool);
+                SslStream(Pointer<Stream>);
+                SslStream(Pointer<Stream>, bool);
                 virtual ~SslStream();
 
                 virtual bool CanRead() const NOEXCEPT override;
@@ -59,12 +59,12 @@ namespace Lupus {
 
                 virtual void Close() override;
                 virtual int64_t Length() const override;
-                virtual void Length(int64_t) throw(std::out_of_range) override;
+                virtual void Length(int64_t) throw(OutOfRange) override;
                 virtual int64_t Position() const override;
-                virtual void Position(int64_t) throw(std::out_of_range) override;
-                virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override;
+                virtual void Position(int64_t) throw(OutOfRange) override;
+                virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
                 virtual int ReadByte() override;
-                virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override;
+                virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
                 virtual void WriteByte(uint8_t byte) override;
                 virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
 
@@ -86,17 +86,17 @@ namespace Lupus {
                 virtual void AuthenticateAsClientAsync(const String& host, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
                 virtual void AuthenticateAsClientAsync(
                     const String& host,
-                    std::vector<
-                        std::shared_ptr<
+                    Vector<
+                        Pointer<
                             Lupus::Security::Cryptography::X509Certificates::X509Certificate
                         >
                     > certificates,
                     Lupus::Security::Authentication::SslProtocols protocols,
                     bool checkRevocation,
                     std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
-                virtual void AuthenticateAsServerAsync(std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
+                virtual void AuthenticateAsServerAsync(Pointer<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate, std::function<void(std::exception_ptr, SslStream*)>) NOEXCEPT;
                 virtual void AuthenticateAsServerAsync(
-                    std::shared_ptr<
+                    Pointer<
                         Lupus::Security::Cryptography::X509Certificates::X509Certificate
                     > certificate,
                     bool clientCertRequired,
@@ -107,16 +107,16 @@ namespace Lupus {
                 virtual void AuthenticateAsClient(const String& host);
                 virtual void AuthenticateAsClient(
                     const String& host, 
-                    std::vector<
-                        std::shared_ptr<
+                    Vector<
+                        Pointer<
                             Lupus::Security::Cryptography::X509Certificates::X509Certificate
                         >
                     > certificates, 
                     Lupus::Security::Authentication::SslProtocols protocols,
                     bool checkRevocation);
-                virtual void AuthenticateAsServer(std::shared_ptr<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate);
+                virtual void AuthenticateAsServer(Pointer<Lupus::Security::Cryptography::X509Certificates::X509Certificate> certificate);
                 virtual void AuthenticateAsServer(
-                    std::shared_ptr<
+                    Pointer<
                         Lupus::Security::Cryptography::X509Certificates::X509Certificate
                     > certificate, 
                     bool clientCertRequired, 
@@ -125,7 +125,7 @@ namespace Lupus {
 
             private:
 
-                std::shared_ptr<Lupus::Security::Cryptography::SymmetricCipher> mCipher;
+                Pointer<Lupus::Security::Cryptography::SymmetricCipher> mCipher;
             };
         }
     }

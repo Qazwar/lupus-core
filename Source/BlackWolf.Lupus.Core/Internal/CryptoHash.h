@@ -41,9 +41,9 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
+                virtual Pointer<HashAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::make_shared<CryptoHash<T>>();
+                    return MakePointer<CryptoHash<T>>();
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override
@@ -56,34 +56,34 @@ namespace Lupus {
                     return T::DIGESTSIZE * 8;
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& buffer) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
                 {
                     return ComputeHash(buffer, 0, (size_t)buffer.size());
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(std::shared_ptr<Stream> stream) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
                     size_t size = (size_t)(stream->Length() - stream->Position());
-                    std::vector<uint8_t> buffer(size);
+                    Vector<uint8_t> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
                 {
                     static const int digestsize = T::DIGESTSIZE;
 
                     if (inputOffset > input.size()) {
-                        throw std::out_of_range("inputOffset");
+                        throw OutOfRange("inputOffset");
                     } else if (inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("inputCount");
+                        throw OutOfRange("inputCount");
                     }
 
                     uint8_t digest[digestsize];
 
                     mAlgorithm.CalculateDigest(digest, input.data() + inputOffset, inputCount);
 
-                    return std::move(std::vector<uint8_t>(digest, digest + digestsize));
+                    return std::move(Vector<uint8_t>(digest, digest + digestsize));
                 }
 
             private:
@@ -98,9 +98,9 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
+                virtual Pointer<HashAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::make_shared<CryptoHash<CryptoPP::SHA3_224>>();
+                    return MakePointer<CryptoHash<CryptoPP::SHA3_224>>();
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override
@@ -113,28 +113,28 @@ namespace Lupus {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& buffer) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
                 {
                     return ComputeHash(buffer, 0, (size_t)buffer.size());
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(std::shared_ptr<Stream> stream) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
                     size_t size = (size_t)(stream->Length() - stream->Position());
-                    std::vector<uint8_t> buffer(size);
+                    Vector<uint8_t> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
-                        throw std::out_of_range("inputOffset");
+                        throw OutOfRange("inputOffset");
                     } else if (inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("inputCount");
+                        throw OutOfRange("inputCount");
                     }
 
-                    std::vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 
@@ -153,9 +153,9 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
+                virtual Pointer<HashAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::make_shared<CryptoHash<CryptoPP::SHA3_256>>();
+                    return MakePointer<CryptoHash<CryptoPP::SHA3_256>>();
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override
@@ -168,28 +168,28 @@ namespace Lupus {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& buffer) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
                 {
                     return ComputeHash(buffer, 0, (size_t)buffer.size());
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(std::shared_ptr<Stream> stream) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
                     size_t size = (size_t)(stream->Length() - stream->Position());
-                    std::vector<uint8_t> buffer(size);
+                    Vector<uint8_t> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
-                        throw std::out_of_range("inputOffset");
+                        throw OutOfRange("inputOffset");
                     } else if (inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("inputCount");
+                        throw OutOfRange("inputCount");
                     }
 
-                    std::vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 
@@ -208,9 +208,9 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
+                virtual Pointer<HashAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::make_shared<CryptoHash<CryptoPP::SHA3_384>>();
+                    return MakePointer<CryptoHash<CryptoPP::SHA3_384>>();
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override
@@ -223,28 +223,28 @@ namespace Lupus {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& buffer) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
                 {
                     return ComputeHash(buffer, 0, (size_t)buffer.size());
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(std::shared_ptr<Stream> stream) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
                     size_t size = (size_t)(stream->Length() - stream->Position());
-                    std::vector<uint8_t> buffer(size);
+                    Vector<uint8_t> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
-                        throw std::out_of_range("inputOffset");
+                        throw OutOfRange("inputOffset");
                     } else if (inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("inputCount");
+                        throw OutOfRange("inputCount");
                     }
 
-                    std::vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 
@@ -263,9 +263,9 @@ namespace Lupus {
 
                 virtual ~CryptoHash() = default;
 
-                virtual std::shared_ptr<HashAlgorithm> Clone() const NOEXCEPT override
+                virtual Pointer<HashAlgorithm> Clone() const NOEXCEPT override
                 {
-                    return std::make_shared<CryptoHash<CryptoPP::SHA3_512>>();
+                    return MakePointer<CryptoHash<CryptoPP::SHA3_512>>();
                 }
 
                 virtual size_t BlockSize() const NOEXCEPT override
@@ -278,28 +278,28 @@ namespace Lupus {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& buffer) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
                 {
                     return ComputeHash(buffer, 0, (size_t)buffer.size());
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(std::shared_ptr<Stream> stream) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
                     size_t size = (size_t)(stream->Length() - stream->Position());
-                    std::vector<uint8_t> buffer(size);
+                    Vector<uint8_t> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual std::vector<uint8_t> ComputeHash(const std::vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(std::out_of_range) override
+                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
-                        throw std::out_of_range("inputOffset");
+                        throw OutOfRange("inputOffset");
                     } else if (inputCount > input.size() - inputOffset) {
-                        throw std::out_of_range("inputCount");
+                        throw OutOfRange("inputCount");
                     }
 
-                    std::vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 

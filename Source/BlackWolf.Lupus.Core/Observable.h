@@ -44,7 +44,7 @@ namespace Lupus {
         virtual ~IObserver() = default;
 
         virtual void OnUpdate(const T& value) = 0;
-        virtual void OnError(std::exception& error) = 0;
+        virtual void OnError(Exception& error) = 0;
         virtual void OnComplete() = 0;
     };
 
@@ -55,40 +55,40 @@ namespace Lupus {
 
         virtual ~Observable() = default;
 
-        virtual void Attach(std::shared_ptr<IObserver<T>> observer) NOEXCEPT final
+        virtual void Attach(Pointer<IObserver<T>> observer) NOEXCEPT final
         {
             mObservers.push_back(observer);
         }
 
-        virtual void Detach(std::shared_ptr<IObserver<T>> observer) NOEXCEPT final
+        virtual void Detach(Pointer<IObserver<T>> observer) NOEXCEPT final
         {
             std::remove(std::begin(mObservers), std::end(mObservers), observer);
         }
 
         virtual void OnUpdate(const T& value) NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [&](std::shared_ptr<IObserver<T>> observer) {
+            std::for_each(std::begin(mObservers), std::end(mObservers), [&](Pointer<IObserver<T>> observer) {
                 observer->OnUpdate(value);
             });
         }
 
-        virtual void OnError(std::exception& ex) NOEXCEPT final
+        virtual void OnError(Exception& ex) NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [&](std::shared_ptr<IObserver<T>> observer) {
+            std::for_each(std::begin(mObservers), std::end(mObservers), [&](Pointer<IObserver<T>> observer) {
                 observer->OnError(ex);
             });
         }
 
         virtual void OnComplete() NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [](std::shared_ptr<IObserver<T>> observer) {
+            std::for_each(std::begin(mObservers), std::end(mObservers), [](Pointer<IObserver<T>> observer) {
                 observer->OnComplete();
             });
         }
 
     private:
 
-        std::vector<std::shared_ptr<IObserver<T>>> mObservers = std::vector<std::shared_ptr<IObserver<T>>>(32);
+        Vector<Pointer<IObserver<T>>> mObservers = Vector<Pointer<IObserver<T>>>(32);
     };
 
     template <typename Owner, typename T>
@@ -110,7 +110,7 @@ namespace Lupus {
             if (mGetter) {
                 return mGetter();
             } else {
-                throw std::runtime_error("getter is not set");
+                throw RuntimeError("getter is not set");
             }
         }
 
@@ -119,7 +119,7 @@ namespace Lupus {
             if (mSetter) {
                 mSetter(value);
             } else {
-                throw std::runtime_error("setter is not set");
+                throw RuntimeError("setter is not set");
             }
 
             ValueChanged(this, value);
@@ -131,7 +131,7 @@ namespace Lupus {
             if (mGetter) {
                 return mGetter();
             } else {
-                throw std::runtime_error("getter is not set");
+                throw RuntimeError("getter is not set");
             }
         }
 
@@ -140,7 +140,7 @@ namespace Lupus {
             if (mSetter) {
                 mSetter(value);
             } else {
-                throw std::runtime_error("setter is not set");
+                throw RuntimeError("setter is not set");
             }
 
             ValueChanged(this, value);

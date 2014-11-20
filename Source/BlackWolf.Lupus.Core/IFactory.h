@@ -28,6 +28,6 @@ namespace Lupus {
     class IFactory
     {
     public:
-        virtual std::shared_ptr<T> Create(const Args&... args) const = 0;
+        virtual Pointer<T> Create(const Args&... args) const = 0;
     };
 }

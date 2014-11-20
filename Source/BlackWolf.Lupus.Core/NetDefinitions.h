@@ -53,14 +53,8 @@ namespace Lupus {
     namespace Net {
         namespace Sockets {
             typedef SOCKET SocketHandle;
-
-            inline std::string GetLastSocketErrorString() {
-                return std::to_string(WSAGetLastError());
-            }
-
-            inline std::string GetLastAddressInfoErrorString() {
-                return std::to_string(WSAGetLastError());
-            }
+            LUPUSCORE_API std::string GetLastSocketErrorString();
+            LUPUSCORE_API std::string GetLastAddressInfoErrorString();
         }
     }
 }
@@ -97,14 +91,9 @@ namespace Lupus {
         namespace Sockets {
             typedef int SocketHandle;
             typedef unsigned long u_long;
-
-            inline std::string GetLastSocketErrorString() {
-                return strerror(errno);
-            }
-
-            inline std::string GetLastAddressInfoErrorString() {
-                return gai_strerror(errno);
-            }
+            typedef SOCKET SocketHandle;
+            LUPUSCORE_API std::string GetLastSocketErrorString();
+            LUPUSCORE_API std::string GetLastAddressInfoErrorString();
         }
     }
 }

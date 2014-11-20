@@ -33,10 +33,10 @@ namespace Lupus {
             Socket::Socket(const SocketInformation& socketInformation)
             {
                 if (socketInformation.ProtocolInformation.size() != sizeof(AddrStorage) + 12) {
-                    throw std::invalid_argument("socketInformatoin has not the right size");
+                    throw InvalidArgument("socketInformatoin has not the right size");
                 }
 
-                std::vector<uint8_t> information = socketInformation.ProtocolInformation;
+                Vector<uint8_t> information = socketInformation.ProtocolInformation;
                 int family = *((int*)(information.data()));
                 int type = *((int*)(information.data() + 4));
                 int protocol = *((int*)(information.data() + 8));
@@ -47,7 +47,7 @@ namespace Lupus {
                 memcpy(&storage, socketInformation.ProtocolInformation.data() + 12, sizeof(storage));
 
                 if ((mHandle = socket((int)family, (int)type, (int)protocol)) == INVALID_SOCKET) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 switch (family) {
@@ -60,13 +60,13 @@ namespace Lupus {
                         break;
 
                     default:
-                        throw std::invalid_argument("Address family is not supported");
+                        throw InvalidArgument("Address family is not supported");
                 }
 
                 switch (socketInformation.Options) {
                     case SocketInformationOption::Connected:
                         if (connect(mHandle, (Addr*)&storage, addrsize) != 0) {
-                            throw socket_error(GetLastSocketErrorString());
+                            throw SocketError(GetLastSocketErrorString());
                         }
 
                         mState.reset(new SocketConnected(this));
@@ -74,7 +74,7 @@ namespace Lupus {
 
                     case SocketInformationOption::Bound:
                         if (bind(mHandle, (Addr*)&storage, addrsize) != 0) {
-                            throw socket_error(GetLastSocketErrorString());
+                            throw SocketError(GetLastSocketErrorString());
                         }
 
                         mState.reset(new SocketBound(this));
@@ -89,7 +89,7 @@ namespace Lupus {
             Socket::Socket(AddressFamily family, SocketType type, ProtocolType protocol)
             {
                 if ((mHandle = socket((int)family, (int)type, (int)protocol)) == INVALID_SOCKET) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 mState.reset(new SocketReady(this));
@@ -103,12 +103,12 @@ namespace Lupus {
                 }
             }
 
-            std::shared_ptr<Socket> Socket::Accept()
+            Pointer<Socket> Socket::Accept()
             {
                 return mState->Accept(this);
             }
 
-            void Socket::Bind(std::shared_ptr<IPEndPoint> localEndPoint)
+            void Socket::Bind(Pointer<IPEndPoint> localEndPoint)
             {
                 mState->Bind(this, localEndPoint);
             }
@@ -123,29 +123,29 @@ namespace Lupus {
                 mState->Close(this, timeout);
             }
 
-            void Socket::Connect(std::shared_ptr<IPEndPoint> remoteEndPoint)
+            void Socket::Connect(Pointer<IPEndPoint> remoteEndPoint)
             {
                 mState->Connect(this, remoteEndPoint);
             }
 
-            void Socket::Connect(std::shared_ptr<IPAddress> address, uint16_t port)
+            void Socket::Connect(Pointer<IPAddress> address, uint16_t port)
             {
                 mState->Connect(this, IPEndPointPtr(new IPEndPoint(address, port)));
             }
 
-            void Socket::Connect(const std::vector<std::shared_ptr<IPEndPoint>>& endPoints)
+            void Socket::Connect(const Vector<Pointer<IPEndPoint>>& endPoints)
             {
                 for (const IPEndPointPtr& endPoint : endPoints) {
                     try {
                         mState->Connect(this, endPoint);
                         break;
-                    } catch (socket_error&) {
+                    } catch (SocketErrorCode&) {
                         continue;
                     }
                 }
 
                 if (!IsConnected()) {
-                    throw socket_error("Could not connect to given end points");
+                    throw SocketError("Could not connect to given end points");
                 }
             }
 
@@ -170,106 +170,106 @@ namespace Lupus {
                 pollfd fdarray[] = { fd };
 
                 switch (poll(fdarray, 1, (int)milliSeconds)) {
-                    case SOCKET_ERROR: throw socket_error(GetLastSocketErrorString());
+                    case SOCKET_ERROR: throw SocketError(GetLastSocketErrorString());
                     case 0: return SocketPollFlags::Timeout;
                     default: return (SocketPollFlags)fdarray[0].revents;
                 }
             }
 
-            int Socket::Receive(std::vector<uint8_t>& buffer)
+            int Socket::Receive(Vector<uint8_t>& buffer)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Receive(this, buffer, 0, (size_t)buffer.size(), SocketFlags::None, errorCode);
             }
 
-            int Socket::Receive(std::vector<uint8_t>& buffer, size_t offset)
+            int Socket::Receive(Vector<uint8_t>& buffer, size_t offset)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Receive(this, buffer, offset, (size_t)buffer.size() - offset, SocketFlags::None, errorCode);
             }
 
-            int Socket::Receive(std::vector<uint8_t>& buffer, size_t offset, size_t size)
+            int Socket::Receive(Vector<uint8_t>& buffer, size_t offset, size_t size)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Receive(this, buffer, offset, size, SocketFlags::None, errorCode);
             }
 
-            int Socket::Receive(std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags)
+            int Socket::Receive(Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Receive(this, buffer, offset, size, socketFlags, errorCode);
             }
 
-            int Socket::Receive(std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode)
+            int Socket::Receive(Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketErrorCode& errorCode)
             {
                 return mState->Receive(this, buffer, offset, size, socketFlags, errorCode);
             }
 
-            int Socket::ReceiveFrom(std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint>& remoteEndPoint)
+            int Socket::ReceiveFrom(Vector<uint8_t>& buffer, Pointer<IPEndPoint>& remoteEndPoint)
             {
                 return mState->ReceiveFrom(this, buffer, 0, (size_t)buffer.size(), SocketFlags::None, remoteEndPoint);
             }
 
-            int Socket::ReceiveFrom(std::vector<uint8_t>& buffer, size_t offset, std::shared_ptr<IPEndPoint>& remoteEndPoint)
+            int Socket::ReceiveFrom(Vector<uint8_t>& buffer, size_t offset, Pointer<IPEndPoint>& remoteEndPoint)
             {
                 return mState->ReceiveFrom(this, buffer, offset, (size_t)buffer.size() - offset, SocketFlags::None, remoteEndPoint);
             }
 
-            int Socket::ReceiveFrom(std::vector<uint8_t>& buffer, size_t offset, size_t size, std::shared_ptr<IPEndPoint>& remoteEndPoint)
+            int Socket::ReceiveFrom(Vector<uint8_t>& buffer, size_t offset, size_t size, Pointer<IPEndPoint>& remoteEndPoint)
             {
                 return mState->ReceiveFrom(this, buffer, offset, size, SocketFlags::None, remoteEndPoint);
             }
 
-            int Socket::ReceiveFrom(std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint>& remoteEndPoint)
+            int Socket::ReceiveFrom(Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, Pointer<IPEndPoint>& remoteEndPoint)
             {
                 return mState->ReceiveFrom(this, buffer, offset, size, socketFlags, remoteEndPoint);
             }
 
-            int Socket::Send(const std::vector<uint8_t>& buffer)
+            int Socket::Send(const Vector<uint8_t>& buffer)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Send(this, buffer, 0, (size_t)buffer.size(), SocketFlags::None, errorCode);
             }
 
-            int Socket::Send(const std::vector<uint8_t>& buffer, size_t offset)
+            int Socket::Send(const Vector<uint8_t>& buffer, size_t offset)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Send(this, buffer, offset, (size_t)buffer.size() - offset, SocketFlags::None, errorCode);
             }
 
-            int Socket::Send(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
+            int Socket::Send(const Vector<uint8_t>& buffer, size_t offset, size_t size)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Send(this, buffer, offset, size, SocketFlags::None, errorCode);
             }
 
-            int Socket::Send(const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags)
+            int Socket::Send(const Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags)
             {
-                SocketError errorCode;
+                SocketErrorCode errorCode;
                 return mState->Send(this, buffer, offset, size, socketFlags, errorCode);
             }
 
-            int Socket::Send(const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketError& errorCode)
+            int Socket::Send(const Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketErrorCode& errorCode)
             {
                 return mState->Send(this, buffer, offset, size, socketFlags, errorCode);
             }
 
-            int Socket::SendTo(const std::vector<uint8_t>& buffer, std::shared_ptr<IPEndPoint> remoteEndPoint)
+            int Socket::SendTo(const Vector<uint8_t>& buffer, Pointer<IPEndPoint> remoteEndPoint)
             {
                 return mState->SendTo(this, buffer, 0, (size_t)buffer.size(), SocketFlags::None, remoteEndPoint);
             }
 
-            int Socket::SendTo(const std::vector<uint8_t>& buffer, size_t offset, std::shared_ptr<IPEndPoint> remoteEndPoint)
+            int Socket::SendTo(const Vector<uint8_t>& buffer, size_t offset, Pointer<IPEndPoint> remoteEndPoint)
             {
                 return mState->SendTo(this, buffer, offset, (size_t)buffer.size() - offset, SocketFlags::None, remoteEndPoint);
             }
 
-            int Socket::SendTo(const std::vector<uint8_t>& buffer, size_t offset, size_t size, std::shared_ptr<IPEndPoint> remoteEndPoint)
+            int Socket::SendTo(const Vector<uint8_t>& buffer, size_t offset, size_t size, Pointer<IPEndPoint> remoteEndPoint)
             {
                 return mState->SendTo(this, buffer, offset, size, SocketFlags::None, remoteEndPoint);
             }
 
-            int Socket::SendTo(const std::vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, std::shared_ptr<IPEndPoint> remoteEndPoint)
+            int Socket::SendTo(const Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, Pointer<IPEndPoint> remoteEndPoint)
             {
                 return mState->SendTo(this, buffer, offset, size, socketFlags, remoteEndPoint);
             }
@@ -299,7 +299,7 @@ namespace Lupus {
                 int result, length = 4;
 
                 if (getsockopt(mHandle, SOL_SOCKET, SO_ACCEPTCONN, (char*)&result, (int*)&length) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return (result == 1);
@@ -320,7 +320,7 @@ namespace Lupus {
                 int result, length = 4;
 
                 if (getsockopt(mHandle, SOL_SOCKET, SO_TYPE, (char*)&result, (int*)&length) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return (SocketType)result;
@@ -331,7 +331,7 @@ namespace Lupus {
                 u_long arg = 0;
 
                 if (ioctlsocket(mHandle, FIONREAD, &(arg)) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return (size_t)arg;
@@ -348,7 +348,7 @@ namespace Lupus {
                 mBlocking = value;
 
                 if (ioctlsocket(mHandle, FIONBIO, &(arg)) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
             }
 
@@ -359,7 +359,7 @@ namespace Lupus {
                 int s = sizeof(linger);
 
                 if (getsockopt(mHandle, SOL_SOCKET, SO_LINGER, (char*)&l, &s) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 o.Enabled = l.l_onoff != 0;
@@ -374,7 +374,7 @@ namespace Lupus {
                 l.l_linger = static_cast<decltype(l.l_linger)>(o.LingerTime);
 
                 if (setsockopt(mHandle, SOL_SOCKET, SO_LINGER, (char*)&l, sizeof(linger)) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
             }
 
@@ -383,7 +383,7 @@ namespace Lupus {
                 int result, length = 4;
 
                 if (getsockopt(mHandle, IPPROTO_TCP, TCP_NODELAY, (char*)&result, (int*)&length) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return (result != 0);
@@ -394,16 +394,16 @@ namespace Lupus {
                 int val = value ? 1 : 0;
 
                 if (setsockopt(mHandle, IPPROTO_TCP, TCP_NODELAY, (char*)&val, 4) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
             }
 
-            std::shared_ptr<IPEndPoint> Socket::LocalEndPoint() const
+            Pointer<IPEndPoint> Socket::LocalEndPoint() const
             {
                 return mLocal;
             }
 
-            std::shared_ptr<IPEndPoint> Socket::RemoteEndPoint() const
+            Pointer<IPEndPoint> Socket::RemoteEndPoint() const
             {
                 return mRemote;
             }
@@ -413,7 +413,7 @@ namespace Lupus {
                 int result, length = 4;
 
                 if (getsockopt(mHandle, SOL_SOCKET, SO_SNDBUF, (char*)&result, (int*)&length) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return result;
@@ -422,7 +422,7 @@ namespace Lupus {
             void Socket::SendBuffer(int value)
             {
                 if (setsockopt(mHandle, SOL_SOCKET, SO_SNDBUF, (char*)&value, 4) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
             }
 
@@ -431,7 +431,7 @@ namespace Lupus {
                 int result, length = 4;
 
                 if (getsockopt(mHandle, SOL_SOCKET, SO_RCVBUF, (char*)&result, (int*)&length) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return result;
@@ -440,7 +440,7 @@ namespace Lupus {
             void Socket::ReceiveBuffer(int value)
             {
                 if (setsockopt(mHandle, SOL_SOCKET, SO_RCVBUF, (char*)&value, 4) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
             }
 
@@ -452,7 +452,7 @@ namespace Lupus {
             void Socket::SendTimeout(int value)
             {
                 if (setsockopt(mHandle, SOL_SOCKET, SO_SNDTIMEO, (char*)&value, 4) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 mSendTime = value;
@@ -466,21 +466,21 @@ namespace Lupus {
             void Socket::ReceiveTimeout(int value)
             {
                 if (setsockopt(mHandle, SOL_SOCKET, SO_RCVTIMEO, (char*)&value, 4) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 mRecvTime = value;
             }
 
-            void Socket::Select(const std::vector<std::shared_ptr<Socket>>& checkRead, const std::vector<std::shared_ptr<Socket>>& checkWrite, const std::vector<std::shared_ptr<Socket>>& checkError, size_t microSeconds)
+            void Socket::Select(const Vector<Pointer<Socket>>& checkRead, const Vector<Pointer<Socket>>& checkWrite, const Vector<Pointer<Socket>>& checkError, size_t microSeconds)
             {
-                throw socket_error("Select is not implemented");
+                throw SocketError("Select is not implemented");
             }
 
 
 #ifdef _MSC_VER
 
-            int Socket::GetSocketDomain(SocketHandle h) const throw(socket_error)
+            int Socket::GetSocketDomain(SocketHandle h) const throw(SocketError)
             {
                 WSAPROTOCOL_INFO info;
                 int size = sizeof(info);
@@ -488,13 +488,13 @@ namespace Lupus {
                 memset(&info, 0, sizeof(WSAPROTOCOL_INFO));
 
                 if (getsockopt(h, SOL_SOCKET, SO_PROTOCOL_INFO, (char*)&info, &size) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return info.iAddressFamily;
             }
 
-            int Socket::GetSocketProtocol(SocketHandle h) const throw(socket_error)
+            int Socket::GetSocketProtocol(SocketHandle h) const throw(SocketError)
             {
                 WSAPROTOCOL_INFO info;
                 int size = sizeof(info);
@@ -502,7 +502,7 @@ namespace Lupus {
                 memset(&info, 0, sizeof(WSAPROTOCOL_INFO));
 
                 if (getsockopt(h, SOL_SOCKET, SO_PROTOCOL_INFO, (char*)&info, (int*)&size) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return info.iProtocol;
@@ -510,25 +510,25 @@ namespace Lupus {
 
 #else
 
-            int Socket::GetSocketDomain(SocketHandle h) const throw(socket_error)
+            int Socket::GetSocketDomain(SocketHandle h) const throw(SocketError)
             {
                 int domain = 0;
                 socklen_t size = sizeof(int);
 
                 if (getsockopt(h, SOL_SOCKET, SO_DOMAIN, &domain, &size) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return domain;
             }
 
-            int Socket::GetSocketProtocol(SocketHandle h) const throw(socket_error)
+            int Socket::GetSocketProtocol(SocketHandle h) const throw(SocketError)
             {
                 int protocol = 0;
                 socklen_t size = sizeof(int);
 
                 if (getsockopt(h, SOL_SOCKET, SO_PROTOCOL, &protocol, &size) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return protocol;

@@ -28,29 +28,29 @@
 
 #include <thread>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Net {
         namespace Sockets {
-            TcpListener::TcpListener(shared_ptr<IPEndPoint> localEP)
+            TcpListener::TcpListener(Pointer<IPEndPoint> localEP)
             {
                 if (!localEP) {
-                    throw null_pointer("localEP");
+                    throw NullPointer("localEP");
                 }
 
-                mServer = make_shared<Socket>(localEP->Family(), SocketType::Stream, ProtocolType::TCP);
+                mServer = MakePointer<Socket>(localEP->Family(), SocketType::Stream, ProtocolType::TCP);
                 mServer->Bind(localEP);
             }
 
-            TcpListener::TcpListener(shared_ptr<IPAddress> localaddr, uint16_t port)
+            TcpListener::TcpListener(Pointer<IPAddress> localaddr, uint16_t port)
             {
                 if (!localaddr) {
-                    throw null_pointer("localaddr");
+                    throw NullPointer("localaddr");
                 }
 
-                auto ep = make_shared<IPEndPoint>(localaddr, port);
-                mServer = make_shared<Socket>(localaddr->Family(), SocketType::Stream, ProtocolType::TCP);
+                auto ep = MakePointer<IPEndPoint>(localaddr, port);
+                mServer = MakePointer<Socket>(localaddr->Family(), SocketType::Stream, ProtocolType::TCP);
                 mServer->Bind(ep);
             }
 
@@ -64,7 +64,7 @@ namespace Lupus {
                 int result, length = 4;
 
                 if (getsockopt(mServer->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&result, (int*)&length) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
 
                 return (result != 0);
@@ -75,42 +75,42 @@ namespace Lupus {
                 int val = value ? 1 : 0;
 
                 if (setsockopt(mServer->Handle(), SOL_SOCKET, SO_REUSEADDR, (char*)&val, 4) != 0) {
-                    throw socket_error(GetLastSocketErrorString());
+                    throw SocketError(GetLastSocketErrorString());
                 }
             }
 
-            shared_ptr<IPEndPoint> TcpListener::LocalEndPoint() const
+            Pointer<IPEndPoint> TcpListener::LocalEndPoint() const
             {
                 return mServer->LocalEndPoint();
             }
 
-            shared_ptr<Socket> TcpListener::Server() const
+            Pointer<Socket> TcpListener::Server() const
             {
                 return mServer;
             }
 
-            Task<shared_ptr<Socket>> TcpListener::AcceptSocketAsync()
+            Task<Pointer<Socket>> TcpListener::AcceptSocketAsync()
             {
-                return Task<shared_ptr<Socket>>([this]() {
+                return Task<Pointer<Socket>>([this]() {
                     return this->AcceptSocket();
                 });
             }
 
-            Task<shared_ptr<TcpClient>> TcpListener::AcceptTcpClientAsync()
+            Task<Pointer<TcpClient>> TcpListener::AcceptTcpClientAsync()
             {
-                return Task<shared_ptr<TcpClient>>([this]() {
+                return Task<Pointer<TcpClient>>([this]() {
                     return this->AcceptTcpClient();
                 });
             }
 
-            shared_ptr<Socket> TcpListener::AcceptSocket()
+            Pointer<Socket> TcpListener::AcceptSocket()
             {
                 return mServer->Accept();
             }
 
-            shared_ptr<TcpClient> TcpListener::AcceptTcpClient()
+            Pointer<TcpClient> TcpListener::AcceptTcpClient()
             {
-                auto client = make_shared<TcpClient>();
+                auto client = MakePointer<TcpClient>();
                 client->Client(AcceptSocket());
                 return client;
             }

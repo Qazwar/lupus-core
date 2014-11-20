@@ -25,15 +25,15 @@
 
 #include <thread>
 
-using namespace std;
+
 
 namespace Lupus {
     namespace Net {
         namespace Sockets {
-            NetworkStream::NetworkStream(shared_ptr<Sockets::Socket> socket)
+            NetworkStream::NetworkStream(Pointer<Sockets::Socket> socket)
             {
                 if (!socket) {
-                    throw null_pointer("socket");
+                    throw NullPointer("socket");
                 }
 
                 mSocket = socket;
@@ -44,21 +44,21 @@ namespace Lupus {
                 return mSocket->Available();
             }
             
-            shared_ptr<Socket> NetworkStream::Socket() const
+            Pointer<Socket> NetworkStream::Socket() const
             {
                 return mSocket;
             }
 
-            Task<int> NetworkStream::ReadAsync(vector<uint8_t>& buffer, size_t offset, size_t size)
+            Task<int> NetworkStream::ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size)
             {
-                return Task<int>([&buffer, offset, size](shared_ptr<Sockets::Socket> socket) {
+                return Task<int>([&buffer, offset, size](Pointer<Sockets::Socket> socket) {
                     return socket->Receive(buffer, offset, size);
                 }, mSocket);
             }
             
-            Task<int> NetworkStream::WriteAsync(const vector<uint8_t>& buffer, size_t offset, size_t size)
+            Task<int> NetworkStream::WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size)
             {
-                return Task<int>([&buffer, offset, size](shared_ptr<Sockets::Socket> socket) {
+                return Task<int>([&buffer, offset, size](Pointer<Sockets::Socket> socket) {
                     return socket->Send(buffer, offset, size);
                 }, mSocket);
             }
@@ -98,10 +98,10 @@ namespace Lupus {
                 return (int64_t)mSocket->Available();
             }
             
-            int NetworkStream::Read(vector<uint8_t>& buffer, size_t offset, size_t size)
+            int NetworkStream::Read(Vector<uint8_t>& buffer, size_t offset, size_t size)
             {
                 if (!mRead) {
-                    throw io_error("network stream is not readable");
+                    throw IOError("network stream is not readable");
                 }
 
                 return mSocket->Receive(buffer, offset, size);
@@ -110,10 +110,10 @@ namespace Lupus {
             int NetworkStream::ReadByte()
             {
                 if (!mRead) {
-                    throw io_error("network stream is not readable");
+                    throw IOError("network stream is not readable");
                 }
 
-                vector<uint8_t> vec(1);
+                Vector<uint8_t> vec(1);
                 
                 if (mSocket->Receive(vec, 0, 1) != 1) {
                     return -1;
@@ -122,10 +122,10 @@ namespace Lupus {
                 return vec[0];
             }
             
-            int NetworkStream::Write(const vector<uint8_t>& buffer, size_t offset, size_t size)
+            int NetworkStream::Write(const Vector<uint8_t>& buffer, size_t offset, size_t size)
             {
                 if (!mWrite) {
-                    throw io_error("network stream is not writable");
+                    throw IOError("network stream is not writable");
                 }
 
                 return mSocket->Send(buffer, offset, size);
@@ -134,10 +134,10 @@ namespace Lupus {
             void NetworkStream::WriteByte(uint8_t byte)
             {
                 if (!mWrite) {
-                    throw io_error("network stream is not writable");
+                    throw IOError("network stream is not writable");
                 }
 
-                vector<uint8_t> vec(1, byte);
+                Vector<uint8_t> vec(1, byte);
                 mSocket->Send(vec, 0, 1);
             }
 

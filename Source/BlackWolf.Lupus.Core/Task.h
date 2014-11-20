@@ -134,10 +134,10 @@ namespace Lupus {
         }
 
         template <typename Function, typename... Args>
-        void Start(Function&& f, Args&&... args) throw(std::runtime_error)
+        void Start(Function&& f, Args&&... args) throw(RuntimeError)
         {
             if (mIsRunning) {
-                throw std::runtime_error("Task is already running");
+                throw RuntimeError("Task is already running");
             }
 
             std::packaged_task<R(Args...)> task(f);
@@ -250,10 +250,10 @@ namespace Lupus {
         }
 
         template <typename Function, typename... Args>
-        void Start(Function&& f, Args&&... args) throw(std::runtime_error)
+        void Start(Function&& f, Args&&... args) throw(RuntimeError)
         {
             if (mIsRunning) {
-                throw std::runtime_error("Task is already running");
+                throw RuntimeError("Task is already running");
             }
 
             std::packaged_task<void(Args...)> task(f);

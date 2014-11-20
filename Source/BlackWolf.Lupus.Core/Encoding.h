@@ -32,30 +32,30 @@ namespace Lupus {
         {
         public:
 
-            Encoding(String str) throw(std::runtime_error);
+            Encoding(String str) throw(RuntimeError);
             virtual ~Encoding();
 
-            virtual std::shared_ptr<Encoding> Clone() const NOEXCEPT override;
+            virtual Pointer<Encoding> Clone() const NOEXCEPT override;
 
-            virtual String GetString(const std::vector<uint8_t>& buffer) const throw(format_error, std::runtime_error);
+            virtual String GetString(const Vector<uint8_t>& buffer) const throw(FormatError, RuntimeError);
             virtual String GetString(
-                const std::vector<uint8_t>& buffer,
-                size_t offset, size_t count) const throw(format_error, std::runtime_error, std::out_of_range);
-            virtual std::vector<uint8_t> GetBytes(const String& str) const throw(format_error, std::runtime_error);
-            virtual std::vector<uint8_t> GetBytes(
+                const Vector<uint8_t>& buffer,
+                size_t offset, size_t count) const throw(FormatError, RuntimeError, OutOfRange);
+            virtual Vector<uint8_t> GetBytes(const String& str) const throw(FormatError, RuntimeError);
+            virtual Vector<uint8_t> GetBytes(
                 const String& str,
-                size_t offset, size_t count) const throw(format_error, std::runtime_error, std::out_of_range);
+                size_t offset, size_t count) const throw(FormatError, RuntimeError, OutOfRange);
             virtual String Name() const NOEXCEPT;
 
-            static std::shared_ptr<Encoding> ASCII() NOEXCEPT;
-            static std::shared_ptr<Encoding> Default() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF32() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF16() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF8() NOEXCEPT;
-            static std::shared_ptr<Encoding> UTF7() NOEXCEPT;
+            static Pointer<Encoding> ASCII() NOEXCEPT;
+            static Pointer<Encoding> Default() NOEXCEPT;
+            static Pointer<Encoding> UTF32() NOEXCEPT;
+            static Pointer<Encoding> UTF16() NOEXCEPT;
+            static Pointer<Encoding> UTF8() NOEXCEPT;
+            static Pointer<Encoding> UTF7() NOEXCEPT;
 
-            static std::shared_ptr<Encoding> GetEncoding(String encoding) NOEXCEPT;
-            static std::vector<String> GetEncodings() NOEXCEPT;
+            static Pointer<Encoding> GetEncoding(String encoding) NOEXCEPT;
+            static Vector<String> GetEncodings() NOEXCEPT;
 
         private:
 

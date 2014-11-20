@@ -31,38 +31,38 @@
 #include "TcpClient.h"
 #include "NetworkStream.h"
 
-using namespace std;
+
 using namespace Lupus::Net::Sockets;
 
 namespace Lupus {
     namespace Net {
-        HttpListener::HttpListener(shared_ptr<TcpListener> listener) :
+        HttpListener::HttpListener(Pointer<TcpListener> listener) :
             mListener(listener)
         {
             if (!listener) {
-                throw null_pointer("listener");
+                throw NullPointer("listener");
             } else if (!listener->IsActive()) {
                 listener->Start(255);
             }
         }
 
-        HttpListener::HttpListener(shared_ptr<IPEndPoint> localEP)
+        HttpListener::HttpListener(Pointer<IPEndPoint> localEP)
         {
             if (!localEP) {
-                throw null_pointer("localEP");
+                throw NullPointer("localEP");
             }
 
-            mListener = make_shared<TcpListener>(localEP);
+            mListener = MakePointer<TcpListener>(localEP);
             mListener->Start(255);
         }
 
-        HttpListener::HttpListener(shared_ptr<IPAddress> localaddr, uint16_t port)
+        HttpListener::HttpListener(Pointer<IPAddress> localaddr, uint16_t port)
         {
             if (!localaddr) {
-                throw null_pointer("localaddr");
+                throw NullPointer("localaddr");
             }
 
-            mListener = make_shared<TcpListener>(localaddr, port);
+            mListener = MakePointer<TcpListener>(localaddr, port);
             mListener->Start(255);
         }
 
@@ -96,12 +96,12 @@ namespace Lupus {
         {
             if (mListening) {
                 auto client = mListener->AcceptTcpClient();
-                vector<uint8_t> buffer(client->Available());
+                Vector<uint8_t> buffer(client->Available());
                 HttpContext context;
 
                 client->GetStream()->Read(buffer, 0, buffer.size());
-                context.Response = make_shared<HttpListenerResponse>(client);
-                context.Request = make_shared<HttpListenerRequest>(buffer, client->Client()->LocalEndPoint(), client->Client()->RemoteEndPoint());
+                context.Response = MakePointer<HttpListenerResponse>(client);
+                context.Request = MakePointer<HttpListenerRequest>(buffer, client->Client()->LocalEndPoint(), client->Client()->RemoteEndPoint());
             }
 
             return HttpContext();

@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -21,7 +26,7 @@
 #include <memory>
 #include <future>
 #include <cstdint>
-#include <exception>
+#include <Exception>
 #include <functional>
 
 #include "Utility.h"
@@ -45,27 +50,27 @@ namespace Lupus {
 
         virtual ~Stream() = default;
 
-        virtual Task<void> CopyToAsync(std::shared_ptr<Stream> destination) NOEXCEPT;
+        virtual Task<void> CopyToAsync(Pointer<Stream> destination) NOEXCEPT;
         virtual Task<void> FlushAsync() NOEXCEPT;
-        virtual Task<int> ReadAsync(std::vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
-        virtual Task<int> WriteAsync(const std::vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
+        virtual Task<int> ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
+        virtual Task<int> WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
 
         virtual bool CanRead() const = 0;
         virtual bool CanWrite() const = 0;
         virtual bool CanSeek() const = 0;
 
         virtual void Close() = 0;
-        virtual void CopyTo(std::shared_ptr<Stream> destination) throw(null_pointer, not_supported);
-        virtual void Flush() throw(not_supported);
+        virtual void CopyTo(Pointer<Stream> destination) throw(NullPointer, NotSupported);
+        virtual void Flush() throw(NotSupported);
         virtual int64_t Length() const = 0;
-        virtual void Length(int64_t) throw(not_supported);
+        virtual void Length(int64_t) throw(NotSupported);
         virtual int64_t Position() const = 0;
-        virtual void Position(int64_t) throw(not_supported);
-        virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) = 0;
+        virtual void Position(int64_t) throw(NotSupported);
+        virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) = 0;
         virtual int ReadByte() = 0;
-        virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) = 0;
+        virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) = 0;
         virtual void WriteByte(uint8_t byte) = 0;
-        virtual int64_t Seek(int64_t offset, SeekOrigin origin) throw(not_supported);
+        virtual int64_t Seek(int64_t offset, SeekOrigin origin) throw(NotSupported);
     };
 
     //! Readonly adapter
@@ -74,7 +79,7 @@ namespace Lupus {
     public:
 
         InputStream() = delete;
-        InputStream(std::shared_ptr<Stream> innerStream) throw(std::invalid_argument, null_pointer);
+        InputStream(Pointer<Stream> innerStream) throw(InvalidArgument, NullPointer);
         virtual ~InputStream() = default;
 
         virtual bool CanRead() const NOEXCEPT override;
@@ -82,21 +87,21 @@ namespace Lupus {
         virtual bool CanSeek() const NOEXCEPT override;
 
         virtual void Close() override;
-        virtual void CopyTo(std::shared_ptr<Stream> destination) throw(null_pointer, not_supported) override;
+        virtual void CopyTo(Pointer<Stream> destination) throw(NullPointer, NotSupported) override;
         virtual void Flush() override;
         virtual int64_t Length() const override;
-        virtual void Length(int64_t) throw(not_supported) override;
+        virtual void Length(int64_t) throw(NotSupported) override;
         virtual int64_t Position() const override;
-        virtual void Position(int64_t) throw(not_supported) override;
-        virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override;
+        virtual void Position(int64_t) throw(NotSupported) override;
+        virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
         virtual int ReadByte() override;
-        virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(not_supported) override;
-        virtual void WriteByte(uint8_t byte) throw(not_supported) override;
+        virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(NotSupported) override;
+        virtual void WriteByte(uint8_t byte) throw(NotSupported) override;
         virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
 
     private:
 
-        std::shared_ptr<Stream> mInnerStream;
+        Pointer<Stream> mInnerStream;
     };
 
     // Writeonly adapter
@@ -105,7 +110,7 @@ namespace Lupus {
     public:
 
         OutputStream() = delete;
-        OutputStream(std::shared_ptr<Stream> innerStream) throw(std::invalid_argument, null_pointer);
+        OutputStream(Pointer<Stream> innerStream) throw(InvalidArgument, NullPointer);
         virtual ~OutputStream() = default;
 
         virtual bool CanRead() const NOEXCEPT override;
@@ -113,21 +118,21 @@ namespace Lupus {
         virtual bool CanSeek() const NOEXCEPT override;
 
         virtual void Close() override;
-        virtual void CopyTo(std::shared_ptr<Stream> destination) throw(null_pointer, not_supported) override;
+        virtual void CopyTo(Pointer<Stream> destination) throw(NullPointer, NotSupported) override;
         virtual void Flush() override;
         virtual int64_t Length() const override;
-        virtual void Length(int64_t) throw(not_supported) override;
+        virtual void Length(int64_t) throw(NotSupported) override;
         virtual int64_t Position() const override;
-        virtual void Position(int64_t) throw(not_supported) override;
-        virtual int Read(std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(std::out_of_range) override;
+        virtual void Position(int64_t) throw(NotSupported) override;
+        virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
         virtual int ReadByte() override;
-        virtual int Write(const std::vector<uint8_t>& buffer, size_t offset, size_t size) throw(not_supported) override;
-        virtual void WriteByte(uint8_t byte) throw(not_supported) override;
+        virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(NotSupported) override;
+        virtual void WriteByte(uint8_t byte) throw(NotSupported) override;
         virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
 
     private:
 
-        std::shared_ptr<Stream> mInnerStream;
+        Pointer<Stream> mInnerStream;
     };
 }
 

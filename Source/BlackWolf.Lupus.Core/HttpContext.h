@@ -33,8 +33,8 @@
 namespace Lupus {
     namespace Net {
         struct LUPUSCORE_API HttpContext {
-            std::shared_ptr<class HttpListenerRequest> Request = nullptr;
-            std::shared_ptr<class HttpListenerResponse> Response = nullptr;
+            Pointer<class HttpListenerRequest> Request = nullptr;
+            Pointer<class HttpListenerResponse> Response = nullptr;
 
             HttpContext() = default;
             HttpContext(const HttpContext&) = default;

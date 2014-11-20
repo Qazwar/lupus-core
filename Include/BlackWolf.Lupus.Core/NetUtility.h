@@ -2,18 +2,23 @@
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
- * Lupus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * Lupus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with Lupus. If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 #pragma once
 
@@ -78,7 +83,7 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUSCORE_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service) throw(std::runtime_error);
+            LUPUSCORE_API Vector<Pointer<IPEndPoint>> GetAddressInformation(const String& node, const String& service) throw(RuntimeError);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -86,7 +91,7 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUSCORE_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, AddressFamily family) throw(std::runtime_error);
+            LUPUSCORE_API Vector<Pointer<IPEndPoint>> GetAddressInformation(const String& node, const String& service, AddressFamily family) throw(RuntimeError);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -94,7 +99,7 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUSCORE_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, SocketType type) throw(std::runtime_error);
+            LUPUSCORE_API Vector<Pointer<IPEndPoint>> GetAddressInformation(const String& node, const String& service, SocketType type) throw(RuntimeError);
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,
@@ -102,12 +107,12 @@ namespace Lupus {
              *
              * \sa GetAddressInformation(const String&, const String&, AddressFamily, SocketType, ProtocolType)
              */
-            LUPUSCORE_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(const String& node, const String& service, ProtocolType protocol) throw(std::runtime_error);
+            LUPUSCORE_API Vector<Pointer<IPEndPoint>> GetAddressInformation(const String& node, const String& service, ProtocolType protocol) throw(RuntimeError);
 
             /*!
              * Liest die Adressinformation des angegebenen Knotens mit dem
              * entsprechenenden Service. Falls node und service eine leere Zeichenkette
-             * darstellen, dann wird ein std::runtime_error geworfen. Falls nach der
+             * darstellen, dann wird ein RuntimeError geworfen. Falls nach der
              * Lokalen-IP (Loopback) gesucht werden soll, dann muss der node eine
              * leere Zeichenkette sein. Falls ein beliebiger Service verwendet werden
              * soll, dann muss service eine leere Zeichenkette sein.
@@ -129,14 +134,14 @@ namespace Lupus {
              *
              * \returns Vektor mit allen gefunden Adressen.
              */
-            LUPUSCORE_API std::vector<std::shared_ptr<IPEndPoint>> GetAddressInformation(
+            LUPUSCORE_API Vector<Pointer<IPEndPoint>> GetAddressInformation(
                 const String& node,
                 const String& service,
                 AddressFamily family,
                 SocketType type,
                 ProtocolType protocol
                 )
-                throw(std::runtime_error, std::invalid_argument);
+                throw(RuntimeError, InvalidArgument);
         }
     }
 }
