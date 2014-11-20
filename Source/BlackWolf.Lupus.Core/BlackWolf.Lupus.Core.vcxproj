@@ -73,6 +73,7 @@
     <ClInclude Include="Internal\CryptoBlockCipher.h" />
     <ClInclude Include="Internal\CryptoHash.h" />
     <ClInclude Include="Internal\CryptoRSA.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
     <ClInclude Include="Observable.h" />
@@ -106,6 +107,9 @@
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Version.h" />
     <ClInclude Include="X509Certificate.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BlackWolf.Lupus.Core.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{40A04166-C40C-422E-93B4-B52CD76A296C}</ProjectGuid>

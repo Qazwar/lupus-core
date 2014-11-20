@@ -53,12 +53,6 @@ namespace Lupus {
         return str;
     }
 
-    Pointer<Version> GetVersion()
-    {
-        static const Pointer<Version> sVersion = MakePointer<Version>(0, 1);
-        return sVersion;
-    }
-
 #ifdef _MSC_VER
     std::string GetLastSystemError()
     {
@@ -78,5 +72,9 @@ namespace Lupus {
         return buffer;
     }
 #else
+    std::string GetLastSystemError()
+    {
+        return std::strerror(errno);
+    }
 #endif
 }

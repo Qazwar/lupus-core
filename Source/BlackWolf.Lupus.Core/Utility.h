@@ -186,18 +186,16 @@ namespace Lupus {
     }
 
     template <typename T, typename... Args>
-    Pointer<T> MakePointer(Args&&... args)
+    Pointer<T> MakePointer(const Args&... args)
     {
-        return std::make_shared<T>(std::forward<Args>(args)...);
+        return std::make_shared<T>(args...);
     }
 
     template <typename T, typename... Args>
-    Unique<T> MakeUnique(Args&&... args)
+    Unique<T> MakeUnique(const Args&... args)
     {
-        return std::make_unique<T>(std::forward<Args>(args)...);
+        return std::make_unique<T>(args...);
     }
-
-    LUPUSCORE_API Pointer<class Version> GetVersion();
 
     LUPUSCORE_API std::string GetLastSystemError();
 }

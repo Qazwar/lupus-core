@@ -36,5 +36,11 @@
     <ClInclude Include="Grid.h">
       <Filter>Code\.h</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BlackWolf.Lupus.Windows.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

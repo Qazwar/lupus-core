@@ -252,6 +252,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Window.h" />
@@ -265,6 +266,9 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BlackWolf.Lupus.Windows.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

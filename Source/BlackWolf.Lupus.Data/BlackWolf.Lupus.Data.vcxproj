@@ -266,6 +266,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
     <ClInclude Include="IsolationLevel.h" />
     <ClInclude Include="ITransaction.h" />
     <ClInclude Include="Parameter.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +280,9 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
     <ClCompile Include="PgConnection.cpp" />
     <ClCompile Include="PgDataReader.cpp" />
     <ClCompile Include="PgTransaction.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BlackWolf.Lupus.Data.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

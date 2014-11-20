@@ -104,10 +104,10 @@ namespace Lupus {
             return *this;
         }
 
-        void operator()(Args&&... args)
+        void operator()(const Args&... args)
         {
             std::for_each(std::begin(mCallbacks), std::end(mCallbacks), [&](Handle& callback) {
-                callback(std::forward<Args>(args)...);
+                callback(args...);
             });
         }
 

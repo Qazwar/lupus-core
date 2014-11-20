@@ -335,5 +335,11 @@
     <ClInclude Include="HttpListenerResponse.h">
       <Filter>Code\Net\.h</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BlackWolf.Lupus.Core.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
