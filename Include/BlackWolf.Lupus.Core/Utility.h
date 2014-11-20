@@ -170,7 +170,7 @@ namespace Lupus {
     template <typename Dest, typename Src>
     Dest force_cast(const Src& src)
     {
-        union types {
+        union {
             Src s;
             Dest d;
         } t;

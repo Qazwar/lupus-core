@@ -25,9 +25,6 @@
 #include <iomanip>
 #include <sstream>
 
-
-using namespace std::chrono;
-
 namespace Lupus {
     namespace Net {
         Cookie::Cookie(String name, String value) :
