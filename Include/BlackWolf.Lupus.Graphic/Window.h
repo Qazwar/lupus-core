@@ -40,7 +40,7 @@
 #endif
 
 namespace Lupus {
-    namespace Windows {
+    namespace Graphic {
         enum class WindowFlags {
             LupusCreateNoFlag(None),
             LupusCreateFlag(Fullscreen, 0),
@@ -96,7 +96,7 @@ namespace Lupus {
             
             virtual void Bordered(bool) const final;
             virtual int DisplayIndex() const final;
-            virtual Pointer<Grid> Grid() const final;
+            virtual Pointer<Graphic::Grid> Grid() const final;
             virtual void Hide() final;
             virtual void Maximize() final;
             virtual void Minimize() final;
@@ -150,7 +150,7 @@ namespace Lupus {
             void Initialize();
 
             void* mHandle = nullptr;
-            Pointer<Windows::Grid> mGrid;
+            Pointer<Graphic::Grid> mGrid;
             Pointer<ObservableObject> mViewModel;
             static Collection<uint32_t, Window*> smMappedWindows;
         };

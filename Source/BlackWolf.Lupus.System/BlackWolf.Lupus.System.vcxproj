@@ -121,10 +121,15 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.System
 del $(SolutionDir)..\Include\BlackWolf.Lupus.System\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System
+del $(SolutionDir)..\Include\BlackWolf.Lupus.System\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -141,10 +146,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.System
 del $(SolutionDir)..\Include\BlackWolf.Lupus.System\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System
+del $(SolutionDir)..\Include\BlackWolf.Lupus.System\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
     <ClCompile>
@@ -162,10 +172,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.System
 del $(SolutionDir)..\Include\BlackWolf.Lupus.System\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System
+del $(SolutionDir)..\Include\BlackWolf.Lupus.System\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
@@ -183,10 +198,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.System
 del $(SolutionDir)..\Include\BlackWolf.Lupus.System\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System
+del $(SolutionDir)..\Include\BlackWolf.Lupus.System\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -207,10 +227,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.System
 del $(SolutionDir)..\Include\BlackWolf.Lupus.System\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System
+del $(SolutionDir)..\Include\BlackWolf.Lupus.System\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -231,10 +256,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
       <AdditionalLibraryDirectories>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.System
 del $(SolutionDir)..\Include\BlackWolf.Lupus.System\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.System
+del $(SolutionDir)..\Include\BlackWolf.Lupus.System\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Library.h" />

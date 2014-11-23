@@ -20,18 +20,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#pragma once
-
 #include "UIElement.h"
 
-namespace Lupus {
-    namespace Windows {
-        // TODO: Implement Grid.
 
-        class LUPUSWINDOWS_API Grid : public UIElement
+
+namespace Lupus {
+    namespace Graphic {
+        void UIElementComposite::Add(const Pointer<UIElement>& element)
         {
-        public:
-            virtual ~Grid() = default;
-        };
+            mChildren.insert(element);
+        }
+
+        void UIElementComposite::Clear()
+        {
+            mChildren.clear();
+        }
+
+        void UIElementComposite::Remove(const Pointer<UIElement>& element)
+        {
+            mChildren.erase(element);
+        }
+
+        const std::unordered_set<Pointer<UIElement>>& UIElementComposite::Children() const
+        {
+            return mChildren;
+        }
     }
 }

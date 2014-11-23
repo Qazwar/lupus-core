@@ -28,6 +28,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include <unordered_set>
 #include <algorithm>
 #include <Exception>
 #include <chrono>
@@ -140,6 +141,9 @@ namespace Lupus {
     using Pair = std::pair < TKey, TValue >;
 
     template <typename T>
+    using Set = std::unordered_set < T >;
+
+    template <typename T>
     using Vector = std::vector < T >;
     template <typename T>
     using List = std::list < T >;
@@ -186,16 +190,18 @@ namespace Lupus {
     }
 
     template <typename T, typename... Args>
-    Pointer<T> MakePointer(const Args&... args)
+    Pointer<T> MakePointer(Args&&... args)
     {
-        return std::make_shared<T>(args...);
+        return std::make_shared<T>(std::forward<Args>(args)...);
     }
 
     template <typename T, typename... Args>
-    Unique<T> MakeUnique(const Args&... args)
+    Unique<T> MakeUnique(Args&&... args)
     {
-        return std::make_unique<T>(args...);
+        return std::make_shared<T>(std::forward<Args>(args)...);
     }
 
     LUPUSCORE_API std::string GetLastSystemError();
+
+    LUPUSCORE_API Pointer<class Version> GetVersion();
 }

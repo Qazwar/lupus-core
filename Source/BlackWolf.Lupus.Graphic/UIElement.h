@@ -20,30 +20,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "UIElement.h"
+#pragma once
 
+#include "Utility.h"
+#include <BlackWolf.Lupus.Core/Utility.h>
+#include <BlackWolf.Lupus.Core/IComposite.h>
+#include <boost/noncopyable.hpp>
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 
 namespace Lupus {
-    namespace Windows {
-        void UIElementComposite::Add(const Pointer<UIElement>& element)
+    namespace Graphic {
+        class LUPUSWINDOWS_API UIElement : public NonCopyable
         {
-            mChildren.insert(element);
-        }
+        public:
+            virtual ~UIElement() = default;
+        };
 
-        void UIElementComposite::Clear()
+        class LUPUSWINDOWS_API UIElementComposite : public ICompositeReference<UIElement>
         {
-            mChildren.clear();
-        }
+        public:
+            virtual ~UIElementComposite() = default;
 
-        void UIElementComposite::Remove(const Pointer<UIElement>& element)
-        {
-            mChildren.erase(element);
-        }
+            virtual void Add(const Pointer<UIElement>& component) NOEXCEPT override;
+            virtual void Clear() NOEXCEPT override;
+            virtual void Remove(const Pointer<UIElement>& component) NOEXCEPT override;
+            virtual const Set<Pointer<UIElement>>& Children() const NOEXCEPT override;
 
-        const std::unordered_set<Pointer<UIElement>>& UIElementComposite::Children() const
-        {
-            return mChildren;
-        }
+        private:
+            Set<Pointer<UIElement>> mChildren;
+        };
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

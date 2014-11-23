@@ -130,10 +130,15 @@
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
     <ClCompile>
@@ -151,10 +156,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
       <Profile>true</Profile>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -171,10 +181,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
@@ -192,10 +207,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
       <Profile>true</Profile>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -216,10 +236,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -240,10 +265,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlackWolf.Lupus.Core\BlackWolf.Lupus.Core.vcxproj">

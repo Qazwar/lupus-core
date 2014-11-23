@@ -29,7 +29,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{66505215-B2E3-4535-A747-74195E95BA90}</ProjectGuid>
     <RootNamespace>LupusWindows</RootNamespace>
-    <ProjectName>BlackWolf.Lupus.Windows</ProjectName>
+    <ProjectName>BlackWolf.Lupus.Graphic</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -131,10 +131,15 @@
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Windows\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
     <ClCompile>
@@ -152,10 +157,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Windows\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -172,10 +182,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Windows\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
@@ -193,10 +208,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Windows\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -217,10 +237,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Windows\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -241,10 +266,15 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Windows
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Windows\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="UIElement.cpp" />
@@ -268,7 +298,7 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Windows</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="BlackWolf.Lupus.Windows.rc" />
+    <ResourceCompile Include="BlackWolf.Lupus.Graphic.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

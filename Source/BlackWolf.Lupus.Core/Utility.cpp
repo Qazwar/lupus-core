@@ -23,6 +23,7 @@
 #include "Utility.h"
 #include "Version.h"
 #include "String.h"
+#include "versioning.h"
 
 #include <cryptopp/osrng.h>
 #include <unicode/uchar.h>
@@ -77,4 +78,9 @@ namespace Lupus {
         return std::strerror(errno);
     }
 #endif
+
+    Pointer<Version> GetVersion()
+    {
+        return MakePointer<Version>(LUPUS_CORE_MAJOR, LUPUS_CORE_MINOR, LUPUS_CORE_BUILD, LUPUS_CORE_REVISION);
+    }
 }

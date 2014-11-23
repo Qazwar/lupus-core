@@ -106,10 +106,14 @@
     <ClInclude Include="Uri.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Version.h" />
+    <ClInclude Include="versioning.h" />
     <ClInclude Include="X509Certificate.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BlackWolf.Lupus.Core.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VersionIncrementer.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{40A04166-C40C-422E-93B4-B52CD76A296C}</ProjectGuid>
@@ -217,10 +221,17 @@
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\versioning.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\resource.h
+python $(ProjectDir)VersionIncrementer.py</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
     <ClCompile>
@@ -239,10 +250,17 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\versioning.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\resource.h
+python $(ProjectDir)VersionIncrementer.py</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -261,13 +279,20 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
+    <PostBuildEvent>
+      <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\versioning.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\resource.h
+python $(ProjectDir)VersionIncrementer.py</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
@@ -286,10 +311,17 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\versioning.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\resource.h
+python $(ProjectDir)VersionIncrementer.py</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -311,10 +343,17 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\versioning.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\resource.h
+python $(ProjectDir)VersionIncrementer.py</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -336,10 +375,17 @@ copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
       <ImportLibrary>$(SolutionDir)..\Lib\$(PlatformName).$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Core
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\*.h
-copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core</Command>
-    </PreBuildEvent>
+copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Core
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\versioning.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Core\resource.h
+python $(ProjectDir)VersionIncrementer.py</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

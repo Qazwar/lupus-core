@@ -22,16 +22,40 @@
  */
 #pragma once
 
-#include "UIElement.h"
+#include "Utility.h"
+#include <BlackWolf.Lupus.Core/Utility.h>
+#include <BlackWolf.Lupus.Core/IComposite.h>
+#include <boost/noncopyable.hpp>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#endif
 
 namespace Lupus {
-    namespace Windows {
-        // TODO: Implement Grid.
-
-        class LUPUSWINDOWS_API Grid : public UIElement
+    namespace Graphic {
+        class LUPUSWINDOWS_API UIElement : public NonCopyable
         {
         public:
-            virtual ~Grid() = default;
+            virtual ~UIElement() = default;
+        };
+
+        class LUPUSWINDOWS_API UIElementComposite : public ICompositeReference<UIElement>
+        {
+        public:
+            virtual ~UIElementComposite() = default;
+
+            virtual void Add(const Pointer<UIElement>& component) NOEXCEPT override;
+            virtual void Clear() NOEXCEPT override;
+            virtual void Remove(const Pointer<UIElement>& component) NOEXCEPT override;
+            virtual const Set<Pointer<UIElement>>& Children() const NOEXCEPT override;
+
+        private:
+            Set<Pointer<UIElement>> mChildren;
         };
     }
 }
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif

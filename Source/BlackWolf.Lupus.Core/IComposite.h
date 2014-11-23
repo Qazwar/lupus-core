@@ -22,11 +22,10 @@
  */
 #pragma once
 
-#include <memory>
-#include <unordered_set>
+#include "Utility.h"
 
 namespace Lupus {
-    template <typename Component, typename Container = std::unordered_set<Component>>
+    template <typename Component, typename Container = Set<Component>>
     class IComposite : public Component
     {
     public:
@@ -38,7 +37,7 @@ namespace Lupus {
         virtual const Container& Children() const = 0;
     };
 
-    template <typename Component, typename Container = std::unordered_set<Pointer<Component>>>
+    template <typename Component, typename Container = Set<Pointer<Component>>>
     class ICompositeReference : public Component
     {
     public:

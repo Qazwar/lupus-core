@@ -39,7 +39,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="BlackWolf.Lupus.Windows.rc">
+    <ResourceCompile Include="BlackWolf.Lupus.Graphic.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

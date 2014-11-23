@@ -30,7 +30,7 @@
     <ProjectGuid>{479D5CBF-2FBB-4287-8557-728E06D502D1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>UnitTests</RootNamespace>
-    <ProjectName>BlackWolf.Lupus.Windows.Tests</ProjectName>
+    <ProjectName>BlackWolf.Lupus.Graphic.Tests</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

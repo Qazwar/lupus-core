@@ -28,7 +28,7 @@
 
 
 namespace Lupus {
-    namespace Windows {
+    namespace Graphic {
         Window::Window(WindowFlags flags)
         {
             SDL_Window* window = SDL_CreateWindow(
@@ -372,7 +372,7 @@ namespace Lupus {
             };
 
             smMappedWindows[SDL_GetWindowID(window)] = this;
-            mGrid = MakePointer<Windows::Grid>();
+            mGrid = MakePointer<Graphic::Grid>();
         }
 
         const int Window::PositionUndefined = SDL_WINDOWPOS_UNDEFINED;
