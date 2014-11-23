@@ -53,3 +53,13 @@
 
 #endif
 #endif
+
+#include <BlackWolf.Lupus.Core/Utility.h>
+
+namespace Lupus {
+    class Version;
+
+    namespace System {
+        LUPUSSYSTEM_API Pointer<Version> GetVersion();
+    }
+}

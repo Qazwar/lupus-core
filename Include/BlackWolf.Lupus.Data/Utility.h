@@ -22,8 +22,6 @@
  */
 #pragma once
 
-#include <BlackWolf.Lupus.Core/Utility.h>
-
 #ifdef _MSC_VER
 #pragma warning(disable: 4290)
 #define NOEXCEPT throw()
@@ -56,8 +54,14 @@
 #endif
 #endif
 
+#include <BlackWolf.Lupus.Core/Utility.h>
+
 namespace Lupus {
+    class Version;
+
     namespace Data {
-        LupusDefineError(sql_error);
+        LupusDefineError(SqlError);
+
+        LUPUSDATA_API Pointer<Version> GetVersion();
     }
 }

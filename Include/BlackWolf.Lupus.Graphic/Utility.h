@@ -26,10 +26,10 @@
 #pragma warning(disable: 4290)
 #define NOEXCEPT throw()
 
-#ifdef LUPUSWINDOWS_EXPORT
-#define LUPUSWINDOWS_API __declspec(dllexport)
+#ifdef LUPUSGRAPHIC_EXPORT
+#define LUPUSGRAPHIC_API __declspec(dllexport)
 #else
-#define LUPUSWINDOWS_API __declspec(dllimport)
+#define LUPUSGRAPHIC_API __declspec(dllimport)
 #endif
 
 #else
@@ -38,18 +38,28 @@
 #ifdef LUPUSWINDOWS_EXPORT
 
 #ifdef __CYGWIN__
-#define LUPUSWINDOWS_API __attribute__ ((dllexport))
+#define LUPUSGRAPHIC_API __attribute__ ((dllexport))
 #else
-#define LUPUSWINDOWS_API __attribute__ ((visibility ("default")))
+#define LUPUSGRAPHIC_API __attribute__ ((visibility ("default")))
 #endif
 
 #else
 
 #ifdef __CYGWIN__
-#define LUPUSWINDOWS_API __attribute__ ((dllimport))
+#define LUPUSGRAPHIC_API __attribute__ ((dllimport))
 #else
-#define LUPUSWINDOWS_API __attribute__ ((visibility ("default")))
+#define LUPUSGRAPHIC_API __attribute__ ((visibility ("default")))
 #endif
 
 #endif
 #endif
+
+#include <BlackWolf.Lupus.Core/Utility.h>
+
+namespace Lupus {
+    class Version;
+
+    namespace Graphic {
+        LUPUSGRAPHIC_API Pointer<Version> GetVersion();
+    }
+}

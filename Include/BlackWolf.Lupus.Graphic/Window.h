@@ -59,7 +59,7 @@ namespace Lupus {
         LupusFlagEnumeration(WindowFlags);
 
         // TODO: Schnittstelle ausbauen und Klasse implementieren.
-        class LUPUSWINDOWS_API Window : public boost::noncopyable
+        class LUPUSGRAPHIC_API Window : public boost::noncopyable
         {
             friend class Application;
 

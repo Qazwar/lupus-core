@@ -122,7 +122,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;$(SolutionDir)..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUPUSWINDOWS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSGRAPHIC_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -138,7 +138,9 @@
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
@@ -147,7 +149,7 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;$(SolutionDir)..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUPUSWINDOWS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSGRAPHIC_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -164,7 +166,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -173,7 +177,7 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;$(SolutionDir)..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUPUSWINDOWS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSGRAPHIC_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -189,7 +193,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
@@ -198,7 +204,7 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;$(SolutionDir)..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUPUSWINDOWS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSGRAPHIC_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -215,7 +221,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -226,7 +234,7 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;$(SolutionDir)..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUPUSWINDOWS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSGRAPHIC_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -244,7 +252,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -255,7 +265,7 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)3rdParty;$(SolutionDir)..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUPUSWINDOWS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUPUSGRAPHIC_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -273,11 +283,14 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +298,7 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
     <ClInclude Include="resource.h" />
     <ClInclude Include="UIElement.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="versioning.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +313,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Graphic\resource.h</Command>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BlackWolf.Lupus.Graphic.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VersionIncrementer.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

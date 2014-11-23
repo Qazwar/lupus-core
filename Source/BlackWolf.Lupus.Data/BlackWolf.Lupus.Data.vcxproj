@@ -137,7 +137,9 @@
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
@@ -163,7 +165,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -188,7 +192,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
@@ -214,7 +220,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -243,7 +251,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -272,7 +282,9 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
       <Command>mkdir $(SolutionDir)..\Include\BlackWolf.Lupus.Data
 del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\*.h
 copy *.h $(SolutionDir)..\Include\BlackWolf.Lupus.Data
-del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h
+del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\versioning.h
+python $(ProjectDir)VersionIncrementer.py</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -298,6 +310,7 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
     <ClInclude Include="Parameter.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="versioning.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
@@ -310,9 +323,13 @@ del $(SolutionDir)..\Include\BlackWolf.Lupus.Data\resource.h</Command>
     <ClCompile Include="PgConnection.cpp" />
     <ClCompile Include="PgDataReader.cpp" />
     <ClCompile Include="PgTransaction.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BlackWolf.Lupus.Data.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VersionIncrementer.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

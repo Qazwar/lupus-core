@@ -32,8 +32,8 @@ namespace Lupus {
 
             virtual ~ITransaction() = default;
 
-            virtual void Commit() throw(sql_error) = 0;
-            virtual void Rollback() throw(sql_error) = 0;
+            virtual void Commit() throw(SqlError) = 0;
+            virtual void Rollback() throw(SqlError) = 0;
         };
     }
 }

@@ -52,10 +52,10 @@ namespace Lupus {
             virtual const Vector<Pointer<Parameter>>& Parameters() const NOEXCEPT = 0;
 
             virtual Pointer<Parameter> CreateParameter() NOEXCEPT = 0;
-            virtual int ExecuteNonQuery() throw(sql_error) = 0;
-            virtual Pointer<IDataReader> ExecuteReader() throw(sql_error) = 0;
-            virtual Vector<NameCollection<Any>> ExecuteScalar() throw(sql_error) = 0;
-            virtual bool Prepare() throw(sql_error) = 0;
+            virtual int ExecuteNonQuery() throw(SqlError) = 0;
+            virtual Pointer<IDataReader> ExecuteReader() throw(SqlError) = 0;
+            virtual Vector<NameCollection<Any>> ExecuteScalar() throw(SqlError) = 0;
+            virtual bool Prepare() throw(SqlError) = 0;
         };
     }
 }

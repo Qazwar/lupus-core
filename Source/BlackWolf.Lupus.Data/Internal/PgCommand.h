@@ -44,14 +44,14 @@ namespace Lupus {
                 virtual const Vector<Pointer<Parameter>>& Parameters() const NOEXCEPT override;
 
                 virtual Pointer<Parameter> CreateParameter() NOEXCEPT override;
-                virtual int ExecuteNonQuery() throw(sql_error) override;
-                virtual Pointer<IDataReader> ExecuteReader() throw(sql_error) override;
-                virtual Vector<NameCollection<Any>> ExecuteScalar() throw(sql_error) override;
-                virtual bool Prepare() throw(sql_error) override;
+                virtual int ExecuteNonQuery() throw(SqlError) override;
+                virtual Pointer<IDataReader> ExecuteReader() throw(SqlError) override;
+                virtual Vector<NameCollection<Any>> ExecuteScalar() throw(SqlError) override;
+                virtual bool Prepare() throw(SqlError) override;
 
             private:
 
-                pg_result* GetResult() throw(sql_error);
+                pg_result* GetResult() throw(SqlError);
 
                 pg_conn* mPgConn = nullptr;
                 bool mPrepared = false;

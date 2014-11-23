@@ -34,11 +34,11 @@ namespace Lupus {
             {
             public:
 
-                PgTransaction(pg_conn*, IsolationLevel) throw(sql_error);
+                PgTransaction(pg_conn*, IsolationLevel) throw(SqlError);
                 virtual ~PgTransaction();
 
-                virtual void Commit() throw(sql_error) override;
-                virtual void Rollback() throw(sql_error) override;
+                virtual void Commit() throw(SqlError) override;
+                virtual void Rollback() throw(SqlError) override;
 
             private:
 

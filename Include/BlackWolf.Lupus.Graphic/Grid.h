@@ -28,7 +28,7 @@ namespace Lupus {
     namespace Graphic {
         // TODO: Implement Grid.
 
-        class LUPUSWINDOWS_API Grid : public UIElement
+        class LUPUSGRAPHIC_API Grid : public UIElement
         {
         public:
             virtual ~Grid() = default;

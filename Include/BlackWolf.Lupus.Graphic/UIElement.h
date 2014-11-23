@@ -34,13 +34,13 @@
 
 namespace Lupus {
     namespace Graphic {
-        class LUPUSWINDOWS_API UIElement : public NonCopyable
+        class LUPUSGRAPHIC_API UIElement : public NonCopyable
         {
         public:
             virtual ~UIElement() = default;
         };
 
-        class LUPUSWINDOWS_API UIElementComposite : public ICompositeReference<UIElement>
+        class LUPUSGRAPHIC_API UIElementComposite : public ICompositeReference<UIElement>
         {
         public:
             virtual ~UIElementComposite() = default;

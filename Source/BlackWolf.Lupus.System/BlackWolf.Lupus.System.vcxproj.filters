@@ -22,6 +22,8 @@
     <ClInclude Include="Utility.h">
       <Filter>Code\.h</Filter>
     </ClInclude>
+    <ClInclude Include="versioning.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UnixLibrary.cpp">
@@ -30,5 +32,16 @@
     <ClCompile Include="Win32Library.cpp">
       <Filter>Code\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VersionIncrementer.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BlackWolf.Lupus.System.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

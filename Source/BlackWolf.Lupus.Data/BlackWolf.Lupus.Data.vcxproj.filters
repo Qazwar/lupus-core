@@ -74,6 +74,7 @@
       <Filter>Code\.h</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="versioning.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp">
@@ -106,10 +107,16 @@
     <ClCompile Include="Parameter.cpp">
       <Filter>Code\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BlackWolf.Lupus.Data.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VersionIncrementer.py" />
   </ItemGroup>
 </Project>

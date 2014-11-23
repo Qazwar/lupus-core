@@ -45,11 +45,11 @@ namespace Lupus {
 
             virtual String ConnectionString() const NOEXCEPT = 0;
             
-            virtual Pointer<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(sql_error) = 0;
-            virtual void Connect(const String&) throw(sql_error) = 0;
+            virtual Pointer<ITransaction> BeginTransaction(IsolationLevel = IsolationLevel::Committed) throw(SqlError) = 0;
+            virtual void Connect(const String&) throw(SqlError) = 0;
             virtual void Close() NOEXCEPT = 0;
-            virtual Pointer<Command> CreateCommand() throw(sql_error) = 0;
-            virtual void Open() throw(sql_error) = 0;
+            virtual Pointer<Command> CreateCommand() throw(SqlError) = 0;
+            virtual void Open() throw(SqlError) = 0;
         };
     }
 }

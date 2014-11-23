@@ -22,6 +22,9 @@
     <ClCompile Include="UIElement.cpp">
       <Filter>Code\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -37,10 +40,14 @@
       <Filter>Code\.h</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="versioning.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BlackWolf.Lupus.Graphic.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VersionIncrementer.py" />
   </ItemGroup>
 </Project>
