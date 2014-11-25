@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "Internal/PgCommand.h"
 #include "Internal/PgOid.h"
 #include "Internal/PgDataReader.h"
@@ -145,7 +123,7 @@ namespace Lupus {
             {
                 Vector<Oid> paramTypes;
 
-                for_each(begin(mParameters), end(mParameters), [&paramTypes](Pointer<Parameter>& param) {
+                for_each(Begin(mParameters), End(mParameters), [&paramTypes](Pointer<Parameter>& param) {
                     switch (param->DbType()) {
                         case DataType::Boolean: paramTypes.push_back(BOOLOID); break;
                         case DataType::Byte: paramTypes.push_back(BYTEAOID); break;
@@ -202,7 +180,7 @@ namespace Lupus {
                 paramFormats.reserve(mParameters.size());
                 paramLengths.reserve(mParameters.size());
 
-                for_each(begin(mParameters), end(mParameters), [&paramValues, &paramLengths, &paramFormats](Pointer<Parameter>& param) {
+                for_each(Begin(mParameters), End(mParameters), [&paramValues, &paramLengths, &paramFormats](Pointer<Parameter>& param) {
                     String value = boost::any_cast<String>(param->Value());
                     paramLengths.push_back((int)value.Length());
 
@@ -219,7 +197,7 @@ namespace Lupus {
 
                 result = PQexecPrepared(mPgConn, mName.ToUTF8().c_str(), (int)mParameters.size(), paramValues.data(), paramLengths.data(), paramFormats.data(), 0);
 
-                for_each(begin(paramValues), end(paramValues), [](const char* s) {
+                for_each(Begin(paramValues), End(paramValues), [](const char* s) {
                     delete s;
                 });
 

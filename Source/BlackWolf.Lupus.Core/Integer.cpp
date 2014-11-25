@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "Integer.h"
 #include <cstdio>
 #include <cstring>
@@ -52,9 +30,9 @@
 #endif
 
 namespace Lupus {
-    static const size_t sIntegerCount = 32;
+    static const U32 sIntegerCount = 32;
 
-    String Integer::ToString(int8_t value, IntegerBase base)
+    String Integer::ToString(S8 value, IntegerBase base)
     {
         char result[sIntegerCount];
         memset(result, 0, sIntegerCount);
@@ -149,7 +127,7 @@ namespace Lupus {
         return result;
     }
 
-    String Integer::ToString(uint8_t value, IntegerBase base)
+    String Integer::ToString(U8 value, IntegerBase base)
     {
         char result[sIntegerCount];
         memset(result, 0, sIntegerCount);
@@ -244,7 +222,7 @@ namespace Lupus {
         return result;
     }
 
-    bool Integer::TryParse(const String& str, int8_t& result, IntegerBase base)
+    bool Integer::TryParse(const String& str, S8& result, IntegerBase base)
     {
         switch (base) {
             case IntegerBase::Decimal:
@@ -309,7 +287,7 @@ namespace Lupus {
         return false;
     }
 
-    bool Integer::TryParse(const String& str, uint8_t& result, IntegerBase base)
+    bool Integer::TryParse(const String& str, U8& result, IntegerBase base)
     {
         switch (base) {
             case IntegerBase::Decimal:
@@ -374,9 +352,9 @@ namespace Lupus {
         return false;
     }
 
-    int8_t Integer::ParseByte(const String& str, IntegerBase base)
+    S8 Integer::ParseByte(const String& str, IntegerBase base)
     {
-        int8_t result = 0;
+        S8 result = 0;
 
         if (!TryParse(str, result, base)) {
             throw InvalidArgument("str");
@@ -429,9 +407,9 @@ namespace Lupus {
         return result;
     }
 
-    uint8_t Integer::ParseUByte(const String& str, IntegerBase base)
+    U8 Integer::ParseUByte(const String& str, IntegerBase base)
     {
-        uint8_t result = 0;
+        U8 result = 0;
 
         if (!TryParse(str, result, base)) {
             throw InvalidArgument("str");

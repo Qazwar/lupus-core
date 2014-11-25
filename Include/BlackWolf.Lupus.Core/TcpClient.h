@@ -50,10 +50,10 @@ namespace Lupus {
                 TcpClient() = default;
                 TcpClient(AddressFamily family) NOEXCEPT;
                 TcpClient(Pointer<IPEndPoint> localEP) throw(SocketError, NullPointer);
-                TcpClient(const String& hostname, uint16_t port) throw(SocketError, RuntimeError);
+                TcpClient(const String& hostname, U16 port) throw(SocketError, RuntimeError);
                 virtual ~TcpClient() = default;
 
-                virtual size_t Available() const throw(InvalidOperation);
+                virtual U32 Available() const throw(InvalidOperation);
                 virtual Pointer<Socket> Client() const NOEXCEPT;
                 virtual void Client(Pointer<Socket>) NOEXCEPT;
                 virtual bool IsConnected() const NOEXCEPT;
@@ -83,14 +83,14 @@ namespace Lupus {
                 virtual void ReceiveTimeout(int) throw(SocketError, InvalidOperation);
 
                 virtual Task<void> ConnectAsync(Pointer<IPEndPoint> remoteEndPoint) NOEXCEPT;
-                virtual Task<void> ConnectAsync(Pointer<IPAddress> address, uint16_t port) NOEXCEPT;
+                virtual Task<void> ConnectAsync(Pointer<IPAddress> address, U16 port) NOEXCEPT;
                 virtual Task<void> ConnectAsync(const Vector<Pointer<IPEndPoint>>& endPoints) NOEXCEPT;
-                virtual Task<void> ConnectAsync(const String& host, uint16_t port) throw(InvalidArgument);
+                virtual Task<void> ConnectAsync(const String& host, U16 port) throw(InvalidArgument);
 
                 virtual void Connect(Pointer<IPEndPoint> remoteEndPoint) throw(SocketError, InvalidOperation);
-                virtual void Connect(Pointer<IPAddress> address, uint16_t port) throw(SocketError, InvalidOperation);
+                virtual void Connect(Pointer<IPAddress> address, U16 port) throw(SocketError, InvalidOperation);
                 virtual void Connect(const Vector<Pointer<IPEndPoint>>& endPoints) throw(InvalidOperation);
-                virtual void Connect(const String& host, uint16_t port) throw(SocketError, InvalidArgument, InvalidOperation);
+                virtual void Connect(const String& host, U16 port) throw(SocketError, InvalidArgument, InvalidOperation);
                 virtual void Close() throw(SocketError, InvalidOperation);
                 virtual Pointer<NetworkStream> GetStream() const throw(InvalidOperation);
 

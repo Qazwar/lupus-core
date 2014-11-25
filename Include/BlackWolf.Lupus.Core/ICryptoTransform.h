@@ -40,16 +40,16 @@ namespace Lupus {
 
                 virtual ~ICryptoTransform() = default;
 
-                virtual Vector<uint8_t> TransformFinalBlock(
-                    const Vector<uint8_t>& input,
-                    size_t inputOffset,
-                    size_t inputCount) = 0;
-                virtual size_t TransformBlock(
-                    const Vector<uint8_t>& input,
-                    size_t inputOffset,
-                    size_t inputCount,
-                    Vector<uint8_t>& output,
-                    size_t outputOffset) = 0;
+                virtual Vector<U8> TransformFinalBlock(
+                    const Vector<U8>& input,
+                    U32 inputOffset,
+                    U32 inputCount) = 0;
+                virtual U32 TransformBlock(
+                    const Vector<U8>& input,
+                    U32 inputOffset,
+                    U32 inputCount,
+                    Vector<U8>& output,
+                    U32 outputOffset) = 0;
             };
         }
     }

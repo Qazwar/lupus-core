@@ -49,7 +49,7 @@ namespace Lupus {
                     mEncryptor = typename T::Encryptor(mDecryptor.AccessPrivateKey());
                 }
 
-                CryptoRSA(const Vector<uint8_t>& buffer)
+                CryptoRSA(const Vector<U8>& buffer)
                 {
                     CryptoPP::ByteQueue byteQueue;
 
@@ -63,7 +63,7 @@ namespace Lupus {
                     return std::dynamic_pointer_cast<AsymmetricAlgorithm>(MakePointer<CryptoRSA<T>>(PrivateKey()));
                 }
 
-                virtual Vector<uint8_t> Encrypt(const Vector<uint8_t>& buffer, size_t offset, size_t size) const throw(OutOfRange) override
+                virtual Vector<U8> Encrypt(const Vector<U8>& buffer, U32 offset, U32 size) const throw(OutOfRange) override
                 {
                     if (offset > buffer.size()) {
                         throw OutOfRange("offset");
@@ -72,15 +72,15 @@ namespace Lupus {
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
-                    Vector<uint8_t> result(mEncryptor.CiphertextLength(size));
+                    Vector<U8> result(mEncryptor.CiphertextLength(size));
 
                     mEncryptor.Encrypt(rng, buffer.data() + offset, size, result.data());
                     return result;
                 }
 
-                virtual size_t Encrypt(const Vector<uint8_t>& buffer, size_t offset, size_t size, Vector<uint8_t>& output, size_t outputOffset) const throw(OutOfRange) override
+                virtual U32 Encrypt(const Vector<U8>& buffer, U32 offset, U32 size, Vector<U8>& output, U32 outputOffset) const throw(OutOfRange) override
                 {
-                    size_t length = mEncryptor.CiphertextLength(size);
+                    U32 length = mEncryptor.CiphertextLength(size);
 
                     if (offset > buffer.size()) {
                         throw OutOfRange("offset");
@@ -96,7 +96,7 @@ namespace Lupus {
                     return length;
                 }
 
-                virtual Vector<uint8_t> Decrypt(Vector<uint8_t>& buffer, size_t offset, size_t size) const throw(OutOfRange) override
+                virtual Vector<U8> Decrypt(Vector<U8>& buffer, U32 offset, U32 size) const throw(OutOfRange) override
                 {
                     if (offset > buffer.size()) {
                         throw OutOfRange("offset");
@@ -105,15 +105,15 @@ namespace Lupus {
                     }
 
                     CryptoPP::AutoSeededRandomPool rng;
-                    Vector<uint8_t> result(mDecryptor.MaxPlaintextLength(size));
+                    Vector<U8> result(mDecryptor.MaxPlaintextLength(size));
 
                     mDecryptor.Decrypt(rng, buffer.data() + offset, size, result.data());
                     return result;
                 }
 
-                virtual size_t Decrypt(const Vector<uint8_t>& buffer, size_t offset, size_t size, Vector<uint8_t>& output, size_t outputOffset) const throw(OutOfRange) override
+                virtual U32 Decrypt(const Vector<U8>& buffer, U32 offset, U32 size, Vector<U8>& output, U32 outputOffset) const throw(OutOfRange) override
                 {
-                    size_t length = mDecryptor.MaxPlaintextLength(size);
+                    U32 length = mDecryptor.MaxPlaintextLength(size);
 
                     if (offset > buffer.size()) {
                         throw OutOfRange("offset");
@@ -129,34 +129,34 @@ namespace Lupus {
                     return length;
                 }
 
-                virtual Vector<uint8_t> PublicKey() const NOEXCEPT override
+                virtual Vector<U8> PublicKey() const NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
-                    Vector<uint8_t> buffer;
+                    Vector<U8> buffer;
 
                     mEncryptor.GetPublicKey().Save(byteQueue);
-                    byteQueue.Get(buffer.data(), byteQueue.MaxRetrievable());
+                    byteQueue.Get(buffer.data(), (size_t)byteQueue.MaxRetrievable());
                     return buffer;
                 }
 
-                virtual void PublicKey(const Vector<uint8_t>& buffer) NOEXCEPT override
+                virtual void PublicKey(const Vector<U8>& buffer) NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
                     byteQueue.Put(buffer.data(), buffer.size());
                     mEncryptor.AccessPublicKey().Load(byteQueue);
                 }
 
-                virtual Vector<uint8_t> PrivateKey() const NOEXCEPT override
+                virtual Vector<U8> PrivateKey() const NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
-                    Vector<uint8_t> buffer;
+                    Vector<U8> buffer;
 
                     mDecryptor.GetPrivateKey().Save(byteQueue);
-                    byteQueue.Get(buffer.data(), byteQueue.MaxRetrievable());
+                    byteQueue.Get(buffer.data(), (size_t)byteQueue.MaxRetrievable());
                     return buffer;
                 }
 
-                virtual void PrivateKey(const Vector<uint8_t>& buffer) NOEXCEPT override
+                virtual void PrivateKey(const Vector<U8>& buffer) NOEXCEPT override
                 {
                     CryptoPP::ByteQueue byteQueue;
                     byteQueue.Put(buffer.data(), buffer.size());
@@ -183,12 +183,12 @@ namespace Lupus {
                     return mEncryptor.GetPublicKey().Validate(rng, (unsigned)level);
                 }
 
-                virtual size_t MessageLength(size_t length) const NOEXCEPT override
+                virtual U32 MessageLength(U32 length) const NOEXCEPT override
                 {
                     return mDecryptor.MaxPlaintextLength(length);
                 }
 
-                virtual size_t CiphertextLength(size_t length) const NOEXCEPT override
+                virtual U32 CiphertextLength(U32 length) const NOEXCEPT override
                 {
                     return mEncryptor.CiphertextLength(length);
                 }

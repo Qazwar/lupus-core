@@ -43,7 +43,7 @@ namespace Lupus {
 
             extern "C" struct LUPUSCORE_API SocketInformation {
                 SocketInformationOption Options;
-                Vector<uint8_t> ProtocolInformation;
+                Vector<U8> ProtocolInformation;
             };
         }
     }

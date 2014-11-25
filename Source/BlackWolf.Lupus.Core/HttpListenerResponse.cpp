@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "HttpListenerResponse.h"
 #include "Encoding.h"
 #include "Version.h"
@@ -84,12 +62,12 @@ namespace Lupus {
             mEncoding = encoding;
         }
         
-        size_t HttpListenerResponse::ContentLength() const 
+        U32 HttpListenerResponse::ContentLength() const 
         {
             return mContentLength;
         }
         
-        void HttpListenerResponse::ContentLength(size_t length)
+        void HttpListenerResponse::ContentLength(U32 length)
         {
             mContentLength = length;
         }
@@ -98,7 +76,7 @@ namespace Lupus {
         {
             auto it = mHeaders.find("Content-Type");
 
-            if (it != end(mHeaders)) {
+            if (it != End(mHeaders)) {
                 return it->second;
             } else {
                 return "";
@@ -134,7 +112,7 @@ namespace Lupus {
         {
             auto it = mHeaders.find("Connection");
 
-            if (it != end(mHeaders)) {
+            if (it != End(mHeaders)) {
                 return (it->second.ToLower().Contains("keep-alive"));
             } else {
                 return false;
@@ -175,12 +153,12 @@ namespace Lupus {
             mRedirection = redirection;
         }
         
-        int32_t HttpListenerResponse::StatusCode() const 
+        S32 HttpListenerResponse::StatusCode() const 
         {
             return mStatus;
         }
         
-        void HttpListenerResponse::StatusCode(int32_t status)
+        void HttpListenerResponse::StatusCode(S32 status)
         {
             if (!ValidStatusCode(status)) {
                 throw InvalidArgument("status");
@@ -219,7 +197,7 @@ namespace Lupus {
         {
             auto it = mHeaders.find(name);
 
-            if (it == end(mHeaders)) {
+            if (it == End(mHeaders)) {
                 mHeaders[name] = value;
             } else {
                 mHeaders[name] += "," + value;
@@ -228,18 +206,18 @@ namespace Lupus {
 
         void HttpListenerResponse::Close()
         {
-            Vector<uint8_t> body((size_t)mStream->Length());
+            Vector<U8> body((U32)mStream->Length());
             mStream->Seek(0, SeekOrigin::Begin);
             mStream->Read(body, 0, body.size());
             Close(body, true);
         }
 
-        void HttpListenerResponse::Close(const Vector<uint8_t>& responseEntity, bool willBlock)
+        void HttpListenerResponse::Close(const Vector<U8>& responseEntity, bool willBlock)
         {
             auto buffer = Encoding::ASCII()->GetBytes(ToString());
             auto stream = mClient->GetStream();
             // TODO: Base64 Encoding for responseEntity
-            buffer.insert(end(buffer), begin(responseEntity), end(responseEntity));
+            buffer.insert(End(buffer), Begin(responseEntity), End(responseEntity));
             stream->WriteAsync(buffer, 0, buffer.size()).SetBlocking(willBlock);
         }
 
@@ -254,7 +232,7 @@ namespace Lupus {
 
         void HttpListenerResponse::SetCookie(Pointer<Cookie> cookie)
         {
-            if (mCookies.find(cookie->Name()) != end(mCookies)) {
+            if (mCookies.find(cookie->Name()) != End(mCookies)) {
                 throw InvalidArgument("cookie");
             } else {
                 mCookies[cookie->Name()] = cookie;
@@ -266,7 +244,7 @@ namespace Lupus {
             String result;
             result += "HTTP/" + (mVersion->Minor() < 0 ? (Integer::ToString(mVersion->Major()) + ".x") : mVersion->ToString());
 
-            if (mHeaders.find("Location") == end(mHeaders)) {
+            if (mHeaders.find("Location") == End(mHeaders)) {
                 result += Integer::ToString(mStatus) + " " + (mStatusDescription.IsEmpty() ? StatusToString(mStatus) : mStatusDescription) + "\r\n";
                 result += "Content-Length: " + Integer::ToString(mContentLength) + "\r\n";
 
@@ -274,11 +252,11 @@ namespace Lupus {
                     result += "Content-Encoding: " + mEncoding->Name() + "\r\n";
                 }
 
-                for_each(begin(mCookies), end(mCookies), [&result](const CookiePair& pair) {
+                for_each(Begin(mCookies), End(mCookies), [&result](const CookiePair& pair) {
                     result += "Set-Cookie: " + pair.second->ToString() + "\r\n";
                 });
 
-                for_each(begin(mHeaders), end(mHeaders), [&result](const NameValuePair& pair) {
+                for_each(Begin(mHeaders), End(mHeaders), [&result](const NameValuePair& pair) {
                     result += pair.first + ": " + pair.second + "\r\n";
                 });
             } else {
@@ -289,14 +267,14 @@ namespace Lupus {
             return (result + "\r\n");
         }
 
-        bool HttpListenerResponse::ValidStatusCode(int32_t value)
+        bool HttpListenerResponse::ValidStatusCode(S32 value)
         {
             return (value >= 100 && value <= 999);
         }
 
-        String HttpListenerResponse::StatusToString(int32_t value)
+        String HttpListenerResponse::StatusToString(S32 value)
         {
-            static const Collection<int32_t, String> sState = {
+            static const Collection<S32, String> sState = {
                 // 100
                 { 100, "Continue" },
                 { 101, "Switching Protocols" },
@@ -371,7 +349,7 @@ namespace Lupus {
 
             auto it = sState.find(value);
 
-            if (it != end(sState)) {
+            if (it != End(sState)) {
                 return it->second;
             } else {
                 return "Unknown";

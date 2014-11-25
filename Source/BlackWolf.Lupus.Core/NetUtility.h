@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #pragma once
 
 #include "SocketEnum.h"
@@ -61,42 +39,42 @@ namespace Lupus {
              *
              * \returns Die 16-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            LUPUSCORE_API uint16_t HostToNetworkOrder(uint16_t host) NOEXCEPT;
+            LUPUSCORE_API U16 HostToNetworkOrder(U16 host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            LUPUSCORE_API uint32_t HostToNetworkOrder(uint32_t host) NOEXCEPT;
+            LUPUSCORE_API U32 HostToNetworkOrder(U32 host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            LUPUSCORE_API uint64_t HostToNetworkOrder(uint64_t host) NOEXCEPT;
+            LUPUSCORE_API U64 HostToNetworkOrder(U64 host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 16-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 16-Bit Ganzzahl in Host Byteorder.
              */
-            LUPUSCORE_API uint16_t NetworkToHostOrder(uint16_t network) NOEXCEPT;
+            LUPUSCORE_API U16 NetworkToHostOrder(U16 network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Host Byteorder.
              */
-            LUPUSCORE_API uint32_t NetworkToHostOrder(uint32_t network) NOEXCEPT;
+            LUPUSCORE_API U32 NetworkToHostOrder(U32 network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Host Byteorder.
              */
-            LUPUSCORE_API uint64_t NetworkToHostOrder(uint64_t network) NOEXCEPT;
+            LUPUSCORE_API U64 NetworkToHostOrder(U64 network) NOEXCEPT;
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,

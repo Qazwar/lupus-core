@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "Encoding.h"
 #include <unicode/ucnv.h>
 
@@ -64,7 +42,7 @@ namespace Lupus {
             return Pointer<Encoding>(new Encoding("UTF-32"));
         }
 
-        Pointer<Encoding> Encoding::UTF16()
+        Pointer<Encoding> Encoding::Unicode()
         {
             return Pointer<Encoding>(new Encoding("UTF-16"));
         }
@@ -112,12 +90,12 @@ namespace Lupus {
             return GetEncoding(Name());
         }
 
-        String Encoding::GetString(const Vector<uint8_t>& buffer) const
+        String Encoding::GetString(const Vector<U8>& buffer) const
         {
             return GetString(buffer, 0, buffer.size());
         }
 
-        String Encoding::GetString(const Vector<uint8_t>& buffer, size_t offset, size_t size) const
+        String Encoding::GetString(const Vector<U8>& buffer, U32 offset, U32 size) const
         {
             if (offset > buffer.size()) {
                 throw OutOfRange("offset");
@@ -126,11 +104,11 @@ namespace Lupus {
             }
 
             UErrorCode error = U_ZERO_ERROR;
-            int32_t length = (int32_t)size * 4;
+            S32 length = (S32)size * 4;
             UChar* dest = new UChar[length + 1];
             memset(dest, 0, length + 1);
 
-            int32_t outLength = ucnv_toUChars((UConverter*)mConverter, dest, length, (const char*)buffer.data() + offset, (int32_t)size, &error);
+            S32 outLength = ucnv_toUChars((UConverter*)mConverter, dest, length, (const char*)buffer.data() + offset, (S32)size, &error);
 
             if (error != U_ZERO_ERROR) {
                 delete dest;
@@ -164,12 +142,12 @@ namespace Lupus {
             return result;
         }
 
-        Vector<uint8_t> Encoding::GetBytes(const String& str) const
+        Vector<U8> Encoding::GetBytes(const String& str) const
         {
             return GetBytes(str, 0, str.Length());
         }
 
-        Vector<uint8_t> Encoding::GetBytes(const String& str, size_t offset, size_t size) const
+        Vector<U8> Encoding::GetBytes(const String& str, U32 offset, U32 size) const
         {
             if (offset > str.Length()) {
                 throw OutOfRange("offset");
@@ -178,11 +156,11 @@ namespace Lupus {
             }
             
             UErrorCode error = U_ZERO_ERROR;
-            int32_t length = UCNV_GET_MAX_BYTES_FOR_STRING(str.Length(), ucnv_getMaxCharSize((UConverter*)mConverter));
+            S32 length = UCNV_GET_MAX_BYTES_FOR_STRING(str.Length(), ucnv_getMaxCharSize((UConverter*)mConverter));
             char* dest = new char[length];
             memset(dest, 0, length);
 
-            int32_t outLength = ucnv_fromUChars((UConverter*)mConverter, dest, length, str.Data(), (int32_t)str.Length(), &error);
+            S32 outLength = ucnv_fromUChars((UConverter*)mConverter, dest, length, str.Data(), (S32)str.Length(), &error);
 
             if (error != U_ZERO_ERROR) {
                 delete dest;
@@ -211,7 +189,7 @@ namespace Lupus {
                 }
             }
 
-            Vector<uint8_t> result((uint8_t*)dest, (uint8_t*)dest + outLength);
+            Vector<U8> result((U8*)dest, (U8*)dest + outLength);
             delete dest;
             return result;
         }
@@ -240,9 +218,9 @@ namespace Lupus {
         Vector<String> Encoding::GetEncodings()
         {
             Vector<String> result;
-            int32_t count = ucnv_countAvailable();
+            S32 count = ucnv_countAvailable();
 
-            for (int32_t i = 0; i < count; i++) {
+            for (S32 i = 0; i < count; i++) {
                 result.push_back(ucnv_getAvailableName(i));
             }
 

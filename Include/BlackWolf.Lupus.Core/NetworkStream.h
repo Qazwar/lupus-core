@@ -41,24 +41,24 @@ namespace Lupus {
                 NetworkStream(Pointer<Socket> socket) throw(NullPointer);
                 virtual ~NetworkStream() = default;
 
-                virtual size_t DataAvailable() const throw(SocketError);
+                virtual U32 DataAvailable() const throw(SocketError);
                 virtual Pointer<Socket> Socket() const NOEXCEPT;
 
-                virtual Task<int> ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT override;
-                virtual Task<int> WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size)  NOEXCEPT override;
+                virtual Task<int> ReadAsync(Vector<U8>& buffer, U32 offset, U32 size) NOEXCEPT override;
+                virtual Task<int> WriteAsync(const Vector<U8>& buffer, U32 offset, U32 size)  NOEXCEPT override;
 
                 virtual bool CanRead() const NOEXCEPT override;
                 virtual bool CanWrite() const NOEXCEPT override;
                 virtual bool CanSeek() const NOEXCEPT override;
                 
                 virtual void Close() throw(SocketError) override;
-                virtual void Close(size_t timeout) throw(SocketError);
-                virtual int64_t Position() const NOEXCEPT override;
-                virtual int64_t Length() const throw(SocketError) override;
-                virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(SocketError, IOError, OutOfRange) override;
+                virtual void Close(U32 timeout) throw(SocketError);
+                virtual S64 Position() const NOEXCEPT override;
+                virtual S64 Length() const throw(SocketError) override;
+                virtual int Read(Vector<U8>& buffer, U32 offset, U32 size) throw(SocketError, IOError, OutOfRange) override;
                 virtual int ReadByte() throw(SocketError, IOError) override;
-                virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(SocketError, IOError, OutOfRange) override;
-                virtual void WriteByte(uint8_t byte) throw(SocketError, IOError) override;
+                virtual int Write(const Vector<U8>& buffer, U32 offset, U32 size) throw(SocketError, IOError, OutOfRange) override;
+                virtual void WriteByte(U8 byte) throw(SocketError, IOError) override;
 
                 virtual bool Readable() const NOEXCEPT;
                 virtual void Readable(bool) NOEXCEPT;

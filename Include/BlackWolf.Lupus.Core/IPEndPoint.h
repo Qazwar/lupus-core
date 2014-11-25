@@ -53,7 +53,7 @@ namespace Lupus {
                  * \param[in]   address Eine valide IPv4 Adresse.
                  * \param[in]   port    Die Portnummer.
                  */
-                IPEndPoint(uint32_t address, uint16_t port) NOEXCEPT;
+                IPEndPoint(U32 address, U16 port) NOEXCEPT;
 
                 /*!
                  * Erstellt einen IP-Endpunkt mit der angebenen IP-Adresse und bindet
@@ -63,14 +63,14 @@ namespace Lupus {
                  * \param[in]   address Eine gültige IP-Adresse für diesen Endpunkt.
                  * \param[in]   port    Die Portnummer.
                  */
-                IPEndPoint(Pointer<IPAddress> address, uint16_t port) throw(NullPointer);
+                IPEndPoint(Pointer<IPAddress> address, U16 port) throw(NullPointer);
 
                 /*!
                  * Erstellt einen IP-Endpunkt anhand von serialisierten Daten.
                  *
                  * \param[in]   buffer  Serialisierte Daten.
                  */
-                IPEndPoint(const Vector<uint8_t>& buffer) throw(InvalidArgument);
+                IPEndPoint(const Vector<U8>& buffer) throw(InvalidArgument);
                 virtual ~IPEndPoint() = default;
 
                 /*!
@@ -92,23 +92,23 @@ namespace Lupus {
                 /*!
                  * \returns Die Portnummer des Endpunkts.
                  */
-                virtual uint16_t Port() const NOEXCEPT;
+                virtual U16 Port() const NOEXCEPT;
 
                 /*!
                  * Setzt den Port des Endpunkts.
                  *
                  * \param[in]   port    Der neue Port.
                  */
-                virtual void Port(uint16_t port) NOEXCEPT;
+                virtual void Port(U16 port) NOEXCEPT;
 
                 /*!
                  * Serialisiert die internen Daten und speichert sie in einen
-                 * uint8_t-Buffer. Der Buffer ist Plattformabhängig, was auch der Grund
+                 * U8-Buffer. Der Buffer ist Plattformabhängig, was auch der Grund
                  * ist wieso keine ISerializable implementiert wird.
                  *
-                 * \returns Interne Daten in Form eines uint8_t-Buffers.
+                 * \returns Interne Daten in Form eines U8-Buffers.
                  */
-                virtual Vector<uint8_t> Serialize() const NOEXCEPT;
+                virtual Vector<U8> Serialize() const NOEXCEPT;
 
             private:
 

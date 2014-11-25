@@ -20,47 +20,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "IPAddress.h"
 #include "NetUtility.h"
 
 namespace Lupus {
     namespace Net {
         namespace Sockets {
-            IPAddress::IPAddress(uint32_t ipv4) :
+            IPAddress::IPAddress(U32 ipv4) :
                 mFamily(AddressFamily::InterNetwork)
             {
                 ipv4 = HostToNetworkOrder(ipv4);
-                mAddress.insert(std::end(mAddress), (uint8_t*)&ipv4, (uint8_t*)&ipv4 + 4);
+                mAddress.insert(End(mAddress), (U8*)&ipv4, (U8*)&ipv4 + 4);
             }
 
-            IPAddress::IPAddress(const Vector<uint8_t>& ipv6) :
+            IPAddress::IPAddress(const Vector<U8>& ipv6) :
                 IPAddress(ipv6, 0)
             {
             }
 
-            IPAddress::IPAddress(const Vector<uint8_t>& ipv6, uint32_t scopeid) :
+            IPAddress::IPAddress(const Vector<U8>& ipv6, U32 scopeid) :
                 mFamily(AddressFamily::InterNetworkV6)
             {
                 if (ipv6.size() != 16) {
@@ -71,12 +49,12 @@ namespace Lupus {
                 mScopeId = scopeid;
             }
 
-            IPAddress::IPAddress(std::initializer_list<uint8_t> ilist) :
-                IPAddress(Vector<uint8_t>(ilist))
+            IPAddress::IPAddress(std::initializer_list<U8> ilist) :
+                IPAddress(Vector<U8>(ilist))
             {
             }
 
-            Vector<uint8_t> IPAddress::Bytes() const
+            Vector<U8> IPAddress::Bytes() const
             {
                 return mAddress;
             }
@@ -101,12 +79,12 @@ namespace Lupus {
                 return false;
             }
 
-            uint32_t IPAddress::ScopeId() const
+            U32 IPAddress::ScopeId() const
             {
                 return mScopeId;
             }
 
-            void IPAddress::ScopeId(uint32_t value)
+            void IPAddress::ScopeId(U32 value)
             {
                 mScopeId = value;
             }
@@ -143,14 +121,14 @@ namespace Lupus {
 
             bool IPAddress::IsLoopback(Pointer<IPAddress> address)
             {
-                Vector<uint8_t> addressBytes = address->Bytes();
-                Vector<uint8_t> comparer;
+                Vector<U8> addressBytes = address->Bytes();
+                Vector<U8> comparer;
 
                 switch (address->Family()) {
                     case AddressFamily::InterNetwork:
                         comparer = IPAddress::Loopback()->Bytes();
 
-                        for (size_t i = 0; i < comparer.size(); i++) {
+                        for (U32 i = 0; i < comparer.size(); i++) {
                             if (addressBytes[i] != comparer[i]) {
                                 return false;
                             }
@@ -161,7 +139,7 @@ namespace Lupus {
                     case AddressFamily::InterNetworkV6:
                         comparer = IPAddress::IPv6Loopback()->Bytes();
 
-                        for (size_t i = 0; i < comparer.size(); i++) {
+                        for (U32 i = 0; i < comparer.size(); i++) {
                             if (addressBytes[i] != comparer[i]) {
                                 return false;
                             }
@@ -185,30 +163,30 @@ namespace Lupus {
 
 #ifdef _UNICODE
                 if (inet_pton(AF_INET, ipString.Data(), &(addr.sin_addr)) == 1) {
-                    address = new IPAddress(NetworkToHostOrder(*((uint32_t*)&addr.sin_addr)));
+                    address = new IPAddress(NetworkToHostOrder(*((U32*)&addr.sin_addr)));
                 } else if (inet_pton(AF_INET6, ipString.Data(), &(addr6.sin6_addr)) == 1) {
-                    uint8_t* begin = (uint8_t*)&addr6.sin6_addr;
+                    U8* Begin = (U8*)&addr6.sin6_addr;
                     address = new IPAddress(0);
                     address->mAddress.clear();
                     address->mAddress.reserve(16);
 
                     for (int i = 0; i < 16; i++) { // Konvertiere von Netzwerk zu Host.
-                        address->mAddress.push_back(*(begin + i));
+                        address->mAddress.push_back(*(Begin + i));
                     }
                 } else {
                     throw InvalidArgument("Not a valid IP address presentation");
                 }
 #else
                 if (inet_pton(AF_INET, ipString.ToUTF8().c_str(), &(addr.sin_addr)) == 1) {
-                    address = new IPAddress(NetworkToHostOrder(*((uint32_t*)&addr.sin_addr)));
+                    address = new IPAddress(NetworkToHostOrder(*((U32*)&addr.sin_addr)));
                 } else if (inet_pton(AF_INET6, ipString.ToUTF8().c_str(), &(addr6.sin6_addr)) == 1) {
-                    uint8_t* begin = (uint8_t*)&addr6.sin6_addr;
+                    U8* Begin = (U8*)&addr6.sin6_addr;
                     address = new IPAddress(0);
                     address->mAddress.clear();
                     address->mAddress.reserve(16);
 
                     for (int i = 0; i < 16; i++) { // Konvertiere von Netzwerk zu Host.
-                        address->mAddress.push_back(*(begin + i));
+                        address->mAddress.push_back(*(Begin + i));
                     }
                 } else {
                     throw InvalidArgument("Not a valid IP address presentation");
@@ -266,9 +244,9 @@ namespace Lupus {
 
             const Pointer<IPAddress> IPAddress::sAny(new IPAddress(0));
             const Pointer<IPAddress> IPAddress::sBroadcast(new IPAddress(0xFFFFFFFF));
-            const Pointer<IPAddress> IPAddress::sIPv6Any(new IPAddress(Vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
-            const Pointer<IPAddress> IPAddress::sIPv6Loopback(new IPAddress(Vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01 })));
-            const Pointer<IPAddress> IPAddress::sIPv6None(new IPAddress(Vector<uint8_t>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
+            const Pointer<IPAddress> IPAddress::sIPv6Any(new IPAddress(Vector<U8>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
+            const Pointer<IPAddress> IPAddress::sIPv6Loopback(new IPAddress(Vector<U8>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01 })));
+            const Pointer<IPAddress> IPAddress::sIPv6None(new IPAddress(Vector<U8>({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })));
             const Pointer<IPAddress> IPAddress::sLoopback(new IPAddress(0x7F000001));
             const Pointer<IPAddress> IPAddress::sNone(new IPAddress(0));
         }

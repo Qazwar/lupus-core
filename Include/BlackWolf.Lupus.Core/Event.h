@@ -68,7 +68,7 @@ namespace Lupus {
 
         void operator()(Sender* sender, Args&&... args)
         {
-            std::for_each(std::begin(mCallbacks), std::end(mCallbacks), [&](Handle& callback) {
+            std::for_each(Begin(mCallbacks), End(mCallbacks), [&](Handle& callback) {
                 callback(sender, std::forward<Args>(args)...);
             });
         }
@@ -106,7 +106,7 @@ namespace Lupus {
 
         void operator()(const Args&... args)
         {
-            std::for_each(std::begin(mCallbacks), std::end(mCallbacks), [&](Handle& callback) {
+            std::for_each(Begin(mCallbacks), End(mCallbacks), [&](Handle& callback) {
                 callback(args...);
             });
         }

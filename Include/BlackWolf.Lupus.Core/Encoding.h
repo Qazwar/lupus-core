@@ -37,20 +37,20 @@ namespace Lupus {
 
             virtual Pointer<Encoding> Clone() const NOEXCEPT override;
 
-            virtual String GetString(const Vector<uint8_t>& buffer) const throw(FormatError, RuntimeError);
+            virtual String GetString(const Vector<U8>& buffer) const throw(FormatError, RuntimeError);
             virtual String GetString(
-                const Vector<uint8_t>& buffer,
-                size_t offset, size_t count) const throw(FormatError, RuntimeError, OutOfRange);
-            virtual Vector<uint8_t> GetBytes(const String& str) const throw(FormatError, RuntimeError);
-            virtual Vector<uint8_t> GetBytes(
+                const Vector<U8>& buffer,
+                U32 offset, U32 count) const throw(FormatError, RuntimeError, OutOfRange);
+            virtual Vector<U8> GetBytes(const String& str) const throw(FormatError, RuntimeError);
+            virtual Vector<U8> GetBytes(
                 const String& str,
-                size_t offset, size_t count) const throw(FormatError, RuntimeError, OutOfRange);
+                U32 offset, U32 count) const throw(FormatError, RuntimeError, OutOfRange);
             virtual String Name() const NOEXCEPT;
 
             static Pointer<Encoding> ASCII() NOEXCEPT;
             static Pointer<Encoding> Default() NOEXCEPT;
             static Pointer<Encoding> UTF32() NOEXCEPT;
-            static Pointer<Encoding> UTF16() NOEXCEPT;
+            static Pointer<Encoding> Unicode() NOEXCEPT;
             static Pointer<Encoding> UTF8() NOEXCEPT;
             static Pointer<Encoding> UTF7() NOEXCEPT;
 

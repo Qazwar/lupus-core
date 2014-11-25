@@ -46,30 +46,30 @@ namespace Lupus {
                     return MakePointer<CryptoHash<T>>();
                 }
 
-                virtual size_t BlockSize() const NOEXCEPT override
+                virtual U32 BlockSize() const NOEXCEPT override
                 {
                     return T::BLOCKSIZE * 8;
                 }
 
-                virtual size_t HashSize() const NOEXCEPT override
+                virtual U32 HashSize() const NOEXCEPT override
                 {
                     return T::DIGESTSIZE * 8;
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& buffer) throw(OutOfRange) override
                 {
-                    return ComputeHash(buffer, 0, (size_t)buffer.size());
+                    return ComputeHash(buffer, 0, (U32)buffer.size());
                 }
 
-                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
-                    size_t size = (size_t)(stream->Length() - stream->Position());
-                    Vector<uint8_t> buffer(size);
+                    U32 size = (U32)(stream->Length() - stream->Position());
+                    Vector<U8> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& input, U32 inputOffset, U32 inputCount) throw(OutOfRange) override
                 {
                     static const int digestsize = T::DIGESTSIZE;
 
@@ -79,11 +79,11 @@ namespace Lupus {
                         throw OutOfRange("inputCount");
                     }
 
-                    uint8_t digest[digestsize];
+                    U8 digest[digestsize];
 
                     mAlgorithm.CalculateDigest(digest, input.data() + inputOffset, inputCount);
 
-                    return std::move(Vector<uint8_t>(digest, digest + digestsize));
+                    return std::move(Vector<U8>(digest, digest + digestsize));
                 }
 
             private:
@@ -103,30 +103,30 @@ namespace Lupus {
                     return MakePointer<CryptoHash<CryptoPP::SHA3_224>>();
                 }
 
-                virtual size_t BlockSize() const NOEXCEPT override
+                virtual U32 BlockSize() const NOEXCEPT override
                 {
                     return mAlgorithm.BlockSize();
                 }
 
-                virtual size_t HashSize() const NOEXCEPT override
+                virtual U32 HashSize() const NOEXCEPT override
                 {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& buffer) throw(OutOfRange) override
                 {
-                    return ComputeHash(buffer, 0, (size_t)buffer.size());
+                    return ComputeHash(buffer, 0, (U32)buffer.size());
                 }
 
-                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
-                    size_t size = (size_t)(stream->Length() - stream->Position());
-                    Vector<uint8_t> buffer(size);
+                    U32 size = (U32)(stream->Length() - stream->Position());
+                    Vector<U8> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& input, U32 inputOffset, U32 inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
                         throw OutOfRange("inputOffset");
@@ -134,7 +134,7 @@ namespace Lupus {
                         throw OutOfRange("inputCount");
                     }
 
-                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<U8> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 
@@ -158,30 +158,30 @@ namespace Lupus {
                     return MakePointer<CryptoHash<CryptoPP::SHA3_256>>();
                 }
 
-                virtual size_t BlockSize() const NOEXCEPT override
+                virtual U32 BlockSize() const NOEXCEPT override
                 {
                     return mAlgorithm.BlockSize();
                 }
 
-                virtual size_t HashSize() const NOEXCEPT override
+                virtual U32 HashSize() const NOEXCEPT override
                 {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& buffer) throw(OutOfRange) override
                 {
-                    return ComputeHash(buffer, 0, (size_t)buffer.size());
+                    return ComputeHash(buffer, 0, (U32)buffer.size());
                 }
 
-                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
-                    size_t size = (size_t)(stream->Length() - stream->Position());
-                    Vector<uint8_t> buffer(size);
+                    U32 size = (U32)(stream->Length() - stream->Position());
+                    Vector<U8> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& input, U32 inputOffset, U32 inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
                         throw OutOfRange("inputOffset");
@@ -189,7 +189,7 @@ namespace Lupus {
                         throw OutOfRange("inputCount");
                     }
 
-                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<U8> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 
@@ -213,30 +213,30 @@ namespace Lupus {
                     return MakePointer<CryptoHash<CryptoPP::SHA3_384>>();
                 }
 
-                virtual size_t BlockSize() const NOEXCEPT override
+                virtual U32 BlockSize() const NOEXCEPT override
                 {
                     return mAlgorithm.BlockSize();
                 }
 
-                virtual size_t HashSize() const NOEXCEPT override
+                virtual U32 HashSize() const NOEXCEPT override
                 {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& buffer) throw(OutOfRange) override
                 {
-                    return ComputeHash(buffer, 0, (size_t)buffer.size());
+                    return ComputeHash(buffer, 0, (U32)buffer.size());
                 }
 
-                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
-                    size_t size = (size_t)(stream->Length() - stream->Position());
-                    Vector<uint8_t> buffer(size);
+                    U32 size = (U32)(stream->Length() - stream->Position());
+                    Vector<U8> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& input, U32 inputOffset, U32 inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
                         throw OutOfRange("inputOffset");
@@ -244,7 +244,7 @@ namespace Lupus {
                         throw OutOfRange("inputCount");
                     }
 
-                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<U8> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 
@@ -268,30 +268,30 @@ namespace Lupus {
                     return MakePointer<CryptoHash<CryptoPP::SHA3_512>>();
                 }
 
-                virtual size_t BlockSize() const NOEXCEPT override
+                virtual U32 BlockSize() const NOEXCEPT override
                 {
                     return mAlgorithm.BlockSize();
                 }
 
-                virtual size_t HashSize() const NOEXCEPT override
+                virtual U32 HashSize() const NOEXCEPT override
                 {
                     return mAlgorithm.DigestSize();
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& buffer) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& buffer) throw(OutOfRange) override
                 {
-                    return ComputeHash(buffer, 0, (size_t)buffer.size());
+                    return ComputeHash(buffer, 0, (U32)buffer.size());
                 }
 
-                virtual Vector<uint8_t> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(Pointer<Stream> stream) throw(OutOfRange) override
                 {
-                    size_t size = (size_t)(stream->Length() - stream->Position());
-                    Vector<uint8_t> buffer(size);
+                    U32 size = (U32)(stream->Length() - stream->Position());
+                    Vector<U8> buffer(size);
                     stream->Read(buffer, 0, size);
                     return ComputeHash(buffer, 0, size);
                 }
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount) throw(OutOfRange) override
+                virtual Vector<U8> ComputeHash(const Vector<U8>& input, U32 inputOffset, U32 inputCount) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
                         throw OutOfRange("inputOffset");
@@ -299,7 +299,7 @@ namespace Lupus {
                         throw OutOfRange("inputCount");
                     }
 
-                    Vector<uint8_t> digest(mAlgorithm.DigestSize());
+                    Vector<U8> digest(mAlgorithm.DigestSize());
 
                     mAlgorithm.CalculateDigest(digest.data(), input.data() + inputOffset, inputCount);
 

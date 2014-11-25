@@ -46,7 +46,7 @@ namespace Lupus {
             public:
 
                 TcpListener(Pointer<IPEndPoint> localEP) throw(SocketError, NullPointer);
-                TcpListener(Pointer<IPAddress> localaddr, uint16_t port) throw(SocketError, NullPointer);
+                TcpListener(Pointer<IPAddress> localaddr, U16 port) throw(SocketError, NullPointer);
                 virtual ~TcpListener() = default;
 
                 virtual bool IsActive() const throw(SocketError);

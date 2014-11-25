@@ -42,10 +42,10 @@ namespace Lupus {
                 public:
 
                     X509Certificate();
-                    X509Certificate(const Vector<uint8_t>& buffer);
+                    X509Certificate(const Vector<U8>& buffer);
                     X509Certificate(const String& fileName);
                     X509Certificate(Pointer<X509Certificate> cert);
-                    X509Certificate(const Vector<uint8_t>& buffer, const String& password);
+                    X509Certificate(const Vector<U8>& buffer, const String& password);
                     X509Certificate(const String& fileName, const String& password);
                 };
             }

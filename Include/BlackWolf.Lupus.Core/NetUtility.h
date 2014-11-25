@@ -39,42 +39,42 @@ namespace Lupus {
              *
              * \returns Die 16-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            LUPUSCORE_API uint16_t HostToNetworkOrder(uint16_t host) NOEXCEPT;
+            LUPUSCORE_API U16 HostToNetworkOrder(U16 host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            LUPUSCORE_API uint32_t HostToNetworkOrder(uint32_t host) NOEXCEPT;
+            LUPUSCORE_API U32 HostToNetworkOrder(U32 host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Host zu Netzwerk Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Netzwerk Byteorder.
              */
-            LUPUSCORE_API uint64_t HostToNetworkOrder(uint64_t host) NOEXCEPT;
+            LUPUSCORE_API U64 HostToNetworkOrder(U64 host) NOEXCEPT;
 
             /*!
              * Konvertiert eine 16-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 16-Bit Ganzzahl in Host Byteorder.
              */
-            LUPUSCORE_API uint16_t NetworkToHostOrder(uint16_t network) NOEXCEPT;
+            LUPUSCORE_API U16 NetworkToHostOrder(U16 network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 32-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 32-Bit Ganzzahl in Host Byteorder.
              */
-            LUPUSCORE_API uint32_t NetworkToHostOrder(uint32_t network) NOEXCEPT;
+            LUPUSCORE_API U32 NetworkToHostOrder(U32 network) NOEXCEPT;
 
             /*!
              * Konvertiert eine 64-Bit Ganzzahl von Netzwerk zu Host Byteorder.
              *
              * \returns Die 64-Bit Ganzzahl in Host Byteorder.
              */
-            LUPUSCORE_API uint64_t NetworkToHostOrder(uint64_t network) NOEXCEPT;
+            LUPUSCORE_API U64 NetworkToHostOrder(U64 network) NOEXCEPT;
 
             /*!
              * Diese Funktion ruft GetAddressInformation(node, service,

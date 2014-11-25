@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "HttpListenerRequest.h"
 #include "Encoding.h"
 #include "Version.h"
@@ -62,24 +40,24 @@ using namespace Lupus::Security::Cryptography::X509Certificates;
 
 namespace Lupus {
     namespace Net {
-        HttpListenerRequest::HttpListenerRequest(const Vector<uint8_t>& buffer, Pointer<IPEndPoint> local, Pointer<IPEndPoint> remote, bool auth, bool sec) :
+        HttpListenerRequest::HttpListenerRequest(const Vector<U8>& buffer, Pointer<IPEndPoint> local, Pointer<IPEndPoint> remote, bool auth, bool sec) :
             mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
             NameValueCollection::const_iterator citum;
 
-            for (auto it = begin(buffer); it != end(buffer); it++) {
+            for (auto it = Begin(buffer); it != End(buffer); it++) {
                 char ch = static_cast<char>(*it);
                 
                 if (ch == '\r' && static_cast<char>(*(it + 1)) == '\n' && static_cast<char>(*(it + 2)) == '\r' && static_cast<char>(*(it + 3)) == '\n') {
                     it += 4;
-                    mRawHeader = Encoding::ASCII()->GetString(Vector<uint8_t>(begin(buffer), it));
-                    mStream = MakePointer<MemoryStream>(buffer, distance(begin(buffer), it), distance(it, end(buffer)), false, true);
+                    mRawHeader = Encoding::ASCII()->GetString(Vector<U8>(Begin(buffer), it));
+                    mStream = MakePointer<MemoryStream>(buffer, distance(Begin(buffer), it), distance(it, End(buffer)), false, true);
                     break;
                 }
             }
 
             Vector<String> lines = mRawHeader.Split("\r\n", StringSplitOption::RemoveEmptyEntries);
-            Vector<String> fields(begin(lines) + 1, end(lines));
+            Vector<String> fields(Begin(lines) + 1, End(lines));
             String version = lines[0].Substring(lines[0].LastIndexOf("/") + 1);
             
             mMethod = lines[0].Substring(0, lines[0].IndexOf(" "));
@@ -93,13 +71,13 @@ namespace Lupus {
             int index = lines[0].IndexOf(" ") + 1;
             mUrl = MakePointer<Uri>((mSecure ? "https://" : "http://") + mHeaders["Host"] + lines[0].Substring(index, lines[0].LastIndexOf(" ") - index));
             String query = mUrl->Query();
-            String cookie = (citum = mHeaders.find("Cookie")) != end(mHeaders) ? citum->second : "";
-            String language = (citum = mHeaders.find("Accept-Language")) != end(mHeaders) ? citum->second : "";
-            String charset = (citum = mHeaders.find("Accept-Charset")) != end(mHeaders) ? citum->second : "";
-            String accepttypes = (citum = mHeaders.find("Accept")) != end(mHeaders) ? citum->second : "";
+            String cookie = (citum = mHeaders.find("Cookie")) != End(mHeaders) ? citum->second : "";
+            String language = (citum = mHeaders.find("Accept-Language")) != End(mHeaders) ? citum->second : "";
+            String charset = (citum = mHeaders.find("Accept-Charset")) != End(mHeaders) ? citum->second : "";
+            String accepttypes = (citum = mHeaders.find("Accept")) != End(mHeaders) ? citum->second : "";
 
-            mContentType = (citum = mHeaders.find("Content-Type")) != end(mHeaders) ? citum->second : "";
-            mUserAgent = (citum = mHeaders.find("User-Agent")) != end(mHeaders) ? citum->second : "";
+            mContentType = (citum = mHeaders.find("Content-Type")) != End(mHeaders) ? citum->second : "";
+            mUserAgent = (citum = mHeaders.find("User-Agent")) != End(mHeaders) ? citum->second : "";
 
             mAcceptedTypes = accepttypes.IsEmpty() ? Vector<String>() : accepttypes.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
             mLanguages = language.IsEmpty() ? Vector<String>() : language.Split(";")[0].Split(",", StringSplitOption::RemoveEmptyEntries);
@@ -147,7 +125,7 @@ namespace Lupus {
             return mEncoding;
         }
         
-        int64_t HttpListenerRequest::ContentLength() const
+        S64 HttpListenerRequest::ContentLength() const
         {
             return mStream->Length();
         }
@@ -199,7 +177,7 @@ namespace Lupus {
         
         bool HttpListenerRequest::KeepAlive() const
         {
-            if (mHeaders.find("Connection") == end(mHeaders)) {
+            if (mHeaders.find("Connection") == End(mHeaders)) {
                 return false;
             } else {
                 return mHeaders.at("Connection").Contains("keep-alive");

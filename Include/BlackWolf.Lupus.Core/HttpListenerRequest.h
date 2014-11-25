@@ -64,7 +64,7 @@ namespace Lupus {
 
             HttpListenerRequest() = delete;
             HttpListenerRequest(
-                const Vector<uint8_t>& buffer,
+                const Vector<U8>& buffer,
                 Pointer<Sockets::IPEndPoint> localEP,
                 Pointer<Sockets::IPEndPoint> remoteEP,
                 bool authenticated = false,
@@ -73,7 +73,7 @@ namespace Lupus {
 
             virtual const Vector<String>& AcceptTypes() const NOEXCEPT;
             virtual Pointer<Text::Encoding> ContentEncoding() const NOEXCEPT;
-            virtual int64_t ContentLength() const NOEXCEPT;
+            virtual S64 ContentLength() const NOEXCEPT;
             virtual String ContentType() const NOEXCEPT;
             virtual const NameCollection<Pointer<Cookie>>& Cookies() const NOEXCEPT;
             virtual bool HasEntityBody() const NOEXCEPT;

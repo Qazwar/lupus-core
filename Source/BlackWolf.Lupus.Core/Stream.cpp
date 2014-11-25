@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "Stream.h"
 
 #include <thread>
@@ -63,14 +41,14 @@ namespace Lupus {
         });
     }
 
-    Task<int> Stream::ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size)
+    Task<int> Stream::ReadAsync(Vector<U8>& buffer, U32 offset, U32 size)
     {
         return Task<int>([this, &buffer, offset, size]() {
             return this->Read(buffer, offset, size);
         });
     }
 
-    Task<int> Stream::WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size)
+    Task<int> Stream::WriteAsync(const Vector<U8>& buffer, U32 offset, U32 size)
     {
         return Task<int>([this, &buffer, offset, size]() {
             return this->Write(buffer, offset, size);
@@ -83,12 +61,12 @@ namespace Lupus {
             throw NullPointer("destination");
         }
 
-        int64_t pos = Position();
-        int64_t len = Length();
-        int64_t dpos = destination->Position();
-        int64_t dlen = destination->Length();
-        int64_t size = len - pos;
-        int64_t dsize = dlen - dpos;
+        S64 pos = Position();
+        S64 len = Length();
+        S64 dpos = destination->Position();
+        S64 dlen = destination->Length();
+        S64 size = len - pos;
+        S64 dsize = dlen - dpos;
 
         if (pos < 0 || len <= 0 || size <= 0 || dpos < 0 || dlen <= 0 || dsize <= 0) {
             return;
@@ -96,9 +74,9 @@ namespace Lupus {
             destination->Length(destination->Length() + size - dsize);
         }
 
-        Vector<uint8_t> buffer((size_t)size);
-        Read(buffer, 0, (size_t)size);
-        destination->Write(buffer, 0, (size_t)size);
+        Vector<U8> buffer((U32)size);
+        Read(buffer, 0, (U32)size);
+        destination->Write(buffer, 0, (U32)size);
     }
 
     void Stream::Flush()
@@ -106,17 +84,17 @@ namespace Lupus {
         throw NotSupported();
     }
 
-    void Stream::Length(int64_t length)
+    void Stream::Length(S64 length)
     {
         throw NotSupported();
     }
 
-    void Stream::Position(int64_t)
+    void Stream::Position(S64)
     {
         throw NotSupported();
     }
 
-    int64_t Stream::Seek(int64_t offset, SeekOrigin origin)
+    S64 Stream::Seek(S64 offset, SeekOrigin origin)
     {
         throw NotSupported();
     }
@@ -162,27 +140,27 @@ namespace Lupus {
         mInnerStream->Flush();
     }
 
-    int64_t InputStream::Length() const
+    S64 InputStream::Length() const
     {
         return mInnerStream->Length();
     }
 
-    void InputStream::Length(int64_t)
+    void InputStream::Length(S64)
     {
         throw NotSupported();
     }
 
-    int64_t InputStream::Position() const
+    S64 InputStream::Position() const
     {
         return mInnerStream->Position();
     }
 
-    void InputStream::Position(int64_t pos)
+    void InputStream::Position(S64 pos)
     {
         mInnerStream->Position(pos);
     }
 
-    int InputStream::Read(Vector<uint8_t>& buffer, size_t offset, size_t size)
+    int InputStream::Read(Vector<U8>& buffer, U32 offset, U32 size)
     {
         return mInnerStream->Read(buffer, offset, size);
     }
@@ -192,17 +170,17 @@ namespace Lupus {
         return mInnerStream->ReadByte();
     }
 
-    int InputStream::Write(const Vector<uint8_t>& buffer, size_t offset, size_t size)
+    int InputStream::Write(const Vector<U8>& buffer, U32 offset, U32 size)
     {
         throw NotSupported();
     }
 
-    void InputStream::WriteByte(uint8_t byte)
+    void InputStream::WriteByte(U8 byte)
     {
         throw NotSupported();
     }
 
-    int64_t InputStream::Seek(int64_t offset, SeekOrigin origin)
+    S64 InputStream::Seek(S64 offset, SeekOrigin origin)
     {
         return mInnerStream->Seek(offset, origin);
     }
@@ -248,27 +226,27 @@ namespace Lupus {
         mInnerStream->Flush();
     }
 
-    int64_t OutputStream::Length() const
+    S64 OutputStream::Length() const
     {
         return mInnerStream->Length();
     }
 
-    void OutputStream::Length(int64_t len)
+    void OutputStream::Length(S64 len)
     {
         mInnerStream->Length(len);
     }
 
-    int64_t OutputStream::Position() const
+    S64 OutputStream::Position() const
     {
         return mInnerStream->Position();
     }
 
-    void OutputStream::Position(int64_t pos)
+    void OutputStream::Position(S64 pos)
     {
         mInnerStream->Position(pos);
     }
 
-    int OutputStream::Read(Vector<uint8_t>& buffer, size_t offset, size_t size)
+    int OutputStream::Read(Vector<U8>& buffer, U32 offset, U32 size)
     {
         throw NotSupported();
     }
@@ -278,17 +256,17 @@ namespace Lupus {
         throw NotSupported();
     }
 
-    int OutputStream::Write(const Vector<uint8_t>& buffer, size_t offset, size_t size)
+    int OutputStream::Write(const Vector<U8>& buffer, U32 offset, U32 size)
     {
         return mInnerStream->Write(buffer, offset, size);
     }
 
-    void OutputStream::WriteByte(uint8_t byte)
+    void OutputStream::WriteByte(U8 byte)
     {
         mInnerStream->WriteByte(byte);
     }
 
-    int64_t OutputStream::Seek(int64_t offset, SeekOrigin origin)
+    S64 OutputStream::Seek(S64 offset, SeekOrigin origin)
     {
         return mInnerStream->Seek(offset, origin);
     }

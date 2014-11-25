@@ -47,7 +47,7 @@ namespace Lupus {
             HttpListener() = delete;
             HttpListener(Pointer<Sockets::TcpListener> listener);
             HttpListener(Pointer<Sockets::IPEndPoint> localEP);
-            HttpListener(Pointer<Sockets::IPAddress> localaddr, uint16_t port);
+            HttpListener(Pointer<Sockets::IPAddress> localaddr, U16 port);
             virtual ~HttpListener() = default;
 
             virtual bool IsListening() const;

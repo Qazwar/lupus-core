@@ -35,6 +35,7 @@
 #include <vector>
 #include <list>
 #include <deque>
+#include <functional>
 #include <boost/any.hpp>
 #include <boost/noncopyable.hpp>
 
@@ -125,6 +126,22 @@ namespace Lupus {
     LupusDefineError(FormatError);
     LupusDefineError(InvalidOperation);
 
+    typedef uint8_t U8;
+    typedef int8_t S8;
+    typedef uint16_t U16;
+    typedef int16_t S16;
+    typedef uint32_t U32;
+    typedef int32_t S32;
+    typedef uint64_t U64;
+    typedef int64_t S64;
+    typedef char Char8;
+#ifdef _UNICODE
+    typedef wchar_t Char;
+    typedef char32_t Char32;
+#else
+    typedef char16_t Char;
+    typedef char32_t Char32;
+#endif
     typedef class String string;
 
     typedef std::unordered_map<class String, class String> NameValueCollection;
@@ -153,9 +170,57 @@ namespace Lupus {
     template <typename T>
     using Pointer = std::shared_ptr < T >;
     template <typename T>
-    using Reference = std::weak_ptr < T >;
-    template <typename T>
     using Unique = std::unique_ptr < T >;
+    template <typename T>
+    using Reference = std::reference_wrapper < T >;
+
+    template <typename T>
+    Reference<T> MakeRef(T& t)
+    {
+        return Reference<T>(t);
+    }
+    
+    template <typename T>
+    Reference<T> MakeRef(Reference<T> t)
+    {
+        return t;
+    }
+    
+    template <typename T>
+    Reference<const T> MakeConstRef(const T& t)
+    {
+        return Reference<T>(t);
+    }
+    
+    template <typename T>
+    Reference<const T> MakeConstRef(Reference<T> t)
+    {
+        return Reference<const T>(t.get());
+    }
+
+    template <typename TContainer>
+    auto Begin(TContainer& container) -> decltype(container.begin())
+    {
+        return container.begin();
+    }
+
+    template <typename TContainer>
+    auto Begin(const TContainer& container) -> decltype(container.begin())
+    {
+        return container.begin();
+    }
+
+    template <typename TContainer>
+    auto End(TContainer& container) -> decltype(container.end())
+    {
+        return container.end();
+    }
+
+    template <typename TContainer>
+    auto End(const TContainer& container) -> decltype(container.end())
+    {
+        return container.end();
+    }
 
     typedef boost::any Any;
     typedef boost::noncopyable NonCopyable;
@@ -169,7 +234,7 @@ namespace Lupus {
     typedef std::chrono::minutes Minutes;
     typedef std::chrono::hours Hours;
 
-    LUPUSCORE_API class String RandomString(uint32_t length);
+    LUPUSCORE_API class String RandomString(U32 length);
 
     template <typename Dest, typename Src>
     Dest force_cast(const Src& src)

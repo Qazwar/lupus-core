@@ -55,8 +55,8 @@ namespace Lupus {
 
             virtual Pointer<Text::Encoding> ContentEncoding() const NOEXCEPT;
             virtual void ContentEncoding(Pointer<Text::Encoding>) NOEXCEPT;
-            virtual size_t ContentLength() const NOEXCEPT;
-            virtual void ContentLength(size_t) NOEXCEPT;
+            virtual U32 ContentLength() const NOEXCEPT;
+            virtual void ContentLength(U32) NOEXCEPT;
             virtual String ContentType() const NOEXCEPT;
             virtual void ContentType(String) NOEXCEPT;
             virtual const NameCollection<Pointer<Cookie>>& Cookies() const NOEXCEPT;
@@ -70,8 +70,8 @@ namespace Lupus {
             virtual void ProtocolVersion(Pointer<Version>) NOEXCEPT;
             virtual String RedirectionLocation() const NOEXCEPT;
             virtual void RedirectionLocation(String) NOEXCEPT;
-            virtual int32_t StatusCode() const NOEXCEPT;
-            virtual void StatusCode(int32_t) throw(InvalidArgument);
+            virtual S32 StatusCode() const NOEXCEPT;
+            virtual void StatusCode(S32) throw(InvalidArgument);
             virtual String StatusDescription() const NOEXCEPT;
             virtual void StatusDescription(String) NOEXCEPT;
 
@@ -80,14 +80,14 @@ namespace Lupus {
             virtual void AppendCookie(Pointer<Cookie>) NOEXCEPT;
             virtual void AppendHeader(String name, String value) NOEXCEPT;
             virtual void Close() throw(SocketError, InvalidOperation);
-            virtual void Close(const Vector<uint8_t>& responseEntity, bool willBlock) throw(SocketError, InvalidOperation);
+            virtual void Close(const Vector<U8>& responseEntity, bool willBlock) throw(SocketError, InvalidOperation);
             virtual void Redirect(String url) NOEXCEPT;
             virtual void SetCookie(Pointer<Cookie>) throw(InvalidArgument);
             virtual String ToString() const NOEXCEPT;
         protected:
 
-            static bool ValidStatusCode(int32_t code);
-            static String StatusToString(int32_t code);
+            static bool ValidStatusCode(S32 code);
+            static String StatusToString(S32 code);
 
         private:
 
@@ -100,8 +100,8 @@ namespace Lupus {
             NameValueCollection mHeaders;
             String mRedirection;
             String mStatusDescription;
-            size_t mContentLength;
-            int32_t mStatus;
+            U32 mContentLength;
+            S32 mStatus;
         };
     }
 }

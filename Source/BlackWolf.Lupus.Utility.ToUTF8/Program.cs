@@ -14,9 +14,9 @@ namespace ToUTF8
             }
             else
             {
-                foreach (var end in args)
+                foreach (var End in args)
                 {
-                    foreach (var f in new DirectoryInfo(".").GetFiles(end, SearchOption.AllDirectories))
+                    foreach (var f in new DirectoryInfo(".").GetFiles(End, SearchOption.AllDirectories))
                     {
                         var s = File.ReadAllText(f.FullName);
                         File.WriteAllText(f.FullName, s, Encoding.UTF8);

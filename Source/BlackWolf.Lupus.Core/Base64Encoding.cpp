@@ -27,32 +27,38 @@
 namespace Lupus {
     namespace Text {
 
-        String Base64Encoding::GetString(const Vector<uint8_t>& buffer) const
+        String Base64Encoding::GetString(const Vector<U8>& buffer) const
         {
             return GetString(buffer, 0, buffer.size());
         }
 
-        String Base64Encoding::GetString(const Vector<uint8_t>& buffer, size_t offset, size_t size) const
+        String Base64Encoding::GetString(const Vector<U8>& buffer, U32 offset, U32 size) const
         {
             if (offset > buffer.size()) {
                 throw OutOfRange("offset");
             } else if (size > buffer.size() - offset) {
                 throw OutOfRange("size");
             }
+
+            // TODO: Impelement
+            return "";
         }
 
-        Vector<uint8_t> Base64Encoding::GetBytes(const String& str) const
+        Vector<U8> Base64Encoding::GetBytes(const String& str) const
         {
             return GetBytes(str, 0, str.Length());
         }
 
-        Vector<uint8_t> Base64Encoding::GetBytes(const String& str, size_t offset, size_t size) const
+        Vector<U8> Base64Encoding::GetBytes(const String& str, U32 offset, U32 size) const
         {
             if (offset > str.Length()) {
                 throw OutOfRange("offset");
             } else if (size > str.Length() - offset) {
                 throw OutOfRange("size");
             }
+
+            // TODO: Implement
+            return {};
         }
     }
 }

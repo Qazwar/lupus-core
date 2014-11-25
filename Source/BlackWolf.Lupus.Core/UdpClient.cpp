@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "UdpClient.h"
 #include "Socket.h"
 #include "IPAddress.h"
@@ -61,7 +39,7 @@ namespace Lupus {
                 mClient = MakePointer<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
             }
 
-            UdpClient::UdpClient(uint16_t port)
+            UdpClient::UdpClient(U16 port)
             {
                 mClient = MakePointer<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
                 mClient->Bind(MakePointer<IPEndPoint>(IPAddress::Loopback(), port));
@@ -77,19 +55,19 @@ namespace Lupus {
                 mClient->Bind(ep);
             }
 
-            UdpClient::UdpClient(uint16_t port, AddressFamily family)
+            UdpClient::UdpClient(U16 port, AddressFamily family)
             {
                 mClient = MakePointer<Socket>(family, SocketType::Datagram, ProtocolType::UDP);
                 mClient->Bind(MakePointer<IPEndPoint>(IPAddress::Loopback(), port));
             }
 
-            UdpClient::UdpClient(const String& hostname, uint16_t port)
+            UdpClient::UdpClient(const String& hostname, U16 port)
             {
                 mClient = MakePointer<Socket>(AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP);
                 mClient->Connect(GetAddressInformation(hostname, Integer::ToString(port), AddressFamily::Unspecified, SocketType::Datagram, ProtocolType::UDP));
             }
 
-            size_t UdpClient::Available() const
+            U32 UdpClient::Available() const
             {
                 if (!mClient) {
                     throw InvalidOperation("UdpClient is in an invalid state");
@@ -136,28 +114,28 @@ namespace Lupus {
                 }
             }
 
-            Task<Vector<uint8_t>> UdpClient::ReceiveAsync(Pointer<IPEndPoint>& ep)
+            Task<Vector<U8>> UdpClient::ReceiveAsync(Pointer<IPEndPoint>& ep)
             {
-                return Task<Vector<uint8_t>>([this, &ep]() {
+                return Task<Vector<U8>>([this, &ep]() {
                     return this->Receive(ep);
                 });
             }
 
-            Task<int> UdpClient::SendAsync(const Vector<uint8_t>& buffer, size_t size)
+            Task<int> UdpClient::SendAsync(const Vector<U8>& buffer, U32 size)
             {
                 return Task<int>([this, &buffer, size]() {
                     return this->Send(buffer, size);
                 });
             }
 
-            Task<int> UdpClient::SendAsync(const Vector<uint8_t>& buffer, size_t size, Pointer<IPEndPoint> ep)
+            Task<int> UdpClient::SendAsync(const Vector<U8>& buffer, U32 size, Pointer<IPEndPoint> ep)
             {
                 return Task<int>([this, &buffer, size, ep]() {
                     return this->Send(buffer, size, ep);
                 });
             }
 
-            Task<int> UdpClient::SendAsync(const Vector<uint8_t>& buffer, size_t size, const String& hostname, uint16_t port)
+            Task<int> UdpClient::SendAsync(const Vector<U8>& buffer, U32 size, const String& hostname, U16 port)
             {
                 return Task<int>([this, &buffer, size, &hostname, port]() {
                     return this->Send(buffer, size, hostname, port);
@@ -173,7 +151,7 @@ namespace Lupus {
                 mClient->Connect(remoteEndPoint);
             }
 
-            void UdpClient::Connect(Pointer<IPAddress> address, uint16_t port)
+            void UdpClient::Connect(Pointer<IPAddress> address, U16 port)
             {
                 if (!mClient) {
                     throw InvalidOperation("UdpClient is in an invalid state");
@@ -182,7 +160,7 @@ namespace Lupus {
                 mClient->Connect(address, port);
             }
 
-            void UdpClient::Connect(const String& host, uint16_t port)
+            void UdpClient::Connect(const String& host, U16 port)
             {
                 if (!mClient) {
                     throw InvalidOperation("UdpClient is in an invalid state");
@@ -200,18 +178,18 @@ namespace Lupus {
                 mClient->Close();
             }
 
-            Vector<uint8_t> UdpClient::Receive(Pointer<IPEndPoint>& ep)
+            Vector<U8> UdpClient::Receive(Pointer<IPEndPoint>& ep)
             {
                 if (!mClient) {
                     throw InvalidOperation("UdpClient is in an invalid state");
                 }
 
-                Vector<uint8_t> vec(Available());
+                Vector<U8> vec(Available());
                 mClient->ReceiveFrom(vec, ep);
                 return vec;
             }
 
-            int UdpClient::Send(const Vector<uint8_t>& buffer, size_t bytes)
+            int UdpClient::Send(const Vector<U8>& buffer, U32 bytes)
             {
                 if (!mClient) {
                     throw InvalidOperation("UdpClient is in an invalid state");
@@ -220,7 +198,7 @@ namespace Lupus {
                 return mClient->Send(buffer, 0, bytes);
             }
 
-            int UdpClient::Send(const Vector<uint8_t>& buffer, size_t bytes, Pointer<IPEndPoint> ep)
+            int UdpClient::Send(const Vector<U8>& buffer, U32 bytes, Pointer<IPEndPoint> ep)
             {
                 if (!mClient) {
                     throw InvalidOperation("UdpClient is in an invalid state");
@@ -231,7 +209,7 @@ namespace Lupus {
                 return mClient->SendTo(buffer, 0, bytes, ep);
             }
 
-            int UdpClient::Send(const Vector<uint8_t>& buffer, size_t bytes, const String& hostname, uint16_t port)
+            int UdpClient::Send(const Vector<U8>& buffer, U32 bytes, const String& hostname, U16 port)
             {
                 if (!mClient) {
                     throw InvalidOperation("UdpClient is in an invalid state");

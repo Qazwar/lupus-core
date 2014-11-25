@@ -44,8 +44,8 @@ namespace Lupus {
             virtual void BaseAddress(Pointer<Uri>) NOEXCEPT;
             virtual const NameValueCollection& DefaultRequestHeaders() const NOEXCEPT;
             virtual void DefaultRequestHeaders(const NameValueCollection&) NOEXCEPT;
-            virtual size_t MaxResponseContentBufferSize() const NOEXCEPT;
-            virtual void MaxResponseContentBufferSize(size_t) NOEXCEPT;
+            virtual U32 MaxResponseContentBufferSize() const NOEXCEPT;
+            virtual void MaxResponseContentBufferSize(U32) NOEXCEPT;
 
             template <typename Rep, typename Period>
             std::chrono::duration<Rep, Period> Timeout() const throw(SocketError, InvalidOperation)

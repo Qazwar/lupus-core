@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "Socket.h"
 #include "IPAddress.h"
 #include "IPEndPoint.h"
@@ -84,7 +62,7 @@ namespace Lupus {
                 }
             }
 
-            void Socket::SocketState::Close(Socket* socket, size_t timeout)
+            void Socket::SocketState::Close(Socket* socket, U32 timeout)
             {
                 if (socket->Handle() == INVALID_SOCKET) {
                     return ChangeState(socket, Pointer<Socket::SocketState>(new SocketClosed()));
@@ -107,7 +85,7 @@ namespace Lupus {
                 int protocol = (int)socket->Protocol();
                 SocketInformation info = {
                     SocketInformationOption::None,
-                    Vector<uint8_t>()
+                    Vector<U8>()
                 };
 
                 if (!socket->mLocal && !socket->mRemote) {
@@ -118,18 +96,18 @@ namespace Lupus {
                     point = socket->mLocal;
                 }
 
-                info.ProtocolInformation.insert(std::end(info.ProtocolInformation), (uint8_t*)&family, (uint8_t*)&family + 4);
-                info.ProtocolInformation.insert(std::end(info.ProtocolInformation), (uint8_t*)&type, (uint8_t*)&type + 4);
-                info.ProtocolInformation.insert(std::end(info.ProtocolInformation), (uint8_t*)&protocol, (uint8_t*)&protocol + 4);
+                info.ProtocolInformation.insert(End(info.ProtocolInformation), (U8*)&family, (U8*)&family + 4);
+                info.ProtocolInformation.insert(End(info.ProtocolInformation), (U8*)&type, (U8*)&type + 4);
+                info.ProtocolInformation.insert(End(info.ProtocolInformation), (U8*)&protocol, (U8*)&protocol + 4);
 
                 if (socket->IsBound()) {
-                    Vector<uint8_t> bytes = point->Address()->Bytes();
+                    Vector<U8> bytes = point->Address()->Bytes();
                     info.Options = SocketInformationOption::Bound;
-                    info.ProtocolInformation.insert(std::end(info.ProtocolInformation), std::begin(bytes), std::end(bytes));
+                    info.ProtocolInformation.insert(End(info.ProtocolInformation), Begin(bytes), End(bytes));
                 } else if (socket->IsConnected()) {
-                    Vector<uint8_t> bytes = socket->mRemote->Address()->Bytes();
+                    Vector<U8> bytes = socket->mRemote->Address()->Bytes();
                     info.Options = SocketInformationOption::Connected;
-                    info.ProtocolInformation.insert(std::end(info.ProtocolInformation), std::begin(bytes), std::end(bytes));
+                    info.ProtocolInformation.insert(End(info.ProtocolInformation), Begin(bytes), End(bytes));
                 } else {
                     info.ProtocolInformation.resize(info.ProtocolInformation.size() + sizeof(AddrStorage));
                 }
@@ -138,17 +116,17 @@ namespace Lupus {
                 return info;
             }
 
-            void Socket::SocketState::Listen(Socket* socket, size_t backlog)
+            void Socket::SocketState::Listen(Socket* socket, U32 backlog)
             {
-                throw SocketError("Socket is not bound to an end point");
+                throw SocketError("Socket is not bound to an End point");
             }
 
-            int Socket::SocketState::Receive(Socket* socket, Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketErrorCode& errorCode)
+            int Socket::SocketState::Receive(Socket* socket, Vector<U8>& buffer, U32 offset, U32 size, SocketFlags socketFlags, SocketErrorCode& errorCode)
             {
                 throw SocketError("Socket is not in an valid state for Receive");
             }
 
-            int Socket::SocketState::ReceiveFrom(Socket* socket, Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, Pointer<IPEndPoint>& remoteEndPoint)
+            int Socket::SocketState::ReceiveFrom(Socket* socket, Vector<U8>& buffer, U32 offset, U32 size, SocketFlags socketFlags, Pointer<IPEndPoint>& remoteEndPoint)
             {
                 if (offset > buffer.size()) {
                     throw OutOfRange("offset");
@@ -162,16 +140,16 @@ namespace Lupus {
 
                 memset(&storage, 0, sizeof(AddrStorage));
                 result = recvfrom(socket->Handle(), (char*)buffer.data() + offset, (int)size, (int)socketFlags, (Addr*)&storage, &length);
-                remoteEndPoint = IPEndPointPtr(new IPEndPoint(Vector<uint8_t>((uint8_t*)&storage, (uint8_t*)&storage + sizeof(AddrLength))));
+                remoteEndPoint = IPEndPointPtr(new IPEndPoint(Vector<U8>((U8*)&storage, (U8*)&storage + sizeof(AddrLength))));
                 return result;
             }
 
-            int Socket::SocketState::Send(Socket* socket, const Vector<uint8_t>& buaffer, size_t offset, size_t size, SocketFlags socketFlags, SocketErrorCode& errorCode)
+            int Socket::SocketState::Send(Socket* socket, const Vector<U8>& buaffer, U32 offset, U32 size, SocketFlags socketFlags, SocketErrorCode& errorCode)
             {
                 throw SocketError("Socket is not in an valid state for Send");
             }
 
-            int Socket::SocketState::SendTo(Socket* socket, const Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, Pointer<IPEndPoint> remoteEndPoint)
+            int Socket::SocketState::SendTo(Socket* socket, const Vector<U8>& buffer, U32 offset, U32 size, SocketFlags socketFlags, Pointer<IPEndPoint> remoteEndPoint)
             {
                 if (offset > buffer.size()) {
                     throw OutOfRange("offset");
@@ -179,7 +157,7 @@ namespace Lupus {
                     throw OutOfRange("size");
                 }
 
-                Vector<uint8_t> address = remoteEndPoint->Serialize();
+                Vector<U8> address = remoteEndPoint->Serialize();
 
                 return sendto(socket->Handle(), (const char*)buffer.data() + offset, (int)size, (int)socketFlags, (const Addr*)address.data(), (int)buffer.size());
             }
@@ -195,7 +173,7 @@ namespace Lupus {
                 sock->mHandle = h;
                 sock->mConnected = true;
                 sock->mLocal = socket->LocalEndPoint();
-                sock->mRemote = IPEndPointPtr(new IPEndPoint(Vector<uint8_t>((uint8_t*)&s, (uint8_t*)&s + sizeof(AddrStorage))));
+                sock->mRemote = IPEndPointPtr(new IPEndPoint(Vector<U8>((U8*)&s, (U8*)&s + sizeof(AddrStorage))));
                 sock->mState = Pointer<Socket::SocketState>(new Socket::SocketConnected(sock));
                 return SocketPtr(sock);
             }
@@ -264,7 +242,7 @@ namespace Lupus {
                 ChangeState(socket, Pointer<Socket::SocketState>(new Socket::SocketConnected(socket)));
             }
 
-            void Socket::SocketBound::Listen(Socket* socket, size_t backlog)
+            void Socket::SocketBound::Listen(Socket* socket, U32 backlog)
             {
                 if (listen(socket->Handle(), (int)backlog) != 0) {
                     throw SocketError(GetLastSocketErrorString());
@@ -321,7 +299,7 @@ namespace Lupus {
                 }
             }
 
-            int Socket::SocketConnected::Receive(Socket* socket, Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketErrorCode& errorCode)
+            int Socket::SocketConnected::Receive(Socket* socket, Vector<U8>& buffer, U32 offset, U32 size, SocketFlags socketFlags, SocketErrorCode& errorCode)
             {
                 if (offset > buffer.size()) {
                     throw OutOfRange("offset");
@@ -338,7 +316,7 @@ namespace Lupus {
                 return result;
             }
 
-            int Socket::SocketConnected::Send(Socket* socket, const Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, SocketErrorCode& errorCode)
+            int Socket::SocketConnected::Send(Socket* socket, const Vector<U8>& buffer, U32 offset, U32 size, SocketFlags socketFlags, SocketErrorCode& errorCode)
             {
                 if (offset > buffer.size()) {
                     throw OutOfRange("offset");
@@ -371,7 +349,7 @@ namespace Lupus {
             void Socket::SocketReady::Bind(Socket* socket, Pointer<IPEndPoint> localEndPoint) throw(SocketError)
             {
                 int yes = 1;
-                Vector<uint8_t> address = localEndPoint->Serialize();
+                Vector<U8> address = localEndPoint->Serialize();
 
                 if (setsockopt(socket->Handle(), SOL_SOCKET, SO_REUSEADDR, (const char*)&yes, sizeof(int)) != 0) {
                     throw SocketError(GetLastSocketErrorString());
@@ -392,7 +370,7 @@ namespace Lupus {
                 // do nothing
             }
 
-            void Socket::SocketClosed::Close(Socket* socket, size_t timeout)
+            void Socket::SocketClosed::Close(Socket* socket, U32 timeout)
             {
                 // do nothing
             }
@@ -402,12 +380,12 @@ namespace Lupus {
                 throw SocketError("Socket is not in an valid state for DuplicateAndClose");
             }
 
-            int Socket::SocketClosed::ReceiveFrom(Socket* socket, Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, Pointer<IPEndPoint>& remoteEndPoint)
+            int Socket::SocketClosed::ReceiveFrom(Socket* socket, Vector<U8>& buffer, U32 offset, U32 size, SocketFlags socketFlags, Pointer<IPEndPoint>& remoteEndPoint)
             {
                 throw SocketError("Socket is not in an valid state for ReceiveFrom");
             }
 
-            int Socket::SocketClosed::SendTo(Socket* socket, const Vector<uint8_t>& buffer, size_t offset, size_t size, SocketFlags socketFlags, Pointer<IPEndPoint> remoteEndPoint)
+            int Socket::SocketClosed::SendTo(Socket* socket, const Vector<U8>& buffer, U32 offset, U32 size, SocketFlags socketFlags, Pointer<IPEndPoint> remoteEndPoint)
             {
                 throw SocketError("Socket is not in an valid state for SendTo");
             }

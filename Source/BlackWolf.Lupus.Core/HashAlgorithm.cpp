@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "HashAlgorithm.h"
 #include "Internal/CryptoHash.h"
 #include <algorithm>
@@ -58,26 +36,26 @@
 namespace Lupus {
     namespace Security {
         namespace Cryptography {
-            Vector<uint8_t> HashAlgorithm::TransformFinalBlock(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount)
+            Vector<U8> HashAlgorithm::TransformFinalBlock(const Vector<U8>& input, U32 inputOffset, U32 inputCount)
             {
                 return std::move(ComputeHash(input, inputOffset, inputCount));
             }
 
-            size_t HashAlgorithm::TransformBlock(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount, Vector<uint8_t>& output, size_t outputOffset)
+            U32 HashAlgorithm::TransformBlock(const Vector<U8>& input, U32 inputOffset, U32 inputCount, Vector<U8>& output, U32 outputOffset)
             {
-                Vector<uint8_t> buffer = ComputeHash(input, inputOffset, inputCount);
-                auto iterator = begin(output) + outputOffset;
+                Vector<U8> buffer = ComputeHash(input, inputOffset, inputCount);
+                auto iterator = Begin(output) + outputOffset;
 
                 if (buffer.size() > output.size() - outputOffset) {
                     throw OutOfRange("Transformed bytes exceeding output vector");
                 }
 
 
-                for_each(begin(buffer), end(buffer), [&iterator](const uint8_t& byte) {
+                for_each(Begin(buffer), End(buffer), [&iterator](const U8& byte) {
                     *(iterator++) = byte;
                 });
 
-                return (size_t)buffer.size();
+                return (U32)buffer.size();
             }
 
             HashAlgorithmFactory::HashAlgorithmFactory()
@@ -110,7 +88,7 @@ namespace Lupus {
             {
                 auto it = mPrototypes.find(hash.ToLower());
 
-                if (it != end(mPrototypes)) {
+                if (it != End(mPrototypes)) {
                     return it->second->Clone();
                 }
 

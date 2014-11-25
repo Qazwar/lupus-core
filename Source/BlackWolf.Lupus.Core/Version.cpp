@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "Version.h"
 #include "Integer.h"
 #include <vector>
@@ -66,42 +44,42 @@ namespace Lupus {
         Version::Version(numbers[0], numbers[1], numbers[2], numbers[3]);
     }
 
-    Version::Version(int32_t major, int32_t minor) :
+    Version::Version(S32 major, S32 minor) :
         Version(major, minor, -1, -1)
     {
     }
 
-    Version::Version(int32_t major, int32_t minor, int32_t build) :
+    Version::Version(S32 major, S32 minor, S32 build) :
         Version(major, minor, build, -1)
     {
     }
 
-    Version::Version(int32_t major, int32_t minor, int32_t build, int32_t revision) :
+    Version::Version(S32 major, S32 minor, S32 build, S32 revision) :
         mMajor(major), mMinor(minor), mBuild(build), mRevision(revision)
     {
     }
 
-    int32_t Version::Major() const
+    S32 Version::Major() const
     {
         return mMajor;
     }
 
-    int32_t Version::Minor() const
+    S32 Version::Minor() const
     {
         return mMinor;
     }
 
-    int32_t Version::Build() const
+    S32 Version::Build() const
     {
         return mBuild;
     }
 
-    int32_t Version::Revision() const
+    S32 Version::Revision() const
     {
         return mRevision;
     }
 
-    int16_t Version::MajorRevision() const
+    S16 Version::MajorRevision() const
     {
         if (mRevision == -1) {
             return -1;
@@ -110,7 +88,7 @@ namespace Lupus {
         }
     }
 
-    int16_t Version::MinorRevision() const
+    S16 Version::MinorRevision() const
     {
         if (mRevision == -1) {
             return -1;

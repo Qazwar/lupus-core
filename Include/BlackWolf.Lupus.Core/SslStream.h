@@ -58,15 +58,15 @@ namespace Lupus {
                 virtual bool CanSeek() const NOEXCEPT override;
 
                 virtual void Close() override;
-                virtual int64_t Length() const override;
-                virtual void Length(int64_t) throw(OutOfRange) override;
-                virtual int64_t Position() const override;
-                virtual void Position(int64_t) throw(OutOfRange) override;
-                virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
+                virtual S64 Length() const override;
+                virtual void Length(S64) throw(OutOfRange) override;
+                virtual S64 Position() const override;
+                virtual void Position(S64) throw(OutOfRange) override;
+                virtual int Read(Vector<U8>& buffer, U32 offset, U32 size) throw(OutOfRange) override;
                 virtual int ReadByte() override;
-                virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
-                virtual void WriteByte(uint8_t byte) override;
-                virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
+                virtual int Write(const Vector<U8>& buffer, U32 offset, U32 size) throw(OutOfRange) override;
+                virtual void WriteByte(U8 byte) override;
+                virtual S64 Seek(S64 offset, SeekOrigin origin) override;
 
                 virtual bool IsAuthenticated() const override;
                 virtual bool IsEncrypted() const override;

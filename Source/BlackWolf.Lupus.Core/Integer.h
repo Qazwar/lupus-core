@@ -20,28 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #pragma once
 
 #include "String.h"
@@ -60,7 +38,7 @@ namespace Lupus {
 	{
 	public:
 		//! \sa Integer::ToString(int, IntegerBase)
-		static String ToString(int8_t value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+		static String ToString(S8 value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::ToString(int, IntegerBase)
         static String ToString(short value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		/**
@@ -76,7 +54,7 @@ namespace Lupus {
 		//! \sa Integer::ToString(int, IntegerBase)
         static String ToString(long long value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::ToString(int, IntegerBase)
-        static String ToString(uint8_t value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static String ToString(U8 value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::ToString(int, IntegerBase)
         static String ToString(unsigned short value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::ToString(int, IntegerBase)
@@ -86,7 +64,7 @@ namespace Lupus {
 		//! \sa Integer::ToString(int, IntegerBase)
         static String ToString(unsigned long long value, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& string, int8_t& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, S8& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
         static bool TryParse(const String& string, short& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		/**
@@ -105,7 +83,7 @@ namespace Lupus {
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
         static bool TryParse(const String& string, long long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
-        static bool TryParse(const String& string, uint8_t& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
+        static bool TryParse(const String& string, U8& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
         static bool TryParse(const String& string, unsigned short& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
@@ -115,13 +93,13 @@ namespace Lupus {
 		//! \sa Integer::TryParse(const String&, int, IntegerBase)
         static bool TryParse(const String& string, unsigned long long& result, IntegerBase base = IntegerBase::Decimal) NOEXCEPT;
 
-        static int8_t ParseByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static S8 ParseByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
         static short ParseShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
         static int ParseInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
         static long ParseLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
         static long long ParseLongLong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
 
-        static uint8_t ParseUByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
+        static U8 ParseUByte(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
         static unsigned short ParseUShort(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
         static unsigned int ParseUInt(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);
         static unsigned long ParseULong(const String& string, IntegerBase base = IntegerBase::Decimal) throw(InvalidArgument);

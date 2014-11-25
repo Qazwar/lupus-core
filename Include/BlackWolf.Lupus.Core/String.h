@@ -33,14 +33,6 @@
 #endif
 
 namespace Lupus {
-#ifdef _UNICODE
-    typedef wchar_t Char;
-    typedef char32_t Char32;
-#else
-    typedef char16_t Char;
-    typedef char32_t Char32;
-#endif
-
     LUPUSCORE_API Char ToChar(char);
     LUPUSCORE_API Char ToChar(wchar_t);
 
@@ -69,70 +61,72 @@ namespace Lupus {
         inline const_iterator cend() const { return &this->operator[](this->Length()); }
 
         String();
-        String(Char ch, size_t count = 1) NOEXCEPT;
+        String(Char ch, U32 count = 1) NOEXCEPT;
         String(const char* str) throw(RuntimeError);
         String(const Char* str) NOEXCEPT;
-        String(const Char* str, size_t offset, size_t size) throw(OutOfRange);
+        String(const Char* str, U32 offset, U32 size) throw(OutOfRange);
+        String(const Vector<Char>& chars) NOEXCEPT;
+        String(const Vector<Char>& chars, U32 offset, U32 size) throw(OutOfRange);
         String(const std::string& str) NOEXCEPT;
-        String(const std::string& str, size_t offset, size_t size) throw(OutOfRange);
+        String(const std::string& str, U32 offset, U32 size) throw(OutOfRange);
         String(const String& str) NOEXCEPT;
-        String(const String& str, size_t offset, size_t size) throw(OutOfRange);
+        String(const String& str, U32 offset, U32 size) throw(OutOfRange);
         String(String&&) NOEXCEPT;
         virtual ~String();
 
-        Char& operator[](size_t index) throw(OutOfRange);
-        const Char& operator[](size_t index) const throw(OutOfRange);
+        Char& operator[](U32 index) throw(OutOfRange);
+        const Char& operator[](U32 index) const throw(OutOfRange);
         virtual String Clone() const NOEXCEPT;
         virtual const Char* Data() const NOEXCEPT;
-        virtual const Char* Data(size_t startIndex) const throw(OutOfRange);
+        virtual const Char* Data(U32 startIndex) const throw(OutOfRange);
         virtual bool IsEmpty() const NOEXCEPT;
-        virtual size_t Length() const NOEXCEPT;
+        virtual U32 Length() const NOEXCEPT;
 
         virtual String Append(Char ch) const NOEXCEPT;
         virtual String Append(String str) const NOEXCEPT;
-        virtual String Append(String str, size_t offset, size_t size) const throw(OutOfRange);
+        virtual String Append(String str, U32 offset, U32 size) const throw(OutOfRange);
         virtual int Compare(String str, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const NOEXCEPT;
-        virtual int Compare(String str, size_t offset, size_t size, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(OutOfRange);
-        virtual int Compare(size_t offset, size_t size, String cmpString, size_t cmpOffset, size_t cmpSize, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(OutOfRange);
+        virtual int Compare(String str, U32 offset, U32 size, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(OutOfRange);
+        virtual int Compare(U32 offset, U32 size, String cmpString, U32 cmpOffset, U32 cmpSize, StringCaseSensitivity = StringCaseSensitivity::CaseSensitive) const throw(OutOfRange);
         virtual bool Contains(String str) const NOEXCEPT;
-        virtual void CopyTo(size_t srcIndex, Vector<Char>& dst, size_t dstIndex, size_t count) const throw(OutOfRange);
+        virtual void CopyTo(U32 srcIndex, Vector<Char>& dst, U32 dstIndex, U32 count) const throw(OutOfRange);
         virtual bool EndsWith(String str) const NOEXCEPT;
-        virtual bool EndsWith(String str, size_t offset, size_t size) const throw(OutOfRange);
+        virtual bool EndsWith(String str, U32 offset, U32 size) const throw(OutOfRange);
         virtual int IndexOf(Char ch) const NOEXCEPT;
         virtual int IndexOf(String str) const NOEXCEPT;
-        virtual int IndexOf(Char ch, size_t offset) const throw(OutOfRange);
-        virtual int IndexOf(String str, size_t offset) const throw(OutOfRange);
-        virtual int IndexOf(Char ch, size_t offset, size_t count) const throw(OutOfRange);
-        virtual int IndexOf(String str, size_t offset, size_t count) const throw(OutOfRange);
+        virtual int IndexOf(Char ch, U32 offset) const throw(OutOfRange);
+        virtual int IndexOf(String str, U32 offset) const throw(OutOfRange);
+        virtual int IndexOf(Char ch, U32 offset, U32 count) const throw(OutOfRange);
+        virtual int IndexOf(String str, U32 offset, U32 count) const throw(OutOfRange);
         virtual int IndexOfAny(const Vector<Char>& chars) const NOEXCEPT;
-        virtual int IndexOfAny(const Vector<Char>& chars, size_t offset) const throw(OutOfRange);
-        virtual int IndexOfAny(const Vector<Char>& chars, size_t offset, size_t count) const throw(OutOfRange);
-        virtual String Insert(size_t startIndex, Char ch) const throw(OutOfRange);
-        virtual String Insert(size_t startIndex, String str) const throw(OutOfRange);
-        virtual String Insert(size_t startIndex, String str, size_t offset, size_t count) const throw(OutOfRange);
+        virtual int IndexOfAny(const Vector<Char>& chars, U32 offset) const throw(OutOfRange);
+        virtual int IndexOfAny(const Vector<Char>& chars, U32 offset, U32 count) const throw(OutOfRange);
+        virtual String Insert(U32 startIndex, Char ch) const throw(OutOfRange);
+        virtual String Insert(U32 startIndex, String str) const throw(OutOfRange);
+        virtual String Insert(U32 startIndex, String str, U32 offset, U32 count) const throw(OutOfRange);
         virtual int LastIndexOf(Char ch) const NOEXCEPT;
         virtual int LastIndexOf(String str) const NOEXCEPT;
-        virtual int LastIndexOf(Char ch, size_t offset) const throw(OutOfRange);
-        virtual int LastIndexOf(String str, size_t offset) const throw(OutOfRange);
-        virtual int LastIndexOf(Char ch, size_t offset, size_t count) const throw(OutOfRange);
-        virtual int LastIndexOf(String str, size_t offset, size_t count) const throw(OutOfRange);
+        virtual int LastIndexOf(Char ch, U32 offset) const throw(OutOfRange);
+        virtual int LastIndexOf(String str, U32 offset) const throw(OutOfRange);
+        virtual int LastIndexOf(Char ch, U32 offset, U32 count) const throw(OutOfRange);
+        virtual int LastIndexOf(String str, U32 offset, U32 count) const throw(OutOfRange);
         virtual int LastIndexOfAny(const Vector<Char>& chars) const NOEXCEPT;
-        virtual int LastIndexOfAny(const Vector<Char>& chars, size_t offset) const throw(OutOfRange);
-        virtual int LastIndexOfAny(const Vector<Char>& chars, size_t offset, size_t count) const throw(OutOfRange);
-        virtual String Remove(size_t startIndex) const throw(OutOfRange);
-        virtual String Remove(size_t startIndex, size_t count) const throw(OutOfRange);
+        virtual int LastIndexOfAny(const Vector<Char>& chars, U32 offset) const throw(OutOfRange);
+        virtual int LastIndexOfAny(const Vector<Char>& chars, U32 offset, U32 count) const throw(OutOfRange);
+        virtual String Remove(U32 startIndex) const throw(OutOfRange);
+        virtual String Remove(U32 startIndex, U32 count) const throw(OutOfRange);
         virtual String Replace(Char oldCh, Char newCh) const NOEXCEPT;
         virtual String Replace(String oldStr, String newStr) const throw(OutOfRange);
         virtual String Reverse() const NOEXCEPT;
-        virtual String Reverse(size_t startIndex, size_t count) const throw(OutOfRange);
+        virtual String Reverse(U32 startIndex, U32 count) const throw(OutOfRange);
         virtual Vector<String> Split(const Vector<Char>& delimiter, StringSplitOption = StringSplitOption::None) const throw(FormatError);
-        virtual Vector<String> Split(const Vector<Char>& delimiter, size_t count, StringSplitOption = StringSplitOption::None) const throw(FormatError);
+        virtual Vector<String> Split(const Vector<Char>& delimiter, U32 count, StringSplitOption = StringSplitOption::None) const throw(FormatError);
         virtual Vector<String> Split(const String& delimiter, StringSplitOption = StringSplitOption::None) const throw(FormatError);
-        virtual Vector<String> Split(const String& delimiter, size_t count, StringSplitOption = StringSplitOption::None) const throw(FormatError);
+        virtual Vector<String> Split(const String& delimiter, U32 count, StringSplitOption = StringSplitOption::None) const throw(FormatError);
         virtual bool StartsWith(String str) const NOEXCEPT;
-        virtual bool StartsWith(String str, size_t offset, size_t size) const throw(OutOfRange);
-        virtual String Substring(size_t startIndex) const throw(OutOfRange);
-        virtual String Substring(size_t startIndex, size_t count) const throw(OutOfRange);
+        virtual bool StartsWith(String str, U32 offset, U32 size) const throw(OutOfRange);
+        virtual String Substring(U32 startIndex) const throw(OutOfRange);
+        virtual String Substring(U32 startIndex, U32 count) const throw(OutOfRange);
         virtual String ToLower() const NOEXCEPT;
         virtual String ToUpper() const NOEXCEPT;
         virtual std::string ToUTF8() const NOEXCEPT;
@@ -160,19 +154,19 @@ namespace Lupus {
 
     protected:
 
-        size_t AddRef();
-        size_t ReleaseRef();
-        size_t RefCount() const;
+        U32 AddRef();
+        U32 ReleaseRef();
+        U32 RefCount() const;
 
-        static const size_t Capacity;
-        static size_t ComputeCapacity(size_t length);
+        static const U32 Capacity;
+        static U32 ComputeCapacity(U32 length);
 
     private:
 
         explicit String(void*);
 
         void* mString = nullptr;
-        size_t* mCount = nullptr;
+        U32* mCount = nullptr;
 #ifdef _DEBUG
         std::string mDebugString;
 #endif

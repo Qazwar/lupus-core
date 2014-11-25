@@ -62,26 +62,26 @@ namespace Lupus {
 
         virtual void Detach(Pointer<IObserver<T>> observer) NOEXCEPT final
         {
-            std::remove(std::begin(mObservers), std::end(mObservers), observer);
+            std::remove(Begin(mObservers), End(mObservers), observer);
         }
 
         virtual void OnUpdate(const T& value) NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [&](Pointer<IObserver<T>> observer) {
+            std::for_each(Begin(mObservers), End(mObservers), [&](Pointer<IObserver<T>> observer) {
                 observer->OnUpdate(value);
             });
         }
 
         virtual void OnError(Exception& ex) NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [&](Pointer<IObserver<T>> observer) {
+            std::for_each(Begin(mObservers), End(mObservers), [&](Pointer<IObserver<T>> observer) {
                 observer->OnError(ex);
             });
         }
 
         virtual void OnComplete() NOEXCEPT final
         {
-            std::for_each(std::begin(mObservers), std::end(mObservers), [](Pointer<IObserver<T>> observer) {
+            std::for_each(Begin(mObservers), End(mObservers), [](Pointer<IObserver<T>> observer) {
                 observer->OnComplete();
             });
         }

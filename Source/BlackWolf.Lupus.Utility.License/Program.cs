@@ -11,9 +11,7 @@ namespace GPL
     {
         static void Main(string[] args)
         {
-            const string oldLicense = @"/**
- * \author David Wolf
- *
+			const string oldLicense = @"/**
  * Copyright (C) 2014 David Wolf <d.wolf@live.at>
  *
  * This file is part of Lupus.
@@ -64,27 +62,31 @@ namespace GPL
             var directory = new DirectoryInfo(".");
 
             foreach (var f in directory.GetFiles("*.h"))
-            {
+			{
+				Console.WriteLine(f.FullName);
                 var text = File.ReadAllText(f.FullName);
                 
-                if (text.Contains(oldLicense))
+                while (text.Contains(oldLicense))
                 {
                     text = text.Remove(text.IndexOf(oldLicense, System.StringComparison.Ordinal), oldLicense.Length);
                 }
 
+	            if (text.Contains(newLicense)) continue;
                 var newText = newLicense + text;
                 File.WriteAllText(f.FullName, newText);
             }
 
             foreach (var f in directory.GetFiles("*.cpp"))
             {
+				Console.WriteLine(f.FullName);
                 var text = File.ReadAllText(f.FullName);
 
-                if (text.Contains(oldLicense))
+                while (text.Contains(oldLicense))
                 {
                     text = text.Remove(text.IndexOf(oldLicense, System.StringComparison.Ordinal), oldLicense.Length);
                 }
 
+				if (text.Contains(newLicense)) continue;
                 var newText = newLicense + text;
                 File.WriteAllText(f.FullName, newText);
             }

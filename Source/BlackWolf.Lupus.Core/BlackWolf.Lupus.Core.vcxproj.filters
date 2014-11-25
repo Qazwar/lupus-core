@@ -189,6 +189,9 @@
     <ClCompile Include="NetDefinitions.cpp">
       <Filter>Code\Net\Sockets\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Base64Encoding.cpp">
+      <Filter>Code\Text\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IPAddress.h">
@@ -337,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="versioning.h" />
+    <ClInclude Include="IEncoder.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Base64Encoding.h">
+      <Filter>Code\Text\.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BlackWolf.Lupus.Core.rc">

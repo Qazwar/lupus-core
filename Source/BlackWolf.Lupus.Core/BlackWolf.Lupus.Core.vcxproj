@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="AsymmetricAlgorithm.cpp" />
     <ClCompile Include="AuthenticatedStream.cpp" />
+    <ClCompile Include="Base64Encoding.cpp" />
     <ClCompile Include="Cookie.cpp" />
     <ClCompile Include="Encoding.cpp" />
     <ClCompile Include="HttpClient.cpp" />
@@ -60,6 +61,7 @@
   <ItemGroup>
     <ClInclude Include="AsymmetricAlgorithm.h" />
     <ClInclude Include="AuthenticatedStream.h" />
+    <ClInclude Include="Base64Encoding.h" />
     <ClInclude Include="Cookie.h" />
     <ClInclude Include="Encoding.h" />
     <ClInclude Include="HttpClient.h" />
@@ -69,6 +71,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="HttpListenerResponse.h" />
     <ClInclude Include="IComposite.h" />
+    <ClInclude Include="IEncoder.h" />
     <ClInclude Include="IFactory.h" />
     <ClInclude Include="Internal\CryptoBlockCipher.h" />
     <ClInclude Include="Internal\CryptoHash.h" />

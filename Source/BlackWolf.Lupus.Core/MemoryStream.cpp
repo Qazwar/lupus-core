@@ -20,52 +20,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/**
- * Copyright (C) 2014 David Wolf <d.wolf@live.at>
- *
- * This file is part of Lupus.
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 #include "MemoryStream.h"
 #include <iterator>
 
 namespace Lupus {
-    MemoryStream::MemoryStream(const Vector<uint8_t>& buffer)
+    MemoryStream::MemoryStream(const Vector<U8>& buffer)
     {
         mBuffer = buffer;
-        mIterator = begin(mBuffer);
+        mIterator = Begin(mBuffer);
     }
 
-    MemoryStream::MemoryStream(size_t length)
+    MemoryStream::MemoryStream(U32 length)
     {
-        mBuffer = Vector<uint8_t>(length);
-        mIterator = begin(mBuffer);
+        mBuffer = Vector<U8>(length);
+        mIterator = Begin(mBuffer);
     }
 
-    MemoryStream::MemoryStream(const Vector<uint8_t>& buffer, bool canWrite)
+    MemoryStream::MemoryStream(const Vector<U8>& buffer, bool canWrite)
     {
         mBuffer = buffer;
         mWritable = canWrite;
-        mIterator = begin(mBuffer);
+        mIterator = Begin(mBuffer);
     }
 
-    MemoryStream::MemoryStream(const Vector<uint8_t>& buffer, size_t offset, size_t size)
+    MemoryStream::MemoryStream(const Vector<U8>& buffer, U32 offset, U32 size)
     {
         if (offset > buffer.size()) {
             throw OutOfRange("offset");
@@ -73,11 +51,11 @@ namespace Lupus {
             throw OutOfRange("size");
         }
 
-        mBuffer = Vector<uint8_t>(begin(buffer) + offset, begin(buffer) + offset + size);
-        mIterator = begin(mBuffer);
+        mBuffer = Vector<U8>(Begin(buffer) + offset, Begin(buffer) + offset + size);
+        mIterator = Begin(mBuffer);
     }
 
-    MemoryStream::MemoryStream(const Vector<uint8_t>& buffer, size_t offset, size_t size, bool canWrite)
+    MemoryStream::MemoryStream(const Vector<U8>& buffer, U32 offset, U32 size, bool canWrite)
     {
         if (offset > buffer.size()) {
             throw OutOfRange("offset");
@@ -86,11 +64,11 @@ namespace Lupus {
         }
 
         mWritable = canWrite;
-        mBuffer = Vector<uint8_t>(begin(buffer) + offset, begin(buffer) + offset + size);
-        mIterator = begin(mBuffer);
+        mBuffer = Vector<U8>(Begin(buffer) + offset, Begin(buffer) + offset + size);
+        mIterator = Begin(mBuffer);
     }
 
-    MemoryStream::MemoryStream(const Vector<uint8_t>& buffer, size_t offset, size_t size, bool canWrite, bool visible)
+    MemoryStream::MemoryStream(const Vector<U8>& buffer, U32 offset, U32 size, bool canWrite, bool visible)
     {
         if (offset > buffer.size()) {
             throw OutOfRange("offset");
@@ -100,8 +78,8 @@ namespace Lupus {
 
         mVisible = visible;
         mWritable = canWrite;
-        mBuffer = Vector<uint8_t>(begin(buffer) + offset, begin(buffer) + offset + size);
-        mIterator = begin(mBuffer);
+        mBuffer = Vector<U8>(Begin(buffer) + offset, Begin(buffer) + offset + size);
+        mIterator = Begin(mBuffer);
     }
 
     bool MemoryStream::CanRead() const
@@ -122,56 +100,56 @@ namespace Lupus {
     void MemoryStream::Close()
     {
         mBuffer.clear();
-        mIterator = begin(mBuffer);
+        mIterator = Begin(mBuffer);
     }
 
-    int64_t MemoryStream::Length() const
+    S64 MemoryStream::Length() const
     {
-        return (int64_t)mBuffer.size();
+        return (S64)mBuffer.size();
     }
 
-    void MemoryStream::Length(int64_t length)
+    void MemoryStream::Length(S64 length)
     {
-        mBuffer.resize((size_t)length);
+        mBuffer.resize((U32)length);
     }
 
-    int64_t MemoryStream::Position() const
+    S64 MemoryStream::Position() const
     {
-        return (int64_t)(mIterator - begin(mBuffer));
+        return (S64)(mIterator - Begin(mBuffer));
     }
 
-    void MemoryStream::Position(int64_t position)
+    void MemoryStream::Position(S64 position)
     {
-        advance((mIterator = begin(mBuffer)), (int)position);
+        advance((mIterator = Begin(mBuffer)), (int)position);
     }
 
-    int MemoryStream::Read(Vector<uint8_t>& buffer, size_t offset, size_t size)
+    int MemoryStream::Read(Vector<U8>& buffer, U32 offset, U32 size)
     {
         if (offset > buffer.size()) {
             throw OutOfRange("offset");
         } else if (size > buffer.size() - offset) {
             throw OutOfRange("size");
-        } else if (mIterator >= end(mBuffer) || mIterator < begin(mBuffer)) {
+        } else if (mIterator >= End(mBuffer) || mIterator < Begin(mBuffer)) {
             return 0;
-        } else if ((int64_t)size > (int64_t)mBuffer.size() - Position()) {
-            size = (size_t)((int64_t)mBuffer.size() - Position());
+        } else if ((S64)size > (S64)mBuffer.size() - Position()) {
+            size = (U32)((S64)mBuffer.size() - Position());
         }
 
-        copy(mIterator, mIterator + size, begin(buffer) + offset + size);
+        copy(mIterator, mIterator + size, Begin(buffer) + offset + size);
         advance(mIterator, size);
         return (int)size;
     }
 
     int MemoryStream::ReadByte()
     {
-        if (end(mBuffer) <= mIterator || begin(mBuffer) > mIterator) {
+        if (End(mBuffer) <= mIterator || Begin(mBuffer) > mIterator) {
             return -1;
         }
 
         return *(mIterator++);
     }
 
-    int MemoryStream::Write(const Vector<uint8_t>& buffer, size_t offset, size_t size)
+    int MemoryStream::Write(const Vector<U8>& buffer, U32 offset, U32 size)
     {
         if (!mWritable) {
             throw NotSupported();
@@ -179,59 +157,59 @@ namespace Lupus {
             throw OutOfRange("offset");
         } else if (size > buffer.size() - offset) {
             throw OutOfRange("size");
-        } else if (mIterator > end(mBuffer) || mIterator < begin(mBuffer)) {
+        } else if (mIterator > End(mBuffer) || mIterator < Begin(mBuffer)) {
             return 0;
-        } else if (size >(size_t)mBuffer.capacity()) {
+        } else if (size >(U32)mBuffer.capacity()) {
             mBuffer.reserve(mBuffer.capacity() + (size > 1024 ? (size / 1024 + 1) * 1024 : 1024));
         }
 
-        mBuffer.insert(mIterator, begin(buffer) + offset, begin(buffer) + offset + size);
+        mBuffer.insert(mIterator, Begin(buffer) + offset, Begin(buffer) + offset + size);
         mIterator += size;
         return (int)size;
     }
 
-    void MemoryStream::WriteByte(uint8_t byte)
+    void MemoryStream::WriteByte(U8 byte)
     {
         if (!mWritable) {
             throw NotSupported();
-        } else if (mIterator == end(mBuffer)) {
+        } else if (mIterator == End(mBuffer)) {
             mBuffer.push_back(byte);
             mIterator++;
-        } else if (mIterator < end(mBuffer) && mIterator >= begin(mBuffer)) {
+        } else if (mIterator < End(mBuffer) && mIterator >= Begin(mBuffer)) {
             *mIterator = byte;
         }
     }
 
-    int64_t MemoryStream::Seek(int64_t offset, SeekOrigin origin)
+    S64 MemoryStream::Seek(S64 offset, SeekOrigin origin)
     {
         switch (origin) {
             case SeekOrigin::Begin:
-                advance((mIterator = begin(mBuffer)), offset);
+                advance((mIterator = Begin(mBuffer)), static_cast<Vector<U8>::difference_type>(offset));
                 break;
 
             case SeekOrigin::Current:
-                mIterator += offset;
+                mIterator += static_cast<Vector<U8>::difference_type>(offset);
                 break;
 
             case SeekOrigin::End:
-                advance((mIterator = end(mBuffer)), offset);
+                advance((mIterator = End(mBuffer)), static_cast<Vector<U8>::difference_type>(offset));
                 break;
         }
 
         return Position();
     }
 
-    size_t MemoryStream::Capacity() const
+    U32 MemoryStream::Capacity() const
     {
-        return (size_t)mBuffer.capacity();
+        return (U32)mBuffer.capacity();
     }
 
-    void MemoryStream::Capacity(size_t cap)
+    void MemoryStream::Capacity(U32 cap)
     {
         mBuffer.reserve(cap);
     }
 
-    const Vector<uint8_t>& MemoryStream::GetBuffer() const
+    const Vector<U8>& MemoryStream::GetBuffer() const
     {
         if (!mVisible) {
             throw UnauthorizedAccess();
@@ -240,12 +218,12 @@ namespace Lupus {
         return mBuffer;
     }
 
-    uint8_t& MemoryStream::operator[](size_t i)
+    U8& MemoryStream::operator[](U32 i)
     {
         return mBuffer[i];
     }
     
-    const uint8_t& MemoryStream::operator[](size_t i) const
+    const U8& MemoryStream::operator[](U32 i) const
     {
         return mBuffer[i];
     }

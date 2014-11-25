@@ -42,12 +42,12 @@ namespace Lupus {
 
                 virtual ~CryptoTransformAlgorithm() = default;
 
-                CryptoTransformAlgorithm(const uint8_t* key, size_t size, const uint8_t* iv)
+                CryptoTransformAlgorithm(const U8* key, U32 size, const U8* iv)
                 {
                     mAlgorithm = T(key, size, iv);
                 }
 
-                virtual Vector<uint8_t> TransformFinalBlock(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override
+                virtual Vector<U8> TransformFinalBlock(const Vector<U8>& buffer, U32 offset, U32 size) throw(OutOfRange) override
                 {
                     if (offset > buffer.size()) {
                         throw OutOfRange("offset");
@@ -55,14 +55,14 @@ namespace Lupus {
                         throw OutOfRange("size");
                     }
 
-                    Vector<uint8_t> output(size);
+                    Vector<U8> output(size);
                     CryptoPP::StreamTransformationFilter filter(mAlgorithm, new CryptoPP::ArraySink(output.data(), size));
                     filter.Put(buffer.data() + offset, size);
                     filter.MessageEnd();
                     return std::move(output);
                 }
 
-                virtual size_t TransformBlock(const Vector<uint8_t>& input, size_t inputOffset, size_t inputCount, Vector<uint8_t>& output, size_t outputOffset) throw(OutOfRange) override
+                virtual U32 TransformBlock(const Vector<U8>& input, U32 inputOffset, U32 inputCount, Vector<U8>& output, U32 outputOffset) throw(OutOfRange) override
                 {
                     if (inputOffset > input.size()) {
                         throw OutOfRange("inputOffset");
@@ -95,32 +95,32 @@ namespace Lupus {
                     return std::dynamic_pointer_cast<SymmetricAlgorithm>(MakePointer<CryptoBlockCipher<T>>());
                 }
 
-                virtual size_t BlockSize() const NOEXCEPT override
+                virtual U32 BlockSize() const NOEXCEPT override
                 {
                     return T::BLOCKSIZE;
                 }
 
-                virtual size_t MinKeyLength() const NOEXCEPT override
+                virtual U32 MinKeyLength() const NOEXCEPT override
                 {
                     return T::MIN_KEYLENGTH;
                 }
 
-                virtual size_t MaxKeyLength() const NOEXCEPT override
+                virtual U32 MaxKeyLength() const NOEXCEPT override
                 {
                     return T::MAX_KEYLENGTH;
                 }
 
-                virtual size_t DefaultKeyLength() const NOEXCEPT override
+                virtual U32 DefaultKeyLength() const NOEXCEPT override
                 {
                     return T::DEFAULT_KEYLENGTH;
                 }
 
-                virtual size_t IvRequirement() const NOEXCEPT override
+                virtual U32 IvRequirement() const NOEXCEPT override
                 {
                     return T::IV_REQUIREMENT;
                 }
 
-                virtual size_t IvLength() const NOEXCEPT override
+                virtual U32 IvLength() const NOEXCEPT override
                 {
                     return T::IV_LENGTH;
                 }
@@ -135,22 +135,22 @@ namespace Lupus {
                     mMode = mode;
                 }
 
-                virtual const Vector<uint8_t>& Key() const NOEXCEPT override
+                virtual const Vector<U8>& Key() const NOEXCEPT override
                 {
                     return mKey;
                 }
 
-                virtual void Key(const Vector<uint8_t>& key) NOEXCEPT override
+                virtual void Key(const Vector<U8>& key) NOEXCEPT override
                 {
                     mKey = key;
                 }
 
-                virtual const Vector<uint8_t>& Iv() const NOEXCEPT override
+                virtual const Vector<U8>& Iv() const NOEXCEPT override
                 {
                     return mIv;
                 }
 
-                virtual void Iv(const Vector<uint8_t>& iv) NOEXCEPT override
+                virtual void Iv(const Vector<U8>& iv) NOEXCEPT override
                 {
                     mIv = iv;
                 }
@@ -181,7 +181,7 @@ namespace Lupus {
                     return nullptr;
                 }
 
-                virtual Pointer<ICryptoTransform> CreateDecryptor(CipherMode mode, const Vector<uint8_t>& key) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateDecryptor(CipherMode mode, const Vector<U8>& key) NOEXCEPT override
                 {
                     switch (mode) {
                         case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(key.data(), key.size(), mIv.data());
@@ -194,7 +194,7 @@ namespace Lupus {
                     return nullptr;
                 }
 
-                virtual Pointer<ICryptoTransform> CreateDecryptor(CipherMode mode, const Vector<uint8_t>& key, const Vector<uint8_t>& iv) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateDecryptor(CipherMode mode, const Vector<U8>& key, const Vector<U8>& iv) NOEXCEPT override
                 {
                     switch (mode) {
                         case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Decryption>>(key.data(), key.size(), iv.data());
@@ -233,7 +233,7 @@ namespace Lupus {
                     return nullptr;
                 }
 
-                virtual Pointer<ICryptoTransform> CreateEncryptor(CipherMode mode, const Vector<uint8_t>& key) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateEncryptor(CipherMode mode, const Vector<U8>& key) NOEXCEPT override
                 {
                     switch (mode) {
                         case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(key.data(), key.size(), mIv.data());
@@ -246,7 +246,7 @@ namespace Lupus {
                     return nullptr;
                 }
 
-                virtual Pointer<ICryptoTransform> CreateEncryptor(CipherMode mode, const Vector<uint8_t>& key, const Vector<uint8_t>& iv) NOEXCEPT override
+                virtual Pointer<ICryptoTransform> CreateEncryptor(CipherMode mode, const Vector<U8>& key, const Vector<U8>& iv) NOEXCEPT override
                 {
                     switch (mode) {
                         case CipherMode::Cbc: return MakePointer<CryptoTransformAlgorithm<CryptoPP::CBC_Mode<T>::Encryption>>(key.data(), key.size(), iv.data());
@@ -262,8 +262,8 @@ namespace Lupus {
             private:
 
                 CipherMode mMode = CipherMode::Ctr;
-                Vector<uint8_t> mKey;
-                Vector<uint8_t> mIv;
+                Vector<U8> mKey;
+                Vector<U8> mIv;
             };
         }
     }

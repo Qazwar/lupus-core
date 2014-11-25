@@ -52,8 +52,8 @@ namespace Lupus {
 
         virtual Task<void> CopyToAsync(Pointer<Stream> destination) NOEXCEPT;
         virtual Task<void> FlushAsync() NOEXCEPT;
-        virtual Task<int> ReadAsync(Vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
-        virtual Task<int> WriteAsync(const Vector<uint8_t>& buffer, size_t offset, size_t size) NOEXCEPT;
+        virtual Task<int> ReadAsync(Vector<U8>& buffer, U32 offset, U32 size) NOEXCEPT;
+        virtual Task<int> WriteAsync(const Vector<U8>& buffer, U32 offset, U32 size) NOEXCEPT;
 
         virtual bool CanRead() const = 0;
         virtual bool CanWrite() const = 0;
@@ -62,15 +62,15 @@ namespace Lupus {
         virtual void Close() = 0;
         virtual void CopyTo(Pointer<Stream> destination) throw(NullPointer, NotSupported);
         virtual void Flush() throw(NotSupported);
-        virtual int64_t Length() const = 0;
-        virtual void Length(int64_t) throw(NotSupported);
-        virtual int64_t Position() const = 0;
-        virtual void Position(int64_t) throw(NotSupported);
-        virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) = 0;
+        virtual S64 Length() const = 0;
+        virtual void Length(S64) throw(NotSupported);
+        virtual S64 Position() const = 0;
+        virtual void Position(S64) throw(NotSupported);
+        virtual int Read(Vector<U8>& buffer, U32 offset, U32 size) throw(OutOfRange) = 0;
         virtual int ReadByte() = 0;
-        virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) = 0;
-        virtual void WriteByte(uint8_t byte) = 0;
-        virtual int64_t Seek(int64_t offset, SeekOrigin origin) throw(NotSupported);
+        virtual int Write(const Vector<U8>& buffer, U32 offset, U32 size) throw(OutOfRange) = 0;
+        virtual void WriteByte(U8 byte) = 0;
+        virtual S64 Seek(S64 offset, SeekOrigin origin) throw(NotSupported);
     };
 
     //! Readonly adapter
@@ -89,15 +89,15 @@ namespace Lupus {
         virtual void Close() override;
         virtual void CopyTo(Pointer<Stream> destination) throw(NullPointer, NotSupported) override;
         virtual void Flush() override;
-        virtual int64_t Length() const override;
-        virtual void Length(int64_t) throw(NotSupported) override;
-        virtual int64_t Position() const override;
-        virtual void Position(int64_t) throw(NotSupported) override;
-        virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
+        virtual S64 Length() const override;
+        virtual void Length(S64) throw(NotSupported) override;
+        virtual S64 Position() const override;
+        virtual void Position(S64) throw(NotSupported) override;
+        virtual int Read(Vector<U8>& buffer, U32 offset, U32 size) throw(OutOfRange) override;
         virtual int ReadByte() override;
-        virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(NotSupported) override;
-        virtual void WriteByte(uint8_t byte) throw(NotSupported) override;
-        virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
+        virtual int Write(const Vector<U8>& buffer, U32 offset, U32 size) throw(NotSupported) override;
+        virtual void WriteByte(U8 byte) throw(NotSupported) override;
+        virtual S64 Seek(S64 offset, SeekOrigin origin) override;
 
     private:
 
@@ -120,15 +120,15 @@ namespace Lupus {
         virtual void Close() override;
         virtual void CopyTo(Pointer<Stream> destination) throw(NullPointer, NotSupported) override;
         virtual void Flush() override;
-        virtual int64_t Length() const override;
-        virtual void Length(int64_t) throw(NotSupported) override;
-        virtual int64_t Position() const override;
-        virtual void Position(int64_t) throw(NotSupported) override;
-        virtual int Read(Vector<uint8_t>& buffer, size_t offset, size_t size) throw(OutOfRange) override;
+        virtual S64 Length() const override;
+        virtual void Length(S64) throw(NotSupported) override;
+        virtual S64 Position() const override;
+        virtual void Position(S64) throw(NotSupported) override;
+        virtual int Read(Vector<U8>& buffer, U32 offset, U32 size) throw(OutOfRange) override;
         virtual int ReadByte() override;
-        virtual int Write(const Vector<uint8_t>& buffer, size_t offset, size_t size) throw(NotSupported) override;
-        virtual void WriteByte(uint8_t byte) throw(NotSupported) override;
-        virtual int64_t Seek(int64_t offset, SeekOrigin origin) override;
+        virtual int Write(const Vector<U8>& buffer, U32 offset, U32 size) throw(NotSupported) override;
+        virtual void WriteByte(U8 byte) throw(NotSupported) override;
+        virtual S64 Seek(S64 offset, SeekOrigin origin) override;
 
     private:
 

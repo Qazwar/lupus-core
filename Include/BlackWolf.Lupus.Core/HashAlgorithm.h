@@ -46,22 +46,22 @@ namespace Lupus {
 
                 virtual ~HashAlgorithm() = default;
 
-                virtual size_t BlockSize() const NOEXCEPT = 0;
-                virtual size_t HashSize() const NOEXCEPT = 0;
+                virtual U32 BlockSize() const NOEXCEPT = 0;
+                virtual U32 HashSize() const NOEXCEPT = 0;
 
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>&) NOEXCEPT = 0;
-                virtual Vector<uint8_t> ComputeHash(Pointer<Stream>) = 0;
-                virtual Vector<uint8_t> ComputeHash(const Vector<uint8_t>& input,
-                    size_t inputOffset,
-                    size_t inputCount) throw(OutOfRange) = 0;
+                virtual Vector<U8> ComputeHash(const Vector<U8>&) NOEXCEPT = 0;
+                virtual Vector<U8> ComputeHash(Pointer<Stream>) = 0;
+                virtual Vector<U8> ComputeHash(const Vector<U8>& input,
+                    U32 inputOffset,
+                    U32 inputCount) throw(OutOfRange) = 0;
 
-                virtual Vector<uint8_t> TransformFinalBlock(const Vector<uint8_t>& input, size_t offset, size_t count) throw(OutOfRange) override;
-                virtual size_t TransformBlock(
-                    const Vector<uint8_t>& input,
-                    size_t inputOffset,
-                    size_t inputCount,
-                    Vector<uint8_t>& output,
-                    size_t outputOffset) throw(OutOfRange) override;
+                virtual Vector<U8> TransformFinalBlock(const Vector<U8>& input, U32 offset, U32 count) throw(OutOfRange) override;
+                virtual U32 TransformBlock(
+                    const Vector<U8>& input,
+                    U32 inputOffset,
+                    U32 inputCount,
+                    Vector<U8>& output,
+                    U32 outputOffset) throw(OutOfRange) override;
             };
 
             class LUPUSCORE_API HashAlgorithmFactory : public IFactory<HashAlgorithm, String>, public NonCopyable
