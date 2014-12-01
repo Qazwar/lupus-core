@@ -165,9 +165,6 @@
     <ClCompile Include="String.cpp">
       <Filter>Code\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Win32Uri.cpp">
-      <Filter>Code\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Encoding.cpp">
       <Filter>Code\Text\.cpp</Filter>
     </ClCompile>
@@ -191,6 +188,15 @@
     </ClCompile>
     <ClCompile Include="Base64Encoding.cpp">
       <Filter>Code\Text\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UriWin32.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime.cpp">
+      <Filter>Code\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSpan.cpp">
+      <Filter>Code\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +351,18 @@
     </ClInclude>
     <ClInclude Include="Base64Encoding.h">
       <Filter>Code\Text\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="IStringifyable.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="ISerializable.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime.h">
+      <Filter>Code\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSpan.h">
+      <Filter>Code\.h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

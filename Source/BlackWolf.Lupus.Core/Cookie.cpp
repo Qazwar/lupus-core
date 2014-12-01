@@ -112,12 +112,12 @@ namespace Lupus {
             mSecure = value;
         }
         
-        TimePoint Cookie::Expires() const 
+        DateTime Cookie::Expires() const 
         {
             return mExpires;
         }
         
-        void Cookie::Expires(const TimePoint& value) 
+        void Cookie::Expires(const DateTime& value) 
         {
             mExpires = value;
         }
@@ -127,21 +127,9 @@ namespace Lupus {
             String expires;
 
             if (mExpired) {
-                std::stringstream ss;
-                time_t time = Clock::to_time_t(Clock::now());
-                tm timetm;
-                memset(&timetm, 0, sizeof(timetm));
-                localtime_s(&timetm, &time);
-                ss << std::put_time(&timetm, "%a, %Y-%b-%d %T GMT");
-                expires += ss.str();
-            } else if (mExpires != TimePoint::min()) {
-                std::stringstream ss;
-                time_t time = Clock::to_time_t(mExpires);
-                tm timetm;
-                memset(&timetm, 0, sizeof(timetm));
-                localtime_s(&timetm, &time);
-                ss << std::put_time(&timetm, "%a, %Y-%b-%d %T GMT");
-                expires += ss.str();
+                expires += DateTime(0).ToString("%a, %Y-%b-%d %T %Z");
+            } else if (mExpires.Ticks() != 0) {
+                expires += mExpires.ToString("%a, %Y-%b-%d %T %Z");
             }
 
             String result = mName + "=" + mValue;

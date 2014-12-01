@@ -31,6 +31,7 @@
     <ClCompile Include="AuthenticatedStream.cpp" />
     <ClCompile Include="Base64Encoding.cpp" />
     <ClCompile Include="Cookie.cpp" />
+    <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="Encoding.cpp" />
     <ClCompile Include="HttpClient.cpp" />
     <ClCompile Include="HttpListener.cpp" />
@@ -53,8 +54,9 @@
     <ClCompile Include="Stream.cpp" />
     <ClCompile Include="TcpClient.cpp" />
     <ClCompile Include="TcpListener.cpp" />
+    <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="UdpClient.cpp" />
-    <ClCompile Include="Win32Uri.cpp" />
+    <ClCompile Include="UriWin32.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Version.cpp" />
   </ItemGroup>
@@ -63,6 +65,7 @@
     <ClInclude Include="AuthenticatedStream.h" />
     <ClInclude Include="Base64Encoding.h" />
     <ClInclude Include="Cookie.h" />
+    <ClInclude Include="DateTime.h" />
     <ClInclude Include="Encoding.h" />
     <ClInclude Include="HttpClient.h" />
     <ClInclude Include="HttpListener.h" />
@@ -76,6 +79,8 @@
     <ClInclude Include="Internal\CryptoBlockCipher.h" />
     <ClInclude Include="Internal\CryptoHash.h" />
     <ClInclude Include="Internal\CryptoRSA.h" />
+    <ClInclude Include="ISerializable.h" />
+    <ClInclude Include="IStringifyable.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="KeyAgreementAlgorithm.h" />
@@ -105,6 +110,7 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
+    <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="UdpClient.h" />
     <ClInclude Include="Uri.h" />
     <ClInclude Include="Utility.h" />

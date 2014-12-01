@@ -68,7 +68,7 @@ namespace Lupus {
                 Pointer<Sockets::IPEndPoint> localEP,
                 Pointer<Sockets::IPEndPoint> remoteEP,
                 bool authenticated = false,
-                bool secure = false);
+                bool secure = false) throw(HttpError);
             virtual ~HttpListenerRequest() = default;
 
             virtual const Vector<String>& AcceptTypes() const NOEXCEPT;

@@ -20,14 +20,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#define BUILD_INCREMENT 270
-#define LUPUS_STRINGIFY(x) #x
-#define LUPUS_XSTRINGIFY(x) LUPUS_STRINGIFY(x)
+#pragma once
+#include "Utility.h"
 
-#define LUPUS_CORE_MAJOR 0
-#define LUPUS_CORE_MINOR 1
-#define LUPUS_CORE_BUILD 0
-#define LUPUS_CORE_REVISION BUILD_INCREMENT
+namespace Lupus {
+    class LUPUSCORE_API IStringifyable
+    {
+    public:
+        virtual ~IStringifyable() = default;
+        virtual String ToString() const = 0;
+    };
 
-#define LUPUS_CORE_VERSION LUPUS_CORE_MAJOR,LUPUS_CORE_MINOR,LUPUS_CORE_BUILD,LUPUS_CORE_REVISION
-#define LUPUS_CORE_VERSION_STRING LUPUS_XSTRINGIFY(LUPUS_CORE_MAJOR) "." LUPUS_XSTRINGIFY(LUPUS_CORE_MINOR) "." LUPUS_XSTRINGIFY(LUPUS_CORE_BUILD) "." LUPUS_XSTRINGIFY(LUPUS_CORE_REVISION)
+    class LUPUSCORE_API IParsable
+    {
+    public:
+        virtual ~IParsable() = default;
+        virtual void Parse(String data) = 0;
+    };
+}

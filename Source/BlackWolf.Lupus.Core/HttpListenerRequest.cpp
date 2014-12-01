@@ -44,17 +44,16 @@ namespace Lupus {
             mLocalEP(local), mRemoteEP(remote), mAuthenticated(auth), mSecure(sec)
         {
             NameValueCollection::const_iterator citum;
+            auto utf8 = Encoding::UTF8();
+            auto request = utf8->GetString(buffer);
 
-            for (auto it = Begin(buffer); it != End(buffer); it++) {
-                char ch = static_cast<char>(*it);
-                
-                if (ch == '\r' && static_cast<char>(*(it + 1)) == '\n' && static_cast<char>(*(it + 2)) == '\r' && static_cast<char>(*(it + 3)) == '\n') {
-                    it += 4;
-                    mRawHeader = Encoding::ASCII()->GetString(Vector<U8>(Begin(buffer), it));
-                    mStream = MakePointer<MemoryStream>(buffer, distance(Begin(buffer), it), distance(it, End(buffer)), false, true);
-                    break;
-                }
+            if (!request.Contains("\r\n\r\n")) {
+                throw HttpError("Invalid http header.");
             }
+
+            auto requestSplit = request.Split("\r\n\r\n");
+            auto head = mRawHeader = requestSplit[0];
+            auto payload = mStream = MakePointer<MemoryStream>(utf8->GetBytes(requestSplit[1]));
 
             Vector<String> lines = mRawHeader.Split("\r\n", StringSplitOption::RemoveEmptyEntries);
             Vector<String> fields(Begin(lines) + 1, End(lines));
@@ -96,13 +95,13 @@ namespace Lupus {
             }
 
             if (charset.IsEmpty()) {
-                mEncoding = Encoding::UTF8();
+                mEncoding = utf8;
             } else {
                 auto encodings = charset.Split(";", StringSplitOption::RemoveEmptyEntries)[0].Split(",", StringSplitOption::RemoveEmptyEntries);
 
                 for (auto enc : encodings) {
                     if (enc.Compare("utf-8", StringCaseSensitivity::CaseInsensitive) == 0) {
-                        mEncoding = Encoding::UTF8();
+                        mEncoding = utf8;
                         break;
                     } else if (!mEncoding) {
                         mEncoding = Encoding::GetEncoding(enc);
@@ -110,7 +109,7 @@ namespace Lupus {
                 }
 
                 if (!mEncoding) {
-                    mEncoding = Encoding::UTF8();
+                    mEncoding = utf8;
                 }
             }
         }

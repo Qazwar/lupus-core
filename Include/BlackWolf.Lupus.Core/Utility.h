@@ -25,6 +25,9 @@
 #include <cstdlib>
 #include <cstdint>
 #include <cwchar>
+#include <cmath>
+#include <ctime>
+#include <cstring>
 #include <string>
 #include <memory>
 #include <unordered_map>
@@ -227,12 +230,14 @@ namespace Lupus {
 
     typedef std::chrono::high_resolution_clock Clock;
     typedef std::chrono::time_point<Clock> TimePoint;
-    typedef std::chrono::nanoseconds Nanoseconds;
-    typedef std::chrono::microseconds Microseconds;
-    typedef std::chrono::milliseconds Milliseconds;
-    typedef std::chrono::seconds Seconds;
-    typedef std::chrono::minutes Minutes;
-    typedef std::chrono::hours Hours;
+    typedef std::chrono::duration<S64, std::ratio<1, 1000000000>> Nanosecond;
+    typedef std::chrono::duration<S64, std::ratio<1, 1000000>> Microsecond;
+    typedef std::chrono::duration<S64, std::ratio<1, 1000>> Millisecond;
+    typedef std::chrono::duration<S64, std::ratio<1, 1>> Second;
+    typedef std::chrono::duration<S32, std::ratio<60, 1>> Minute;
+    typedef std::chrono::duration<S32, std::ratio<3600, 1>> Hour;
+    typedef std::chrono::duration<S32, std::ratio<86400, 1>> Day;
+    typedef Clock::duration Tick;
 
     LUPUSCORE_API class String RandomString(U32 length);
 

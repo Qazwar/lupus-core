@@ -23,6 +23,7 @@
 #pragma once
 
 #include "String.h"
+#include "DateTime.h"
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -56,8 +57,8 @@ namespace Lupus {
             virtual void HttpOnly(bool) NOEXCEPT;
             virtual bool Secure() const NOEXCEPT;
             virtual void Secure(bool) NOEXCEPT;
-            virtual TimePoint Expires() const NOEXCEPT;
-            virtual void Expires(const TimePoint&) NOEXCEPT;
+            virtual DateTime Expires() const NOEXCEPT;
+            virtual void Expires(const DateTime&) NOEXCEPT;
 
             virtual String ToString() const NOEXCEPT;
 
@@ -70,7 +71,7 @@ namespace Lupus {
             bool mExpired = false;
             bool mHttpOnly = false;
             bool mSecure = false;
-            TimePoint mExpires = TimePoint::min();
+            DateTime mExpires = DateTime(0);
         };
 
         typedef NameCollection<Pointer<Cookie>> CookieCollection;
