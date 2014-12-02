@@ -127,9 +127,9 @@ namespace Lupus {
             String expires;
 
             if (mExpired) {
-                expires += DateTime(0).ToString("%a, %Y-%b-%d %T %Z");
+                expires += DateTime(0).ToString("%a, %Y-%b-%d %T GMT");
             } else if (mExpires.Ticks() != 0) {
-                expires += mExpires.ToString("%a, %Y-%b-%d %T %Z");
+                expires += mExpires.ToString("%a, %Y-%b-%d %T GMT");
             }
 
             String result = mName + "=" + mValue;

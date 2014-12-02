@@ -90,7 +90,7 @@ namespace Lupus {
     {
         auto time = mktime(&mTime);
         auto timePoint = Clock::from_time_t(time);
-        return (Clock::time_point::min() - timePoint).count();
+        return static_cast<S64>(timePoint.time_since_epoch().count());
     }
 
     S32 DateTime::Year() const

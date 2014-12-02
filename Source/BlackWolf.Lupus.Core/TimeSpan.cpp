@@ -232,9 +232,8 @@ namespace Lupus {
         auto time = Clock::to_time_t(timePoint);
         tm timetm;
 
-        memset(&timetm, 0, sizeof(timetm));
         localtime_s(&timetm, &time);
-        ss << std::put_time(&timetm, "%c");
+        ss << std::put_time(&timetm, "%T");
         return ss.str();
     }
 
